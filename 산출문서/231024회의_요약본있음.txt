@@ -17,6 +17,17 @@ db는 배운 걸로 - fire Base
 1. 원격저장소에서 가져오기
 git clone https://github.com/rkdgnlee/BBMR.git
 2. 
+git remote add origin https://github.com/rkdgnlee/BBMR.git
+
+git remote pull origin master
+
+git branch "원하는 branch이름" 
+
+git add .
+
+git commit -m "원하는 메시지"
+
+git push origin 브랜치명
 
 
 
