@@ -5,6 +5,7 @@ import android.content.ContentValues
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.provider.MediaStore
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.ImageCapture
@@ -32,6 +33,7 @@ import androidx.camera.video.VideoRecordEvent
 import androidx.core.app.ComponentActivity
 import androidx.core.content.PermissionChecker
 import com.example.cameraxapp.databinding.ActivityMainBinding
+import kotlinx.coroutines.Delay
 import java.nio.ByteBuffer
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -63,8 +65,18 @@ class MainActivity : ComponentActivity() {
         }
 
         // Set up the listeners for take photo and video capture buttons
-        viewBinding.imageCaptureButton.setOnClickListener { takePhoto() }
-        viewBinding.videoCaptureButton.setOnClickListener { captureVideo() }
+        // 이 SetOnClicklistener안에 있는 Handler를 얼굴 인식 성공 후 바로 찍게 넣으면 됨.
+        // 1. manifest의 권한
+        // 2. build.gradle의 app단위에서도 sdk와 gradle버전 맞추고 API 적용.
+        // 3. 위 아래의 권한 설정과 관련된 코드
+        // 를 해당 얼굴 인식 후에 바로 넣으면 됨.
+
+        viewBinding.imageCaptureButton.setOnClickListener {
+            Handler().postDelayed({
+                takePhoto()
+            }, 500)
+        }
+
 
         cameraExecutor = Executors.newSingleThreadExecutor()
     }
@@ -79,7 +91,7 @@ class MainActivity : ComponentActivity() {
         val contentValues = ContentValues().apply {
             put(MediaStore.MediaColumns.DISPLAY_NAME, name)
             put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
-            if(Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
                 put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/CameraX-Image")
             }
         }
@@ -102,7 +114,7 @@ class MainActivity : ComponentActivity() {
                 }
 
                 override fun
-                        onImageSaved(output: ImageCapture.OutputFileResults){
+                        onImageSaved(output: ImageCapture.OutputFileResults) {
                     val msg = "Photo capture succeeded: ${output.savedUri}"
                     Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
                     Log.d(TAG, msg)
@@ -110,8 +122,6 @@ class MainActivity : ComponentActivity() {
             }
         )
     }
-
-    private fun captureVideo() {}
 
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
