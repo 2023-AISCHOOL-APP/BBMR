@@ -28,8 +28,14 @@ git add .
 git commit -m "원하는 메시지"
 
 git push origin 브랜치명
+[master라는 default branch 이름이 변경됨]
+git branch -m main master
 
+git fetch origin
 
+git branch -u origin/master master
+
+git remote set-head origin -a
 
 [20231024]
 Front
