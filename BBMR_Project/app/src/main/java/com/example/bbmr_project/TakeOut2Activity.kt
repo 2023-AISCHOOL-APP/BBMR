@@ -6,10 +6,10 @@ import android.os.Bundle
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.viewpager.widget.ViewPager
-import com.example.bbmr_project.fragments.Fragment2_1
-import com.example.bbmr_project.fragments.Fragment2_2
-import com.example.bbmr_project.fragments.Fragment2_3
-import com.example.bbmr_project.fragments.adapters.ViewPagerAdapter
+import com.example.bbmr_project.fragments2.Fragment2_1
+import com.example.bbmr_project.fragments2.Fragment2_2
+import com.example.bbmr_project.fragments2.Fragment2_3
+import com.example.bbmr_project.fragments2.adapters.ViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 
 class TakeOut2Activity : AppCompatActivity() {
@@ -62,5 +62,7 @@ class TakeOut2Activity : AppCompatActivity() {
         tabs.getTabAt(2)?.view?.setOnClickListener {
             supportFragmentManager.beginTransaction().replace(R.id.fl, Fragment2_3()).commit()
         }
+
+
     }
 }

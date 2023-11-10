@@ -3,20 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments1.Fragment1_1">
+    tools:context=".fragments2.Fragment2_1_Shake">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="추천메뉴입니다!"
-        android:textSize="50sp" />
-
-    <androidx.gridlayout.widget.GridLayout
-        android:id="@+id/grBest"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </androidx.gridlayout.widget.GridLayout>
+        android:text="쉐이크" />
 
 </FrameLayout>
