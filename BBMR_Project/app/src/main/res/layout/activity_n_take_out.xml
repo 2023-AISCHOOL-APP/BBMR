@@ -27,6 +27,7 @@
         app:layout_constraintGuide_percent="0.15" />
 
     <View
+        android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_centerInParent="true"
@@ -72,7 +73,9 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline10" />
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -95,78 +98,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.75" />
-
-    <RadioGroup
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/guideline11"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline10"
-        tools:ignore="MissingConstraints">
-
-
-        <RadioButton
-            android:id="@+id/btnCoffee"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/btn_ripple"
-            android:button="@null"
-            android:text="커피"
-            android:textAlignment="center"
-            android:textColor="@drawable/btn_text2"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            tools:ignore="MissingConstraints" />
-
-        <RadioButton
-            android:id="@+id/btnBeverage"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/btn_ripple"
-            android:button="@null"
-            android:text="베버리지"
-            android:textAlignment="center"
-            android:textColor="@drawable/btn_text2"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            tools:ignore="MissingConstraints" />
-
-        <RadioButton
-            android:id="@+id/btnFlatccino"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/btn_ripple"
-            android:button="@null"
-            android:text="플랫치노"
-            android:textAlignment="center"
-            android:textColor="@drawable/btn_text2"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            tools:ignore="MissingConstraints" />
-
-        <RadioButton
-            android:id="@+id/btnShake"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/btn_ripple"
-            android:button="@null"
-            android:text="쉐이크&amp;에이드"
-            android:textAlignment="center"
-            android:textColor="@drawable/btn_text2"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            tools:ignore="MissingConstraints" />
-    </RadioGroup>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline24"
