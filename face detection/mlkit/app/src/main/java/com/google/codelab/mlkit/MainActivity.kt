@@ -36,7 +36,7 @@ import kotlin.math.max
 
 class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     private var mImageView: ImageView? = null
-    private var mTextButton: Button? = null
+
     private var mFaceButton: Button? = null
     private var mSelectedImage: Bitmap? = null
     private var mGraphicOverlay: GraphicOverlay? = null
@@ -58,10 +58,10 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mImageView = findViewById(R.id.image_view)
-        mTextButton = findViewById(R.id.button_text)
+
         mFaceButton = findViewById(R.id.button_face)
         mGraphicOverlay = findViewById(R.id.graphic_overlay)
-        mTextButton?.setOnClickListener(View.OnClickListener { runTextRecognition() })
+
         mFaceButton?.setOnClickListener(View.OnClickListener { runFaceContourDetection() })
         val dropdown = findViewById<Spinner>(R.id.spinner)
         val items = arrayOf("Test Image 1 (Text)", "Test Image 2 (Face)")
@@ -69,41 +69,6 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         dropdown.adapter = adapter
         dropdown.onItemSelectedListener = this
     }
-
-    private fun runTextRecognition() {
-        val image = InputImage.fromBitmap(mSelectedImage!!, 0)
-        val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
-        mTextButton!!.isEnabled = false
-        recognizer.process(image)
-            .addOnSuccessListener { texts ->
-                mTextButton!!.isEnabled = true
-                processTextRecognitionResult(texts)
-            }
-            .addOnFailureListener { e -> // Task failed with an exception
-                mTextButton!!.isEnabled = true
-                e.printStackTrace()
-            }
-    }
-
-    private fun processTextRecognitionResult(texts: Text) {
-        val blocks = texts.textBlocks
-        if (blocks.size == 0) {
-            showToast("No text found")
-            return
-        }
-        mGraphicOverlay!!.clear()
-        for (i in blocks.indices) {
-            val lines = blocks[i].lines
-            for (j in lines.indices) {
-                val elements = lines[j].elements
-                for (k in elements.indices) {
-                    val textGraphic: Graphic = TextGraphic(mGraphicOverlay, elements[k])
-                    mGraphicOverlay!!.add(textGraphic)
-                }
-            }
-        }
-    }
-
     private fun runFaceContourDetection() {
         val image = InputImage.fromBitmap(mSelectedImage!!, 0)
         val options = FaceDetectorOptions.Builder()
