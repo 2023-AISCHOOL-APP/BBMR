@@ -183,7 +183,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         when (position) {
             0 -> mSelectedImage = getBitmapFromAsset(this, "Please_walk_on_the_grass.jpg")
             1 ->                 // Whatever you want to happen when the thrid item gets selected
-                mSelectedImage = getBitmapFromAsset(this, "0483_001.jpg")
+                mSelectedImage = getBitmapFromAsset(this, "grace_hopper.jpg")
         }
         if (mSelectedImage != null) {
             // Get the dimensions of the View
