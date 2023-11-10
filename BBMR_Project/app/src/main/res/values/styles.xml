@@ -7,7 +7,7 @@
     </style>
 
     <style name="CustomTabText" parent="TextAppearance.Design.Tab">
-        <item name="android:textSize">20sp</item> <!-- 탭 텍스트 크기 조절 -->
+        <item name="android:textSize">12sp</item> <!-- 탭 텍스트 크기 조절 -->
         <item name="android:textColor">@color/mainColor</item>
     </style>
 
