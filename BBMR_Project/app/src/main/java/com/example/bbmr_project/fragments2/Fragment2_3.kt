@@ -1,4 +1,4 @@
-package com.example.bbmr_project.fragments
+package com.example.bbmr_project.fragments2
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,7 +12,7 @@ class Fragment2_3 : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_fragment2_3, container, false)
+        return inflater.inflate(R.layout.fragment2_3, container, false)
     }
 
     fun newInstant(): Any {

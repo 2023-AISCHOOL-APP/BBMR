@@ -1,4 +1,4 @@
-package com.example.bbmr_project.fragments.adapters
+package com.example.bbmr_project.fragments2.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
