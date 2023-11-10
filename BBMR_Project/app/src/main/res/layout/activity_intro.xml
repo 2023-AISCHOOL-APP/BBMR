@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/mainColor"
-    tools:context=".MainActivity">
+    tools:context=".IntroActivity">
 
     <TextView
         android:id="@+id/tv3"
@@ -25,7 +25,7 @@
         android:gravity="center|left"
         android:text="Kinior\n시니어를 위한\n키오스크"
         android:textColor="#FFFFFF"
-        android:textSize="80sp"
+        android:textSize="100sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tv3"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,16 +48,36 @@
 
     <Button
         android:id="@+id/btnOrder"
-        android:layout_width="500dp"
+        android:layout_width="300dp"
         android:layout_height="225dp"
         android:layout_marginBottom="128dp"
         android:backgroundTint="@color/mainColor"
-        android:text="주문하기"
-        android:textSize="80dp"
+        android:text="매장"
+        android:textSize="100dp"
+        android:textStyle="bold"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline8"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="300dp"
+        android:layout_height="225dp"
+        android:layout_marginBottom="128dp"
+        android:backgroundTint="@color/mainColor"
+        android:text="포장"
+        android:textSize="100dp"
         android:textStyle="bold"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.524"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/guideline8" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 </androidx.constraintlayout.widget.ConstraintLayout>
