@@ -3,10 +3,9 @@ package com.example.bbmr_project
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class TakeOut2Activity : AppCompatActivity() {
+class IntroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_take_out2)
-
+        setContentView(R.layout.activity_intro)
     }
 }
