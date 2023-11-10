@@ -77,7 +77,7 @@ class GraphicOverlay(context: Context?, attrs: AttributeSet?) :
         abstract fun draw(canvas: Canvas?)
 
         /**
-         * Adjusts a horizontal value of the supplied value from the preview scale to the view scale.
+         * Adjusts a horizontal value of the suppliㅋed value from the preview scale to the view scale.
          */
         fun scaleX(horizontal: Float): Float {
             return horizontal * overlay.widthScaleFactor
