@@ -4,12 +4,7 @@ package com.example.bbmr_project
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
-<<<<<<< HEAD
-import com.example.bbmr_project.databinding.ActivityTakeOutBinding
-=======
-import com.example.bbmr_project.databinding.ActivityMainBinding
 import com.example.bbmr_project.databinding.ActivitySTakeOutBinding
->>>>>>> add4141fc5a11349be34f6974d9fd8bc45bc0681
 import com.example.bbmr_project.fragments1.Fragment1_1
 import com.example.bbmr_project.fragments1.Fragment1_2
 import com.example.bbmr_project.fragments1.Fragment1_3
