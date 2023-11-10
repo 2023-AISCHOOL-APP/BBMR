@@ -4,8 +4,9 @@ plugins {
 }
 
 android {
+
     namespace = "com.example.bbmr_project"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.bbmr_project"
