@@ -3,10 +3,7 @@ package com.example.bbmr_project
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
-import com.example.bbmr_project.databinding.ActivityMainBinding
 import com.example.bbmr_project.databinding.ActivityTakeOutBinding
 import com.example.bbmr_project.fragments1.Fragment1_1
 import com.example.bbmr_project.fragments1.Fragment1_2
@@ -21,7 +18,7 @@ class TakeOutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_take_out)
+        setContentView(R.layout.activity_s_take_out)
 
         //viewBinding 추가 코드
         binding = ActivityTakeOutBinding.inflate(layoutInflater)
