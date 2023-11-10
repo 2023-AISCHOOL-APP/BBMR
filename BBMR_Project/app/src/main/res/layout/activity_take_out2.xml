@@ -24,14 +24,39 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15" />
+        app:layout_constraintGuide_percent="0.04" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:tabGravity="fill"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/mainColor"
+            app:tabTextAppearance="@style/CustomTabLayout"
+            app:tabTextColor="@color/mainColor"
+            tools:ignore="MissingConstraints" />
+
+    </androidx.viewpager.widget.ViewPager>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.2" />
+        app:layout_constraintGuide_percent="0.1" />
 
     <FrameLayout
         android:id="@+id/fl"
@@ -39,10 +64,7 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline10" >
-
-    </FrameLayout>
+        app:layout_constraintHorizontal_bias="0.0"/>
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -66,62 +88,77 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.75" />
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline10"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline24"
-        app:layout_constraintVertical_bias="1.0">
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabs"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#FFFFFF"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:tabGravity="fill"
-            app:tabMode="fixed"
-            app:tabSelectedTextColor="@color/mainColor"
-            app:tabTextAppearance="@style/CustomTabLayout"
-            app:tabTextColor="@color/mainColor"
-            tools:ignore="MissingConstraints" />
-
-    </androidx.viewpager.widget.ViewPager>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline24"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1" />
-
-    <TextView
-        android:id="@+id/tvTitle"
+    <RadioGroup
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:gravity="center"
-        android:text="Kinior 키오스크"
-        android:textColor="@color/mainColor"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/viewPager"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/guideline11"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="@+id/guideline10"
+        tools:ignore="MissingConstraints">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_centerInParent="true"
-        android:background="#B5B5B5"
-        app:layout_constraintBottom_toTopOf="@+id/viewPager"
-        tools:ignore="MissingConstraints" />
+
+        <RadioButton
+            android:id="@+id/btnCoffee"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_ripple"
+            android:button="@null"
+            android:text="커피"
+            android:textAlignment="center"
+            android:textColor="@drawable/btn_text2"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            tools:ignore="MissingConstraints" />
+
+        <RadioButton
+            android:id="@+id/btnBeverage"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_ripple"
+            android:button="@null"
+            android:text="베버리지"
+            android:textAlignment="center"
+            android:textColor="@drawable/btn_text2"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            tools:ignore="MissingConstraints" />
+
+        <RadioButton
+            android:id="@+id/btnFlatccino"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_ripple"
+            android:button="@null"
+            android:text="플랫치노"
+            android:textAlignment="center"
+            android:textColor="@drawable/btn_text2"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            tools:ignore="MissingConstraints" />
+
+        <RadioButton
+            android:id="@+id/btnShake"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_ripple"
+            android:button="@null"
+            android:text="쉐이크&amp;에이드"
+            android:textAlignment="center"
+            android:textColor="@drawable/btn_text2"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            tools:ignore="MissingConstraints" />
+    </RadioGroup>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
