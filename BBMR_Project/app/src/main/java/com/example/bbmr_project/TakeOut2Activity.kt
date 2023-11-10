@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.viewpager.widget.ViewPager
-import com.example.bbmr_project.databinding.ActivityTakeOut2Binding
+import com.example.bbmr_project.databinding.ActivityNTakeOutBinding
 import com.example.bbmr_project.fragments2.Fragment2_1
 import com.example.bbmr_project.fragments2.Fragment2_1_Coffee
 import com.example.bbmr_project.fragments2.Fragment2_2
@@ -16,14 +16,14 @@ import com.google.android.material.tabs.TabLayout
 
 class TakeOut2Activity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityTakeOut2Binding
+    private lateinit var binding: ActivityNTakeOutBinding
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_n_take_out)
 
-        binding = ActivityTakeOut2Binding.inflate(layoutInflater)
+        binding = ActivityNTakeOutBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setUpTabs(binding.viewPager)
 
