@@ -7,6 +7,11 @@ android {
     namespace = "com.example.bbmr_project"
     compileSdk = 34
 
+    // viewBinding -> findViewById 관리
+    viewBinding{
+        enable = true
+    }
+
     defaultConfig {
         applicationId = "com.example.bbmr_project"
         minSdk = 24
