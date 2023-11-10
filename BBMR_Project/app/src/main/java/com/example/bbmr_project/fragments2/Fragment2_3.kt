@@ -12,7 +12,7 @@ class Fragment2_3 : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment2_3, container, false)
+        return inflater.inflate(R.layout.fragment_n_3, container, false)
     }
 
     fun newInstant(): Any {

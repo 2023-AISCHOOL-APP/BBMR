@@ -6,6 +6,6 @@ import android.os.Bundle
 class Stay2Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_stay2)
+        setContentView(R.layout.activity_n_stay)
     }
 }

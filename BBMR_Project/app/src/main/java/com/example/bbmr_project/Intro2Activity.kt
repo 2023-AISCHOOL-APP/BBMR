@@ -10,7 +10,7 @@ class Intro2Activity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_intro2)
+        setContentView(R.layout.activity_n_intro)
 
         val btnTakeOut: Button = findViewById(R.id.btnTakeOut)
         val btnStay: Button = findViewById(R.id.btnStay)
