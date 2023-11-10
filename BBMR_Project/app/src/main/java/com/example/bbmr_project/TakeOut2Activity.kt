@@ -21,7 +21,7 @@ class TakeOut2Activity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_take_out2)
+        setContentView(R.layout.activity_n_take_out)
 
         binding = ActivityTakeOut2Binding.inflate(layoutInflater)
         setContentView(binding.root)
