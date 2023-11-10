@@ -8,10 +8,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bbmr_project.R
-import com.example.bbmr_project.VO.Frag1VO
+import com.example.bbmr_project.VO.TakeOut2VO
 
-class Frag1Adapter (val context: Context, val layout : Int, val frag1List: ArrayList<Frag1VO>)
-    : RecyclerView.Adapter<Frag1Adapter.ViewHolder>(){
+class TakeOut2Adapter (val context: Context, val layout : Int, val frag1List: ArrayList<TakeOut2VO>)
+    : RecyclerView.Adapter<TakeOut2Adapter.ViewHolder>(){
 
         val inflater : LayoutInflater = LayoutInflater.from(context)
 
@@ -21,12 +21,12 @@ class Frag1Adapter (val context: Context, val layout : Int, val frag1List: Array
         val tvPrice : TextView = view.findViewById(R.id.tvPrice)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Frag1Adapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TakeOut2Adapter.ViewHolder {
         val view = inflater.inflate(layout, parent, false)
-        return Frag1Adapter.ViewHolder(view)
+        return TakeOut2Adapter.ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: Frag1Adapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TakeOut2Adapter.ViewHolder, position: Int) {
         holder.tvName.text = frag1List[position].name
         holder.tvPrice.text = frag1List[position].Price
         holder.img.setImageResource(frag1List[position].img)
