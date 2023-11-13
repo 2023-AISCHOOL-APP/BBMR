@@ -1,5 +1,6 @@
 package com.example.bbmr_project
 
+import Fragment2_1
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,7 +8,7 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.viewpager.widget.ViewPager
 import com.example.bbmr_project.databinding.ActivityNTakeOutBinding
-import com.example.bbmr_project.fragments2.Fragment2_1
+//import com.example.bbmr_project.fragments2.Fragment2_1
 import com.example.bbmr_project.fragments2.Fragment2_1_Coffee
 import com.example.bbmr_project.fragments2.Fragment2_2
 import com.example.bbmr_project.fragments2.Fragment2_3
@@ -27,7 +28,7 @@ class TakeOut2Activity : AppCompatActivity() {
         setContentView(binding.root)
         setUpTabs(binding.viewPager)
 
-        val fl: FrameLayout = findViewById(R.id.fl)
+        val fl: FrameLayout = findViewById(R.id.flTakeOut)
 
         // ViewPager와 TabLayout 연결
         binding.tabs.setupWithViewPager(binding.viewPager)
@@ -57,15 +58,15 @@ class TakeOut2Activity : AppCompatActivity() {
         tabs.setupWithViewPager(viewPager)
 
 
-        supportFragmentManager.beginTransaction().replace(R.id.fl, Fragment2_1_Coffee()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.flTakeOut, Fragment2_1()).commit()
         tabs.getTabAt(0)?.view?.setOnClickListener {
-            supportFragmentManager.beginTransaction().replace(R.id.fl, Fragment2_1_Coffee()).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.flTakeOut, Fragment2_1()).commit()
         }
         tabs.getTabAt(1)?.view?.setOnClickListener {
-            supportFragmentManager.beginTransaction().replace(R.id.fl, Fragment2_2()).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.flTakeOut, Fragment2_2()).commit()
         }
         tabs.getTabAt(2)?.view?.setOnClickListener {
-            supportFragmentManager.beginTransaction().replace(R.id.fl, Fragment2_3()).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.flTakeOut, Fragment2_3()).commit()
         }
 
 

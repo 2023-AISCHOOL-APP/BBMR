@@ -6,41 +6,33 @@
     android:layout_height="match_parent"
     tools:context=".fragments2.Fragment2_1">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline25"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.06" />
+        app:layout_constraintGuide_percent="0.08" />
 
     <View
+        android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="4dp"
+        android:layout_height="2dp"
         android:layout_centerInParent="true"
         android:background="#B5B5B5"
-        app:layout_constraintBottom_toTopOf="@+id/rv"
+        app:layout_constraintBottom_toTopOf="@+id/guideline25"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="80dp" />
 
     <RadioGroup
-        android:id="@+id/radioGroup"
+        android:id="@+id/btnGroup"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/guideline25"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline10"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints,UnknownIdInLayout">
 
@@ -107,5 +99,16 @@
             tools:ignore="MissingConstraints" />
 
     </RadioGroup>
+
+    <FrameLayout
+        android:id="@+id/flMenu"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline25">
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
