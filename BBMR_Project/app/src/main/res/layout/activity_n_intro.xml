@@ -53,7 +53,7 @@
         app:layout_constraintGuide_percent="0.46" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btnStay"
         android:layout_width="315dp"
         android:layout_height="105dp"
         android:backgroundTint="@color/white"
@@ -70,7 +70,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/btnTakeOut"
         android:layout_width="315dp"
         android:layout_height="105dp"
         android:backgroundTint="@color/white"

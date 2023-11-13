@@ -1,10 +1,11 @@
-package com.example.bbmr_project
+package com.example.bbmr_project.fragments1
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.bbmr_project.R
 
 
 class Fragment1_2 : Fragment() {
@@ -15,7 +16,7 @@ class Fragment1_2 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fragment1_2, container, false)
+        return inflater.inflate(R.layout.fragment_s_2, container, false)
     }
 
 
