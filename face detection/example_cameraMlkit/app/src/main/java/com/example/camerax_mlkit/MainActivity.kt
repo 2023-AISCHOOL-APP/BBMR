@@ -19,8 +19,11 @@ package com.example.camerax_mlkit
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.media.Image
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
@@ -40,7 +43,10 @@ import com.google.mlkit.vision.face.FaceDetector
 import com.google.mlkit.vision.face.FaceDetectorOptions
 import java.util.concurrent.ExecutorService
 import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.camera.view.CameraController
+import androidx.camera.view.CameraController.IMAGE_CAPTURE
 import androidx.lifecycle.LifecycleOwner
+import java.io.ByteArrayOutputStream
 import java.util.concurrent.Executors
 
 class MainActivity : AppCompatActivity() {
@@ -48,8 +54,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewBinding: ActivityMainBinding
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var faceDetector: FaceDetector
-
-
+    private lateinit var cameraController: CameraController
+    private lateinit var imageCapture: ImageCapture
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityMainBinding.inflate(layoutInflater)
@@ -87,8 +93,15 @@ class MainActivity : AppCompatActivity() {
             .setContourMode(FaceDetectorOptions.CONTOUR_MODE_ALL)
             .build()
         val faceDetector = FaceDetection.getClient(options)
-        cameraController.cameraSelector = cameraSelector
 
+        // 이미지 캡처 객체를 생성하고 라이프 사이클에 바인딩하는 곳
+        // 걍 이미지 캡처하는 곳이라고 보면 됨
+        imageCapture = ImageCapture.Builder().build()
+
+
+
+
+        cameraController.cameraSelector = cameraSelector
         // 1 프레임 당 실시하는 analyzer
         cameraController.setImageAnalysisAnalyzer(
             ContextCompat.getMainExecutor(this),
@@ -105,8 +118,27 @@ class MainActivity : AppCompatActivity() {
                     previewView.overlay.clear()
                     previewView.setOnTouchListener { _, _ -> false } //no-op
                     return@MlKitAnalyzer
-                } else {
-                    imageCapture()
+                } else {        // 걍 스크린샷 캡처로 갑니다
+                    imageCaptureAndSend()
+
+//                    imageCapture.takePicture(
+//                        ContextCompat.getMainExecutor(this),
+//                        object: ImageCapture.OnImageCapturedCallback() {
+//                            override fun onCaptureSuccess(image: ImageProxy) {
+//                                // 이미지 성공 시
+//
+//                                val tag :String = "이미지 캡처: "
+//                                Log.d(tag, "성공")
+//                            }
+//
+//                            override fun onError(exception: ImageCaptureException) {
+//                                val tag :String = "이미지 캡처: "
+//                                Log.e(tag, "실패", exception)
+//                            }
+//                        }
+//                    )
+
+                    cameraController.unbind()
                 }
                 val faceDetectModel = faceDetectModel(faceResults[0])
                 val faceDrawable = faceDrawable(faceDetectModel)
@@ -116,32 +148,43 @@ class MainActivity : AppCompatActivity() {
         )
 
         cameraController.bindToLifecycle(this)
+
         previewView.controller = cameraController
        // cameraController.
     }
 
     //  private var previewView: PreviewView = viewBinding.viewFinder
 
-    private fun imageCapture() {
-        val imageCapture = ImageCapture.Builder().build()
-        imageCapture.takePicture(cameraExecutor, object: ImageCapture.OnImageCapturedCallback()
-        {
-            override fun onCaptureSuccess(image: ImageProxy) {
-                val buffer = image.planes[0].buffer
-                val data = ByteArray(buffer.remaining())
-                buffer.get(data)
+    private fun imageCaptureAndSend() {
+        val rootView : View = window.decorView.rootView
+        rootView.isDrawingCacheEnabled = true
+        val bitmap : Bitmap = Bitmap.createBitmap(rootView.drawingCache)
+        rootView.isDrawingCacheEnabled = false
 
-                //여기서 data배열을 서버로 전송하는 형태
+        // 스크린 샷의 이미지 짜르기
+        val screenHeight = bitmap.height
+        val cutHeight = (screenHeight * 0.2).toInt()
+        val croppedBitmap = Bitmap.createBitmap(
+            bitmap,
+            0,
+            cutHeight,
+            bitmap.width,
+            screenHeight - 2 * cutHeight
+        )
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        croppedBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+        val byteArray = byteArrayOutputStream.toByteArray()
+        // 이 곳에 byteArray를 받아와서 전송하시면 됩니다!
 
-                image.close()
 
 
 
-            }
-            override fun onError(exception: ImageCaptureException) {
-                Log.e(TAG, "Photo capture failed: ${exception.message}", exception)
-            }
-        })
+
+
+
+
+        val tag: String = "이미지 캡처: "
+        Log.d(tag, "성공")
 
     }
 
