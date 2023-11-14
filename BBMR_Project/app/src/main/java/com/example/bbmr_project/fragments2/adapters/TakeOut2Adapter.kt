@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bbmr_project.R
 import com.example.bbmr_project.VO.TakeOut2VO
 
-class TakeOut2Adapter (val context: Context, val layout : Int, val frag1List: ArrayList<TakeOut2VO>)
+class TakeOut2Adapter(val context: Context, val layout: Int, val frag1List: List<TakeOut2VO>)
     : RecyclerView.Adapter<TakeOut2Adapter.ViewHolder>(){
 
         val inflater : LayoutInflater = LayoutInflater.from(context)
