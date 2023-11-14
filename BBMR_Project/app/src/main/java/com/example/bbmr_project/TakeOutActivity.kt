@@ -6,61 +6,52 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import com.example.bbmr_project.databinding.ActivityMainBinding
+import com.example.bbmr_project.databinding.ActivitySTakeOutBinding
+import com.example.bbmr_project.fragments1.Fragment1_1
+import com.example.bbmr_project.fragments1.Fragment1_2
+import com.example.bbmr_project.fragments1.Fragment1_3
+import com.example.bbmr_project.fragments1.Fragment1_4
 
 
 class TakeOutActivity : AppCompatActivity() {
 
+    // viewBinding 엑티비디 id에 맞는 변수를 자동으로 적용해줌.
+    private lateinit var binding : ActivitySTakeOutBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_take_out)
+        setContentView(R.layout.activity_s_take_out)
 
-        // 상단 카테고리 변수선언
-        val rbtnBest : Button = findViewById(R.id.rbtnBest)
-        val rbtnCoffee : Button = findViewById(R.id.rbtnCoffee)
-        val rbtnBeverage : Button = findViewById(R.id.rbtnBeverage)
-        val rbtnDessert : Button = findViewById(R.id.rbtnDessert)
-
-        // 하단에 들어가는 값 변수선언
-        val tvPrice : TextView = findViewById(R.id.tvPrice)
-        val btnBasket : Button = findViewById(R.id.btnBasket)
+        //viewBinding 추가 코드
+        binding = ActivitySTakeOutBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
 
-        // 상단 메뉴 버튼 기능
-        rbtnBest.setOnClickListener {
+
+
+
+        // Fragment 관리하는 함수
+        fun loadFragment(fragment : androidx.fragment.app.Fragment){
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fl1, Fragment1_1())
+                .replace(R.id.fl1, fragment)
                 .commit()
         }
-
-        rbtnCoffee.setOnClickListener {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fl1, Fragment1_2())
-                .commit()
-        }
-
-        rbtnBeverage.setOnClickListener {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fl1, Fragment1_3())
-                .commit()
-        }
-
-        rbtnDessert.setOnClickListener {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fl1, Fragment1_4())
-                .commit()
-        }
-
-
+        // 상단-버튼 클릭시 Fragment 화면 전환
+        binding.rbtnBest.setOnClickListener { loadFragment(Fragment1_1()) }
+        binding.rbtnCoffee.setOnClickListener { loadFragment(Fragment1_2()) }
+        binding.rbtnBeverage.setOnClickListener { loadFragment(Fragment1_3()) }
+        binding.rbtnDessert.setOnClickListener { loadFragment(Fragment1_4()) }
 
 
 
         // 장바구니 버튼 기능
-        btnBasket.setOnClickListener{
+        binding.btnBasket.setOnClickListener{
 //            val intent = Intent(this, BasketActivity::class.java)
 //            startActivity(intent)
 
 
-            val price = tvPrice.text
+            val price = binding.tvPrice.text
             AlertDialog.Builder(this).run{
                 setTitle("test dialog")
                 setIcon(android.R.drawable.ic_delete)

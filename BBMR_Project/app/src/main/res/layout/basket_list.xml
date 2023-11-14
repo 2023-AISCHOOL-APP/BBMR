@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center|top">
+
+    <ImageView
+        android:id="@+id/coffee"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:foregroundGravity="center"
+        app:layout_constraintEnd_toEndOf="@+id/tvContainer"
+        app:layout_constraintStart_toStartOf="@+id/tvContainer"
+        app:layout_constraintTop_toTopOf="@+id/tvContainer"
+        app:srcCompat="@drawable/coffee" />
+
+    <ImageView
+        android:id="@+id/plus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/coffee"
+        app:srcCompat="@drawable/plus" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:textSize="60dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tvContainer"
+        app:layout_constraintEnd_toEndOf="@+id/coffee"
+        app:layout_constraintStart_toStartOf="@+id/coffee"
+        app:layout_constraintTop_toBottomOf="@+id/coffee"
+        app:layout_constraintVertical_bias="0.002" />
+
+    <ImageView
+        android:id="@+id/minus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="30dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintEnd_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/coffee"
+        app:srcCompat="@drawable/minus" />
+
+    <ImageView
+        android:id="@+id/x"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintEnd_toEndOf="@+id/coffee"
+        app:layout_constraintTop_toTopOf="@+id/coffee"
+        app:srcCompat="@drawable/x" />
+
+    <TextView
+        android:id="@+id/tvContainer"
+        android:layout_width="500dp"
+        android:layout_height="500dp"
+        android:gravity="center|top"
+        android:shadowDx="10"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintEnd_toEndOf="@+id/coffee"
+        app:layout_constraintTop_toTopOf="@+id/x"
+        app:srcCompat="@drawable/x" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

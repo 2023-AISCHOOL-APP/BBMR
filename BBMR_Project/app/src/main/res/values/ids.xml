@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="rvCoffee" type="id" />
+    <item name="guideline10" type="id" />
+    <item name="viewPager" type="id" />
+    <item name="guideline9" type="id" />
+    <item name="guideline8" type="id" />
+</resources>
