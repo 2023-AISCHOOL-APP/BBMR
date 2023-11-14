@@ -25,7 +25,7 @@
         app:layout_constraintGuide_begin="614dp" />
 
     <TextView
-        android:id="@+id/tvInfo"
+        android:id="@+id/tvguide1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="80dp"
@@ -41,7 +41,7 @@
         app:layout_constraintVertical_bias="0.438" />
 
     <TextView
-        android:id="@+id/tvInfo2"
+        android:id="@+id/tvguide2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="80dp"
@@ -69,22 +69,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline34" />
 
-    <ProgressBar
-        android:id="@+id/pb"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="267dp"
-        android:layout_height="197dp"
-        app:layout_constraintBottom_toBottomOf="@+id/ColorView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/ColorView"
-        app:layout_constraintTop_toBottomOf="@+id/tvInfo2" />
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline35"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="446dp" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ColorView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvguide2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

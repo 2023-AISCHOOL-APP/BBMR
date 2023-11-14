@@ -26,6 +26,7 @@ import com.google.mlkit.vision.face.FaceDetectorOptions
 import java.util.concurrent.ExecutorService
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.CameraController
+import androidx.core.view.isVisible
 import com.example.bbmr_project.databinding.ActivityLoadingSplashBinding
 import com.example.bbmr_project.mlkit.faceDetectModel
 import com.example.bbmr_project.mlkit.faceDrawable
@@ -168,19 +169,31 @@ class LoadingSplashActivity : AppCompatActivity() {
 
         val tag: String = "이미지 캡처: "
         Log.d(tag, "성공")
-
+        var res : String = "0"
         val Handler = Handler(Looper.getMainLooper())
         // 일반 고객으로 판단 될 경우
-        if (true) {
+        if (res == "0") {
+            viewBinding.progressBar.visibility = View.INVISIBLE
+            viewBinding.tvguide1.text = "고객님"
+            viewBinding.tvguide2.text = "환영합니다"
 //            viewBinding.pb.
-            val intent = Intent(this, Intro2Activity::class.java)
-            startActivity(intent)
-            finish()
+            Handler.postDelayed({
+                val intent = Intent(this, Intro2Activity::class.java)
+                startActivity(intent)
+                finish()
+            }, 1000)
+
             // 시니어로 판단 될 경우
-        } else if (true) {
-            val intent = Intent(this, IntroActivity::class.java)
-            startActivity(intent)
-            finish()
+        } else if (res == "1") {
+            viewBinding.progressBar.visibility = View.INVISIBLE
+            viewBinding.tvguide1.text = "시니어님"
+            viewBinding.tvguide2.text = "환영합니다"
+            Handler.postDelayed({
+                val intent = Intent(this, IntroActivity::class.java)
+                startActivity(intent)
+                finish()
+            }, 500)
+
         }
 
     }
