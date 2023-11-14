@@ -89,7 +89,9 @@
             android:text="추천메뉴"
             android:textColor="@drawable/button_text"
             android:textSize="50sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:checked="true"
+            />
 
         <RadioButton
             android:id="@+id/rbtnCoffee"
@@ -132,7 +134,7 @@
     </RadioGroup>
 
     <android.widget.Button
-        android:id="@+id/button9"
+        android:id="@+id/btnPay"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/button_normal"
@@ -171,8 +173,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:padding="8dp"
-        android:text="총 \n금액"
-        android:textAlignment="textStart"
+        android:text="총 금액"
+        android:textAlignment="center"
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -185,7 +187,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.125" />
+        app:layout_constraintGuide_percent="0.155" />
 
     <TextView
         android:id="@+id/tvPrice"
@@ -206,12 +208,57 @@
         android:id="@+id/fl1"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline11"
+        app:layout_constraintBottom_toTopOf="@+id/guideline30"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline10">
 
     </FrameLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.71" />
+
+    <android.widget.Button
+        android:id="@+id/btnPre"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/button_normal"
+        android:text="이전"
+        android:textColor="@drawable/button_text"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guideline11"
+        app:layout_constraintEnd_toStartOf="@+id/guideline12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline30" />
+
+    <android.widget.Button
+        android:id="@+id/btnNext"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/button_normal"
+        android:text="다음"
+        android:textColor="@drawable/button_text"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guideline11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline14"
+        app:layout_constraintTop_toTopOf="@+id/guideline30" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline31"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.875" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
