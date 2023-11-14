@@ -24,9 +24,6 @@ import com.google.mlkit.vision.face.FaceDetection
 import com.google.mlkit.vision.face.FaceDetector
 import com.google.mlkit.vision.face.FaceDetectorOptions
 import java.util.concurrent.ExecutorService
-import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.camera.view.CameraController
-import androidx.core.view.isVisible
 import com.example.bbmr_project.databinding.ActivityLoadingSplashBinding
 import com.example.bbmr_project.mlkit.faceDetectModel
 import com.example.bbmr_project.mlkit.faceDrawable
@@ -181,7 +178,7 @@ class LoadingSplashActivity : AppCompatActivity() {
                 val intent = Intent(this, Intro2Activity::class.java)
                 startActivity(intent)
                 finish()
-            }, 1000)
+            }, 800)
 
             // 시니어로 판단 될 경우
         } else if (res == "1") {
@@ -192,7 +189,7 @@ class LoadingSplashActivity : AppCompatActivity() {
                 val intent = Intent(this, IntroActivity::class.java)
                 startActivity(intent)
                 finish()
-            }, 500)
+            }, 800)
 
         }
 
