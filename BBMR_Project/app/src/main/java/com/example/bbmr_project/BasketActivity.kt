@@ -13,7 +13,7 @@ class BasketActivity : AppCompatActivity() {
         val btnTurn : Button = findViewById(R.id.btnTurn)
 
         btnTurn.setOnClickListener{
-            val intent = Intent(this, TakeOutActivity::class.java)
+            val intent = Intent(this, TakeOut1Activity::class.java)
             startActivity(intent)
         }
     }

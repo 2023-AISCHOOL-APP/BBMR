@@ -19,24 +19,27 @@
         <activity
             android:name=".Pay1Activity"
             android:exported="false"
-            android:theme="@style/CustomDialogTheme" />
+            android:theme="@style/CustomDialogTheme"
+            />
 
         <activity
             android:name=".Stay2Activity"
             android:exported="false" />
 
         <activity
-            android:name=".TakeOutActivity"
-            android:exported="true"></activity>
-
-        <activity
-            android:name=".TakeOut2Activity"
+            android:name=".TakeOut1Activity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+
+        <activity
+            android:name=".TakeOut2Activity"
+            android:exported="true">
         </activity>
 
         <activity

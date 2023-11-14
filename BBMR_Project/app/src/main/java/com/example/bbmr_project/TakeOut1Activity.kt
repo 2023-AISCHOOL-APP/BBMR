@@ -5,19 +5,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
-import androidx.lifecycle.ReportFragment.Companion.reportFragment
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.bbmr_project.VO.TakeOut1VO
 import com.example.bbmr_project.databinding.ActivitySTakeOutBinding
 import com.example.bbmr_project.fragments1.Fragment1_1
 import com.example.bbmr_project.fragments1.Fragment1_2
 import com.example.bbmr_project.fragments1.Fragment1_3
 import com.example.bbmr_project.fragments1.Fragment1_4
-import com.example.bbmr_project.fragments1.adapters1.TakeOut1Adapter
 
 
-class TakeOutActivity : AppCompatActivity() {
+class TakeOut1Activity : AppCompatActivity() {
 
 
 
@@ -50,15 +45,15 @@ class TakeOutActivity : AppCompatActivity() {
         binding.rbtnBeverage.setOnClickListener { loadFragment(Fragment1_3()) }
         binding.rbtnDessert.setOnClickListener { loadFragment(Fragment1_4()) }
 
-
-        binding.btnPre.setOnClickListener { (supportFragmentManager.findFragmentById(R.id.fl1) as? Fragment1_1)?.clearMenuList2() }
         // 다음 버튼 클릭시 기존의 리스트 리셋후 새로운 리스트 추가
-        binding.btnNext.setOnClickListener { (supportFragmentManager.findFragmentById(R.id.fl1)  as? Fragment1_1)?.clearMenuList1() }
+        binding.btnPre.setOnClickListener { (supportFragmentManager.findFragmentById(R.id.fl1) as? Fragment1_1)?.switchToMenuList1() }
+        // 다음 버튼 클릭시 기존의 리스트 리셋후 새로운 리스트 추가
+        binding.btnNext.setOnClickListener { (supportFragmentManager.findFragmentById(R.id.fl1)  as? Fragment1_1)?.switchToMenuList2() }
 
 
         //결제화면 이동
         binding.btnPay.setOnClickListener {
-            val intent = Intent(this@TakeOutActivity, Pay1Activity::class.java)
+            val intent = Intent(this@TakeOut1Activity, Pay1Activity::class.java)
             startActivity(intent)
         }
 
