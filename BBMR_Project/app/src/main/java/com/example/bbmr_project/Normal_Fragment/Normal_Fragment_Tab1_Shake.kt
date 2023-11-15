@@ -1,4 +1,4 @@
-package com.example.bbmr_project.fragments2
+package com.example.bbmr_project.Normal_Fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -9,10 +9,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bbmr_project.R
-import com.example.bbmr_project.VO.TakeOut2VO
-import com.example.bbmr_project.fragments2.adapters.TakeOut2Adapter
+import com.example.bbmr_project.VO.NormalTakeOutVO
+import com.example.bbmr_project.Normal_Fragment.adapters.TakeOut2Adapter
 
-class Fragment2_1_Shake : Fragment() {
+class Normal_Fragment_Tab1_Shake : Fragment() {
     private lateinit var rvShake: RecyclerView
 
     @SuppressLint("MissingInflatedId")
@@ -20,18 +20,18 @@ class Fragment2_1_Shake : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_n_1_shake, container, false)
+        val view = inflater.inflate(R.layout.frag_normal_tab1_shake, container, false)
         rvShake = view.findViewById(R.id.rvShake)
 
         val layoutManager = GridLayoutManager(requireContext(), 4)
         rvShake.layoutManager = layoutManager
 
-        val frag1List: ArrayList<TakeOut2VO> = ArrayList()
-        frag1List.add(TakeOut2VO(R.drawable.coffee, "쿠키 쉐이크", "2,000원"))
-        frag1List.add(TakeOut2VO(R.drawable.coffee, "딸기 쉐이크", "2,000원"))
-        frag1List.add(TakeOut2VO(R.drawable.coffee, "밀크 쉐이크", "2,000원"))
+        val frag1List: ArrayList<NormalTakeOutVO> = ArrayList()
+        frag1List.add(NormalTakeOutVO(R.drawable.coffee, "쿠키 쉐이크", "2,000원"))
+        frag1List.add(NormalTakeOutVO(R.drawable.coffee, "딸기 쉐이크", "2,000원"))
+        frag1List.add(NormalTakeOutVO(R.drawable.coffee, "밀크 쉐이크", "2,000원"))
 
-        val adapter = context?.let { TakeOut2Adapter(it, R.layout.frag_n_list, frag1List, childFragmentManager) }
+        val adapter = context?.let { TakeOut2Adapter(it, R.layout.frag_normal_list, frag1List, childFragmentManager) }
         rvShake.adapter = adapter
 
         return view

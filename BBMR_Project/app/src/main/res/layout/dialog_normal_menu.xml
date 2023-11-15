@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#00000000"
-    tools:context=".NDialog.NMenuDialog">
+    tools:context=".Dialog.Normal_MenuDialog">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -85,7 +85,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginRight="40dp"
                 android:layout_weight="1"
-                android:background="@drawable/btn_menu2"
+                android:background="@drawable/btn_normal_dialog_menu"
                 android:button="@null"
                 android:text="이전으로"
                 android:textAlignment="center"
@@ -99,7 +99,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="40dp"
                 android:layout_weight="1"
-                android:background="@drawable/btn_menu2"
+                android:background="@drawable/btn_normal_dialog_menu"
                 android:button="@null"
                 android:text="메뉴담기"
                 android:textAlignment="center"
@@ -123,11 +123,11 @@
                 android:layout_height="match_parent"
                 android:layout_marginRight="40dp"
                 android:layout_weight="1"
-                android:background="@drawable/btn_hot2"
+                android:background="@drawable/btn_normal_dialog_hot"
                 android:button="@null"
                 android:text="HOT"
                 android:textAlignment="center"
-                android:textColor="@drawable/btn_hot_text2"
+                android:textColor="@drawable/btn_normal_dialog_hottext"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -137,11 +137,11 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="40dp"
                 android:layout_weight="1"
-                android:background="@drawable/btn_cool2"
+                android:background="@drawable/btn_normal_dialog_cool"
                 android:button="@null"
                 android:text="COLD"
                 android:textAlignment="center"
-                android:textColor="@drawable/btn_cold_text2"
+                android:textColor="@drawable/btn_normal_dialog_coldtext"
                 android:textSize="20sp"
                 android:textStyle="bold" />
         </RadioGroup>
