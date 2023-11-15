@@ -1,40 +1,36 @@
 package com.example.bbmr_project
 
-import Fragment2_1
+import Normal_Fragment_Tab1
 import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.FrameLayout
 import android.widget.TextView
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
-import com.example.bbmr_project.VO.BasketVO
-import com.example.bbmr_project.databinding.ActivityNTakeOutBinding
-//import com.example.bbmr_project.fragments2.Fragment2_1
-import com.example.bbmr_project.fragments2.Fragment2_1_Coffee
-import com.example.bbmr_project.fragments2.Fragment2_2
-import com.example.bbmr_project.fragments2.Fragment2_3
-import com.example.bbmr_project.fragments2.adapters.BasketAdapter
-import com.example.bbmr_project.fragments2.adapters.ViewPagerAdapter
+import com.example.bbmr_project.VO.NormalSelectBasketVO
+import com.example.bbmr_project.databinding.ActivityNormalTakeoutBinding
+import com.example.bbmr_project.Normal_Fragment.Normal_Fragment_Tab2
+import com.example.bbmr_project.Normal_Fragment.Normal_Fragment_Tab3
+import com.example.bbmr_project.Normal_Fragment.adapters.NormalSelectBasketAdapter
+import com.example.bbmr_project.Normal_Fragment.adapters.NormalViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 
 interface NMenuDialogListener {
-    fun onMenuAdded(basketVO: BasketVO)
+    fun onMenuAdded(normalSelectBasketVO: NormalSelectBasketVO)
 }
-class TakeOut2Activity : AppCompatActivity() {
+class Normal_TakeOutActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityNTakeOutBinding
-    private lateinit var basketAdapter: BasketAdapter
+    private lateinit var binding: ActivityNormalTakeoutBinding
+    private lateinit var normalSelectBasketAdapter: NormalSelectBasketAdapter
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_n_take_out)
+        setContentView(R.layout.activity_normal_takeout)
 
-        binding = ActivityNTakeOutBinding.inflate(layoutInflater)
+        binding = ActivityNormalTakeoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setUpTabs(binding.viewPager)
 
@@ -42,7 +38,7 @@ class TakeOut2Activity : AppCompatActivity() {
 
         // 시니어 키오스크로 이동
         binding.btnToSenior.setOnClickListener {
-            val intent = Intent(this@TakeOut2Activity, TakeOut1Activity::class.java)
+            val intent = Intent(this@Normal_TakeOutActivity, TakeOut1Activity::class.java)
             startActivity(intent)
         }
 
@@ -60,8 +56,8 @@ class TakeOut2Activity : AppCompatActivity() {
         binding.tabs.getTabAt(2)?.customView = customTab3
 
         // TakeOut2Activity에서 BasketAdapter 객체를 생성하고 초기화하는 부분
-        val basketAdapter = BasketAdapter(this, R.layout.basket_list, mutableListOf())
-        binding.rvBasket.adapter = basketAdapter
+        val normalSelectBasketAdapter = NormalSelectBasketAdapter(this, R.layout.normal_basketlist, mutableListOf())
+        binding.rvBasket.adapter = normalSelectBasketAdapter
 
         // TakeOut2Activity에서 메뉴 정보를 받는 부분
         val intent = intent
@@ -69,8 +65,8 @@ class TakeOut2Activity : AppCompatActivity() {
         val tvBasketCount = intent.getStringExtra("tvBasketCount")
 
         // Basket에 추가
-        val basketVO = BasketVO(basketImg, tvBasketCount ?: "")
-        basketAdapter.addItem(basketVO)
+        val normalSelectBasketVO = NormalSelectBasketVO(basketImg, tvBasketCount ?: "")
+        normalSelectBasketAdapter.addItem(normalSelectBasketVO)
 
         val gridLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.rvBasket.layoutManager = gridLayoutManager
@@ -78,27 +74,27 @@ class TakeOut2Activity : AppCompatActivity() {
 
 
     private fun setUpTabs(viewPager: ViewPager) {
-        val adapter = ViewPagerAdapter(supportFragmentManager)
-        adapter.addFragment(Fragment2_1(), "음료")
-        adapter.addFragment(Fragment2_2(), "디저트")
-        adapter.addFragment(Fragment2_3(), "MD")
+        val adapter = NormalViewPagerAdapter(supportFragmentManager)
+        adapter.addFragment(Normal_Fragment_Tab1(), "음료")
+        adapter.addFragment(Normal_Fragment_Tab2(), "디저트")
+        adapter.addFragment(Normal_Fragment_Tab3(), "MD")
         viewPager.adapter = adapter
 
         val tabs = findViewById<TabLayout>(R.id.tabs)
         tabs.setupWithViewPager(viewPager)
 
 
-        supportFragmentManager.beginTransaction().replace(R.id.flTakeOut, Fragment2_1()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.flTakeOut, Normal_Fragment_Tab1()).commit()
         tabs.getTabAt(0)?.view?.setOnClickListener {
-            supportFragmentManager.beginTransaction().replace(R.id.flTakeOut, Fragment2_1())
+            supportFragmentManager.beginTransaction().replace(R.id.flTakeOut, Normal_Fragment_Tab1())
                 .commit()
         }
         tabs.getTabAt(1)?.view?.setOnClickListener {
-            supportFragmentManager.beginTransaction().replace(R.id.flTakeOut, Fragment2_2())
+            supportFragmentManager.beginTransaction().replace(R.id.flTakeOut, Normal_Fragment_Tab2())
                 .commit()
         }
         tabs.getTabAt(2)?.view?.setOnClickListener {
-            supportFragmentManager.beginTransaction().replace(R.id.flTakeOut, Fragment2_3())
+            supportFragmentManager.beginTransaction().replace(R.id.flTakeOut, Normal_Fragment_Tab3())
                 .commit()
         }
 

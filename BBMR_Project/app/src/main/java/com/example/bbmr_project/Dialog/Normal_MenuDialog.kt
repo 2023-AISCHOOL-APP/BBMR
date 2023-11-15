@@ -1,25 +1,21 @@
-package com.example.bbmr_project.NDialog
+package com.example.bbmr_project.Dialog
 
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import com.example.bbmr_project.NMenuDialogListener
-import com.example.bbmr_project.R
-import com.example.bbmr_project.TakeOut2Activity
-import com.example.bbmr_project.VO.BasketVO
-import com.example.bbmr_project.databinding.ActivityNMenuBinding
+import com.example.bbmr_project.VO.NormalSelectBasketVO
+import com.example.bbmr_project.databinding.DialogNormalMenuBinding
 
 // 메뉴 선택 시 출력되는 Dialog
 
-class NMenuDialog : DialogFragment() {
+class Normal_MenuDialog : DialogFragment() {
 
-    private lateinit var binding: ActivityNMenuBinding
+    private lateinit var binding: DialogNormalMenuBinding
     private var listener: NMenuDialogListener? = null  // 리스너 선언
 
     // 부모 액티비티에 리스너를 설정하는 메서드
@@ -44,7 +40,7 @@ class NMenuDialog : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = ActivityNMenuBinding.inflate(layoutInflater)
+        binding = DialogNormalMenuBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -59,7 +55,7 @@ class NMenuDialog : DialogFragment() {
         // 메뉴담기 클릭 시 부모 Activity에 값 전달
         binding.btnBasketN.setOnClickListener {
             // 선택한 메뉴 정보
-            val selectedMenu = BasketVO(basketImg = 0, tvBasketCount = toString())
+            val selectedMenu = NormalSelectBasketVO(basketImg = 0, tvBasketCount = toString())
 
             // 부모 Activity에 값 전달
             listener?.onMenuAdded(selectedMenu)
