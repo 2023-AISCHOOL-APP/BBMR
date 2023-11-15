@@ -75,4 +75,8 @@ class TakeOut1Adapter (val context: Context, val layout : Int, val menuList: Arr
 
     }
 
+    override fun onViewRecycled(holder: ViewHolder) {
+        super.onViewRecycled(holder)
+    }
+
 }
