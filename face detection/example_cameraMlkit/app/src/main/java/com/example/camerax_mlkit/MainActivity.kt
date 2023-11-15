@@ -46,6 +46,11 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.CameraController
 import androidx.camera.view.CameraController.IMAGE_CAPTURE
 import androidx.lifecycle.LifecycleOwner
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.io.ByteArrayOutputStream
 import java.util.concurrent.Executors
 
@@ -68,6 +73,7 @@ class MainActivity : AppCompatActivity() {
                 this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
             )
         }
+
         cameraExecutor = Executors.newSingleThreadExecutor()
 //        // 해당 함수 내에서 res = 1 일 경우 if문으로 해서 액티비티 이동 intent활용 해보면 됨
 //        // 다음 인텐트로 이동
@@ -178,6 +184,8 @@ class MainActivity : AppCompatActivity() {
 
 
 
+        uploadImageToServer(byteArray)
+
 
 
 
@@ -185,6 +193,7 @@ class MainActivity : AppCompatActivity() {
 
         val tag: String = "이미지 캡처: "
         Log.d(tag, "성공")
+        Log.d(tag,"이미지 : $byteArray")
 
     }
 
@@ -222,6 +231,37 @@ class MainActivity : AppCompatActivity() {
                 finish()
             }
         }
+    }
+
+
+    // retrofit 이미지 주고 받기
+    private fun uploadImageToServer(byteArray: ByteArray) {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(getString(R.string.baseUrl))
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val apiService = retrofit.create(RetrofitAPI::class.java)
+
+        val call = apiService.uploadImage(byteArray)
+
+        call.enqueue(object : Callback<ImageUploadResponse> {
+            override fun onResponse(call: Call<ImageUploadResponse>, response: Response<ImageUploadResponse>) {
+                if (response.isSuccessful) {
+                    val result = response.body()?.result
+                    // 서버로부터 받은 결과 처리
+                    Log.d(TAG,"결과는 : $result 성공")
+                } else {
+                    // 서버로부터 실패 응답을 받았을 때의 처리
+                    Log.d(TAG,"플라스크 서버에서 return값 받기 실패")
+                }
+            }
+
+            override fun onFailure(call: Call<ImageUploadResponse>, t: Throwable) {
+                // 네트워크 요청 실패 시의 처리
+                Log.d(TAG,"플라스크서버로 보내기 실패")
+            }
+        })
     }
 }
 
