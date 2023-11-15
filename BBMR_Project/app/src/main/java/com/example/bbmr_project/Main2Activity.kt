@@ -13,7 +13,7 @@ class Main2Activity : AppCompatActivity() {
         // 주문하기 버튼 클릭 시 Intro2로 이동
         val btnOrder: Button = findViewById(R.id.btnOrder)
         btnOrder.setOnClickListener {
-            val intent = Intent(this@Main2Activity, Intro2Activity::class.java)
+            val intent = Intent(this@Main2Activity, LoadingSplashActivity::class.java)
             startActivity(intent)
         }
     }

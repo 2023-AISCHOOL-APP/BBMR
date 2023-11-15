@@ -15,6 +15,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables{
+            useSupportLibrary = true
+        }
     }
 
     buildTypes {
@@ -30,11 +33,47 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures{
+        compose = true
+        viewBinding = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.4.3"
+    }
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL.2.0, LGPL2.1}"
+        }
+    }
 }
 
 dependencies {
+    // mlKit
     implementation("com.google.mlkit:face-detection:16.1.5")
     implementation("com.google.android.gms:play-services-mlkit-text-recognition:19.0.0")
+    // cameraX
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    val camerax_version = "1.1.0-beta01"
+    implementation ("androidx.camera:camera-core:${camerax_version}")
+    implementation ("androidx.camera:camera-camera2:${camerax_version}")
+    implementation ("androidx.camera:camera-lifecycle:${camerax_version}")
+    implementation ("androidx.camera:camera-video:${camerax_version}")
+    implementation ("androidx.camera:camera-view:${camerax_version}")
+    implementation ("androidx.camera:camera-extensions:${camerax_version}")
+
+    // 그 외 ui 등
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+    implementation("androidx.activity:activity-compose:1.8.0")
+    implementation(platform("androidx.compose:compose-bom:2023.03.00"))
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.ui:ui-graphics")
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation("androidx.compose.material3:material3")
+    androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    debugImplementation("androidx.compose.ui:ui-tooling")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
