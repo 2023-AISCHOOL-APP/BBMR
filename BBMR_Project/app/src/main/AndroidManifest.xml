@@ -16,24 +16,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BBMR_Project"
         tools:targetApi="31">
-
-        <activity
-            android:name=".CouponNumberActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <!-- 공용 액티비티   -->
         <activity
             android:name=".LoadingSplashActivity"
-            android:exported="false" />
+            android:exported="true" />
+        <!-- 일반용 액티비티 2 , n -->
         <activity
             android:name=".Stay2Activity"
-            android:exported="false" />
-        <activity
-            android:name=".TakeOutActivity"
             android:exported="true" />
         <activity
             android:name=".TakeOut2Activity"
@@ -43,7 +32,23 @@
             android:exported="true" />
         <activity
             android:name=".Main2Activity"
-            android:exported="true"></activity>
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+        <!-- 시니어용 액티비티 1, s -->
+        <activity
+            android:name=".CouponNumberActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".TakeOutActivity"
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true" />
@@ -51,6 +56,11 @@
             android:exported="true">
 
         </activity>
+
+
+
+
+
     </application>
 
 </manifest>
