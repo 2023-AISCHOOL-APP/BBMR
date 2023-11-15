@@ -25,7 +25,7 @@
         android:gravity="center|left"
         android:text="Kinior\n시니어를 위한\n키오스크"
         android:textColor="#FFFFFF"
-        android:textSize="100sp"
+        android:textSize="90sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tv3"
         app:layout_constraintEnd_toEndOf="parent"

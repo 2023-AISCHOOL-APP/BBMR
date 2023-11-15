@@ -30,9 +30,6 @@ class TakeOut1Activity : AppCompatActivity() {
 
 
 
-
-
-
         // Fragment 관리하는 함수
         fun loadFragment(fragment : androidx.fragment.app.Fragment){
             supportFragmentManager.beginTransaction()
@@ -53,11 +50,8 @@ class TakeOut1Activity : AppCompatActivity() {
 
         //결제화면 이동
         binding.btnPay.setOnClickListener {
-            val intent = Intent(this@TakeOut1Activity, Pay1Activity::class.java)
-            startActivity(intent)
+            Pay1Dialog().show(supportFragmentManager, "")
         }
-
-
 
 
 
@@ -76,7 +70,6 @@ class TakeOut1Activity : AppCompatActivity() {
                 show()
             }
 
-            
-            }
+        }
     }
 }
