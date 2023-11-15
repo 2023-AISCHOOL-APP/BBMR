@@ -30,7 +30,7 @@ class TakeOut1Activity : AppCompatActivity() {
 
         // 일반 키오스크로 이동
         binding.btnToOrigin.setOnClickListener {
-            val intent = Intent(this@TakeOut1Activity, TakeOut2Activity::class.java)
+            val intent = Intent(this@TakeOut1Activity, Normal_TakeOutActivity::class.java)
             startActivity(intent)
         }
 
