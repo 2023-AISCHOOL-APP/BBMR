@@ -16,9 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BBMR_Project"
         tools:targetApi="31">
-        <activity
-            android:name=".alertdialog.AlertDialog"
-            android:exported="false" />
+
         <activity
             android:name=".CouponNumberActivity"
             android:exported="true">
@@ -49,6 +47,10 @@
         <activity
             android:name=".MainActivity"
             android:exported="true" />
+        <activity android:name=".BasketActivity"
+            android:exported="true">
+
+        </activity>
     </application>
 
 </manifest>
