@@ -6,16 +6,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bbmr_project.Pay1Dialog
 import com.example.bbmr_project.R
 import com.example.bbmr_project.VO.TakeOut1VO
 
+// 정확한 예시가 모르겠음
+// 외부의 접근 유무
 
-
+//interface ItemClickListener {
+//    fun onItemClick(item: TakeOut1VO)
+//}  // 클릭 이벤트
 
 // RecyclerView Adapter 클래스 정의
-class TakeOut1Adapter (val context: Context, val layout : Int, val menuList: ArrayList<TakeOut1VO>)
+class TakeOut1Adapter (val context: Context, val layout : Int, val menuList: ArrayList<TakeOut1VO>,
+//                       private val itemClickListener: ItemClickListener? = null,
+//                       private val fragmentManager: FragmentManager // 클릭 이벤트
+)
     : RecyclerView.Adapter<TakeOut1Adapter.ViewHolder>() {
+
 
     // LayoutInflater를 이용하여 레이아웃을 인플레이트하기 위한객체 초기화
     private val inflater: LayoutInflater = LayoutInflater.from(context)
@@ -55,6 +65,13 @@ class TakeOut1Adapter (val context: Context, val layout : Int, val menuList: Arr
         holder.tvNameS.text = menuList[position].name
         holder.tvPriceS.text = menuList[position].price
 
+//        holder.itemView.setOnClickListener {
+//            itemClickListener?.onItemClick(menuList[position])
+//
+//            val siniorDialog = Pay1Dialog()
+//            siniorDialog.show(fragmentManager, "Pay1Dialog")
+//
+//        } // 클릭 이벤트
 
     }
 

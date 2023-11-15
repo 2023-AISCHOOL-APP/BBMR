@@ -28,10 +28,11 @@ class TakeOut1Activity : AppCompatActivity() {
         binding = ActivitySTakeOutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-
-
-
+        // 일반 키오스크로 이동
+        binding.btnToOrigin.setOnClickListener {
+            val intent = Intent(this@TakeOut1Activity, TakeOut2Activity::class.java)
+            startActivity(intent)
+        }
 
         // Fragment 관리하는 함수
         fun loadFragment(fragment : androidx.fragment.app.Fragment){
@@ -53,11 +54,8 @@ class TakeOut1Activity : AppCompatActivity() {
 
         //결제화면 이동
         binding.btnPay.setOnClickListener {
-            val intent = Intent(this@TakeOut1Activity, Pay1Activity::class.java)
-            startActivity(intent)
+            Pay1Dialog().show(supportFragmentManager, "")
         }
-
-
 
 
 
@@ -76,7 +74,6 @@ class TakeOut1Activity : AppCompatActivity() {
                 show()
             }
 
-            
-            }
+        }
     }
 }

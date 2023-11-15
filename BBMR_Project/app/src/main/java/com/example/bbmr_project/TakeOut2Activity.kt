@@ -2,6 +2,7 @@ package com.example.bbmr_project
 
 import Fragment2_1
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.FrameLayout
@@ -38,6 +39,12 @@ class TakeOut2Activity : AppCompatActivity() {
         setUpTabs(binding.viewPager)
 
         val fl: FrameLayout = findViewById(R.id.flTakeOut)
+
+        // 시니어 키오스크로 이동
+        binding.btnToSenior.setOnClickListener {
+            val intent = Intent(this@TakeOut2Activity, TakeOut1Activity::class.java)
+            startActivity(intent)
+        }
 
         // ViewPager와 TabLayout 연결
         binding.tabs.setupWithViewPager(binding.viewPager)

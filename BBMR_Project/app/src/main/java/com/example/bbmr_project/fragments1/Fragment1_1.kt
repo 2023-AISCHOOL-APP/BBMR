@@ -16,10 +16,6 @@ import com.example.bbmr_project.fragments1.adapters1.TakeOut1Adapter
 class Fragment1_1 : Fragment(){
 
 
-
-//    private val menuList: ArrayList<TakeOut1VO> = ArrayList() // 1차
-//    private lateinit var adapter: TakeOut1Adapter
-//    private lateinit var rvS : RecyclerView
     private lateinit var viewModel: MenuListViewModel
     private lateinit var adapter: TakeOut1Adapter
     private lateinit var rvS: RecyclerView
@@ -29,7 +25,6 @@ class Fragment1_1 : Fragment(){
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
 
         // ViewModel 초기화
         viewModel = ViewModelProvider(this).get(MenuListViewModel::class.java)

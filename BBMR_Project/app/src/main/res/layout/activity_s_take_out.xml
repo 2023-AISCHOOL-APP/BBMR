@@ -260,5 +260,13 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.875" />
 
+    <Button
+        android:id="@+id/btnToOrigin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="일반으로 가기"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
