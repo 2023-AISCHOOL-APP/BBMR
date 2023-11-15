@@ -32,6 +32,7 @@ class Fragment2_1 : Fragment() {
                 R.id.btnShake -> replaceFragment(Fragment2_1_Shake())
             }
         }
+
         return binding.root
     }
 

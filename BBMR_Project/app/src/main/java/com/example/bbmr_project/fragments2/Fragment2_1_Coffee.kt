@@ -33,7 +33,7 @@ class Fragment2_1_Coffee : Fragment() {
         frag1List.add(TakeOut2VO(R.drawable.coffee, "카푸치노", "2,000원"))
         frag1List.add(TakeOut2VO(R.drawable.coffee, "바닐라라떼", "2,000원"))
 
-        val adapter = context?.let { TakeOut2Adapter(it, R.layout.frag_n_list, frag1List) }
+        val adapter = context?.let { TakeOut2Adapter(it, R.layout.frag_n_list, frag1List, childFragmentManager) }
         rvCoffee.adapter = adapter
 
         return view

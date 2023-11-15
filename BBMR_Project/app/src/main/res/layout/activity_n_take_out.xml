@@ -204,13 +204,11 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <android.widget.Button
-        android:id="@+id/button5"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/pay"
         android:insetTop="0dp"
         android:insetBottom="0dp"
-        android:text="Button"
         app:cornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

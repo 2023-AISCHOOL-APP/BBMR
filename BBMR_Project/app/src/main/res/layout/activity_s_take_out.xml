@@ -169,7 +169,7 @@
         app:layout_constraintGuide_percent="0.9" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tvBasketCount"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:padding="8dp"
