@@ -16,12 +16,12 @@ class Normal_IntroActivity : AppCompatActivity() {
         val btnStay: Button = findViewById(R.id.btnStay)
 
         btnTakeOut.setOnClickListener {
-            val intent = Intent(this@Normal_IntroActivity, TakeOut2Activity::class.java)
+            val intent = Intent(this@Normal_IntroActivity, Normal_TakeOutActivity::class.java)
             startActivity(intent)
         }
 
         btnStay.setOnClickListener {
-            val intent = Intent(this@Normal_IntroActivity, TakeOut2Activity::class.java)
+            val intent = Intent(this@Normal_IntroActivity, Normal_TakeOutActivity::class.java)
             startActivity(intent)
         }
     }
