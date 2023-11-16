@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var mRetrofit : Retrofit
     lateinit var mRetrofitAPI: RetrofitAPI
     lateinit var mCallTodoList : retrofit2.Call<JsonObject>
-    val cafeList : ArrayList<MenuVO> = ArrayList()
+    val coffeeList : ArrayList<MenuVO> = ArrayList()
     val dessertList : ArrayList<MenuVO> = ArrayList()
     val teaList : ArrayList<MenuVO> = ArrayList()
     val mdList : ArrayList<MenuVO> = ArrayList()
@@ -57,26 +57,24 @@ class MainActivity : AppCompatActivity() {
             if (response.isSuccessful && coffeeResult != null && dessertResult != null &&
                 teaResult != null && mdResult != null && flatccinoResult != null &&
                 beverageResult != null) {
-                for ((name, price) in coffeeResult.entrySet()) {
-                    cafeList.add(MenuVO(name, price.asInt))
-                }
-                for ((name, price) in dessertResult.entrySet()) {
-                    dessertList.add(MenuVO(name, price.asInt))
-                }
-                for ((name, price) in teaResult.entrySet()) {
-                    teaList.add(MenuVO(name, price.asInt))
-                }
 
-                for ((name, price) in mdResult.entrySet()) {
-                    mdList.add(MenuVO(name, price.asInt))
-                }
+                // 카테고리 별로 리스트 초기화
+                val categories = listOf(
+                    Pair(coffeeResult, coffeeList),
+                    Pair(dessertResult, dessertList),
+                    Pair(teaResult, teaList),
+                    Pair(mdResult, mdList),
+                    Pair(flatccinoResult, flatccinoList),
+                    Pair(beverageResult, beverageList)
+                )
 
-                for ((name, price) in flatccinoResult.entrySet()) {
-                    flatccinoList.add(MenuVO(name, price.asInt))
-                }
-
-                for ((name, price) in beverageResult.entrySet()) {
-                    beverageList.add(MenuVO(name, price.asInt))
+                // 각 카테고리에 대해 처리
+                for ((categoryResult, categoryList) in categories) {
+                    for ((menu_id, data) in categoryResult.entrySet()) {
+                        val name = data.asJsonArray[1].asString // 변경된 부분
+                        val price = data.asJsonArray[0].asInt // 변경된 부분
+                        categoryList.add(MenuVO(menu_id, name, price))
+                    }
                 }
             }
         }

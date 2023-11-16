@@ -1,9 +1,21 @@
 from io import BytesIO
-from tkinter import Image
+import io
+# from tkinter import Image
+from PIL import Image # 2번 Image 모듈이 tkinter 패키지에 포함되어 3번으로 수정
 from connection import get_connection
 from mysql.connector import Error
 from flask import Flask, request, jsonify, send_file
 from flask_restful import Resource, Api, reqparse, abort
+from tensorflow import keras
+from keras import models, layers
+from keras.layers import Dense
+from keras.preprocessing import image
+from keras.applications.vgg16 import preprocess_input
+from werkzeug.utils import secure_filename # 231116 filename불러오기 위한 import
+import joblib # 231115 모델 로딩 라이브러리 사용 - 정희석(8-12)
+import tensorflow as tf
+import numpy as np
+import os # 231116 추가 - 이미지를 PIL Image로 변환
 
 app = Flask(__name__)
 api = Api(app)
@@ -19,7 +31,7 @@ class TodoList(Resource):
         db_result = cursor.fetchall()
         menu = {}
         for item in db_result:
-            menu[item['name']] = item['price']
+            menu[item['menu_id']] = [item['price'], item['name']]
         return menu
 
     def get(self):
@@ -31,31 +43,53 @@ class TodoList(Resource):
         beverage = self.fetch_menu('beverage')
         etc = self.fetch_menu('etc')
 
+        print(coffee)
 
         return {"coffee": coffee, "dessert": dessert, "etc": etc,
                 "tea":tea, "md":md, "flatccino": flatccino,"beverage" : beverage}
     
    
 
-# 앱에서 촬영된 사진 이미지 byteArray로 받아오고 result return 해주는 함수
-class ImageUpload(Resource):
-    def post(self):
-        try:
-            # 이미지를 바이트 배열로 받음
-            image_bytes = request.get_data()
-            
-            # 여기서 이미지 처리 로직을 추가하면 됨
-            # 예를 들어, 받은 이미지를 저장하거나 다른 처리를 수행
-            
-            # 결과값으로 '1'을 리턴
-            result = '123123'
-            print(image_bytes)
-            return jsonify({'result': result})
-        except Exception as e:
-            return jsonify({'error': 'error'})
 
 
-api.add_resource(ImageUpload, "/model/")
+# 학습된 모델 로드
+model = tf.keras.models.load_model('test_face_cnn_model.h5')
+
+################################################################################
+
+### 1번
+def preprocess_image(image):
+    # 이미지 전처리
+    img = image.resize((360, 480))
+    img_array = np.array(img) / 255.0
+    img_array = np.expand_dims(img_array, axis=0)
+    return img_array
+
+@app.route('/upload_and_predict', methods=['POST'])
+def upload_and_predict():
+    # 클라이언트로부터 이미지 파일 받기
+    if 'image' not in request.files:
+        return jsonify({'error': 'No image part'})
+
+    image_file = request.files['image']
+    
+    # 이미지를 PIL Image로 변환
+    image = Image.open(io.BytesIO(image_file.read())).convert("RGB")
+    
+    # 전처리
+    preprocessed_image = preprocess_image(image)
+
+    # 모델 예측
+    input_array = np.array([np.asarray(preprocessed_image)])
+    predictions = model.predict(input_array)
+
+    # 결과 전송
+    result = {'prediction': predictions.tolist()}
+    return jsonify(result)
+
+
+
+
 api.add_resource(TodoList,'/todos/')
 
 if __name__ == '__main__':
