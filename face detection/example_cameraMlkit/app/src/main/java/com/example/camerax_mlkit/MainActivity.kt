@@ -17,10 +17,8 @@
 package com.example.camerax_mlkit
 
 import android.Manifest
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.media.Image
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -28,8 +26,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
-import androidx.camera.core.ImageCaptureException
-import androidx.camera.core.ImageProxy
 import androidx.camera.core.Preview
 import androidx.camera.mlkit.vision.MlKitAnalyzer
 import androidx.camera.view.CameraController.COORDINATE_SYSTEM_VIEW_REFERENCED
@@ -44,8 +40,6 @@ import com.google.mlkit.vision.face.FaceDetectorOptions
 import java.util.concurrent.ExecutorService
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.CameraController
-import androidx.camera.view.CameraController.IMAGE_CAPTURE
-import androidx.lifecycle.LifecycleOwner
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -243,7 +237,15 @@ class MainActivity : AppCompatActivity() {
 
         val apiService = retrofit.create(RetrofitAPI::class.java)
 
+//        // 이미지 데이터를 Base64로 인코딩
+//        val imageBase64 = Base64.encodeToString(byteArray, Base64.DEFAULT)
+//
+//        // JSON 데이터 구성
+//        val requestData = mapOf("image" to imageBase64)
+
+        // JSON 형식으로 전송
         val call = apiService.uploadImage(byteArray)
+//        Log.d(TAG,"이미지 base64 : $requestData")
 
         call.enqueue(object : Callback<ImageUploadResponse> {
             override fun onResponse(call: Call<ImageUploadResponse>, response: Response<ImageUploadResponse>) {

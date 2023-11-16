@@ -1,62 +1,41 @@
 from io import BytesIO
 from tkinter import Image
-from test_connection import get_connection
+from connection import get_connection
 from mysql.connector import Error
 from flask import Flask, request, jsonify, send_file
 from flask_restful import Resource, Api, reqparse, abort
-from resources.cafe_test import cafe_test
 
 app = Flask(__name__)
 api = Api(app)
 
 
-
-# 아직 수정 해야할 부분 TodoList, DessertList
+# DB에서 메뉴(name, price) 가져오기
 class TodoList(Resource):
-    def get(self):
+    def fetch_menu(self, category):
         conn = get_connection()
-        query = "select * from test"
+        query = f"SELECT * FROM menu WHERE cate = '{category}'"
         cursor = conn.cursor(dictionary=True)
         cursor.execute(query)
-        dbResult = cursor.fetchall()
-        result = dbResult[0]['price']
-        Todos = {}
-        for i in range(len(dbResult)):
-            Todos[dbResult[i]['name']] =  dbResult[i]['price']
+        db_result = cursor.fetchall()
+        menu = {}
+        for item in db_result:
+            menu[item['name']] = item['price']
+        return menu
 
-        print(Todos)
-
-        conn = get_connection()
-        query2 = "select * from dessert"
-        cursor = conn.cursor(dictionary=True)
-        cursor.execute(query2)
-        dbResult2 = cursor.fetchall()
-        result2 = dbResult2[0]['price']
-        dessert = {}
-        for i in range(len(dbResult2)):
-            dessert[dbResult2[i]['name']] =  dbResult2[i]['price']
-
-        print(dessert)
-
-
-        return {"coffee":Todos, "dessert":dessert}
-    
-class DessertList(Resource):
     def get(self):
-        conn = get_connection()
-        query = "select * from dessert"
-        cursor = conn.cursor(dictionary=True)
-        cursor.execute(query)
-        dbResult = cursor.fetchall()
-        result = dbResult[0]['price']
-        dessert = {}
-        for i in range(len(dbResult)):
-            dessert[dbResult[i]['name']] =  dbResult[i]['price']
+        coffee = self.fetch_menu('coffee')
+        dessert = self.fetch_menu('dessert')
+        tea = self.fetch_menu('tea')
+        md = self.fetch_menu('md')
+        flatccino = self.fetch_menu('flatccino')
+        beverage = self.fetch_menu('beverage')
+        etc = self.fetch_menu('etc')
 
-        print(dessert)
-        return dessert
 
+        return {"coffee": coffee, "dessert": dessert, "etc": etc,
+                "tea":tea, "md":md, "flatccino": flatccino,"beverage" : beverage}
     
+   
 
 # 앱에서 촬영된 사진 이미지 byteArray로 받아오고 result return 해주는 함수
 class ImageUpload(Resource):
@@ -78,7 +57,6 @@ class ImageUpload(Resource):
 
 api.add_resource(ImageUpload, "/model/")
 api.add_resource(TodoList,'/todos/')
-api.add_resource(DessertList,'/dessert/')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000) 
