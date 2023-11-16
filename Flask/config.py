@@ -1,13 +1,6 @@
 class Config:
-    HOST = '127.0.0.1'
-    DATABASE = 'testdb'
-    DB_USER = 'root'
-    DB_PASSWORD = '1234'
-
-
-# class Config:
-#     HOST = 'project-db-stu3.smhrd.com'
-#     PORT = '3307'
-#     DATABASE = 'Insa4_App_final_2'
-#     DB_USER = 'Insa4_App_final_2'
-#     DB_PASSWORD = 'aischool2'
+    HOST = 'project-db-stu3.smhrd.com'
+    PORT = '3307'
+    DATABASE = 'Insa4_App_final_2'
+    DB_USER = 'Insa4_App_final_2'
+    DB_PASSWORD = 'aischool2'
