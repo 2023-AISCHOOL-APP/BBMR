@@ -1,7 +1,5 @@
 package com.example.bbmr_project
 
-import android.app.Dialog
-import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,6 +7,7 @@ import android.view.View
 import android.widget.Button
 
 import androidx.appcompat.app.AlertDialog
+import com.example.bbmr_project.Dialog.Senior_BasketDialog
 import com.example.bbmr_project.databinding.ActivityCouponNumberBinding
 
 class CouponNumberActivity : AppCompatActivity() {
@@ -59,7 +58,7 @@ class CouponNumberActivity : AppCompatActivity() {
         dialog.show()
         myLayout.findViewById<Button>(R.id.btnYesAD).setOnClickListener {
             dialog.dismiss()
-            val intent = Intent(view.context, BasketActivity::class.java)
+            val intent = Intent(view.context, Senior_BasketDialog::class.java)
             startActivity(intent)
         }
         myLayout.findViewById<Button>(R.id.btnNoAD).setOnClickListener {
