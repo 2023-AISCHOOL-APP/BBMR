@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF200"
-    tools:context=".fragments1.Fragment1_4">
+    android:background="#61F610"
+    tools:context=".Sinior_Fragment.Senior_Fragment_Tab_Beverage">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="디저트입니다."
+        android:text="음료입니다!"
         android:textSize="50sp" />
 
 </FrameLayout>

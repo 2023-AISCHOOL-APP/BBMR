@@ -12,14 +12,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bbmr_project.Dialog.Normal_MenuDialog
 import com.example.bbmr_project.R
 import com.example.bbmr_project.VO.NormalTakeOutVO
+
+
 interface ItemClickListener {
     fun onItemClick(item: NormalTakeOutVO)
 }
 
-class TakeOut2Adapter(val context: Context, val layout: Int, val frag1List: List<NormalTakeOutVO>,
+class NormalTakeOutAdapter(val context: Context, val layout: Int, val frag1List: List<NormalTakeOutVO>,
                       private val fragmentManager: FragmentManager,
                       private val itemClickListener: ItemClickListener? = null)
-    : RecyclerView.Adapter<TakeOut2Adapter.ViewHolder>(){
+    : RecyclerView.Adapter<NormalTakeOutAdapter.ViewHolder>(){
 
         val inflater : LayoutInflater = LayoutInflater.from(context)
 
@@ -29,14 +31,14 @@ class TakeOut2Adapter(val context: Context, val layout: Int, val frag1List: List
         val tvPrice : TextView = view.findViewById(R.id.tvPrice)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TakeOut2Adapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NormalTakeOutAdapter.ViewHolder {
         val view = inflater.inflate(layout, parent, false)
-        return TakeOut2Adapter.ViewHolder(view)
+        return NormalTakeOutAdapter.ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: TakeOut2Adapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: NormalTakeOutAdapter.ViewHolder, position: Int) {
         holder.tvName.text = frag1List[position].name
-        holder.tvPrice.text = frag1List[position].Price
+        holder.tvPrice.text = frag1List[position].price
         holder.img.setImageResource(frag1List[position].img)
         holder.itemView.setOnClickListener {
             Log.d("TakeOut2Adapter", "Item clicked at position $position")

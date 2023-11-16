@@ -1,30 +1,36 @@
-package com.example.bbmr_project.fragments1.adapters1
+package com.example.bbmr_project.Sinior_Fragment.adapters1
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView.OnItemClickListener
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bbmr_project.Pay1Dialog
+import com.example.bbmr_project.Dialog.Senior_MenuDialog
+import com.example.bbmr_project.Normal_Fragment.adapters.ItemClickListener
 import com.example.bbmr_project.R
-import com.example.bbmr_project.VO.TakeOut1VO
+import com.example.bbmr_project.Sinior_Fragment.Senior_Fragment_Tab_Recommend
+import com.example.bbmr_project.VO.Senior_TakeOutVO
 
 // 정확한 예시가 모르겠음
 // 외부의 접근 유무
 
-//interface ItemClickListener {
-//    fun onItemClick(item: TakeOut1VO)
-//}  // 클릭 이벤트
+
 
 // RecyclerView Adapter 클래스 정의
-class TakeOut1Adapter (val context: Context, val layout : Int, val menuList: ArrayList<TakeOut1VO>,
-//                       private val itemClickListener: ItemClickListener? = null,
-//                       private val fragmentManager: FragmentManager // 클릭 이벤트
+class SeniorTakeOutAdapter (val context: Context, val layout : Int, val menuList: ArrayList<Senior_TakeOutVO>,
+//                            private val itemClickListener: ItemClickListener? = null,
+//                            private val fragmentManager: FragmentManager
 )
-    : RecyclerView.Adapter<TakeOut1Adapter.ViewHolder>() {
+    : RecyclerView.Adapter<SeniorTakeOutAdapter.ViewHolder>() {
+
+//    interface ItemClickListener {
+//        fun onItemClick(item: Senior_TakeOutVO)
+//    }
 
 
     // LayoutInflater를 이용하여 레이아웃을 인플레이트하기 위한객체 초기화
@@ -37,7 +43,7 @@ class TakeOut1Adapter (val context: Context, val layout : Int, val menuList: Arr
         val tvPriceS: TextView = view.findViewById(R.id.tvPriceS)
     }
 
-    fun updateList(newList: List<TakeOut1VO>) {
+    fun updateList(newList: List<Senior_TakeOutVO>) {
         menuList.clear()
         menuList.addAll(newList)
         notifyDataSetChanged()
@@ -61,17 +67,18 @@ class TakeOut1Adapter (val context: Context, val layout : Int, val menuList: Arr
     // 메뉴 사진, 이름, 가격 설정
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.imgS.scaleType = ImageView.ScaleType.CENTER_CROP
-        holder.imgS.setImageResource(menuList[position].img)
-        holder.tvNameS.text = menuList[position].name
-        holder.tvPriceS.text = menuList[position].price
+        holder.imgS.setImageResource(menuList[position].simg)
+        holder.tvNameS.text = menuList[position].sname
+        holder.tvPriceS.text = menuList[position].sprice
 
 //        holder.itemView.setOnClickListener {
 //            itemClickListener?.onItemClick(menuList[position])
 //
-//            val siniorDialog = Pay1Dialog()
-//            siniorDialog.show(fragmentManager, "Pay1Dialog")
+//            val siniorDialog = Senior_MenuDialog()
+//            siniorDialog.show(fragmentManager, "siniorDialog")
 //
-//        } // 클릭 이벤트
+//        }
+
 
     }
 

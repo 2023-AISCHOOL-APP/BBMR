@@ -1,4 +1,4 @@
-package com.example.bbmr_project.fragments1
+package com.example.bbmr_project.Sinior_Fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,16 +8,18 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bbmr_project.Dialog.Senior_MenuDialog
 import com.example.bbmr_project.Menu.MenuListViewModel
 import com.example.bbmr_project.R
-import com.example.bbmr_project.fragments1.adapters1.TakeOut1Adapter
+import com.example.bbmr_project.Sinior_Fragment.adapters1.SeniorTakeOutAdapter
+import com.example.bbmr_project.VO.Senior_TakeOutVO
 
 
-class Fragment1_1 : Fragment(){
+class Senior_Fragment_Tab_Recommend : Fragment(){
 
 
     private lateinit var viewModel: MenuListViewModel
-    private lateinit var adapter: TakeOut1Adapter
+    private lateinit var adapter: SeniorTakeOutAdapter
     private lateinit var rvS: RecyclerView
 
 
@@ -26,16 +28,18 @@ class Fragment1_1 : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
 
+
+
         // ViewModel 초기화
         viewModel = ViewModelProvider(this).get(MenuListViewModel::class.java)
 
-        val view = inflater.inflate(R.layout.fragment_s_1, container, false)
+        val view = inflater.inflate(R.layout.frag_senior_tab_recommend, container, false)
 
         rvS = view.findViewById(R.id.rvS)
 
 
         // RecyclerView 어댑터 초기화
-        adapter = TakeOut1Adapter(requireContext(), R.layout.frag_s_list, arrayListOf())
+        adapter = SeniorTakeOutAdapter(requireContext(), R.layout.frag_senior_list, arrayListOf()) //, this,  parentFragmentManager
         rvS.adapter = adapter
         rvS.layoutManager = GridLayoutManager(requireContext(), 3)
 
@@ -45,7 +49,15 @@ class Fragment1_1 : Fragment(){
         }
 
         return view
+
+
     }
+
+//    override fun onItemClick(item: Senior_TakeOutVO) {
+//        Senior_MenuDialog().show(parentFragmentManager, "SeniorMenuDialog")
+//    }
+
+
 
 
     // menuList1로 전환하는 함수

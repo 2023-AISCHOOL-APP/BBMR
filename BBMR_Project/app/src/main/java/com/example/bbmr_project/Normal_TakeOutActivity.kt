@@ -38,7 +38,7 @@ class Normal_TakeOutActivity : AppCompatActivity() {
 
         // 시니어 키오스크로 이동
         binding.btnToSenior.setOnClickListener {
-            val intent = Intent(this@Normal_TakeOutActivity, TakeOut1Activity::class.java)
+            val intent = Intent(this@Normal_TakeOutActivity, Senior_TakeOutActivity::class.java)
             startActivity(intent)
         }
 

@@ -1,4 +1,4 @@
-package com.example.bbmr_project
+package com.example.bbmr_project.Dialog
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -6,13 +6,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
-import com.example.bbmr_project.databinding.ActivitySPayBinding
+import com.example.bbmr_project.databinding.DialogSeniorMenuBinding
 
-class Pay1Dialog : DialogFragment() {
+class Senior_MenuDialog : DialogFragment() {
 
-    private lateinit var binding: ActivitySPayBinding
+    private lateinit var binding: DialogSeniorMenuBinding
 
     override fun onStart() {
         super.onStart()
@@ -32,7 +31,7 @@ class Pay1Dialog : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = ActivitySPayBinding.inflate(layoutInflater)
+        binding = DialogSeniorMenuBinding.inflate(layoutInflater)
         return binding.root
     }
 

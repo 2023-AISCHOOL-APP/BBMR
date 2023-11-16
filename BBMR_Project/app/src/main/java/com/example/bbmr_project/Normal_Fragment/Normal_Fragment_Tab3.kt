@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bbmr_project.R
 import com.example.bbmr_project.VO.NormalTakeOutVO
-import com.example.bbmr_project.Normal_Fragment.adapters.TakeOut2Adapter
+import com.example.bbmr_project.Normal_Fragment.adapters.NormalTakeOutAdapter
 
 class Normal_Fragment_Tab3 : Fragment() {
     private lateinit var rvMD: RecyclerView
@@ -30,7 +30,7 @@ class Normal_Fragment_Tab3 : Fragment() {
         frag1List.add(NormalTakeOutVO(R.drawable.coffee, "MD", "2,000원"))
         frag1List.add(NormalTakeOutVO(R.drawable.coffee, "MD", "2,000원"))
 
-        val adapter = context?.let { TakeOut2Adapter(it, R.layout.frag_normal_list, frag1List, childFragmentManager) }
+        val adapter = context?.let { NormalTakeOutAdapter(it, R.layout.frag_normal_list, frag1List, childFragmentManager) }
         rvMD.adapter = adapter
 
         return view
