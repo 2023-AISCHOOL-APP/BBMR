@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.FrameLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.example.bbmr_project.databinding.ActivityNTakeOutBinding
 //import com.example.bbmr_project.fragments2.Fragment2_1
@@ -43,7 +45,6 @@ class TakeOut2Activity : AppCompatActivity() {
         customTab3.findViewById<TextView>(R.id.textView6).text = "MD"
         binding.tabs.getTabAt(2)?.customView = customTab3
 
-
     }
 
 
@@ -68,7 +69,5 @@ class TakeOut2Activity : AppCompatActivity() {
         tabs.getTabAt(2)?.view?.setOnClickListener {
             supportFragmentManager.beginTransaction().replace(R.id.flTakeOut, Fragment2_3()).commit()
         }
-
-
     }
 }
