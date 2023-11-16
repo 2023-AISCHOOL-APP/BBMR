@@ -9,6 +9,7 @@
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
+        android:enableOnBackInvokedCallback="true"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -16,53 +17,73 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BBMR_Project"
         tools:targetApi="31">
-        <!-- 공용 액티비티   -->
+
+        <!-- 공용 액티비티 -->
         <activity
             android:name=".LoadingSplashActivity"
-            android:exported="true" />
-        <!-- 일반용 액티비티 2 , n -->
-        <activity
-            android:name=".Stay2Activity"
-                        android:exported="true" />
-        <activity
-            android:name=".TakeOut2Activity"
-            android:exported="true" />
-        <activity
-            android:name=".Intro2Activity"
-            android:exported="true" />
-        <activity
-            android:name=".Main2Activity"
-            android:exported="true">
-
-        </activity>
-
-
-        <!-- 시니어용 액티비티 1, s -->
-        <activity
-            android:name=".CouponNumberActivity"
             android:exported="true">
         </activity>
+
+
+        <!-- 일반용 액티비티 -->
         <activity
-            android:name=".TakeOut1Activity"
+            android:name=".Normal_StayActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".Normal_TakeOutActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>>
-        <activity
-            android:name=".MainActivity"
-            android:exported="true" />
-        <activity android:name=".BasketActivity"
-            android:exported="true">
+        </activity>
 
+        <activity
+            android:name=".Normal_IntroActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".Normal_MainActivity"
+            android:exported="true">
         </activity>
 
 
 
+        <!-- 시니어용 액티비티 -->
+        <activity
+            android:name=".CouponNumberActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".Senior_TakeOutActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".BasketActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".SelectMenu1Activity"
+            android:exported="true">
+        </activity>
 
 
+        <activity
+            android:name=".Senior_IntroActivity"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>
