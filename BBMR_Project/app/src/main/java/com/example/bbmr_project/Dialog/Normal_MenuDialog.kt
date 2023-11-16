@@ -13,13 +13,13 @@ import com.example.bbmr_project.databinding.DialogNormalMenuBinding
 
 // 메뉴 선택 시 출력되는 Dialog
 
-class Normal_MenuDialog : DialogFragment() {
+class Normal_MenuDialog : DialogFragment(), NMenuDialogListener {
 
     private lateinit var binding: DialogNormalMenuBinding
     private var listener: NMenuDialogListener? = null  // 리스너 선언
 
     // 부모 액티비티에 리스너를 설정하는 메서드
-    fun setNMenuDialogListener(listener: NMenuDialogListener) {
+    fun setNMenuDialogListener(listener: Normal_MenuDialog) {
         this.listener = listener
     }
 
@@ -47,7 +47,7 @@ class Normal_MenuDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 이전으로 클릭 시 TakeOut2로 이동
+        // 이전으로 클릭 시 NormalTakeOut으로 이동
         binding.btnBackN.setOnClickListener {
             dismiss()
         }
@@ -55,7 +55,7 @@ class Normal_MenuDialog : DialogFragment() {
         // 메뉴담기 클릭 시 부모 Activity에 값 전달
         binding.btnBasketN.setOnClickListener {
             // 선택한 메뉴 정보
-            val selectedMenu = NormalSelectBasketVO(basketImg = 0, tvBasketCount = toString())
+            val selectedMenu = NormalSelectBasketVO(basketImg = 0, tvBasketCount = binding.tvCount.text.toString())
 
             // 부모 Activity에 값 전달
             listener?.onMenuAdded(selectedMenu)
@@ -172,8 +172,5 @@ class Normal_MenuDialog : DialogFragment() {
             // btnMinus4 활성화
             binding.btnMinus4.isEnabled = true
     }
-
-
-
     }
 }

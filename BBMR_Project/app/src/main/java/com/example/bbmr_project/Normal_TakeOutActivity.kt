@@ -5,10 +5,12 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.ViewPager
+import com.example.bbmr_project.Dialog.Normal_SelectPayDialog
 import com.example.bbmr_project.VO.NormalSelectBasketVO
 import com.example.bbmr_project.databinding.ActivityNormalTakeoutBinding
 import com.example.bbmr_project.Normal_Fragment.Normal_Fragment_Tab2
@@ -18,7 +20,9 @@ import com.example.bbmr_project.Normal_Fragment.adapters.NormalViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 
 interface NMenuDialogListener {
-    fun onMenuAdded(normalSelectBasketVO: NormalSelectBasketVO)
+    fun onMenuAdded(normalSelectBasketVO: NormalSelectBasketVO) {
+        Log.d("Normal_TakeOutActivity", "Menu added: ${normalSelectBasketVO.basketImg}, ${normalSelectBasketVO.tvBasketCount}")
+    }
 }
 class Normal_TakeOutActivity : AppCompatActivity() {
 
@@ -55,11 +59,11 @@ class Normal_TakeOutActivity : AppCompatActivity() {
         customTab3.findViewById<TextView>(R.id.textView6).text = "MD"
         binding.tabs.getTabAt(2)?.customView = customTab3
 
-        // TakeOut2Activity에서 BasketAdapter 객체를 생성하고 초기화하는 부분
-        val normalSelectBasketAdapter = NormalSelectBasketAdapter(this, R.layout.normal_basketlist, mutableListOf())
-        binding.rvBasket.adapter = normalSelectBasketAdapter
+        // NormalTakeOut에서 NormalSelectBasketAdapter 객체를 생성하고 초기화하는 부분
+        normalSelectBasketAdapter = NormalSelectBasketAdapter(this, R.layout.normal_basketlist, mutableListOf())
+        binding.rvNormalBasket.adapter = normalSelectBasketAdapter
 
-        // TakeOut2Activity에서 메뉴 정보를 받는 부분
+        // NormalTakeOut에서 메뉴 정보를 받는 부분
         val intent = intent
         val basketImg = intent.getIntExtra("basketImg", 0)
         val tvBasketCount = intent.getStringExtra("tvBasketCount")
@@ -69,7 +73,13 @@ class Normal_TakeOutActivity : AppCompatActivity() {
         normalSelectBasketAdapter.addItem(normalSelectBasketVO)
 
         val gridLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        binding.rvBasket.layoutManager = gridLayoutManager
+        binding.rvNormalBasket.layoutManager = gridLayoutManager
+
+        // 결제하기 클릭 시 결제 창 normalSelectpaydialog 띄우기
+        binding.btnNormalPay.setOnClickListener {
+            val normalSelectpaydialog = Normal_SelectPayDialog()
+            normalSelectpaydialog.show(supportFragmentManager, "Normal_SelectPayDialog")
+        }
     }
 
 
