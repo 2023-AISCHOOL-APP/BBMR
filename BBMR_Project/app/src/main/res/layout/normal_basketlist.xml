@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center|top"
-    android:background="#FD0000">
+    android:background="#C3C3C3">
 
     <ImageView
         android:id="@+id/basketImg"
