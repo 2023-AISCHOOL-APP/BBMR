@@ -1,4 +1,4 @@
-package com.example.bbmr_project.Sinior_Fragment
+package com.example.bbmr_project.Senior_Fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.bbmr_project.R
 
-class Senior_Fragment_Tab_Beverage : Fragment() {
+
+class Senior_Fragment_Tab_Dessert : Fragment() {
 
 
     override fun onCreateView(
@@ -15,7 +16,7 @@ class Senior_Fragment_Tab_Beverage : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.frag_senior_tab_beverage, container, false)
+        return inflater.inflate(R.layout.frag_senior_tab_dessert, container, false)
     }
 
 

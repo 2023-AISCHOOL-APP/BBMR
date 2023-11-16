@@ -103,7 +103,7 @@
         </RadioGroup>
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/imgMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
@@ -114,7 +114,7 @@
             app:layout_constraintTop_toBottomOf="@+id/btnBack" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/tvMenuName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="아메리카노"
@@ -122,11 +122,11 @@
             android:textSize="75sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView3"
-            app:layout_constraintTop_toTopOf="@+id/imageView3" />
+            app:layout_constraintStart_toEndOf="@+id/imgMenu"
+            app:layout_constraintTop_toTopOf="@+id/imgMenu" />
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/tvMenuPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -134,9 +134,9 @@
             android:textColor="#FF0000"
             android:textSize="60sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/textView3"
-            app:layout_constraintStart_toStartOf="@+id/textView3"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            app:layout_constraintEnd_toEndOf="@+id/tvMenuName"
+            app:layout_constraintStart_toStartOf="@+id/tvMenuName"
+            app:layout_constraintTop_toBottomOf="@+id/tvMenuName" />
 
         <TextView
             android:id="@+id/textView9"
@@ -147,10 +147,10 @@
             android:textColor="#000000"
             android:textSize="50sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/textView8"
+            app:layout_constraintEnd_toEndOf="@+id/tvMenuPrice"
             app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+            app:layout_constraintStart_toStartOf="@+id/tvMenuPrice"
+            app:layout_constraintTop_toBottomOf="@+id/tvMenuPrice" />
 
         <android.widget.Button
             android:id="@+id/button3"
