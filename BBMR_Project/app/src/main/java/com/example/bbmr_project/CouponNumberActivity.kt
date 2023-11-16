@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 
 import androidx.appcompat.app.AlertDialog
+import com.example.bbmr_project.Dialog.Senior_BasketDialog
 import com.example.bbmr_project.databinding.ActivityCouponNumberBinding
 
 class CouponNumberActivity : AppCompatActivity() {
@@ -70,7 +71,7 @@ class CouponNumberActivity : AppCompatActivity() {
         dialog.show()
         myLayout.findViewById<Button>(R.id.btnYesDCB).setOnClickListener {
             dialog.dismiss()
-            val intent = Intent(view.context, BasketActivity::class.java)
+            val intent = Intent(view.context, Senior_BasketDialog::class.java)
             startActivity(intent)
         }
         myLayout.findViewById<Button>(R.id.btnNoDCB).setOnClickListener {
@@ -95,6 +96,7 @@ class CouponNumberActivity : AppCompatActivity() {
     }
 
     fun ChangedSuccessDialog(view: View) {
+
         val myLayout = layoutInflater.inflate(R.layout.dialog_coupon_success, null)
         val build = AlertDialog.Builder(view.context).apply{
             setView(myLayout)
@@ -110,9 +112,14 @@ class CouponNumberActivity : AppCompatActivity() {
         myLayout.findViewById<Button>(R.id.btnCpnUseDCS).setOnClickListener {
             // couponPrice에다가 담아서 보내기
             val CouponPrice = myLayout.findViewById<TextView>(R.id.tvPdPrice).text.toString().replace(",", "").toIntOrNull()?: 0
-            val intent = Intent(view.context, BasketActivity::class.java)
-            intent.putExtra("coupon_price", CouponPrice)
-            startActivity(intent)
+            // 번들에 담아서 다이얼로그프래그먼트로 보내기
+
+            val dialogFragment = Senior_BasketDialog()
+            val bundle = Bundle()
+            bundle.putString("discount_price", "2,900")
+            dialogFragment.arguments = bundle
+            dialogFragment.show(supportFragmentManager, "Senior_BasketDialog")
+
             // 다이얼로그창 끄기
             dialog.dismiss()
         }
@@ -138,9 +145,11 @@ class CouponNumberActivity : AppCompatActivity() {
         myLayout.findViewById<Button>(R.id.btnCpnUseDCS).setOnClickListener {
             // couponPrice에다가 담아서 보내기
             val CouponPrice = myLayout.findViewById<TextView>(R.id.tvPdPrice).text.toString().replace(",", "").toIntOrNull()?: 0
-            val intent = Intent(view.context, BasketActivity::class.java)
-            intent.putExtra("coupon_price", CouponPrice)
-            startActivity(intent)
+            val dialogFragment = Senior_BasketDialog()
+            val bundle = Bundle()
+            bundle.putString("discount_price", "20,000")
+            dialogFragment.arguments = bundle
+            dialogFragment.show(supportFragmentManager, "Senior_BasketDialog")
             // 다이얼로그창 끄기
             dialog.dismiss()
         }

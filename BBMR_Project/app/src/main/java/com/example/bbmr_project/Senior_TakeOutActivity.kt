@@ -5,12 +5,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
-import com.example.bbmr_project.Dialog.Senior_MenuDialog
+import com.example.bbmr_project.Dialog.Senior_BasketDialog
 import com.example.bbmr_project.databinding.ActivitySeniorTakeoutBinding
-import com.example.bbmr_project.Sinior_Fragment.Senior_Fragment_Tab_Recommend
-import com.example.bbmr_project.Sinior_Fragment.Senior_Fragment_Tab_Coffee
-import com.example.bbmr_project.Sinior_Fragment.Senior_Fragment_Tab_Beverage
-import com.example.bbmr_project.Sinior_Fragment.Senior_Fragment_Tab_Dessert
+import com.example.bbmr_project.Senior_Fragment.Senior_Fragment_Tab_Recommend
+import com.example.bbmr_project.Senior_Fragment.Senior_Fragment_Tab_Coffee
+import com.example.bbmr_project.Senior_Fragment.Senior_Fragment_Tab_Beverage
+import com.example.bbmr_project.Senior_Fragment.Senior_Fragment_Tab_Dessert
 
 
 class Senior_TakeOutActivity : AppCompatActivity() {
@@ -61,19 +61,7 @@ class Senior_TakeOutActivity : AppCompatActivity() {
 
         // 장바구니 버튼 기능
         binding.btnBasket.setOnClickListener{
-//            val intent = Intent(this, BasketActivity::class.java)
-//            startActivity(intent)
-
-
-            val price = binding.tvPrice.text
-            AlertDialog.Builder(this).run{
-                setTitle("test dialog")
-                setIcon(android.R.drawable.ic_delete)
-                setPositiveButton("이전으로", null)
-                setMessage("결제금액 :  ${price}")
-                show()
-            }
-
+            Senior_BasketDialog().show(supportFragmentManager, "")
         }
     }
 }
