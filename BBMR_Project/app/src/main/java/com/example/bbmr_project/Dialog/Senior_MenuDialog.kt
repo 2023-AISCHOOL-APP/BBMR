@@ -16,8 +16,9 @@ import com.example.bbmr_project.databinding.DialogSeniorMenuBinding
 class Senior_MenuDialog : DialogFragment() {
 
 
+    // Adapter에서 값을 받아오는 코드
     companion object {
-        fun newInstance(item: Senior_TakeOutVO): Senior_MenuDialog {
+        fun Senior_Menu(item: Senior_TakeOutVO): Senior_MenuDialog {
             val args = Bundle().apply {
                 putString("sname", item.sname)
                 putString("sprice", item.sprice)
@@ -64,6 +65,7 @@ class Senior_MenuDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // 메뉴 선택시 Dialog에 메뉴의 기본정보 제공하는 코드 (Adapter에서 받아온 값을 화면에 보여주기 위한 코드)
         val sname = arguments?.getString("sname")
         val sprice = arguments?.getString("sprice")
         val simg = arguments?.getInt("simg")
@@ -74,7 +76,7 @@ class Senior_MenuDialog : DialogFragment() {
             binding.imgMenu.setImageResource(simg)
         }
 
-
+        // 이전으로 버튼 클릭시 화면 꺼지는 코드
         binding.btnBack.setOnClickListener {
             dismiss()
         }

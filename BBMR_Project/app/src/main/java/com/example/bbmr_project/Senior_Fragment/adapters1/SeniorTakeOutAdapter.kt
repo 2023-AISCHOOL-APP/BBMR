@@ -58,7 +58,8 @@ class SeniorTakeOutAdapter (val context: Context, val layout : Int, val menuList
         holder.itemView.setOnClickListener {
             itemClickListener?.onItemClick(menuList[position])
 
-            val siniorDialog = Senior_MenuDialog.newInstance(menuList[position])
+            // MenuDialog에 값을 보내주기 위한 코드
+            val siniorDialog = Senior_MenuDialog.Senior_Menu(menuList[position])
             siniorDialog.show(fragmentManager, "siniorDialog")
 
         }
