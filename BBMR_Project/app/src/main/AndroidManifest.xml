@@ -5,8 +5,10 @@
     <uses-feature android:name="android.hardware.camera.any" />
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:enableOnBackInvokedCallback="true"
@@ -25,10 +27,14 @@
             android:exported="false" />
         <activity
             android:name=".Dialog.Normal_SelectPayDialog"
-            android:exported="false" /> <!-- 공용 액티비티 -->
+            android:exported="false" />
+
+        <!-- 공용 액티비티 -->
         <activity
             android:name=".LoadingSplashActivity"
-            android:exported="true" /> <!-- 일반용 액티비티 -->
+            android:exported="true" />
+
+        <!-- 일반용 액티비티 -->
         <activity
             android:name=".Normal_StayActivity"
             android:exported="true" />
@@ -46,7 +52,9 @@
             android:exported="true" />
         <activity
             android:name=".Normal_MainActivity"
-            android:exported="true" /> <!-- 시니어용 액티비티 -->
+            android:exported="true" />
+
+        <!-- 시니어용 액티비티 -->
         <activity
             android:name=".CouponNumberActivity"
             android:exported="true" />
@@ -57,8 +65,10 @@
             android:name=".MainActivity"
             android:exported="true" />
         <activity
-            android:name=".BasketActivity"
-            android:exported="true" />
+            android:name=".Dialog.Senior_BasketDialog"
+            android:exported="true">
+        </activity>
+
         <activity
             android:name=".SelectMenu1Activity"
             android:exported="true" />
