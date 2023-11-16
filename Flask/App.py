@@ -31,7 +31,7 @@ class TodoList(Resource):
         db_result = cursor.fetchall()
         menu = {}
         for item in db_result:
-            menu[item['menu_id']] = [item['price'], item['name']]
+            menu[item['menu_id']] = [item['name'], item['price']]
         return menu
 
     def get(self):
@@ -42,8 +42,6 @@ class TodoList(Resource):
         flatccino = self.fetch_menu('flatccino')
         beverage = self.fetch_menu('beverage')
         etc = self.fetch_menu('etc')
-
-        print(coffee)
 
         return {"coffee": coffee, "dessert": dessert, "etc": etc,
                 "tea":tea, "md":md, "flatccino": flatccino,"beverage" : beverage}

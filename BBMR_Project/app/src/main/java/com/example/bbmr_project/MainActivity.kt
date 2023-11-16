@@ -71,8 +71,8 @@ class MainActivity : AppCompatActivity() {
                 // 각 카테고리에 대해 처리
                 for ((categoryResult, categoryList) in categories) {
                     for ((menu_id, data) in categoryResult.entrySet()) {
-                        val name = data.asJsonArray[1].asString // 변경된 부분
-                        val price = data.asJsonArray[0].asInt // 변경된 부분
+                        val name = data.asJsonArray[0].asString // 변경된 부분
+                        val price = data.asJsonArray[1].asInt // 변경된 부분
                         categoryList.add(MenuVO(menu_id, name, price))
                     }
                 }
