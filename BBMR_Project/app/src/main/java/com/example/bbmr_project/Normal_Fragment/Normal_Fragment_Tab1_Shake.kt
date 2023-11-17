@@ -31,7 +31,7 @@ class Normal_Fragment_Tab1_Shake : Fragment() {
         frag1List.add(NormalTakeOutVO(R.drawable.coffee, "딸기 쉐이크", "2,000원"))
         frag1List.add(NormalTakeOutVO(R.drawable.coffee, "밀크 쉐이크", "2,000원"))
 
-        val adapter = context?.let { NormalTakeOutAdapter(it, R.layout.frag_normal_list, frag1List, childFragmentManager) }
+        val adapter = context?.let { NormalTakeOutAdapter(it, R.layout.frag_normal_list, frag1List, childFragmentManager, null) }
         rvShake.adapter = adapter
 
         return view

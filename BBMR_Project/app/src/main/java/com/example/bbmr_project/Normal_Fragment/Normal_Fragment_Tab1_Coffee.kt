@@ -33,7 +33,7 @@ class Normal_Fragment_Tab1_Coffee : Fragment() {
         frag1List.add(NormalTakeOutVO(R.drawable.coffee, "카푸치노", "2,000원"))
         frag1List.add(NormalTakeOutVO(R.drawable.coffee, "바닐라라떼", "2,000원"))
 
-        val adapter = context?.let { NormalTakeOutAdapter(it, R.layout.frag_normal_list, frag1List, childFragmentManager) }
+        val adapter = context?.let { NormalTakeOutAdapter(it, R.layout.frag_normal_list, frag1List, childFragmentManager, null) }
         rvCoffee.adapter = adapter
 
         return view
