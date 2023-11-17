@@ -4,21 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp">
+    android:padding="50dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="20dp"
+        android:layout_margin="50dp"
         android:background="@color/subColor"
         tools:layout_editor_absoluteX="20dp"
         tools:layout_editor_absoluteY="20dp">
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/tvPaySuccess"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="주문이 완료됐습니다\n주문번호를 받아가세요"
+            android:gravity="center"
+            android:text="주문 성공!\n주문번호를 받아가세요"
             android:textSize="60sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/imageView"
@@ -28,13 +29,14 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="273dp"
-            android:layout_height="223dp"
+            android:layout_width="395dp"
+            android:layout_height="407dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.592"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.59"
-            app:srcCompat="@drawable/button_select" />
+            app:layout_constraintVertical_bias="0.575"
+            app:srcCompat="@drawable/bill" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

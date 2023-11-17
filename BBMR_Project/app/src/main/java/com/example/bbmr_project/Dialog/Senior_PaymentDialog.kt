@@ -77,6 +77,8 @@ class Senior_PaymentDialog: DialogFragment() {
         val myLayout = layoutInflater.inflate(R.layout.dialog_payment_billquery, null)
         val build = AlertDialog.Builder(view.context).apply {
             setView(myLayout)
+            // 화면밖 터치 했을 때 안 됨
+            setCancelable(false)
         }
         val cancelButton : Button = myLayout.findViewById(R.id.btnNoBill)
         val fulltext = "아니오\n(주문번호 미발행)"
