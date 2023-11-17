@@ -55,17 +55,21 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener {
         binding.tabs.setupWithViewPager(binding.viewPager)
         setCustomTabTitles()
 
-        supportFragmentManager.beginTransaction().replace(R.id.flTakeOut, Normal_Fragment_Tab1()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.flTakeOut, Normal_Fragment_Tab1())
+            .commit()
         binding.tabs.getTabAt(0)?.view?.setOnClickListener {
-            supportFragmentManager.beginTransaction().replace(R.id.flTakeOut, Normal_Fragment_Tab1())
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.flTakeOut, Normal_Fragment_Tab1())
                 .commit()
         }
         binding.tabs.getTabAt(1)?.view?.setOnClickListener {
-            supportFragmentManager.beginTransaction().replace(R.id.flTakeOut, Normal_Fragment_Tab2())
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.flTakeOut, Normal_Fragment_Tab2())
                 .commit()
         }
         binding.tabs.getTabAt(2)?.view?.setOnClickListener {
-            supportFragmentManager.beginTransaction().replace(R.id.flTakeOut, Normal_Fragment_Tab3())
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.flTakeOut, Normal_Fragment_Tab3())
                 .commit()
         }
     }
@@ -88,12 +92,16 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener {
 
     private fun initializeRecyclerView() {
         // 장바구니(rvNormalBasket)에 정보 담기
-        normalSelectBasketAdapter = NormalSelectBasketAdapter(this, R.layout.normal_basketlist, mutableListOf())
+        normalSelectBasketAdapter =
+            NormalSelectBasketAdapter(this, R.layout.normal_basketlist, mutableListOf())
         binding.rvNormalBasket.apply {
             adapter = normalSelectBasketAdapter
-            layoutManager = LinearLayoutManager(this@Normal_TakeOutActivity, LinearLayoutManager.HORIZONTAL, false)
+            layoutManager = LinearLayoutManager(
+                this@Normal_TakeOutActivity,
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
         }
-        
     }
 
     private fun showSelectPayDialog() {

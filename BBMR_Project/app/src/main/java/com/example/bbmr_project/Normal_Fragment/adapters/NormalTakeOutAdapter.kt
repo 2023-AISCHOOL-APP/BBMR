@@ -16,7 +16,6 @@ import com.example.bbmr_project.VO.NormalTakeOutVO
 
 interface ItemClickListener {
     fun onItemClick(item: NormalTakeOutVO)
-    fun onShowMenuDialog(item: NormalTakeOutVO)
 }
 
 class NormalTakeOutAdapter(
@@ -50,11 +49,6 @@ class NormalTakeOutAdapter(
             Log.d("TakeOut2Adapter", "Item clicked at position $position")
             // 아이템 클릭 이벤트 전달
             itemClickListener?.onItemClick(frag1List[position])
-            itemClickListener?.onShowMenuDialog(frag1List[position])
-
-            // NMenuDialog를 보여주기
-            val normalMenuDialog = Normal_MenuDialog.newInstance(frag1List[position])
-            normalMenuDialog.show(fragmentManager, "NMenuDialog")
         }
 
     }

@@ -97,15 +97,11 @@ class Normal_MenuDialog : DialogFragment() {
                 tvCount4 = binding.tvCount4.text.toString().toIntOrNull() ?: 0
             )
 
-            val normalBasketList : ArrayList<NormalSelectBasketVO> = ArrayList()
-            normalBasketList.add(NormalSelectBasketVO(R.drawable.coffee, "2"))
-
             listener?.onMenuAdded(selectedMenuInfo)
             // 로그 출력
             Log.d("Normal_MenuDialog", "Selected Menu: $selectedMenuInfo")
             dismiss()
         }
-
 
 
         // btnMinus, btnPlus 클릭 이벤트
@@ -206,6 +202,7 @@ class Normal_MenuDialog : DialogFragment() {
             else -> ""
         }
     }
+
     // 리스너 설정 메서드
     fun setListener(listener: Normal_MenuDialogListener) {
         this.listener = listener
