@@ -21,17 +21,17 @@ app = Flask(__name__)
 api = Api(app)
 
 
-# DB에서 메뉴(name, price) 가져오기
+# DB에서 메뉴정보 가져오기
 class TodoList(Resource):
     def fetch_menu(self, category):
         conn = get_connection()
-        query = f"SELECT * FROM menu WHERE cate = '{category}'"
+        query = f"SELECT * FROM menu WHERE category = '{category}'"
         cursor = conn.cursor(dictionary=True)
         cursor.execute(query)
         db_result = cursor.fetchall()
         menu = {}
         for item in db_result:
-            menu[item['menu_id']] = [item['name'], item['price']]
+            menu[item['menu_id']] = [item['name'],item['price'],item['menu_con'],item['size']]
         return menu
 
     def get(self):

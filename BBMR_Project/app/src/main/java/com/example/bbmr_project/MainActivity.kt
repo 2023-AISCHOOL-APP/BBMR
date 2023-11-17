@@ -71,9 +71,11 @@ class MainActivity : AppCompatActivity() {
                 // 각 카테고리에 대해 처리
                 for ((categoryResult, categoryList) in categories) {
                     for ((menu_id, data) in categoryResult.entrySet()) {
-                        val name = data.asJsonArray[0].asString // 변경된 부분
-                        val price = data.asJsonArray[1].asInt // 변경된 부분
-                        categoryList.add(MenuVO(menu_id, name, price))
+                        val name = data.asJsonArray[0].asString // 메뉴명
+                        val price = data.asJsonArray[1].asInt   // 메뉴 가격
+                        val menu_con = data.asJsonArray[1].asString // 음료 온도 (HOT,ICED,N_drink)
+                        val size = data.asJsonArray[1].asInt    // 음료 사이즈 (0, 1, 2)
+                        categoryList.add(MenuVO(menu_id, name, price, menu_con, size))
                     }
                 }
             }
