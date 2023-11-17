@@ -37,16 +37,17 @@ class NormalTakeOutAdapter(val context: Context, val layout: Int, val frag1List:
     }
 
     override fun onBindViewHolder(holder: NormalTakeOutAdapter.ViewHolder, position: Int) {
+        holder.img.setImageResource(frag1List[position].img)
         holder.tvName.text = frag1List[position].name
         holder.tvPrice.text = frag1List[position].price
-        holder.img.setImageResource(frag1List[position].img)
+
         holder.itemView.setOnClickListener {
             Log.d("TakeOut2Adapter", "Item clicked at position $position")
             // 아이템 클릭 이벤트 전달
             itemClickListener?.onItemClick(frag1List[position])
 
             // NMenuDialog를 보여주기
-            val normalMenuDialog = Normal_MenuDialog()
+            val normalMenuDialog = Normal_MenuDialog.newInstance(frag1List[position])
             normalMenuDialog.show(fragmentManager, "NMenuDialog")
         }
 

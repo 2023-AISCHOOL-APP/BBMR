@@ -1,47 +1,79 @@
 package com.example.bbmr_project
 
 import Normal_Fragment_Tab1
-import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.viewpager.widget.ViewPager
-import com.example.bbmr_project.VO.NormalSelectBasketVO
-import com.example.bbmr_project.databinding.ActivityNormalTakeoutBinding
+import androidx.recyclerview.widget.RecyclerView
+import com.example.bbmr_project.Dialog.Normal_MenuDialog
+import com.example.bbmr_project.Dialog.Normal_SelectPayDialog
 import com.example.bbmr_project.Normal_Fragment.Normal_Fragment_Tab2
 import com.example.bbmr_project.Normal_Fragment.Normal_Fragment_Tab3
+import com.example.bbmr_project.VO.NormalSelectBasketVO
+import com.example.bbmr_project.databinding.ActivityNormalTakeoutBinding
 import com.example.bbmr_project.Normal_Fragment.adapters.NormalSelectBasketAdapter
 import com.example.bbmr_project.Normal_Fragment.adapters.NormalViewPagerAdapter
+//import com.example.bbmr_project.VO.NMenuDialogListener
+import com.example.bbmr_project.VO.NormalTakeOutVO
 import com.google.android.material.tabs.TabLayout
 
-interface NMenuDialogListener {
-    fun onMenuAdded(normalSelectBasketVO: NormalSelectBasketVO)
-}
 class Normal_TakeOutActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityNormalTakeoutBinding
     private lateinit var normalSelectBasketAdapter: NormalSelectBasketAdapter
 
-    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_normal_takeout)
-
         binding = ActivityNormalTakeoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setUpTabs(binding.viewPager)
 
-        val fl: FrameLayout = findViewById(R.id.flTakeOut)
+        setUpTabs()
+        initializeRecyclerView()
 
-        // 시니어 키오스크로 이동
+        binding.btnNormalPay.setOnClickListener {
+            showSelectPayDialog()
+        }
+
         binding.btnToSenior.setOnClickListener {
             val intent = Intent(this@Normal_TakeOutActivity, Senior_TakeOutActivity::class.java)
             startActivity(intent)
         }
 
+        val rvNormalBasket: RecyclerView = findViewById(R.id.rvNormalBasket)
+        val NormalBasketList : ArrayList<NormalTakeOutVO> = ArrayList()
+        NormalBasketList.add(NormalTakeOutVO(R.drawable.coffee, "아메리카노", "2,000원"))
+        NormalBasketList.add(NormalTakeOutVO(R.drawable.coffee, "카푸치노", "5,000원"))
+        NormalBasketList.add(NormalTakeOutVO(R.drawable.coffee, "카페라떼", "3,000원"))
+    }
+
+    private fun setUpTabs() {
+        val adapter = NormalViewPagerAdapter(supportFragmentManager)
+        adapter.addFragment(Normal_Fragment_Tab1(), "음료")
+        adapter.addFragment(Normal_Fragment_Tab2(), "디저트")
+        adapter.addFragment(Normal_Fragment_Tab3(), "MD")
+        binding.viewPager.adapter = adapter
+        binding.tabs.setupWithViewPager(binding.viewPager)
+        setCustomTabTitles()
+
+        supportFragmentManager.beginTransaction().replace(R.id.flTakeOut, Normal_Fragment_Tab1()).commit()
+        binding.tabs.getTabAt(0)?.view?.setOnClickListener {
+            supportFragmentManager.beginTransaction().replace(R.id.flTakeOut, Normal_Fragment_Tab1())
+                .commit()
+        }
+        binding.tabs.getTabAt(1)?.view?.setOnClickListener {
+            supportFragmentManager.beginTransaction().replace(R.id.flTakeOut, Normal_Fragment_Tab2())
+                .commit()
+        }
+        binding.tabs.getTabAt(2)?.view?.setOnClickListener {
+            supportFragmentManager.beginTransaction().replace(R.id.flTakeOut, Normal_Fragment_Tab3())
+                .commit()
+        }
+    }
+
+    // 탭의 설정
+    private fun setCustomTabTitles() {
         // ViewPager와 TabLayout 연결
         binding.tabs.setupWithViewPager(binding.viewPager)
 
@@ -54,49 +86,23 @@ class Normal_TakeOutActivity : AppCompatActivity() {
         val customTab3 = layoutInflater.inflate(R.layout.custom_origin_tab, null)
         customTab3.findViewById<TextView>(R.id.textView6).text = "MD"
         binding.tabs.getTabAt(2)?.customView = customTab3
-
-        // TakeOut2Activity에서 BasketAdapter 객체를 생성하고 초기화하는 부분
-        val normalSelectBasketAdapter = NormalSelectBasketAdapter(this, R.layout.normal_basketlist, mutableListOf())
-        binding.rvBasket.adapter = normalSelectBasketAdapter
-
-        // TakeOut2Activity에서 메뉴 정보를 받는 부분
-        val intent = intent
-        val basketImg = intent.getIntExtra("basketImg", 0)
-        val tvBasketCount = intent.getStringExtra("tvBasketCount")
-
-        // Basket에 추가
-        val normalSelectBasketVO = NormalSelectBasketVO(basketImg, tvBasketCount ?: "")
-        normalSelectBasketAdapter.addItem(normalSelectBasketVO)
-
-        val gridLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        binding.rvBasket.layoutManager = gridLayoutManager
     }
 
-
-    private fun setUpTabs(viewPager: ViewPager) {
-        val adapter = NormalViewPagerAdapter(supportFragmentManager)
-        adapter.addFragment(Normal_Fragment_Tab1(), "음료")
-        adapter.addFragment(Normal_Fragment_Tab2(), "디저트")
-        adapter.addFragment(Normal_Fragment_Tab3(), "MD")
-        viewPager.adapter = adapter
-
-        val tabs = findViewById<TabLayout>(R.id.tabs)
-        tabs.setupWithViewPager(viewPager)
-
-
-        supportFragmentManager.beginTransaction().replace(R.id.flTakeOut, Normal_Fragment_Tab1()).commit()
-        tabs.getTabAt(0)?.view?.setOnClickListener {
-            supportFragmentManager.beginTransaction().replace(R.id.flTakeOut, Normal_Fragment_Tab1())
-                .commit()
+    private fun initializeRecyclerView() {
+        normalSelectBasketAdapter = NormalSelectBasketAdapter(this, R.layout.normal_basketlist, mutableListOf())
+        binding.rvNormalBasket.apply {
+            adapter = normalSelectBasketAdapter
+            layoutManager = LinearLayoutManager(this@Normal_TakeOutActivity)
         }
-        tabs.getTabAt(1)?.view?.setOnClickListener {
-            supportFragmentManager.beginTransaction().replace(R.id.flTakeOut, Normal_Fragment_Tab2())
-                .commit()
-        }
-        tabs.getTabAt(2)?.view?.setOnClickListener {
-            supportFragmentManager.beginTransaction().replace(R.id.flTakeOut, Normal_Fragment_Tab3())
-                .commit()
-        }
+    }
 
+    private fun showSelectPayDialog() {
+        // 결제 창 띄우기
+        val normalSelectpaydialog = Normal_SelectPayDialog()
+        normalSelectpaydialog.show(supportFragmentManager, "Normal_SelectPayDialog")
+    }
+
+    fun onMenuAdded(normalSelectBasketVO: NormalSelectBasketVO) {
+        normalSelectBasketAdapter.addItem(normalSelectBasketVO)
     }
 }
