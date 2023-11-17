@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="760dp"
+    android:layout_width="650dp"
     android:layout_height="480dp">
 
     <TextView
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnYesAD"
+        android:id="@+id/btnYesDCB"
         android:layout_width="244dp"
         android:layout_height="136dp"
         android:layout_marginBottom="40dp"
@@ -31,7 +31,7 @@
         android:text="예"
         android:textSize="60sp"
         android:textStyle="bold"
-        app:cornerRadius="4dp"
+        app:cornerRadius="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.116"
@@ -40,7 +40,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/btnNoAD"
+        android:id="@+id/btnNoDCB"
         android:layout_width="244dp"
         android:layout_height="136dp"
         android:layout_marginBottom="40dp"
@@ -50,11 +50,11 @@
         android:text="아니오"
         android:textSize="60sp"
         android:textStyle="bold"
-        app:cornerRadius="4dp"
+        app:cornerRadius="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.716"
-        app:layout_constraintStart_toEndOf="@+id/btnYesAD"
+        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintStart_toEndOf="@+id/btnYesDCB"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
         app:layout_constraintVertical_bias="1.0" />
 

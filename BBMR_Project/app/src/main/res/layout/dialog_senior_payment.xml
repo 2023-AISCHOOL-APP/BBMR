@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/subColor">
+
+    <ImageView
+        android:id="@+id/ivCardPayment"
+        android:layout_width="554dp"
+        android:layout_height="499dp"
+        android:layout_marginBottom="364dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDSP"
+        app:layout_constraintVertical_bias="0.984"
+        app:srcCompat="@drawable/cardpayment" />
+
+    <Button
+        android:id="@+id/btnCnclDSP"
+        android:layout_width="350dp"
+        android:layout_height="200dp"
+        android:layout_marginBottom="100dp"
+        android:backgroundTint="@color/mainColor"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="취소"
+        android:textSize="75sp"
+        android:textStyle="bold"
+        app:cornerRadius="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivCardPayment"
+        app:layout_constraintVertical_bias="0.671" />
+
+    <TextView
+        android:id="@+id/tvDSP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="카드를 투입해주세요"
+        android:textSize="70sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.146" />
+</androidx.constraintlayout.widget.ConstraintLayout>
