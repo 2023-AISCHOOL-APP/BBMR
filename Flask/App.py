@@ -1,3 +1,5 @@
+import datetime
+from datetime import datetime
 from io import BytesIO
 import io
 # from tkinter import Image
@@ -45,7 +47,63 @@ class TodoList(Resource):
 
         return {"coffee": coffee, "dessert": dessert, "etc": etc,
                 "tea":tea, "md":md, "flatccino": flatccino,"beverage" : beverage}
-    
+
+
+
+# 입력한 쿠폰 사용가능여부 / 사용가능 할 때 교환권, 금액권 구별하고 금액권이면 남은 금액, 교환권이면 해당 음료정보 리턴
+class checkCoupon(Resource):
+    def post(self):
+        # 입력한 코드 받아와서 해당 코드에 대한 정보 DB에서 가져오기
+        coupon_code = request.form['coupon'] 
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(f"select * from coupon where coupon_code='{coupon_code}'")
+        couponList = cursor.fetchall()
+        # 쿠폰 입력할 때 날짜
+        current_date = datetime.now().strftime('%Y-%m-%d')
+
+        # 입력한 코드에 대한 정보가 DB에서 있을 때
+        if couponList:  
+            conn = get_connection()
+            cursor = conn.cursor()
+            cursor.execute(f"select menu_id, C_use, expiry_date, amount from coupon where coupon_code='{coupon_code}'")
+            C_check = cursor.fetchall()[0]
+            menu_id = C_check[0]
+            C_use = C_check[1]
+            expiry_date = C_check[2]
+            expiry_date = expiry_date.strftime('%Y-%m-%d')
+            amount = C_check[3]
+            conn.close()
+
+            # 사용기한 체크
+            if current_date <= expiry_date:
+                # 금액권 쿠폰일때(교환권 쿠폰은 amount = 0)
+                if amount > 0 :
+                    return {"result": amount}
+                elif amount == 0 and menu_id is None:
+                    return {"result" : "잔액이 없습니다."}
+                else:
+                    # 사용가능 할 때 return 해줄 result 값 DB에서 가져오기 
+                    conn = get_connection()
+                    cursor = conn.cursor()
+                    cursor.execute(f"select menu_id, name, price, menu_con, size from menu where menu_id='{menu_id}'")
+                    result = cursor.fetchall()[0]
+                    conn.close()
+                    # 사용여부 체크 C_use==0 이면 사용가능
+                    if C_use==0:
+                        return {"result" : result}
+                    else:
+                        return {"result" : "이미 사용한 쿠폰입니다."}
+            else:
+                return {"result" : "사용기한이 지났습니다."}    
+            
+        # 쿠폰번호를 잘못입력했거나 없을때(입력한 코드에 대한 정보가 DB에 없을때)           
+        else:
+            result = "잘못 입력 또는 없는 쿠폰입니다."
+            return {"result": result}
+
+
+
    
 
 
@@ -87,7 +145,7 @@ def upload_and_predict():
 
 
 
-
+api.add_resource(checkCoupon,"/checkcoupon/")
 api.add_resource(TodoList,'/todos/')
 
 if __name__ == '__main__':
