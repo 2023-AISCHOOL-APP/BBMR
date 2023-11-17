@@ -28,7 +28,7 @@ class NormalTakeOutAdapter(val context: Context, val layout: Int, val frag1List:
     class ViewHolder(view : View) : RecyclerView.ViewHolder(view){
         val img : ImageView = view.findViewById(R.id.img)
         val tvName : TextView = view.findViewById(R.id.tvName)
-        val tvPrice : TextView = view.findViewById(R.id.tvPrice)
+        val tvPrice : TextView = view.findViewById(R.id.tvSeniorTakePrice)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NormalTakeOutAdapter.ViewHolder {

@@ -46,6 +46,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".Normal_IntroActivity"
@@ -57,7 +58,10 @@
         <!-- 시니어용 액티비티 -->
         <activity
             android:name=".CouponNumberActivity"
+
             android:exported="true" />
+
+
         <activity
             android:name=".Senior_TakeOutActivity"
             android:exported="true" />

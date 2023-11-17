@@ -27,24 +27,24 @@ class MenuListViewModel : ViewModel() {
     //첫 번째 메뉴 리스트 생성 메서드
     private fun createMenuList1(): List<Senior_TakeOutVO> {
         return listOf(
-            Senior_TakeOutVO(R.drawable.coffee, "아메리카노", "2000원"),
-            Senior_TakeOutVO(R.drawable.coffee, "메리카노아", "3000원"),
-            Senior_TakeOutVO(R.drawable.coffee, "리카노아메", "4000원"),
-            Senior_TakeOutVO(R.drawable.coffee, "카노아메리", "5000원"),
-            Senior_TakeOutVO(R.drawable.coffee, "노아메리카", "6000원"),
-            Senior_TakeOutVO(R.drawable.coffee, "아메리카노", "2000원"),
+            Senior_TakeOutVO(R.drawable.coffee, "아메리카노", 2000),
+            Senior_TakeOutVO(R.drawable.coffee, "메리카노아", 3000),
+            Senior_TakeOutVO(R.drawable.coffee, "리카노아메", 4000),
+            Senior_TakeOutVO(R.drawable.coffee, "카노아메리", 5000),
+            Senior_TakeOutVO(R.drawable.coffee, "노아메리카", 6000),
+            Senior_TakeOutVO(R.drawable.coffee, "아메리카노", 2000),
         )
     }
 
     // 두 번째 메뉴 리스트 생성 메서드
     private fun createMenuList2(): List<Senior_TakeOutVO> {
         return listOf(
-            Senior_TakeOutVO(R.drawable.coffee, "에스프레소", "2000원"),
-            Senior_TakeOutVO(R.drawable.coffee, "스프레소에", "3000원"),
-            Senior_TakeOutVO(R.drawable.coffee, "프레소에스", "4000원"),
-            Senior_TakeOutVO(R.drawable.coffee, "레소에스프", "5000원"),
-            Senior_TakeOutVO(R.drawable.coffee, "소에스프레", "6000원"),
-            Senior_TakeOutVO(R.drawable.coffee, "에스프레소", "7000원"),
+            Senior_TakeOutVO(R.drawable.coffee, "에스프레소", 2000),
+            Senior_TakeOutVO(R.drawable.coffee, "스프레소에", 3000),
+            Senior_TakeOutVO(R.drawable.coffee, "프레소에스", 4000),
+            Senior_TakeOutVO(R.drawable.coffee, "레소에스프", 5000),
+            Senior_TakeOutVO(R.drawable.coffee, "소에스프레", 6000),
+            Senior_TakeOutVO(R.drawable.coffee, "에스프레소", 7000),
         )
     }
 }

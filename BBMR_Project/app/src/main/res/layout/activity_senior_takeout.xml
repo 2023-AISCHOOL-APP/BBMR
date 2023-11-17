@@ -70,6 +70,7 @@
         app:layout_constraintGuide_percent="0.07" />
 
     <RadioGroup
+        android:id="@+id/rgSenior"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
@@ -85,13 +86,12 @@
             android:layout_weight="1"
             android:background="@drawable/button_select"
             android:button="@null"
+            android:checked="true"
             android:gravity="center"
             android:text="추천메뉴"
             android:textColor="@drawable/button_text"
             android:textSize="50sp"
-            android:textStyle="bold"
-            android:checked="true"
-            />
+            android:textStyle="bold" />
 
         <RadioButton
             android:id="@+id/rbtnCoffee"
@@ -190,7 +190,7 @@
         app:layout_constraintGuide_percent="0.155" />
 
     <TextView
-        android:id="@+id/tvPrice"
+        android:id="@+id/tvSeniorTakePrice"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginRight="8dp"

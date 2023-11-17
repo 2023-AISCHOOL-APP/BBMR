@@ -53,7 +53,7 @@ class SeniorTakeOutAdapter (val context: Context, val layout : Int, val menuList
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.tvNameS.text = menuList[position].sname
-        holder.tvPriceS.text = menuList[position].sprice
+        holder.tvPriceS.text = menuList[position].sprice.toString()
         holder.imgS.setImageResource(menuList[position].simg)
         holder.itemView.setOnClickListener {
             itemClickListener?.onItemClick(menuList[position])
