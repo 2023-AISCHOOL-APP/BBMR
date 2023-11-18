@@ -3,22 +3,13 @@ package com.example.bbmr_project.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.provider.ContactsContract.Data
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import com.example.bbmr_project.CartStorage
 import com.example.bbmr_project.Product
-import com.example.bbmr_project.R
-import com.example.bbmr_project.Senior_Fragment.adapters1.SeniorTakeOutAdapter
-import com.example.bbmr_project.Senior_TakeOutActivity
-import com.example.bbmr_project.VO.Senior_MenuDetailVO
 import com.example.bbmr_project.VO.Senior_TakeOutVO
-import com.example.bbmr_project.databinding.ActivitySeniorTakeoutBinding
-import com.example.bbmr_project.databinding.DialogSeniorBasketBinding
 import com.example.bbmr_project.databinding.DialogSeniorMenuBinding
 
 class Senior_MenuDialog : DialogFragment() {
@@ -88,7 +79,7 @@ class Senior_MenuDialog : DialogFragment() {
             binding.imgMenu.setImageResource(simg)
         }
 
-        // 이전으로 버튼 클릭시 화면 꺼지는 코드
+        // ------ 이전으로 버튼 클릭시 화면 꺼지는 코드 ------
         binding.btnBack.setOnClickListener {
             dismiss()
         }
@@ -115,5 +106,33 @@ class Senior_MenuDialog : DialogFragment() {
 
             dismiss()
         }
+
+
+        // ------ 상품의 수량 조절하는 코드 시작 ------
+        var MenuCount = 1
+
+        // Plus버튼 누르면 증가하는 코드
+        binding.btnSeniorPlus.setOnClickListener {
+            MenuCount++
+            binding.tvMenuCount.text = MenuCount.toString()
+            binding.btnSeniorMinus.isClickable = true  // Plus버튼 이후에 지속적으로 Minus버튼 클릭시 버튼 활성화
+        }
+
+        // Minus버튼 누르면 감소하는 코드
+        binding.btnSeniorMinus.setOnClickListener {
+
+            if (MenuCount == 1) {
+                binding.btnSeniorMinus.isClickable = false  // 수량이 1이면 Minus버튼 비활성화
+            }
+
+            if (MenuCount > 1) {
+                MenuCount--
+                binding.tvMenuCount.text = MenuCount.toString()
+            }
+
+        }
+        // ------ 상품의 수량 조절하는 코드 끝 ------
+
+
     }
 }

@@ -4,6 +4,7 @@ package com.example.bbmr_project
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.bbmr_project.Dialog.KeyProductBundleKey
 import com.example.bbmr_project.Dialog.Senior_BasketDialog
@@ -63,8 +64,8 @@ class Senior_TakeOutActivity : AppCompatActivity() {
         // 장바구니 버튼 기능
         binding.btnBasket.setOnClickListener {
 
-            val fragment = Senior_BasketDialog()
 
+            val fragment = Senior_BasketDialog()
 
             val args = Bundle().apply {
 
