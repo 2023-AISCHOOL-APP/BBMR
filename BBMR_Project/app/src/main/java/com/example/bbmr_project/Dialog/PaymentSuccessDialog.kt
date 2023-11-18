@@ -6,6 +6,9 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.RelativeSizeSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +28,7 @@ class PaymentSuccessDialog: DialogFragment() {
             ViewGroup.LayoutParams.MATCH_PARENT
         )
         dialog?.window?.setDimAmount(0.4f)
+        dialog?.setCancelable(false)
     }
 
     override fun onCreateView(
@@ -39,6 +43,19 @@ class PaymentSuccessDialog: DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // 텍스트 뷰 텍스트 크기 조정
+        val tvPaySuccess = binding.tvPaySuccess
+        val _text = "주문 성공!\n주문번호를 받아가세요"
+        val spannableStringBuilder = SpannableStringBuilder(_text)
+        spannableStringBuilder.setSpan(RelativeSizeSpan(2f), 0, 6, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannableStringBuilder.setSpan(RelativeSizeSpan(0.9f),7, _text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        tvPaySuccess.text = spannableStringBuilder
+        //
+
+
+
+
         val Handler = Handler(Looper.getMainLooper())
         Handler.postDelayed({
             val intent = Intent(view.context, Normal_MainActivity::class.java)

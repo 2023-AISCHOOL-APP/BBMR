@@ -22,29 +22,28 @@
         android:layout_width="500dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="614dp" />
+        app:layout_constraintGuide_percent="0.5" />
 
     <TextView
         android:id="@+id/tvguide1"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="80dp"
-        android:gravity="center|left"
+        android:layout_marginTop="576dp"
         android:text="AI를 통해 연령대"
         android:textColor="@color/mainColor"
         android:textSize="80sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline34"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.197"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.438" />
+        app:layout_constraintVertical_bias="0.695" />
 
     <TextView
         android:id="@+id/tvguide2"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="80dp"
         android:elevation="4dp"
         android:gravity="center|left"
         android:text="판단중입니다."
@@ -53,10 +52,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.375"
+        app:layout_constraintHorizontal_bias="0.156"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.565" />
+        app:layout_constraintTop_toTopOf="@+id/guideline34"
+        app:layout_constraintVertical_bias="0.043" />
 
     <View
         android:id="@+id/ColorView"
@@ -83,8 +82,10 @@
         android:layout_height="250dp"
         app:layout_constraintBottom_toBottomOf="@+id/ColorView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.477"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvguide2" />
+        app:layout_constraintTop_toBottomOf="@+id/tvguide2"
+        app:layout_constraintVertical_bias="0.328" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
