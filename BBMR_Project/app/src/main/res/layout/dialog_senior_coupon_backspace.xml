@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnYesDCB"
+        android:id="@+id/btnYesDSCB"
         android:layout_width="260dp"
         android:layout_height="180dp"
         android:layout_marginStart="10dp"
@@ -42,7 +42,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/btnNoDCB"
+        android:id="@+id/btnNoDSCB"
         android:layout_width="260dp"
         android:layout_height="180dp"
         android:layout_marginEnd="10dp"
@@ -57,7 +57,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.638"
-        app:layout_constraintStart_toEndOf="@+id/btnYesDCB"
+        app:layout_constraintStart_toEndOf="@+id/btnYesDSCB"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
         app:layout_constraintVertical_bias="1.0" />
 

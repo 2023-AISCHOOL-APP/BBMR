@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import com.example.bbmr_project.CouponNumberActivity
+import com.example.bbmr_project.Senior_TakeOutActivity
 import com.example.bbmr_project.databinding.DialogSeniorBasketBinding
 import com.example.bbmr_project.databinding.DialogSeniorMenuBinding
 
@@ -64,10 +64,10 @@ class Senior_BasketDialog : DialogFragment() {
 
         }
 
-        // 쿠폰은 바로 보내버리기
+        // 쿠폰 클릭 시, 쿠폰 창으로 넘어가기
         binding.btnCpnDSB.setOnClickListener {
-            val intent = Intent(view.context, CouponNumberActivity::class.java)
-            startActivity(intent)
+            val dialogFragment = Senior_CouponPayDialog()
+            dialogFragment.show(requireActivity().supportFragmentManager, "Senior_CouponPayDialog")
         }
 
         // 결제창 클릭했을 때, 결제 로 넘어가기

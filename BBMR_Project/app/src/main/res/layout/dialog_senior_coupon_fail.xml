@@ -24,7 +24,7 @@
         app:layout_constraintVertical_bias="0.045" />
 
     <Button
-        android:id="@+id/btnCpnReinputDCF"
+        android:id="@+id/btnRetryCpnDSCF"
         android:layout_width="480dp"
         android:layout_height="270dp"
         android:layout_marginStart="20dp"

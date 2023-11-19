@@ -16,7 +16,7 @@ import androidx.fragment.app.DialogFragment
 import com.example.bbmr_project.Normal_MainActivity
 import com.example.bbmr_project.databinding.DialogPaymentSuccessBinding
 
-class PaymentSuccessDialog: DialogFragment() {
+class Senior_PaySuccessDialog: DialogFragment() {
     private lateinit var  binding: DialogPaymentSuccessBinding
 
     override fun onStart() {
