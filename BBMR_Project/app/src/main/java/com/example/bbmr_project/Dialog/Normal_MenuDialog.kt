@@ -1,5 +1,6 @@
 package com.example.bbmr_project.Dialog
 
+import NormalSelectedMenuInfo
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -8,10 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import androidx.recyclerview.widget.RecyclerView
-import com.example.bbmr_project.Menu.NormalSelectedMenuInfo
 import com.example.bbmr_project.R
-import com.example.bbmr_project.VO.NormalSelectBasketVO
 import com.example.bbmr_project.VO.NormalTakeOutVO
 import com.example.bbmr_project.databinding.DialogNormalMenuBinding
 
@@ -20,7 +18,7 @@ import com.example.bbmr_project.databinding.DialogNormalMenuBinding
 
 // Normal_TakeOutActivity에서 장바구니에 추가하기 위한 코드
 interface Normal_MenuDialogListener {
-    fun onMenuAdded(normalSelectedMenuInfo: NormalSelectedMenuInfo)
+    fun onMenuAdded(normalSelectedMenuInfo: NormalSelectedMenuInfo, tvCount: Int)
 }
 
 class Normal_MenuDialog : DialogFragment() {
@@ -97,7 +95,10 @@ class Normal_MenuDialog : DialogFragment() {
                 tvCount4 = binding.tvCount4.text.toString().toIntOrNull() ?: 0
             )
 
-            listener?.onMenuAdded(selectedMenuInfo)
+            // 장바구니에 담고 나서도 수량 증감을 위해 따로 값 보내기
+            val tvCount = binding.tvCount.text.toString().toIntOrNull() ?: 0
+
+            listener?.onMenuAdded(selectedMenuInfo, tvCount)
             // 로그 출력
             Log.d("Normal_MenuDialog", "Selected Menu: $selectedMenuInfo")
             dismiss()

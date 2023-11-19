@@ -1,5 +1,6 @@
 package com.example.bbmr_project
 
+import NormalSelectedMenuInfo
 import Normal_Fragment_Tab1
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,26 +8,22 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.bbmr_project.Dialog.Normal_MenuDialog
+import com.example.bbmr_project.Dialog.NormalSelectPayDialogListener
 import com.example.bbmr_project.Dialog.Normal_MenuDialogListener
 import com.example.bbmr_project.Dialog.Normal_SelectPayDialog
-import com.example.bbmr_project.Menu.NormalSelectedMenuInfo
 import com.example.bbmr_project.Normal_Fragment.Normal_Fragment_Tab2
 import com.example.bbmr_project.Normal_Fragment.Normal_Fragment_Tab3
-import com.example.bbmr_project.VO.NormalSelectBasketVO
 import com.example.bbmr_project.databinding.ActivityNormalTakeoutBinding
 import com.example.bbmr_project.Normal_Fragment.adapters.NormalSelectBasketAdapter
-import com.example.bbmr_project.Normal_Fragment.adapters.NormalTakeOutAdapter
 import com.example.bbmr_project.Normal_Fragment.adapters.NormalViewPagerAdapter
-//import com.example.bbmr_project.VO.NMenuDialogListener
-import com.example.bbmr_project.VO.NormalTakeOutVO
-import com.google.android.material.tabs.TabLayout
 
-class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener {
+class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
+    NormalSelectPayDialogListener {
 
     private lateinit var binding: ActivityNormalTakeoutBinding
     private lateinit var normalSelectBasketAdapter: NormalSelectBasketAdapter
+    private var selectedMenuList: MutableList<NormalSelectedMenuInfo> = mutableListOf()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -110,11 +107,17 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener {
         normalSelectpaydialog.show(supportFragmentManager, "Normal_SelectPayDialog")
     }
 
-    override fun onMenuAdded(normalSelectedMenuInfo: NormalSelectedMenuInfo) {
+    override fun onMenuAdded(normalSelectedMenuInfo: NormalSelectedMenuInfo, tvCount: Int) {
         // 메뉴가 추가되었을 때 호출되는 콜백 함수 - MenuDialog
         Log.d("MenuAdded", "Menu added: $normalSelectedMenuInfo")
+
+        // 추가된 메뉴의 tvCount를 사용자가 선택한 값으로 설정
+        normalSelectedMenuInfo.tvCount = tvCount
+
         normalSelectBasketAdapter.addItem(normalSelectedMenuInfo)
         normalSelectBasketAdapter.notifyItemInserted(normalSelectBasketAdapter.itemCount - 1)
+
+        selectedMenuList.add(normalSelectedMenuInfo)
     }
 
 }
