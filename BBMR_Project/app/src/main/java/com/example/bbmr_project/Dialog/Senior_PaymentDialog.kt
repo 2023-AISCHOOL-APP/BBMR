@@ -51,12 +51,12 @@ class Senior_PaymentDialog: DialogFragment() {
 
             dismiss()
         }
-        binding.clPayFail.setOnClickListener{
+        binding.clPayFailDSP.setOnClickListener{
             paymentFail(view.rootView)
             // true를 반환하여 이벤트가 더 이상 상위 요소로 전달 X
             true
         }
-        binding.clPaySuccess.setOnClickListener{
+        binding.clPaySuccessDSP.setOnClickListener{
             paymentSuccess(view.rootView)
         }
     }
@@ -94,13 +94,13 @@ class Senior_PaymentDialog: DialogFragment() {
 
         // 영수증 출력
         myLayout.findViewById<Button>(R.id.btnYesBill).setOnClickListener {
-            val dialogFragment = PaymentSuccessDialog()
+            val dialogFragment = Senior_PaySuccessDialog()
             dialogFragment.show(requireActivity().supportFragmentManager, "PaymentSuccessDialog")
             dialog.dismiss()
         }
         // 주문번호 발행
         myLayout.findViewById<Button>(R.id.btnNoBill).setOnClickListener {
-            val dialogFragment = PaymentSuccessDialog()
+            val dialogFragment = Senior_PaySuccessDialog()
             dialogFragment.show(requireActivity().supportFragmentManager, "PaymentSuccessDialog")
             dialog.dismiss()
         }

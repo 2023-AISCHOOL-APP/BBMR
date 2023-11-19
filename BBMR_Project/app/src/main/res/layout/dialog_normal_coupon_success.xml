@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTintMode="add"
+    android:padding="100dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/normal_dialog_background"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView29"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:text="모바일 쿠폰 (금액권, 교환권)"
+            android:textColor="@color/mainColor"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textView30"
+            app:layout_constraintEnd_toEndOf="@+id/textView30"
+            app:layout_constraintStart_toStartOf="@+id/textView30"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.529" />
+
+        <TextView
+            android:id="@+id/textView30"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:layout_marginBottom="244dp"
+            android:background="@color/mainColor"
+            android:backgroundTintMode="add"
+            app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TableLayout
+            android:id="@+id/tableLayout"
+            android:layout_width="600dp"
+            android:layout_height="121dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.36">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_height="match_parent"
+                    android:background="@color/gray"
+                    android:paddingLeft="45dp"
+                    android:paddingTop="13dp"
+                    android:paddingRight="45dp"
+                    android:paddingBottom="13dp"
+                    android:text="바코드 번호"
+                    android:textAlignment="center"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvCpnNumDNCS"
+                    android:layout_width="329dp"
+                    android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
+                    android:backgroundTint="@color/black"
+                    android:backgroundTintMode="add"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="13dp"
+                    android:paddingBottom="13dp"
+                    android:text="3333 5582 4458"
+                    android:textAlignment="textStart"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView31"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray"
+                    android:backgroundTintMode="add"
+                    android:paddingLeft="45dp"
+                    android:paddingTop="13dp"
+                    android:paddingRight="45dp"
+                    android:paddingBottom="13dp"
+                    android:text="결제금액"
+                    android:textAlignment="center"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvCpnPriceDNCS"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@color/gray"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="13dp"
+                    android:paddingBottom="13dp"
+                    android:text="2000"
+                    android:textAlignment="textStart"
+                    android:textColor="#FF0000"
+                    android:textSize="28sp"
+                    android:textStyle="bold" />
+            </TableRow>
+
+
+        </TableLayout>
+
+        <TextView
+            android:id="@+id/textView32"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="180dp"
+            android:text="결제정보"
+            android:textColor="#FF0000"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/tableLayout"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tableLayout"
+            app:layout_constraintTop_toBottomOf="@+id/textView30" />
+
+        <Button
+            android:id="@+id/btnCpnCnclDNCS"
+            android:layout_width="130dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="184dp"
+            android:backgroundTint="@color/mainColor"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="이전으로"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:cornerRadius="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/tableLayout"
+            app:layout_constraintHorizontal_bias="0.302"
+            app:layout_constraintStart_toStartOf="@+id/tableLayout"
+            app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
+
+        <Button
+            android:id="@+id/btnCpnUseDNCS"
+            android:layout_width="130dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="184dp"
+            android:backgroundTint="@color/mainColor"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="사용하기"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:cornerRadius="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/tableLayout"
+            app:layout_constraintHorizontal_bias="0.7"
+            app:layout_constraintStart_toStartOf="@+id/tableLayout"
+            app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
