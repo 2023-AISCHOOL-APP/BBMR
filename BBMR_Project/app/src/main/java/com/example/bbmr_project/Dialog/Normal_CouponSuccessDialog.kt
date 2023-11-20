@@ -22,6 +22,8 @@ class Normal_CouponSuccessDialog: DialogFragment() {
             ViewGroup.LayoutParams.MATCH_PARENT
         )
         dialog?.window?.setDimAmount(0.4f)
+        isCancelable = false
+
     }
 
     override fun onCreateView(
@@ -53,14 +55,14 @@ class Normal_CouponSuccessDialog: DialogFragment() {
         // 쿠폰 사용 --> 장바구니로 돌아가기
         binding.btnCpnUseDNCS.setOnClickListener{
             // argument에 데이터를 담음
-//            val dialogFragment = Normal_SelectPayDialog()
-//            val bundle = Bundle()
+            val dialogFragment = Normal_SelectPayDialog()
+            val bundle = Bundle()
 //            // 쿠폰 성공 시
-//            bundle.putString("CouponPrice", binding.tvCpnPriceDNCS.text.toString())
-//            dialogFragment.arguments = bundle
-//            dialogFragment.show(requireActivity().supportFragmentManager, "Normal_SelectPayDialog")
-            val intent = Intent(view.context, Normal_PaySuccessActivity::class.java)
-            startActivity(intent)
+            bundle.putString("CouponPrice", binding.tvCpnPriceDNCS.text.toString())
+            dialogFragment.arguments = bundle
+            dialogFragment.show(requireActivity().supportFragmentManager, "Normal_SelectPayDialog")
+//            val intent = Intent(view.context, Normal_PaySuccessActivity::class.java)
+//            startActivity(intent)
 
         }
     }

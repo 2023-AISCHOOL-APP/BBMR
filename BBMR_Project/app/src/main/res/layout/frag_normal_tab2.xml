@@ -7,7 +7,7 @@
     tools:context=".Normal_Fragment.Normal_Fragment_Tab2">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvDessert"
+        android:id="@+id/rvDessertPage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="8dp" />

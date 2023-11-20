@@ -4,18 +4,22 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import com.example.bbmr_project.CartStorage
+import com.example.bbmr_project.Product
 import com.example.bbmr_project.Senior_TakeOutActivity
 import com.example.bbmr_project.databinding.DialogSeniorBasketBinding
 import com.example.bbmr_project.databinding.DialogSeniorMenuBinding
 
-class Senior_BasketDialog : DialogFragment() {
+const val KeyProductBundleKey = "Product"
+
+class Senior_BasketDialog() : DialogFragment() {
 
     private lateinit var binding: DialogSeniorBasketBinding
-
 
     override fun onStart() {
         super.onStart()
@@ -26,8 +30,11 @@ class Senior_BasketDialog : DialogFragment() {
             ViewGroup.LayoutParams.MATCH_PARENT
         )
         dialog?.window?.setDimAmount(0.4f)
+
+        isCancelable = false
 //        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 //        dialog?.window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+
     }
 
 
@@ -36,8 +43,6 @@ class Senior_BasketDialog : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // 쿠폰 값을 받아오는 곳
-
         binding = DialogSeniorBasketBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -45,32 +50,60 @@ class Senior_BasketDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 할인 쿠폰 금액 가져오기
-        val discountPrice = arguments?.getString("discount_price").toString().toIntOrNull()?: 0 // 여기서 각 상품에 맞는 게 String으로 가져와 짐
+        val discountPrice = arguments?.getString("discount_price").toString().toIntOrNull()
+            ?: 0 // 여기서 각 상품에 맞는 게 String으로 가져와 짐
         // 총 합계
-        var amountPrice = binding.tvAmount.text.toString().toIntOrNull()?: 0
+        var amountPrice = binding.tvAmount.text.toString().toIntOrNull() ?: 0
 
         // 남은 금액
         var extraPrice = 0
 
         if (amountPrice >= discountPrice) {
-            amountPrice = amountPrice-discountPrice
+            amountPrice = amountPrice - discountPrice
             binding.tvAmount.text = amountPrice.toString()
         } else if (amountPrice < discountPrice) {
             amountPrice = amountPrice - discountPrice
             // 이 부분에서 남은 금액을 교환권에 되돌려 주기
-            extraPrice = discountPrice-amountPrice
+            extraPrice = discountPrice - amountPrice
         } else {
 
         }
 
+//        val product = requireArguments().getParcelable<Product>(KeyProductBundleKey)
+//        binding.tvSeniorPayPrice.text= product?.price?.toString() ?: "0"
+
+        // val product = parentFragmentManager.fragments
+
+        val product = arguments?.getParcelable<Product>(KeyProductBundleKey)
+        Log.d("Senior_BasketDialog", "Received Product: $product")
+
+
+
+        if (product != null) {
+            // 인자가 있을 경우
+            binding.tvAmount.text = product.price.toString()
+            Log.d("장바구니", binding.tvAmount.text as String)
+
+        } else {
+            // 인자가 없을 경우
+            binding.tvAmount.text = ""
+
+        }
+
+
+        CartStorage.productList
+
+
+        // 쿠폰은 바로 보내버리기
+
         // 쿠폰 클릭 시, 쿠폰 창으로 넘어가기
+
         binding.btnCpnDSB.setOnClickListener {
             val dialogFragment = Senior_CouponPayDialog()
             dialogFragment.show(requireActivity().supportFragmentManager, "Senior_CouponPayDialog")
         }
 
-        // 결제창 클릭했을 때, 결제 로 넘어가기
+        // 결제창 클릭했을 때, 결제로 넘어가기
         binding.btnCardDSB.setOnClickListener {
             val dialogFragment = Senior_PaymentDialog()
             val bundle = Bundle()
@@ -85,5 +118,6 @@ class Senior_BasketDialog : DialogFragment() {
         binding.btnTurnDSB.setOnClickListener {
             dismiss()
         }
+
     }
 }

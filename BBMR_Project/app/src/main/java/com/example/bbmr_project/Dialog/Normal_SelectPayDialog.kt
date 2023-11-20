@@ -1,5 +1,7 @@
 package com.example.bbmr_project.Dialog
 
+import NormalSelectPayAdapter
+import NormalSelectedMenuInfo
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -7,11 +9,31 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bbmr_project.R
 import com.example.bbmr_project.databinding.DialogNormalSelectPayBinding
 
+interface NormalSelectPayDialogListener : Normal_MenuDialogListener {
+    override fun onMenuAdded(normalSelectedMenuInfo: NormalSelectedMenuInfo, tvCount: Int)
+}
+
 class Normal_SelectPayDialog : DialogFragment() {
+
     private lateinit var binding: DialogNormalSelectPayBinding
+    private var listener: Normal_MenuDialogListener? = null
+    private var selectedMenuList: MutableList<NormalSelectedMenuInfo> = mutableListOf()
+
+    companion object {
+        fun newInstance(selectedMenuList: MutableList<NormalSelectedMenuInfo>): Normal_SelectPayDialog {
+            val args = Bundle().apply {
+                // selectedMenuList를 인자로 전달
+                putParcelableArrayList("selectedMenuList", ArrayList(selectedMenuList))
+            }
+            val fragment = Normal_SelectPayDialog()
+            fragment.arguments = args
+            return fragment
+        }
+    }
 
     override fun onStart() {
         super.onStart()
@@ -23,6 +45,7 @@ class Normal_SelectPayDialog : DialogFragment() {
             ViewGroup.LayoutParams.MATCH_PARENT
         )
         dialog?.window?.setDimAmount(0.4f)
+        isCancelable = false
     }
 
     override fun onCreateView(
@@ -53,7 +76,15 @@ class Normal_SelectPayDialog : DialogFragment() {
                 }
             }
         }
+        // 인자로부터 selectedMenuList를 가져옴
+        selectedMenuList = arguments?.getParcelableArrayList("selectedMenuList") ?: mutableListOf()
+
+        // RecyclerView를 selectedMenuList로 설정
+        val adapter = NormalSelectPayAdapter(requireActivity(), R.layout.dialog_normal_select_pay, selectedMenuList)
+        binding.rvSelectPayList.adapter = adapter
+        binding.rvSelectPayList.layoutManager = LinearLayoutManager(requireContext())
     }
+
     private fun showNormalCardPayDialog() {
         val normalCardPayDialog = Normal_CardPayDialog()
         normalCardPayDialog.show(requireActivity().supportFragmentManager, "Normal_CardPayDialog")
@@ -61,10 +92,21 @@ class Normal_SelectPayDialog : DialogFragment() {
 
     private fun showNormalCouponPayDialog() {
         val normalCouponPayDialog = Normal_CouponPayDialog()
-        normalCouponPayDialog.show(requireActivity().supportFragmentManager, "Normal_CouponPayDialog")
+        normalCouponPayDialog.show(
+            requireActivity().supportFragmentManager,
+            "Normal_CouponPayDialog"
+        )
     }
+
     private fun showNormalNoSelectPayDialog() {
         val normalNoSelectPayDialog = Normal_NoSelectPayDialog()
-        normalNoSelectPayDialog.show(requireActivity().supportFragmentManager, "Normal_NoSelectPayDialog")
+        normalNoSelectPayDialog.show(
+            requireActivity().supportFragmentManager,
+            "Normal_NoSelectPayDialog"
+        )
+    }
+
+    fun setListener(listener: NormalSelectPayDialogListener) {
+        this.listener = listener
     }
 }
