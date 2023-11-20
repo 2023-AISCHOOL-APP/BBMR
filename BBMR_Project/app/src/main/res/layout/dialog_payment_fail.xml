@@ -7,7 +7,7 @@
 
     <Button
         android:id="@+id/btnPymtRetry"
-        android:layout_width="240dp"
+        android:layout_width="0dp"
         android:layout_height="160dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="24dp"
@@ -15,7 +15,8 @@
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:text="다시 시도"
-        android:textSize="48sp"
+        android:textSize="60sp"
+        android:textStyle="bold"
         app:cornerRadius="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textView"
@@ -25,11 +26,11 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
-        android:layout_height="300dp"
+        android:layout_height="250dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:text="인식에 실패했습니다\n다시 시도해주세요."
+        android:text="결제에 실패했습니다\n다시 시도해주세요."
         android:textSize="48sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

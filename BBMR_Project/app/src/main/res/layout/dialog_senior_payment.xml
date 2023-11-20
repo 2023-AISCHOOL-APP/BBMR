@@ -16,10 +16,21 @@
         tools:layout_editor_absoluteY="40dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clPayFail"
+            android:id="@+id/clPaySuccessDSP"
             android:layout_width="match_parent"
-            android:layout_height="570dp"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline18">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clPayFailDSP"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline18"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,60 +39,51 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clPaySuccess"
-            android:layout_width="match_parent"
-            android:layout_height="570dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <ImageView
+            android:id="@+id/ivCardPayment"
+            android:layout_width="554dp"
+            android:layout_height="499dp"
+            android:layout_marginTop="40dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/clPayFail"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintTop_toBottomOf="@+id/tvDSP"
+            app:srcCompat="@drawable/cardpayment" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tvDSP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="128dp"
+            android:text="카드를 투입해주세요"
+            android:textSize="80sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnCnclDSP"
+            android:layout_width="400dp"
+            android:layout_height="240dp"
+            android:layout_marginTop="70dp"
+            android:backgroundTint="@color/mainColor"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="취소"
+            android:textSize="90sp"
+            android:textStyle="bold"
+            app:cornerRadius="24dp"
+            app:layout_constraintEnd_toEndOf="@+id/ivCardPayment"
+            app:layout_constraintStart_toStartOf="@+id/ivCardPayment"
+            app:layout_constraintTop_toBottomOf="@+id/ivCardPayment" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ImageView
-        android:id="@+id/ivCardPayment"
-        android:layout_width="554dp"
-        android:layout_height="499dp"
-        android:layout_marginBottom="364dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDSP"
-        app:layout_constraintVertical_bias="0.984"
-        app:srcCompat="@drawable/cardpayment" />
-
-    <Button
-        android:id="@+id/btnCnclDSP"
-        android:layout_width="350dp"
-        android:layout_height="200dp"
-        android:layout_marginBottom="100dp"
-        android:backgroundTint="@color/mainColor"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:text="취소"
-        android:textSize="75sp"
-        android:textStyle="bold"
-        app:cornerRadius="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivCardPayment"
-        app:layout_constraintVertical_bias="0.671" />
-
-    <TextView
-        android:id="@+id/tvDSP"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="카드를 투입해주세요"
-        android:textSize="70sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.146" />
 </androidx.constraintlayout.widget.ConstraintLayout>
