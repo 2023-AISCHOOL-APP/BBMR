@@ -16,15 +16,23 @@ import com.example.bbmr_project.databinding.DialogNormalMenuBinding
 // 메뉴 선택 시 출력되는 Dialog
 
 
-// Normal_TakeOutActivity에서 장바구니에 추가하기 위한 코드
+// Normal_TakeOutActivity에서 장바구니에 추가하기 위한 인터페이스
 interface Normal_MenuDialogListener {
-    fun onMenuAdded(normalSelectedMenuInfo: NormalSelectedMenuInfo, tvCount: Int)
+    fun onMenuAdded(normalSelectedMenuInfo: NormalSelectedMenuInfo, tvCount: Int, totalCost: Int)
+}
+
+// Normal_TakeOutActivity에서 총합계를 위한 인터페이스
+interface TotalCostListener {
+    fun onTotalCostUpdated(totalCost: Int, itemCost: Int)
+    fun onMenuAdded(normalSelectedMenuInfo: NormalSelectedMenuInfo, tvCount: Int, totalCost: Int)
 }
 
 class Normal_MenuDialog : DialogFragment() {
 
     private lateinit var binding: DialogNormalMenuBinding
     private var listener: Normal_MenuDialogListener? = null
+    private var selectedMenuList: MutableList<NormalSelectedMenuInfo> = mutableListOf()
+
 
     // NormalTakeOutAdapter랑 연결
     companion object {
@@ -98,9 +106,12 @@ class Normal_MenuDialog : DialogFragment() {
             // 장바구니에 담고 나서도 수량 증감을 위해 따로 값 보내기
             val tvCount = binding.tvCount.text.toString().toIntOrNull() ?: 0
 
-            listener?.onMenuAdded(selectedMenuInfo, tvCount)
-            // 로그 출력
-            Log.d("Normal_MenuDialog", "Selected Menu: $selectedMenuInfo")
+            // 총 비용 계산
+            val priceString = selectedMenuInfo.price?.replace(",", "")?.replace("원", "") // 쉼표, 원 제거 후 정수변환
+            val menuPrice = priceString?.toIntOrNull() ?: 0
+            val totalCost = menuPrice * selectedMenuInfo.tvCount
+
+            listener?.onMenuAdded(selectedMenuInfo, tvCount, totalCost)
             dismiss()
         }
 
@@ -208,4 +219,5 @@ class Normal_MenuDialog : DialogFragment() {
     fun setListener(listener: Normal_MenuDialogListener) {
         this.listener = listener
     }
+
 }

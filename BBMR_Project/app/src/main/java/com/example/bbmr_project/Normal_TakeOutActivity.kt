@@ -11,19 +11,22 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bbmr_project.Dialog.NormalSelectPayDialogListener
 import com.example.bbmr_project.Dialog.Normal_MenuDialogListener
 import com.example.bbmr_project.Dialog.Normal_SelectPayDialog
+import com.example.bbmr_project.Dialog.TotalCostListener
 import com.example.bbmr_project.Normal_Fragment.Normal_Fragment_Tab2
 import com.example.bbmr_project.Normal_Fragment.Normal_Fragment_Tab3
 import com.example.bbmr_project.databinding.ActivityNormalTakeoutBinding
 import com.example.bbmr_project.Normal_Fragment.adapters.NormalSelectBasketAdapter
 import com.example.bbmr_project.Normal_Fragment.adapters.NormalViewPagerAdapter
+import java.text.NumberFormat
+import java.util.Locale
 
 class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
-    NormalSelectPayDialogListener {
+    NormalSelectPayDialogListener, TotalCostListener {
 
     private lateinit var binding: ActivityNormalTakeoutBinding
     private lateinit var normalSelectBasketAdapter: NormalSelectBasketAdapter
     private var selectedMenuList: MutableList<NormalSelectedMenuInfo> = mutableListOf()
-
+    private var totalCost: Int = 0  // 누적 총 비용
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +44,24 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
             val intent = Intent(this@Normal_TakeOutActivity, Senior_TakeOutActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    override fun onTotalCostUpdated(totalCost: Int, itemCost: Int) {
+        // 활동에서 총 비용 UI 요소(tvNormalTotalMoney)를 업데이트
+        updateTotalCostUI(totalCost)
+
+        // 아이템 비용을 빼고 업데이트된 총 비용으로 totalCost 변수를 업데이트
+        this.totalCost = totalCost
+    }
+
+    private fun updateTotalCostUI(currentTotalCost: Int) {
+        // 숫자를 한국 통화 단위로 포맷
+        val formattedTotalCost = NumberFormat.getNumberInstance(Locale.KOREA).format(currentTotalCost)
+
+        // 활동에서 총 비용 UI 요소(tvNormalTotalMoney)를 업데이트
+        binding.tvNormalTotalMoney.text = String.format("%s 원", formattedTotalCost)
+        // 로그로 현재 tvNormalTotalMoney의 값 출력
+        Log.d("TotalCostUpdated", "Current tvNormalTotalMoney Value: $formattedTotalCost")
     }
 
     private fun setUpTabs() {
@@ -90,7 +111,7 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
     private fun initializeRecyclerView() {
         // 장바구니(rvNormalBasket)에 정보 담기
         normalSelectBasketAdapter =
-            NormalSelectBasketAdapter(this, R.layout.normal_basketlist, mutableListOf())
+            NormalSelectBasketAdapter(this, R.layout.normal_basketlist, mutableListOf(), this)
         binding.rvNormalBasket.apply {
             adapter = normalSelectBasketAdapter
             layoutManager = LinearLayoutManager(
@@ -107,9 +128,15 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
         normalSelectpaydialog.show(supportFragmentManager, "Normal_SelectPayDialog")
     }
 
-    override fun onMenuAdded(normalSelectedMenuInfo: NormalSelectedMenuInfo, tvCount: Int) {
+    override fun onMenuAdded(
+        normalSelectedMenuInfo: NormalSelectedMenuInfo,
+        tvCount: Int,
+        menuCost: Int
+    ) {
         // 메뉴가 추가되었을 때 호출되는 콜백 함수 - MenuDialog
         Log.d("MenuAdded", "Menu added: $normalSelectedMenuInfo")
+        Log.d("TotalCostUpdated", "Total Cost: $totalCost")
+        Log.d("TotalCostUpdated", "menu Cost: $menuCost")
 
         // 추가된 메뉴의 tvCount를 사용자가 선택한 값으로 설정
         normalSelectedMenuInfo.tvCount = tvCount
@@ -118,6 +145,12 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
         normalSelectBasketAdapter.notifyItemInserted(normalSelectBasketAdapter.itemCount - 1)
 
         selectedMenuList.add(normalSelectedMenuInfo)
+
+        // 총 비용 업데이트
+        totalCost += menuCost
+
+        // TotalCostListener에 알림
+        onTotalCostUpdated(totalCost, 0)
     }
 
 }
