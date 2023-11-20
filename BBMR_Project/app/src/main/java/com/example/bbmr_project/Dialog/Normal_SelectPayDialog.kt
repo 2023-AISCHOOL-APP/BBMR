@@ -54,6 +54,7 @@ class Normal_SelectPayDialog : DialogFragment() {
             }
         }
     }
+
     private fun showNormalCardPayDialog() {
         val normalCardPayDialog = Normal_CardPayDialog()
         normalCardPayDialog.show(requireActivity().supportFragmentManager, "Normal_CardPayDialog")
@@ -61,10 +62,17 @@ class Normal_SelectPayDialog : DialogFragment() {
 
     private fun showNormalCouponPayDialog() {
         val normalCouponPayDialog = Normal_CouponPayDialog()
-        normalCouponPayDialog.show(requireActivity().supportFragmentManager, "Normal_CouponPayDialog")
+        normalCouponPayDialog.show(
+            requireActivity().supportFragmentManager,
+            "Normal_CouponPayDialog"
+        )
     }
+
     private fun showNormalNoSelectPayDialog() {
         val normalNoSelectPayDialog = Normal_NoSelectPayDialog()
-        normalNoSelectPayDialog.show(requireActivity().supportFragmentManager, "Normal_NoSelectPayDialog")
+        normalNoSelectPayDialog.show(
+            requireActivity().supportFragmentManager,
+            "Normal_NoSelectPayDialog"
+        )
     }
 }

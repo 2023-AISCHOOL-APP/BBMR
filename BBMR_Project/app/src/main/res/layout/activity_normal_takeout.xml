@@ -154,7 +154,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline23" />
 
     <TextView
-        android:id="@+id/tvMoney"
+        android:id="@+id/tvNormalTotalMoney"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="12dp"
@@ -192,18 +192,6 @@
         app:layout_constraintGuide_percent="0.57" />
 
     <android.widget.Button
-        android:id="@+id/btnNext"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/next"
-        app:layout_constraintBottom_toTopOf="@+id/guideline31"
-        app:layout_constraintEnd_toStartOf="@+id/guideline30"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline33"
-        app:layout_constraintTop_toTopOf="@+id/guideline32"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <android.widget.Button
         android:id="@+id/btnNormalPay"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -221,7 +209,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnNext"
+        app:layout_constraintEnd_toStartOf="@+id/guideline30"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline23" />
 

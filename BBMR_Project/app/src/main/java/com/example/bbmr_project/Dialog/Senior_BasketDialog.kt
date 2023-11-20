@@ -21,7 +21,6 @@ class Senior_BasketDialog() : DialogFragment() {
 
     private lateinit var binding: DialogSeniorBasketBinding
 
-
     override fun onStart() {
         super.onStart()
         val darkTransparentBlack = Color.argb((255 * 0.6).toInt(), 0, 0, 0)
@@ -78,13 +77,14 @@ class Senior_BasketDialog() : DialogFragment() {
         if (product != null) {
             // 인자가 있을 경우
             binding.tvAmount.text = product.price.toString()
-            Log.d("장바구니", "받는 값: $product")
+            Log.d("장바구니", binding.tvAmount.text as String)
 
         } else {
             // 인자가 없을 경우
             binding.tvAmount.text = ""
 
         }
+
 
         CartStorage.productList
 

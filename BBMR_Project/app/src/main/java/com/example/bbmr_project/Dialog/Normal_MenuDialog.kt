@@ -3,18 +3,30 @@ package com.example.bbmr_project.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import androidx.recyclerview.widget.RecyclerView
+import com.example.bbmr_project.Menu.NormalSelectedMenuInfo
+import com.example.bbmr_project.R
+import com.example.bbmr_project.VO.NormalSelectBasketVO
 import com.example.bbmr_project.VO.NormalTakeOutVO
 import com.example.bbmr_project.databinding.DialogNormalMenuBinding
 
 // 메뉴 선택 시 출력되는 Dialog
 
+
+// Normal_TakeOutActivity에서 장바구니에 추가하기 위한 코드
+interface Normal_MenuDialogListener {
+    fun onMenuAdded(normalSelectedMenuInfo: NormalSelectedMenuInfo)
+}
+
 class Normal_MenuDialog : DialogFragment() {
 
     private lateinit var binding: DialogNormalMenuBinding
+    private var listener: Normal_MenuDialogListener? = null
 
     // NormalTakeOutAdapter랑 연결
     companion object {
@@ -58,10 +70,11 @@ class Normal_MenuDialog : DialogFragment() {
         val name = arguments?.getString("normal_name")
         val price = arguments?.getString("normal_price")
 
-        if (img != null) {binding.menuImg.setImageResource(img)}
+        if (img != null) {
+            binding.menuImg.setImageResource(img)
+        }
         binding.name.text = name
         binding.price.text = price
-
 
 
         // 이전으로 클릭 시 NormalTakeOut으로 이동
@@ -69,17 +82,27 @@ class Normal_MenuDialog : DialogFragment() {
             dismiss()
         }
 
-        // 메뉴담기 클릭 시 부모 Activity에 값 전달
         binding.btnBasketN.setOnClickListener {
-//            // 선택한 메뉴의 이미지 리소스 ID를 가져옴
-//            val selectedImg = arguments?.getInt("normal_img") ?: 0
-//            // 선택한 메뉴 정보
-//            val selectedMenu = NormalSelectBasketVO(basketImg = selectedImg, tvBasketCount = binding.tvCount.text.toString())
-//            // 부모 Activity에 값 전달
-//            listener?.onMenuAdded(selectedMenu)
-//            Log.d("Dialog", "Menu added: $selectedMenu")
+            // 선택한 메뉴의 정보를 NormalSelectedMenuInfo 클래스에 저장
+            val selectedMenuInfo = NormalSelectedMenuInfo(
+                menuImg = img ?: 0,
+                name = name,
+                price = price,
+                temperature = getSelectedTemperature(),
+                tvCount = binding.tvCount.text.toString().toIntOrNull()
+                    ?: 0, // tv값을 정수로 변환하거나 null 반환
+                tvCount1 = binding.tvCount1.text.toString().toIntOrNull() ?: 0,
+                tvCount2 = binding.tvCount2.text.toString().toIntOrNull() ?: 0,
+                tvCount3 = binding.tvCount3.text.toString().toIntOrNull() ?: 0,
+                tvCount4 = binding.tvCount4.text.toString().toIntOrNull() ?: 0
+            )
+
+            listener?.onMenuAdded(selectedMenuInfo)
+            // 로그 출력
+            Log.d("Normal_MenuDialog", "Selected Menu: $selectedMenuInfo")
             dismiss()
         }
+
 
         // btnMinus, btnPlus 클릭 이벤트
         var tvCount = 1
@@ -168,6 +191,20 @@ class Normal_MenuDialog : DialogFragment() {
             tvCount4++
             binding.tvCount4.text = tvCount4.toString()
             binding.btnMinus4.isEnabled = true
+        }
     }
+
+    private fun getSelectedTemperature(): String {
+        // hot cold 라디오 버튼 선택
+        return when (binding.btnNormalTempGroup.checkedRadioButtonId) {
+            R.id.btnHot -> "Hot"
+            R.id.btnCold -> "Cold"
+            else -> ""
+        }
+    }
+
+    // 리스너 설정 메서드
+    fun setListener(listener: Normal_MenuDialogListener) {
+        this.listener = listener
     }
 }

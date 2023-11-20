@@ -7,35 +7,42 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bbmr_project.Menu.NormalSelectedMenuInfo
 import com.example.bbmr_project.R
 import com.example.bbmr_project.VO.NormalSelectBasketVO
 
-class NormalSelectBasketAdapter (val context: Context, val layout: Int, val basketList: MutableList<NormalSelectBasketVO>)
-    : RecyclerView.Adapter<NormalSelectBasketAdapter.ViewHolder>(){
+class NormalSelectBasketAdapter(
+    val context: Context,
+    val layout: Int,
+    val basketList: MutableList<NormalSelectedMenuInfo>
+) : RecyclerView.Adapter<NormalSelectBasketAdapter.ViewHolder>() {
 
-    val inflater : LayoutInflater = LayoutInflater.from(context)
+    val inflater: LayoutInflater = LayoutInflater.from(context)
 
-    class ViewHolder(view : View) : RecyclerView.ViewHolder(view){
-        val basketImg : ImageView = view.findViewById(R.id.basketImg)
-        val tvBasketCount : TextView = view.findViewById(R.id.tvBasketCount)
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val basketImg: ImageView = view.findViewById(R.id.basketImg)
+        val tvBasketCount: TextView = view.findViewById(R.id.tvBasketCount)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NormalSelectBasketAdapter.ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): NormalSelectBasketAdapter.ViewHolder {
         val view = inflater.inflate(layout, parent, false)
         return NormalSelectBasketAdapter.ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: NormalSelectBasketAdapter.ViewHolder, position: Int) {
-        holder.basketImg.setImageResource(basketList[position].basketImg)
-        holder.tvBasketCount.text = basketList[position].tvBasketCount
+        holder.basketImg.setImageResource(basketList[position].menuImg)
+        holder.tvBasketCount.text = basketList[position].tvCount.toString()
     }
 
     override fun getItemCount(): Int {
         return basketList.size
     }
 
-    fun addItem(normalSelectBasketVO: NormalSelectBasketVO) {
-        basketList.add(normalSelectBasketVO)
+    fun addItem(selectedMenuInfo: NormalSelectedMenuInfo) {
+        basketList.add(selectedMenuInfo)
         notifyItemInserted(basketList.size - 1)
     }
 

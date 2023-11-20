@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import com.example.bbmr_project.Dialog.KeyProductBundleKey
 import com.example.bbmr_project.Dialog.Senior_BasketDialog
 import com.example.bbmr_project.databinding.ActivitySeniorTakeoutBinding
@@ -16,6 +17,8 @@ import com.example.bbmr_project.Senior_Fragment.Senior_Fragment_Tab_Dessert
 
 
 class Senior_TakeOutActivity : AppCompatActivity() {
+
+    var buttonDoubleDefend = false
 
 
     // viewBinding 엑티비디 id에 맞는 변수를 자동으로 적용해줌.
@@ -51,6 +54,7 @@ class Senior_TakeOutActivity : AppCompatActivity() {
         }
 
 
+
         // 다음 버튼 클릭시 기존의 리스트 리셋후 새로운 리스트 추가
         binding.btnPre.setOnClickListener { (supportFragmentManager.findFragmentById(R.id.fl1) as? Senior_Fragment_Tab_Recommend)?.switchToMenuList1() }
         // 다음 버튼 클릭시 기존의 리스트 리셋후 새로운 리스트 추가
@@ -63,24 +67,29 @@ class Senior_TakeOutActivity : AppCompatActivity() {
 
         // 장바구니 버튼 기능
         binding.btnBasket.setOnClickListener {
+            if (!buttonDoubleDefend){
+                buttonDoubleDefend = true
 
+                val fragment = Senior_BasketDialog()
 
-            val fragment = Senior_BasketDialog()
-
-            val args = Bundle().apply {
+                val args = Bundle().apply {
 
 //                putParcelable(KeyProductBundleKey, Product("아메리카노", 1000,10))
-                putParcelableArrayList(KeyProductBundleKey, ArrayList(CartStorage.productList))
+                    putParcelableArrayList(KeyProductBundleKey, ArrayList(CartStorage.productList))
+            }
+
+                fragment.arguments = args
+                fragment.show(supportFragmentManager, "Senior.BasketDialog")
+
+                fragment.setOn
+
 
             }
-            fragment.arguments = args
-            fragment.show(supportFragmentManager, "Senior.BasketDialog")
 
         }
 
         // 가격측정
-        binding.tvSeniorTakePrice.text
-
+        binding.tvTotalSeniorPrice.text
 
     }
 

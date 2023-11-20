@@ -22,7 +22,7 @@ class Normal_Fragment_Tab2 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.frag_normal_tab2, container, false)
-        rvDessert = view.findViewById(R.id.rvDessert)
+        rvDessert = view.findViewById(R.id.rvDessertPage)
 
         val layoutManager = GridLayoutManager(requireContext(), 4)
         rvDessert.layoutManager = layoutManager
@@ -31,7 +31,7 @@ class Normal_Fragment_Tab2 : Fragment() {
         frag1List.add(NormalTakeOutVO(R.drawable.coffee, "디저트", "2,000원"))
         frag1List.add(NormalTakeOutVO(R.drawable.coffee, "디저트", "2,000원"))
 
-        val adapter = context?.let { NormalTakeOutAdapter(it, R.layout.frag_normal_list, frag1List, childFragmentManager) }
+        val adapter = context?.let { NormalTakeOutAdapter(it, R.layout.frag_normal_list, frag1List, childFragmentManager, null) }
         rvDessert.adapter = adapter
 
         return view

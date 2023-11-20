@@ -144,7 +144,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline13"
+        app:layout_constraintStart_toStartOf="@+id/btnBasket"
         app:layout_constraintTop_toTopOf="@+id/guideline16" />
 
     <android.widget.Button
@@ -172,25 +172,18 @@
         android:id="@+id/tvBasketCount"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:gravity="center"
         android:padding="8dp"
         android:text="총 금액"
-        android:textAlignment="center"
-        android:textSize="40sp"
+        android:textSize="80sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline17"
+        app:layout_constraintBottom_toTopOf="@+id/guideline16"
+        app:layout_constraintEnd_toStartOf="@+id/guideline13"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline16" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.155" />
+        app:layout_constraintTop_toTopOf="@+id/guideline11" />
 
     <TextView
-        android:id="@+id/tvSeniorTakePrice"
+        android:id="@+id/tvTotalSeniorPrice"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginRight="8dp"
@@ -201,7 +194,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline13"
-        app:layout_constraintStart_toStartOf="@+id/guideline17"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline16" />
 
     <FrameLayout

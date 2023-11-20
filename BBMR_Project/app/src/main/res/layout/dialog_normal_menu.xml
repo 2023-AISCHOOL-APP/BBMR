@@ -32,16 +32,16 @@
 
         <TextView
             android:id="@+id/name"
-            android:layout_width="0dp"
+            android:layout_width="400dp"
             android:layout_height="0dp"
+            android:layout_marginLeft="34dp"
             android:gravity="center"
             android:text="아메리카노"
+            android:textAlignment="viewStart"
             android:textColor="#000000"
             android:textSize="40sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/guideline54"
-            app:layout_constraintEnd_toStartOf="@+id/guideline50"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline56"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
@@ -109,6 +109,7 @@
         </RadioGroup>
 
         <RadioGroup
+            android:id="@+id/btnNormalTempGroup"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:orientation="horizontal"
@@ -199,7 +200,7 @@
             app:layout_constraintTop_toTopOf="@+id/guideline55" />
 
         <TextView
-            android:id="@+id/textView15"
+            android:id="@+id/tvOption1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -214,7 +215,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
         <TextView
-            android:id="@+id/textView16"
+            android:id="@+id/tvOption2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -227,11 +228,11 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/guideline48"
             app:layout_constraintHorizontal_bias="0.368"
-            app:layout_constraintStart_toStartOf="@+id/textView15"
-            app:layout_constraintTop_toBottomOf="@+id/textView15" />
+            app:layout_constraintStart_toStartOf="@+id/tvOption1"
+            app:layout_constraintTop_toBottomOf="@+id/tvOption1" />
 
         <TextView
-            android:id="@+id/textView17"
+            android:id="@+id/tvOption3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -242,12 +243,12 @@
             android:textColor="#000000"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/textView16"
-            app:layout_constraintStart_toStartOf="@+id/textView16"
-            app:layout_constraintTop_toBottomOf="@+id/textView16" />
+            app:layout_constraintEnd_toEndOf="@+id/tvOption2"
+            app:layout_constraintStart_toStartOf="@+id/tvOption2"
+            app:layout_constraintTop_toBottomOf="@+id/tvOption2" />
 
         <TextView
-            android:id="@+id/textView18"
+            android:id="@+id/tvOption4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -258,12 +259,12 @@
             android:textColor="#000000"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/textView17"
-            app:layout_constraintStart_toStartOf="@+id/textView17"
-            app:layout_constraintTop_toBottomOf="@+id/textView17" />
+            app:layout_constraintEnd_toEndOf="@+id/tvOption3"
+            app:layout_constraintStart_toStartOf="@+id/tvOption3"
+            app:layout_constraintTop_toBottomOf="@+id/tvOption3" />
 
         <TextView
-            android:id="@+id/textView19"
+            android:id="@+id/tvOptionMoney1"
             android:layout_width="100dp"
             android:layout_height="0dp"
             android:gravity="center"
@@ -272,13 +273,13 @@
             android:textColor="#FF0000"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/textView15"
+            app:layout_constraintBottom_toBottomOf="@+id/tvOption1"
             app:layout_constraintEnd_toStartOf="@+id/guideline50"
             app:layout_constraintStart_toStartOf="@+id/guideline46"
-            app:layout_constraintTop_toTopOf="@+id/textView15" />
+            app:layout_constraintTop_toTopOf="@+id/tvOption1" />
 
         <TextView
-            android:id="@+id/textView22"
+            android:id="@+id/tvOptionMoney2"
             android:layout_width="100dp"
             android:layout_height="0dp"
             android:gravity="center"
@@ -287,13 +288,13 @@
             android:textColor="#FF0000"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/textView16"
+            app:layout_constraintBottom_toBottomOf="@+id/tvOption2"
             app:layout_constraintEnd_toStartOf="@+id/guideline50"
             app:layout_constraintStart_toStartOf="@+id/guideline46"
-            app:layout_constraintTop_toTopOf="@+id/textView16" />
+            app:layout_constraintTop_toTopOf="@+id/tvOption2" />
 
         <TextView
-            android:id="@+id/textView23"
+            android:id="@+id/tvOptionMoney4"
             android:layout_width="100dp"
             android:layout_height="0dp"
             android:gravity="center"
@@ -302,13 +303,13 @@
             android:textColor="#FF0000"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/textView18"
+            app:layout_constraintBottom_toBottomOf="@+id/tvOption4"
             app:layout_constraintEnd_toStartOf="@+id/guideline50"
             app:layout_constraintStart_toStartOf="@+id/guideline46"
-            app:layout_constraintTop_toTopOf="@+id/textView18" />
+            app:layout_constraintTop_toTopOf="@+id/tvOption4" />
 
         <TextView
-            android:id="@+id/textView24"
+            android:id="@+id/tvOptionMoney3"
             android:layout_width="100dp"
             android:layout_height="0dp"
             android:gravity="center"
@@ -317,10 +318,10 @@
             android:textColor="#FF0000"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/textView17"
+            app:layout_constraintBottom_toBottomOf="@+id/tvOption3"
             app:layout_constraintEnd_toStartOf="@+id/guideline50"
             app:layout_constraintStart_toStartOf="@+id/guideline46"
-            app:layout_constraintTop_toTopOf="@+id/textView17" />
+            app:layout_constraintTop_toTopOf="@+id/tvOption3" />
 
         <View
             android:id="@+id/view2"
@@ -329,7 +330,7 @@
             android:background="@color/gray"
             app:layout_constraintEnd_toStartOf="@+id/guideline48"
             app:layout_constraintStart_toStartOf="@+id/guideline47"
-            app:layout_constraintTop_toBottomOf="@+id/textView15" />
+            app:layout_constraintTop_toBottomOf="@+id/tvOption1" />
 
         <View
             android:id="@+id/view4"
@@ -339,7 +340,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline48"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline47"
-            app:layout_constraintTop_toBottomOf="@+id/textView16" />
+            app:layout_constraintTop_toBottomOf="@+id/tvOption2" />
 
         <View
             android:id="@+id/view5"
@@ -349,7 +350,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline48"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline47"
-            app:layout_constraintTop_toBottomOf="@+id/textView17" />
+            app:layout_constraintTop_toBottomOf="@+id/tvOption3" />
 
         <View
             android:id="@+id/view3"
@@ -359,7 +360,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline48"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline47"
-            app:layout_constraintTop_toBottomOf="@+id/textView18" />
+            app:layout_constraintTop_toBottomOf="@+id/tvOption4" />
 
         <TextView
             android:id="@+id/tvCount2"
@@ -372,7 +373,7 @@
             app:layout_constraintBottom_toTopOf="@+id/view4"
             app:layout_constraintEnd_toStartOf="@+id/guideline48"
             app:layout_constraintStart_toStartOf="@+id/guideline58"
-            app:layout_constraintTop_toTopOf="@+id/textView16" />
+            app:layout_constraintTop_toTopOf="@+id/tvOption2" />
 
         <android.widget.Button
             android:id="@+id/btnPlus2"
@@ -406,10 +407,10 @@
             android:textColor="#000000"
             android:textSize="30sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/textView18"
+            app:layout_constraintBottom_toBottomOf="@+id/tvOption4"
             app:layout_constraintEnd_toStartOf="@+id/guideline48"
             app:layout_constraintStart_toStartOf="@+id/guideline58"
-            app:layout_constraintTop_toTopOf="@+id/textView18" />
+            app:layout_constraintTop_toTopOf="@+id/tvOption4" />
 
         <android.widget.Button
             android:id="@+id/btnPlus4"
@@ -446,7 +447,7 @@
             app:layout_constraintBottom_toTopOf="@+id/view5"
             app:layout_constraintEnd_toStartOf="@+id/guideline48"
             app:layout_constraintStart_toStartOf="@+id/guideline58"
-            app:layout_constraintTop_toTopOf="@+id/textView17" />
+            app:layout_constraintTop_toTopOf="@+id/tvOption3" />
 
         <android.widget.Button
             android:id="@+id/btnMinus3"
@@ -508,7 +509,7 @@
             app:layout_constraintBottom_toTopOf="@+id/view2"
             app:layout_constraintEnd_toStartOf="@+id/guideline48"
             app:layout_constraintStart_toStartOf="@+id/guideline58"
-            app:layout_constraintTop_toTopOf="@+id/textView15" />
+            app:layout_constraintTop_toTopOf="@+id/tvOption1" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline43"

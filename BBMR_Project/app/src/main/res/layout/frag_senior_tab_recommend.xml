@@ -9,7 +9,7 @@
     tools:context=".Senior_Fragment.Senior_Fragment_Tab_Recommend">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvS"
+        android:id="@+id/rvRecommend"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:nestedScrollingEnabled="false"
