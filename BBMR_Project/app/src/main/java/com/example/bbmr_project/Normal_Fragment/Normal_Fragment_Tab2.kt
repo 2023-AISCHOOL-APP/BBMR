@@ -25,7 +25,7 @@ class Normal_Fragment_Tab2 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.frag_normal_tab2, container, false)
-        rvDessert = view.findViewById(R.id.rvDessert)
+        rvDessert = view.findViewById(R.id.rvDessertPage)
 
         val layoutManager = GridLayoutManager(requireContext(), 4)
         rvDessert.layoutManager = layoutManager

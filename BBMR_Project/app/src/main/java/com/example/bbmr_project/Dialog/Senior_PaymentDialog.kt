@@ -27,6 +27,7 @@ class Senior_PaymentDialog: DialogFragment() {
             ViewGroup.LayoutParams.MATCH_PARENT
         )
         dialog?.window?.setDimAmount(0.4f)
+        isCancelable = false
     }
 
     override fun onCreateView(
@@ -61,11 +62,13 @@ class Senior_PaymentDialog: DialogFragment() {
         }
     }
     fun paymentFail(view: View) {
-        val myLayout = layoutInflater.inflate(R.layout.dialog_payment_fail, null)
+        val myLayout = layoutInflater.inflate(R.layout.dialog_senior_payment_fail, null)
         val build = AlertDialog.Builder(view.context).apply {
             setView(myLayout)
         }
         val dialog = build.create()
+        // 화면 밖 터치 잠금
+        dialog.setCanceledOnTouchOutside(false)
         dialog.show()
         myLayout.findViewById<Button>(R.id.btnPymtRetry).setOnClickListener {
             dialog.dismiss()
@@ -74,13 +77,13 @@ class Senior_PaymentDialog: DialogFragment() {
     }
 
     fun paymentSuccess(view: View) {
-        val myLayout = layoutInflater.inflate(R.layout.dialog_payment_billquery, null)
+        val myLayout = layoutInflater.inflate(R.layout.dialog_senior_payment_billquery, null)
         val build = AlertDialog.Builder(view.context).apply {
             setView(myLayout)
             // 화면밖 터치 했을 때 안 됨
             setCancelable(false)
         }
-        val cancelButton : Button = myLayout.findViewById(R.id.btnNoBill)
+        val cancelButton : Button = myLayout.findViewById(R.id.btnNoBillDSPB)
         val fulltext = "아니오\n(주문번호 미발행)"
 
         val spannableStringBuilder = SpannableStringBuilder(fulltext)
@@ -90,16 +93,18 @@ class Senior_PaymentDialog: DialogFragment() {
 
 
         val dialog = build.create()
+        // 화면 밖 터치 잠금
+        dialog.setCanceledOnTouchOutside(false)
         dialog.show()
 
         // 영수증 출력
-        myLayout.findViewById<Button>(R.id.btnYesBill).setOnClickListener {
+        myLayout.findViewById<Button>(R.id.btnYesBillDSPB).setOnClickListener {
             val dialogFragment = Senior_PaySuccessDialog()
             dialogFragment.show(requireActivity().supportFragmentManager, "PaymentSuccessDialog")
             dialog.dismiss()
         }
         // 주문번호 발행
-        myLayout.findViewById<Button>(R.id.btnNoBill).setOnClickListener {
+        myLayout.findViewById<Button>(R.id.btnNoBillDSPB).setOnClickListener {
             val dialogFragment = Senior_PaySuccessDialog()
             dialogFragment.show(requireActivity().supportFragmentManager, "PaymentSuccessDialog")
             dialog.dismiss()

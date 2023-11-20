@@ -49,6 +49,7 @@ class Normal_SelectPayDialog : DialogFragment() {
             ViewGroup.LayoutParams.MATCH_PARENT
         )
         dialog?.window?.setDimAmount(0.4f)
+        isCancelable = false
     }
 
     override fun onCreateView(

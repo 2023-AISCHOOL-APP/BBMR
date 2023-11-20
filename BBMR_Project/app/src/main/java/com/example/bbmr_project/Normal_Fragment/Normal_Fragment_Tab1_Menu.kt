@@ -83,7 +83,8 @@ class Normal_Fragment_Tab1_Menu(val type: Int) : Fragment() {
                     normalMenuDialog.show(childFragmentManager, "NMenuDialog")
                     normalMenuDialog.setListener(requireActivity() as Normal_MenuDialogListener)
                 }
-            })
+            }
+        )
         rvBeverage.adapter = adapter
 
         return view

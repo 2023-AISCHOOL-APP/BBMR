@@ -17,13 +17,14 @@ import com.example.bbmr_project.VO.Senior_TakeOutVO
 
 class Senior_Fragment_Tab_Recommend : Fragment(), ItemClickListener {
     override fun onItemClick(item: Senior_TakeOutVO) {
-//        Senior_MenuDialog().show(parentFragmentManager, "siniorDialog")
     }
+
+
 
 
     private lateinit var viewModel: MenuListViewModel
     private lateinit var adapter: SeniorTakeOutAdapter
-    private lateinit var rvS: RecyclerView
+    private lateinit var rvRecommend: RecyclerView
 
 
     override fun onCreateView(
@@ -32,18 +33,20 @@ class Senior_Fragment_Tab_Recommend : Fragment(), ItemClickListener {
     ): View? {
 
 
+
+
         // ViewModel 초기화
         viewModel = ViewModelProvider(this).get(MenuListViewModel::class.java)
 
 
         val view = inflater.inflate(R.layout.frag_senior_tab_recommend, container, false)
-        rvS = view.findViewById(R.id.rvS)
+        rvRecommend = view.findViewById(R.id.rvRecommend)
 
 
         // RecyclerView 어댑터 초기화
         adapter = SeniorTakeOutAdapter(requireContext(), R.layout.frag_senior_list, arrayListOf(), this,  parentFragmentManager)
-        rvS.adapter = adapter
-        rvS.layoutManager = GridLayoutManager(requireContext(), 3)
+        rvRecommend.adapter = adapter
+        rvRecommend.layoutManager = GridLayoutManager(requireContext(), 3)
 
 
 
@@ -59,9 +62,6 @@ class Senior_Fragment_Tab_Recommend : Fragment(), ItemClickListener {
     }
 
 
-
-
-
     // menuList1로 전환하는 함수
     fun switchToMenuList1() {
         viewModel.menuList1.value?.let { menuList1 ->
@@ -74,6 +74,7 @@ class Senior_Fragment_Tab_Recommend : Fragment(), ItemClickListener {
             adapter.updateList(menuList2)
         }
     }
-    }
+
+}
 
 

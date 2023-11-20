@@ -1,6 +1,11 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+
+
+    // parcelable 사용
+    id("kotlin-parcelize")
+
 }
 
 android {

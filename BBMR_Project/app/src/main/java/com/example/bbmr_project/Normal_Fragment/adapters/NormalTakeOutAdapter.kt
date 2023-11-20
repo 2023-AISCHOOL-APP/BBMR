@@ -1,5 +1,4 @@
 package com.example.bbmr_project.Normal_Fragment.adapters
-
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,7 +12,6 @@ import com.example.bbmr_project.Dialog.Normal_MenuDialog
 import com.example.bbmr_project.R
 import com.example.bbmr_project.VO.NormalTakeOutVO
 
-
 interface ItemClickListener {
     fun onItemClick(item: NormalTakeOutVO)
 }
@@ -23,15 +21,12 @@ class NormalTakeOutAdapter(
     private val fragmentManager: FragmentManager,
     private val itemClickListener: ItemClickListener?
 ) : RecyclerView.Adapter<NormalTakeOutAdapter.ViewHolder>() {
-
     val inflater: LayoutInflater = LayoutInflater.from(context)
-
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val img: ImageView = view.findViewById(R.id.img)
         val tvName: TextView = view.findViewById(R.id.tvName)
         val tvPrice: TextView = view.findViewById(R.id.tvPrice)
     }
-
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -39,12 +34,10 @@ class NormalTakeOutAdapter(
         val view = inflater.inflate(layout, parent, false)
         return NormalTakeOutAdapter.ViewHolder(view)
     }
-
     override fun onBindViewHolder(holder: NormalTakeOutAdapter.ViewHolder, position: Int) {
         holder.img.setImageResource(frag1List[position].img)
         holder.tvName.text = frag1List[position].name
         holder.tvPrice.text = frag1List[position].price
-
         holder.itemView.setOnClickListener {
             Log.d("TakeOut2Adapter", "Item clicked at position $position")
             // 아이템 클릭 이벤트 전달
@@ -52,7 +45,6 @@ class NormalTakeOutAdapter(
         }
 
     }
-
     override fun getItemCount(): Int {
         return frag1List.size
     }
