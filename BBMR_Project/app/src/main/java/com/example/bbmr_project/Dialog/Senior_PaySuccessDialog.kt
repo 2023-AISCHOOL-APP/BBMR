@@ -14,10 +14,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.bbmr_project.Normal_MainActivity
-import com.example.bbmr_project.databinding.DialogPaymentSuccessBinding
 
-class PaymentSuccessDialog: DialogFragment() {
-    private lateinit var  binding: DialogPaymentSuccessBinding
+import com.example.bbmr_project.databinding.DialogSeniorPaymentSuccessBinding
+
+class Senior_PaySuccessDialog: DialogFragment() {
+    private lateinit var  binding: DialogSeniorPaymentSuccessBinding
 
     override fun onStart() {
         super.onStart()
@@ -29,6 +30,7 @@ class PaymentSuccessDialog: DialogFragment() {
         )
         dialog?.window?.setDimAmount(0.4f)
         dialog?.setCancelable(false)
+        isCancelable = false
     }
 
     override fun onCreateView(
@@ -36,7 +38,7 @@ class PaymentSuccessDialog: DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DialogPaymentSuccessBinding.inflate(layoutInflater)
+        binding = DialogSeniorPaymentSuccessBinding.inflate(layoutInflater)
         return binding.root
 
     }

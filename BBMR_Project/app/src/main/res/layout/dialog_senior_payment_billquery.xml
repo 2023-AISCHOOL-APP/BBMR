@@ -24,7 +24,7 @@
         app:layout_constraintVertical_bias="0.188" />
 
     <Button
-        android:id="@+id/btnYesBill"
+        android:id="@+id/btnYesBillDSPB"
         android:layout_width="240dp"
         android:layout_height="180dp"
         android:layout_marginStart="44dp"
@@ -41,7 +41,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <Button
-        android:id="@+id/btnNoBill"
+        android:id="@+id/btnNoBillDSPB"
         android:layout_width="240dp"
         android:layout_height="180dp"
         android:layout_marginTop="132dp"

@@ -5,10 +5,9 @@
     <uses-feature android:name="android.hardware.camera.any" />
 
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:enableOnBackInvokedCallback="true"
@@ -18,21 +17,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BBMR_Project"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
+        <activity
+            android:name=".Normal_PaySuccessActivity"
+            android:exported="false" />
         <!-- 공용 액티비티 -->
         <activity
             android:name=".LoadingSplashActivity"
-            android:exported="true">
-        </activity>
-
-
-        <!-- 일반용 액티비티 -->
+            android:exported="true"></activity> <!-- 일반용 액티비티 -->
         <activity
             android:name=".Normal_StayActivity"
-            android:exported="true">
-        </activity>
-
+            android:exported="true"></activity>
         <activity
             android:name=".Normal_TakeOutActivity"
             android:exported="true">
@@ -41,7 +37,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".Normal_IntroActivity"
@@ -50,40 +45,22 @@
             android:name=".Normal_MainActivity"
             android:exported="true" />
 
-
-        <!-- 시니어용 액티비티 -->
-        <activity
-            android:name=".CouponNumberActivity"
-            android:exported="true">
-
-        </activity>
-
-
+    <!-- 시니어용 액티비티 -->
         <activity
             android:name=".Senior_TakeOutActivity"
-            android:exported="true">
-        </activity>
-
+            android:exported="true"></activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-        </activity>
-
+            android:exported="true"></activity>
         <activity
             android:name=".Dialog.Senior_BasketDialog"
-            android:exported="true">
-        </activity>
-
+            android:exported="true"></activity>
         <activity
             android:name=".SelectMenu1Activity"
-            android:exported="true">
-        </activity>
-
-
+            android:exported="true"></activity>
         <activity
             android:name=".Senior_IntroActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
     </application>
 
 </manifest>

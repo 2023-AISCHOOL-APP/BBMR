@@ -7,11 +7,19 @@
         <deviceKey>
           <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
+<<<<<<< HEAD
             <value value="C:\Users\GJ AI school\.android\avd\TabletS8Ultra_API_34_API_34.avd" />
+=======
+            <value value="C:\Users\aischool185\.android\avd\S8_Ultra_API_34.avd" />
+>>>>>>> 6a285748512fc37eccce6d8755ee613c7180104b
           </Key>
         </deviceKey>
       </Target>
     </targetSelectedWithDropDown>
+<<<<<<< HEAD
     <timeTargetWasSelectedWithDropDown value="2023-11-19T14:19:06.675381Z" />
+=======
+    <timeTargetWasSelectedWithDropDown value="2023-11-20T00:42:05.208305200Z" />
+>>>>>>> 6a285748512fc37eccce6d8755ee613c7180104b
   </component>
 </project>

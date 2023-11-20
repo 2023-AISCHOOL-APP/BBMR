@@ -81,7 +81,6 @@ class Senior_TakeOutActivity : AppCompatActivity() {
                 fragment.arguments = args
                 fragment.show(supportFragmentManager, "Senior.BasketDialog")
 
-                fragment.setOn
 
 
             }

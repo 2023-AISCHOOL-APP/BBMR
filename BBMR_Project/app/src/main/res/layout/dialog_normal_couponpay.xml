@@ -79,7 +79,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tvCpnNumDNC" />
 
         <Button
-            android:id="@+id/btnCnclDNC"
+            android:id="@+id/btnCpnCnclDNC"
             android:layout_width="130dp"
             android:layout_height="60dp"
             android:layout_marginTop="48dp"
@@ -89,7 +89,7 @@
             android:text="이전으로"
             android:textSize="22sp"
             android:textStyle="bold"
-            app:cornerRadius="8dp"
+            app:cornerRadius="10dp"
             app:layout_constraintEnd_toEndOf="@+id/tvBckGnd"
             app:layout_constraintHorizontal_bias="0.317"
             app:layout_constraintStart_toStartOf="@+id/tvBckGnd"
@@ -106,7 +106,7 @@
             android:text="조회하기"
             android:textSize="22sp"
             android:textStyle="bold"
-            app:cornerRadius="8dp"
+            app:cornerRadius="10dp"
             app:layout_constraintEnd_toEndOf="@+id/tvBckGnd"
             app:layout_constraintHorizontal_bias="0.68"
             app:layout_constraintStart_toStartOf="@+id/tvBckGnd"
@@ -203,7 +203,7 @@
             app:layout_constraintVertical_bias="0.104" />
 
         <Button
-            android:id="@+id/btn1N8"
+            android:id="@+id/btnBckSpceDNC"
             android:layout_width="85dp"
             android:layout_height="85dp"
             android:layout_marginStart="12dp"
@@ -280,7 +280,7 @@
             app:layout_constraintVertical_bias="0.9" />
 
         <Button
-            android:id="@+id/btn1N10"
+            android:id="@+id/btnClearDNC"
             android:layout_width="85dp"
             android:layout_height="85dp"
             android:layout_marginStart="12dp"
@@ -297,7 +297,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/tvBckGnd"
             app:layout_constraintEnd_toEndOf="@+id/tvBckGnd"
             app:layout_constraintStart_toEndOf="@+id/btn0N"
-            app:layout_constraintTop_toBottomOf="@+id/btn1N8"
+            app:layout_constraintTop_toBottomOf="@+id/btnBckSpceDNC"
             app:layout_constraintVertical_bias="0.9" />
 
         <Button

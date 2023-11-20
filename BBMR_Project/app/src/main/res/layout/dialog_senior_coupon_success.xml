@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="650dp"
-    android:layout_height="760dp">
+    android:layout_height="760dp"
+    android:background="@drawable/normal_dialog_background">
 
     <TextView
         android:id="@+id/tvCpnQuery"
@@ -19,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnCpnCnclDCS"
+        android:id="@+id/btnCpnCnclDSCS"
         android:layout_width="240dp"
         android:layout_height="148dp"
         android:layout_marginStart="44dp"
@@ -33,13 +34,13 @@
         android:textStyle="bold"
         app:cornerRadius="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnCpnUseDCS"
+        app:layout_constraintEnd_toStartOf="@+id/btnCpnUseDSCS"
         app:layout_constraintHorizontal_bias="0.012"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvPdPrice" />
 
     <Button
-        android:id="@+id/btnCpnUseDCS"
+        android:id="@+id/btnCpnUseDSCS"
         android:layout_width="240dp"
         android:layout_height="148dp"
         android:layout_marginTop="24dp"
@@ -81,11 +82,10 @@
         android:id="@+id/tvPdPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="28dp"
         android:text="2,900"
         android:textSize="70dp"
-        app:layout_constraintEnd_toEndOf="@+id/tvPdName"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvPdName" />
 
