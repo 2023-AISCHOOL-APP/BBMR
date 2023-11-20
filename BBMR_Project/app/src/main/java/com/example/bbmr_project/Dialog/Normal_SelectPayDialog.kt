@@ -17,7 +17,8 @@ interface NormalSelectPayDialogListener : Normal_MenuDialogListener {
     override fun onMenuAdded(
         normalSelectedMenuInfo: NormalSelectedMenuInfo,
         tvCount: Int,
-        totalCost: Int
+        totalCost: Int,
+        optionTvCount: Int
     )
 }
 

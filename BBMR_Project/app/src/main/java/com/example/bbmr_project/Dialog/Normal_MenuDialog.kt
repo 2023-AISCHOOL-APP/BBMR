@@ -4,7 +4,6 @@ import NormalSelectedMenuInfo
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,13 +17,23 @@ import com.example.bbmr_project.databinding.DialogNormalMenuBinding
 
 // Normal_TakeOutActivity에서 장바구니에 추가하기 위한 인터페이스
 interface Normal_MenuDialogListener {
-    fun onMenuAdded(normalSelectedMenuInfo: NormalSelectedMenuInfo, tvCount: Int, totalCost: Int)
+    fun onMenuAdded(
+        normalSelectedMenuInfo: NormalSelectedMenuInfo,
+        tvCount: Int,
+        totalCost: Int,
+        optionTvCount: Int
+    )
 }
 
 // Normal_TakeOutActivity에서 총합계를 위한 인터페이스
 interface TotalCostListener {
     fun onTotalCostUpdated(totalCost: Int, itemCost: Int)
-    fun onMenuAdded(normalSelectedMenuInfo: NormalSelectedMenuInfo, tvCount: Int, totalCost: Int)
+    fun onMenuAdded(
+        normalSelectedMenuInfo: NormalSelectedMenuInfo,
+        tvCount: Int,
+        totalCost: Int,
+        optionTvCount: Int
+    )
 }
 
 class Normal_MenuDialog : DialogFragment() {
@@ -100,18 +109,25 @@ class Normal_MenuDialog : DialogFragment() {
                 tvCount1 = binding.tvCount1.text.toString().toIntOrNull() ?: 0,
                 tvCount2 = binding.tvCount2.text.toString().toIntOrNull() ?: 0,
                 tvCount3 = binding.tvCount3.text.toString().toIntOrNull() ?: 0,
-                tvCount4 = binding.tvCount4.text.toString().toIntOrNull() ?: 0
+                tvCount4 = binding.tvCount4.text.toString().toIntOrNull() ?: 0,
+                optionTvCount = 0, // 초기값으로 설정
+                totalCost = 0 // 초기값으로 설정
             )
 
             // 장바구니에 담고 나서도 수량 증감을 위해 따로 값 보내기
             val tvCount = binding.tvCount.text.toString().toIntOrNull() ?: 0
 
+            // tvCount1, tvCount2, tvCount3, tvCount4 값을 합산하여 menuPrice 계산
+            val optionTvCount = (selectedMenuInfo.tvCount1 + selectedMenuInfo.tvCount2 +
+                    selectedMenuInfo.tvCount3 + selectedMenuInfo.tvCount4) * 500
+
             // 총 비용 계산
-            val priceString = selectedMenuInfo.price?.replace(",", "")?.replace("원", "") // 쉼표, 원 제거 후 정수변환
+            val priceString =
+                selectedMenuInfo.price?.replace(",", "")?.replace("원", "") // 쉼표, 원 제거 후 정수변환
             val menuPrice = priceString?.toIntOrNull() ?: 0
             val totalCost = menuPrice * selectedMenuInfo.tvCount
 
-            listener?.onMenuAdded(selectedMenuInfo, tvCount, totalCost)
+            listener?.onMenuAdded(selectedMenuInfo, tvCount, totalCost, optionTvCount)
             dismiss()
         }
 
@@ -204,6 +220,14 @@ class Normal_MenuDialog : DialogFragment() {
             binding.tvCount4.text = tvCount4.toString()
             binding.btnMinus4.isEnabled = true
         }
+    }
+
+    private fun calculateTotalTvCount(selectedMenuInfo: NormalSelectedMenuInfo): Int {
+        return selectedMenuInfo.tvCount +
+                selectedMenuInfo.tvCount1 +
+                selectedMenuInfo.tvCount2 +
+                selectedMenuInfo.tvCount3 +
+                selectedMenuInfo.tvCount4
     }
 
     private fun getSelectedTemperature(): String {
