@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature android:name="android.hardware.camera.any" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
+        android:usesCleartextTraffic="true"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:enableOnBackInvokedCallback="true"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.BBMR_Project"
+        tools:targetApi="31">
+
+        <!-- 공용 액티비티 -->
+        <activity
+            android:name=".LoadingSplashActivity"
+            android:exported="true">
+        </activity>
+
+
+        <!-- 일반용 액티비티 -->
+        <activity
+            android:name=".Normal_StayActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".Normal_TakeOutActivity"
+            android:exported="true">
+
+        </activity>
+
+        <activity
+            android:name=".Normal_IntroActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".Normal_MainActivity"
+            android:exported="true">
+        </activity>
+
+
+
+        <!-- 시니어용 액티비티 -->
+        <activity
+            android:name=".CouponNumberActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".Senior_TakeOutActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".Dialog.Senior_BasketDialog"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".SelectMenu1Activity"
+            android:exported="true">
+        </activity>
+
+
+        <activity
+            android:name=".Senior_IntroActivity"
+            android:exported="true">
+        </activity>
+    </application>
+
+</manifest>
