@@ -1,0 +1,64 @@
+[요약]
+- front
+키오스크는 종류를 최대한 많이 뽑아내기
+1. 일단 초기 흐름도 만들기(카페, 맥도날드 기준)
+2. 표준 키오스크 앱 만들기
+3. 소외계층 맞춤 키오스크 앱 제작
+	3-1. 키오스크 디스플레이 크기에 맞춰 4~6개 Button 제작
+	3-2. Yes or No 에 맞게 2가지 버튼만 흐름에 맞게 출력 
+4. 소요 기간에 맞춰 case 다양화 
+	
+
+- back, modeling
+db는 배운 걸로 - fire Base
+모델 학습 후 android연동 - 교내 선생님들 도움 요청
+
+[git 사용법]
+1. 원격저장소에서 가져오기
+git clone https://github.com/rkdgnlee/BBMR.git
+2. 
+git remote add origin https://github.com/rkdgnlee/BBMR.git
+
+git remote pull origin master
+
+git branch "원하는 branch이름" 
+
+git add .
+
+git commit -m "원하는 메시지"
+
+git push origin 브랜치명
+[master라는 default branch 이름이 변경됨]
+git branch -m main master
+
+git fetch origin
+
+git branch -u origin/master master
+
+git remote set-head origin -a
+
+[20231024]
+Front
+업종 - 병원 
+요식업계
+카페 식당 - 메뉴가 많아 어려움 
+뭘 눌러야 할지를 
+전체적인 흐름을 모른다. 당황스러움이 선택지를 너무 많이 줘서 그런다. 
+선택지를 최소한의 줄일 것을 
+6칸 먹고
+40대 미만 이상 
+디지털 소외계층 
+어르신 
+커피 디카페인 ㅅ
+사이즈 시럽 옵션 -이지 선다 
+뭐 든지 yes or no
+안드로이드 스튜디오  
+요식업을 
+카페 식당 
+4*5정도  
+모델 일주일 11월 초중순 이미지 roboflow 
+open
+권한받고  
+모델연동하는 건 선생님들의 도움이 필요함 그래서 꽤 걸린다 
+
+
