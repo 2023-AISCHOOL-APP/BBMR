@@ -18,20 +18,24 @@ interface ItemClickListener {
     fun onItemClick(item: NormalTakeOutVO)
 }
 
-class NormalTakeOutAdapter(val context: Context, val layout: Int, val frag1List: List<NormalTakeOutVO>,
-                      private val fragmentManager: FragmentManager,
-                      private val itemClickListener: ItemClickListener? = null)
-    : RecyclerView.Adapter<NormalTakeOutAdapter.ViewHolder>(){
+class NormalTakeOutAdapter(
+    val context: Context, val layout: Int, val frag1List: List<NormalTakeOutVO>,
+    private val fragmentManager: FragmentManager,
+    private val itemClickListener: ItemClickListener?
+) : RecyclerView.Adapter<NormalTakeOutAdapter.ViewHolder>() {
 
-        val inflater : LayoutInflater = LayoutInflater.from(context)
+    val inflater: LayoutInflater = LayoutInflater.from(context)
 
-    class ViewHolder(view : View) : RecyclerView.ViewHolder(view){
-        val img : ImageView = view.findViewById(R.id.img)
-        val tvName : TextView = view.findViewById(R.id.tvName)
-        val tvPrice : TextView = view.findViewById(R.id.tvPrice)
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val img: ImageView = view.findViewById(R.id.img)
+        val tvName: TextView = view.findViewById(R.id.tvName)
+        val tvPrice: TextView = view.findViewById(R.id.tvPrice)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NormalTakeOutAdapter.ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): NormalTakeOutAdapter.ViewHolder {
         val view = inflater.inflate(layout, parent, false)
         return NormalTakeOutAdapter.ViewHolder(view)
     }
@@ -45,10 +49,6 @@ class NormalTakeOutAdapter(val context: Context, val layout: Int, val frag1List:
             Log.d("TakeOut2Adapter", "Item clicked at position $position")
             // 아이템 클릭 이벤트 전달
             itemClickListener?.onItemClick(frag1List[position])
-
-            // NMenuDialog를 보여주기
-            val normalMenuDialog = Normal_MenuDialog.newInstance(frag1List[position])
-            normalMenuDialog.show(fragmentManager, "NMenuDialog")
         }
 
     }
