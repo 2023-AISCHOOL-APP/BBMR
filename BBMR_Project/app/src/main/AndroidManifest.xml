@@ -25,7 +25,13 @@
         <!-- 공용 액티비티 -->
         <activity
             android:name=".LoadingSplashActivity"
-            android:exported="true"></activity> <!-- 일반용 액티비티 -->
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity> <!-- 일반용 액티비티 -->
         <activity
             android:name=".Normal_StayActivity"
             android:exported="true"></activity>
@@ -45,11 +51,7 @@
         <activity
             android:name=".Senior_TakeOutActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
