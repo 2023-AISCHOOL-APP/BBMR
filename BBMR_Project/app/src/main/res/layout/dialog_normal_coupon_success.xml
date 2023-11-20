@@ -39,12 +39,26 @@
             android:id="@+id/textView30"
             android:layout_width="0dp"
             android:layout_height="4dp"
-            android:layout_marginBottom="244dp"
+            android:layout_marginBottom="300dp"
             android:background="@color/mainColor"
             android:backgroundTintMode="add"
             app:layout_constraintBottom_toTopOf="@+id/tableLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView32"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="228dp"
+            android:text="결제정보"
+            android:textColor="#FF0000"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/tableLayout"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tableLayout"
+            app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
         <TableLayout
             android:id="@+id/tableLayout"
@@ -54,7 +68,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.36">
+            app:layout_constraintVertical_bias="0.434">
 
             <TableRow
                 android:layout_width="match_parent"
@@ -125,34 +139,20 @@
 
         </TableLayout>
 
-        <TextView
-            android:id="@+id/textView32"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="180dp"
-            android:text="결제정보"
-            android:textColor="#FF0000"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/tableLayout"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/tableLayout"
-            app:layout_constraintTop_toBottomOf="@+id/textView30" />
-
         <Button
             android:id="@+id/btnCpnCnclDNCS"
             android:layout_width="130dp"
             android:layout_height="60dp"
-            android:layout_marginTop="184dp"
+            android:layout_marginTop="172dp"
             android:backgroundTint="@color/mainColor"
             android:insetTop="0dp"
             android:insetBottom="0dp"
             android:text="이전으로"
             android:textSize="20dp"
             android:textStyle="bold"
-            app:cornerRadius="16dp"
+            app:cornerRadius="10dp"
             app:layout_constraintEnd_toEndOf="@+id/tableLayout"
-            app:layout_constraintHorizontal_bias="0.302"
+            app:layout_constraintHorizontal_bias="0.3"
             app:layout_constraintStart_toStartOf="@+id/tableLayout"
             app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
 
@@ -160,16 +160,16 @@
             android:id="@+id/btnCpnUseDNCS"
             android:layout_width="130dp"
             android:layout_height="60dp"
-            android:layout_marginTop="184dp"
+            android:layout_marginTop="172dp"
             android:backgroundTint="@color/mainColor"
             android:insetTop="0dp"
             android:insetBottom="0dp"
             android:text="사용하기"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:cornerRadius="16dp"
+            app:cornerRadius="10dp"
             app:layout_constraintEnd_toEndOf="@+id/tableLayout"
-            app:layout_constraintHorizontal_bias="0.7"
+            app:layout_constraintHorizontal_bias="0.71"
             app:layout_constraintStart_toStartOf="@+id/tableLayout"
             app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
 

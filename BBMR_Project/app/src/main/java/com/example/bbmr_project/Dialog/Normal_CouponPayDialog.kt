@@ -28,6 +28,8 @@ class Normal_CouponPayDialog : DialogFragment() {
             ViewGroup.LayoutParams.MATCH_PARENT
         )
         dialog?.window?.setDimAmount(0.4f)
+        isCancelable = false
+
     }
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -91,6 +93,8 @@ class Normal_CouponPayDialog : DialogFragment() {
             setView(myLayout)
         }
         val dialog = build.create()
+        // 화면 밖 터치 잠금
+        dialog.setCanceledOnTouchOutside(false)
         dialog.show()
         myLayout.findViewById<Button>(R.id.btnRetryCpnDNCF).setOnClickListener {
             binding.tvCpnNumDNC.text = ""

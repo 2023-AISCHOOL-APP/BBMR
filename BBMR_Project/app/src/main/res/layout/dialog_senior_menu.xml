@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="50dp"
-        android:background="@color/subColor"
+        android:background="@drawable/normal_dialog_background"
+        android:backgroundTint="@color/subColor"
         tools:layout_editor_absoluteX="50dp"
         tools:layout_editor_absoluteY="50dp">
 

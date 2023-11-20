@@ -27,6 +27,7 @@ class Senior_CouponPayDialog: DialogFragment() {
             ViewGroup.LayoutParams.MATCH_PARENT
         )
         dialog?.window?.setDimAmount(0.4f)
+        isCancelable = false
     }
 
     override fun onCreateView(
@@ -85,6 +86,8 @@ class Senior_CouponPayDialog: DialogFragment() {
             setView(myLayout)
         }
         val dialog = build.create()
+        // 화면 밖 터치 잠금
+        dialog.setCanceledOnTouchOutside(false)
         dialog.show()
         myLayout.findViewById<Button>(R.id.btnYesDSCB).setOnClickListener {
             dialog.dismiss()
@@ -110,6 +113,8 @@ class Senior_CouponPayDialog: DialogFragment() {
             setView(myLayout)
         }
         val dialog = build.create()
+        // 화면 밖 터치 잠금
+        dialog.setCanceledOnTouchOutside(false)
         dialog.show()
         myLayout.findViewById<Button>(R.id.btnRetryCpnDSCF).setOnClickListener {
             binding.tvCpnNumN.text = ""
@@ -128,6 +133,8 @@ class Senior_CouponPayDialog: DialogFragment() {
         SelectedGift(productName, productPrice, "콘치즈달걀빵", "2,900")
         myLayout.findViewById<ImageView>(R.id.ivCoupon).setImageResource(R.drawable.corncheezeeggbread)
         val dialog = build.create()
+        // 화면 밖 터치 잠금
+        dialog.setCanceledOnTouchOutside(false)
         dialog.show()
 
         // 교환권 성공 및 사용 버튼 누를 경우
@@ -162,6 +169,8 @@ class Senior_CouponPayDialog: DialogFragment() {
         SelectedGift(productName, productPrice, "이디야 상품권", "20,000")
         myLayout.findViewById<ImageView>(R.id.ivCoupon).setImageResource(R.drawable.giftcard)
         val dialog = build.create()
+        // 화면 밖 터치 잠금
+        dialog.setCanceledOnTouchOutside(false)
         dialog.show()
         // 쿠폰 번호 맞는데 사용 버튼 누를 경우
         myLayout.findViewById<Button>(R.id.btnCpnUseDSCS).setOnClickListener {
