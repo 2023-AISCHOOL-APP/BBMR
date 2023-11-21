@@ -104,6 +104,72 @@ class checkCoupon(Resource):
 
 
 
+
+# 결제 완료 후 DB 저장 / 주문번호 안드로이드로 보내기
+class SaveOrder(Resource):
+    def post(self):
+        try:
+            # 안드로이드 앱에서 전송한 JSON 데이터를 받음
+            data = request.get_json()
+            print(data)
+            # 메뉴리스트[(메뉴id,수량),(메뉴id,수량)...], 결제금액
+            menu_ids = data['menu_ids']
+            total_amount = data['total_amount']
+
+            conn = get_connection()
+            cursor = conn.cursor()
+            # Orders 테이블에 주문 정보 삽입(order_id(주문번호)는 자동생성), 총결제금액(쿠폰사용금액 제외)
+            cursor.execute("INSERT INTO orders (total_amount) VALUES (%s)", (total_amount,))
+            conn.commit()
+
+            # 삽입한 주문의 id값을 가져온다
+            order_id = cursor.lastrowid 
+            # order_detail테이블에 order_id, 메뉴id, 수량을 저장
+            for menu_id in menu_ids:
+                cursor.execute("INSERT INTO order_detail (order_id, menu_id, quantity) VALUES (%s, %s, %s)",
+                            (order_id, menu_id['menu_id'], menu_id['quantity']))
+                conn.commit()
+            conn.close()
+
+            # 쿠폰을 썼을때 JSON데이터에 coupon 값이 null이 아닌 값이 있을때
+            if 'coupon' in data:
+                # 쿠폰코드와 할인금액을 가져온다(할인금액은 금액권이나 교환권이나 상관없이 금액으로)
+                coupon_code = data['coupon']
+                discount = data['discount']
+
+                # 쿠폰코드에 해당되는 쿠폰정보를 가져옴
+                conn = get_connection()
+                cursor = conn.cursor()
+                cursor.execute("SELECT menu_id, C_use, amount FROM coupon WHERE coupon_code = %s", (coupon_code,))
+                coupon_data = cursor.fetchall()[0]
+                menu_id, C_use, amount = coupon_data
+                # 쿠폰의 amount(금액)이 0이고 메뉴id가 있을때 (교환권)
+                if amount ==0 and menu_id is not None:
+                    conn = get_connection()
+                    cursor = conn.cursor()
+                    cursor.execute(f"update coupon set C_use = 1 where coupon_code = '{coupon_code}'")
+                    conn.commit()
+                # 금액권
+                else:
+                    amount_result = amount-discount
+                    print(amount_result)
+                    conn = get_connection()
+                    cursor = conn.cursor()
+                    cursor.execute("UPDATE coupon SET amount = %s WHERE coupon_code = %s", (amount_result, coupon_code))
+                    conn.commit()
+                conn.close()
+
+            
+            response = {"response":order_id}
+            
+            return {"response":order_id}
+
+        except Exception as e:
+            print(str(e))
+            response = jsonify({"error": "Error saving order"})
+            
+            return response
+
    
 
 
@@ -152,6 +218,7 @@ def upload_and_predict():
 
 
 
+api.add_resource(SaveOrder,"/saveorder/")
 api.add_resource(checkCoupon,"/checkcoupon/")
 api.add_resource(TodoList,'/todos/')
 
