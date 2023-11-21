@@ -1,19 +1,19 @@
 package com.example.bbmr_project
 
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
-import androidx.camera.core.ImageCaptureException
-import androidx.camera.core.ImageProxy
 import androidx.camera.core.Preview
 import androidx.camera.mlkit.vision.MlKitAnalyzer
 import androidx.camera.view.CameraController.COORDINATE_SYSTEM_VIEW_REFERENCED
@@ -21,19 +21,15 @@ import androidx.camera.view.LifecycleCameraController
 import androidx.camera.view.PreviewView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.example.bbmr_project.databinding.ActivityMainBinding
+import com.example.bbmr_project.RetrofitAPI.ApiService
+import com.example.bbmr_project.RetrofitAPI.RetrofitAPI
+import com.example.bbmr_project.RetrofitAPI.RfAPI
 import com.google.mlkit.vision.face.FaceDetection
 import com.google.mlkit.vision.face.FaceDetector
 import com.google.mlkit.vision.face.FaceDetectorOptions
 import java.util.concurrent.ExecutorService
-import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.camera.view.CameraController
-import com.example.bbmr_project.RetrofitAPI.ImageUploadResponse
-import com.example.bbmr_project.RetrofitAPI.RetrofitAPI
 import com.example.bbmr_project.databinding.ActivityLoadingSplashBinding
-import com.example.bbmr_project.mlkit.faceDetectModel
-import com.example.bbmr_project.mlkit.faceDrawable
-import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -42,21 +38,21 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
 import java.util.concurrent.Executors
-
 
 class LoadingSplashActivity : AppCompatActivity() {
 
-    private lateinit var cameraProvider: ProcessCameraProvider
     private lateinit var viewBinding: ActivityLoadingSplashBinding
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var faceDetector: FaceDetector
-    private lateinit var cameraController: LifecycleCameraController // 231120 --  CameraController 중복 선언으로 인한 수정
     private lateinit var imageCapture: ImageCapture
-    private var isImagedCaptured = false // -- 231120 isImageCaptured 플래그 선언
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityLoadingSplashBinding.inflate(layoutInflater)
+
         setContentView(viewBinding.root)
         // Request camera permissions
         if (allPermissionsGranted()) {
@@ -66,13 +62,17 @@ class LoadingSplashActivity : AppCompatActivity() {
                 this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
             )
         }
-
         cameraExecutor = Executors.newSingleThreadExecutor()
+//        // 해당 함수 내에서 res = 1 일 경우 if문으로 해서 액티비티 이동 intent활용 해보면 됨
+//        // 다음 인텐트로 이동
+//        val intent = Intent("내가 보내야 하는 액티비티 화면", )
+//        startActivity(intent)
+//        finish()
 
     }
 
     private fun startCamera() {
-        cameraController = LifecycleCameraController(baseContext)
+        var cameraController = LifecycleCameraController(baseContext)
         val previewView: PreviewView = viewBinding.viewFinder
         // 카메라 전면 사용하기
         val cameraSelector = CameraSelector.Builder()
@@ -86,11 +86,15 @@ class LoadingSplashActivity : AppCompatActivity() {
             .setPerformanceMode(FaceDetectorOptions.PERFORMANCE_MODE_FAST)
             .setContourMode(FaceDetectorOptions.CONTOUR_MODE_ALL)
             .build()
-        val faceDetector = FaceDetection.getClient(options)
 
+        faceDetector = FaceDetection.getClient(options)
+
+        // 이미지 캡처 객체를 생성하고 라이프 사이클에 바인딩하는 곳
+        // 걍 이미지 캡처하는 곳이라고 보면 됨
         imageCapture = ImageCapture.Builder().build()
 
-        //cameraController.cameraSelector = cameraSelector
+
+        cameraController.cameraSelector = cameraSelector
         // 1 프레임 당 실시하는 analyzer
         cameraController.setImageAnalysisAnalyzer(
             ContextCompat.getMainExecutor(this),
@@ -100,159 +104,147 @@ class LoadingSplashActivity : AppCompatActivity() {
                 ContextCompat.getMainExecutor(this)
             ) { result: MlKitAnalyzer.Result? ->
                 val faceResults = result?.getValue(faceDetector)
-                if ((faceResults == null) ||
-                    (faceResults.size == 0) ||
-                    (faceResults.first() == null)
-                ) {
-                    previewView.overlay.clear()
-                    previewView.setOnTouchListener { _, _ -> false } //no-op
-                    return@MlKitAnalyzer
-                } else {        // 걍 스크린샷 캡처로 갑니다
+                if (faceResults != null && faceResults.isNotEmpty()) {
                     imageCaptureAndSend()
-
-
-                    cameraController.unbind()
                 }
-                val faceDetectModel = faceDetectModel(faceResults[0])
-                val faceDrawable = faceDrawable(faceDetectModel)
                 previewView.overlay.clear()
-                previewView.overlay.add(faceDrawable)
             }
         )
 
         cameraController.bindToLifecycle(this)
-
         previewView.controller = cameraController
-
-    }
-    // -- 이상이 없음 231120
-    // --------- 231120 imageProxyToBitmap 함수 코드 추가
-    private fun imageProxyToBitmap(imageProxy: ImageProxy): Bitmap {
-        val buffer = imageProxy.planes[0].buffer
-        val bytes = ByteArray(buffer.capacity())
-        buffer.get(bytes)
-        return BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
     }
 
-    // ----------- 231120 새로운 이미지 캡쳐 방식 : 카메라 프리뷰와 실제 캡쳐된 이미지가 달라지는 것을 방지하기 위함
     private fun imageCaptureAndSend() {
-        // ImageCaptured 플래그 코드
-        if (isImagedCaptured){
-            return
-        }
+        val rootView : View = window.decorView.rootView
+        rootView.isDrawingCacheEnabled = true
+        val bitmap : Bitmap = Bitmap.createBitmap(rootView.drawingCache)
+        rootView.isDrawingCacheEnabled = false
 
-        imageCapture.takePicture(
-            ContextCompat.getMainExecutor(this),
-            object : ImageCapture.OnImageCapturedCallback() {
-                override fun onCaptureSuccess(imageProxy: ImageProxy) {
-                    isImagedCaptured = true // 이미지 캡쳐 표시
-                    // imageProxy를 사용하여 Bitmap으로 변환
-                    val bitmap = imageProxyToBitmap(imageProxy)
-                    imageProxy.close()
-
-                    // Bitmap을 MultipartBody.Part로 변환 및 업로드 로직
-                    uploadBitmap(bitmap)
-
-                }
-
-                override fun onError(exception: ImageCaptureException) {
-                    Log.e(TAG, "이미지 캡처 실패: ${exception.message}", exception)
-                }
-            }
+        // 스크린 샷의 이미지 짜르기
+        val screenHeight = bitmap.height
+        val cutHeight = (screenHeight * 0.2).toInt()
+        val croppedBitmap = Bitmap.createBitmap(
+            bitmap,
+            0,
+            cutHeight,
+            bitmap.width,
+            screenHeight - 2 * cutHeight
         )
-    }
-
-
-    private fun uploadBitmap(bitmap: Bitmap) {
-        // Bitmap을 ByteArrayOutputStream을 사용하여 바이트 배열로 변환
         val byteArrayOutputStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+        croppedBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
         val byteArray = byteArrayOutputStream.toByteArray()
+        // 이 곳에 byteArray를 받아와서 전송하시면 됩니다!
+        val tag: String = "이미지 캡처: "
+        Log.d(tag, "성공")
+        var res : String = "0"
+        val Handler = Handler(Looper.getMainLooper())
+        // 일반 고객으로 판단 될 경우
+        if (res == "0") {
+            viewBinding.progressBar.visibility = View.INVISIBLE
+            viewBinding.tvguide1.text = "고객님"
+            viewBinding.tvguide2.text = "환영합니다"
+//            viewBinding.pb.
+            Handler.postDelayed({
+                val intent = Intent(this, Normal_IntroActivity::class.java)
+                startActivity(intent)
+                finish()
+            }, 800)
 
-        // Bitmap을 MultipartBody.Part로 변환
-        val imageRequestBody = RequestBody.create(MediaType.parse("image/png"), byteArray)
-        val imagePart = MultipartBody.Part.createFormData("image", "image.png", imageRequestBody)
+            // 시니어로 판단 될 경우
+        } else if (res == "1") {
+            viewBinding.progressBar.visibility = View.INVISIBLE
+            viewBinding.tvguide1.text = "시니어님"
+            viewBinding.tvguide2.text = "환영합니다"
+            Handler.postDelayed({
+                val intent = Intent(this, Senior_IntroActivity::class.java)
+                startActivity(intent)
+                finish()
+            }, 800)
+        }
 
-        // Retrofit API를 사용하여 이미지 업로드
-        val retrofit = Retrofit.Builder()
-            .baseUrl(getString(R.string.baseUrl))
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+        val filePath = saveBitmapToFile(this, croppedBitmap)
+        filePath?.let {
+            // 파일로부터 MultipartBody.Part 생성
+            val multipartBody = createMultipartBodyPartFromFile(it)
 
-        val apiService = retrofit.create(RetrofitAPI::class.java)
-        val call = apiService.uploadImage(imagePart)
+            // Retrofit 인스턴스 생성 및 이미지 전송
+            val retrofit = Retrofit.Builder()
+                .baseUrl(getString(R.string.baseUrl)) // 서버 URL 설정
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
 
-        call.enqueue(object : Callback<ImageUploadResponse> {
-            override fun onResponse(call: Call<ImageUploadResponse>, response: Response<ImageUploadResponse>) {
-                // 231120 -- 결과에 따른 화면 이동을 위해 주석처리
-//                if (response.isSuccessful) {
-//                    val result = response.body()?.result
-//                    // 서버로부터 받은 결과 처리
-//                    Log.d(TAG, "결과는: $result 성공")
-//                } else {
-//                    // 서버로부터 실패 응답을 받았을 때의 처리
-//                    Log.d(TAG, "서버 응답 실패")
-//                }
-                if (response.isSuccessful && response.body() != null) {
-                    val result = response.body()!!.result
-                    handleServerResult(result)  // 결과에 따른 화면 이동 로직
-                    unBindCamera()
-                } else {
-                    Log.d(TAG, "서버 응답 실패")
-                    unBindCamera()
+            val service = retrofit.create(ApiService::class.java)
+            service.uploadImage(multipartBody).enqueue(object : Callback<RfAPI> {
+                override fun onResponse(call: Call<RfAPI>, response: Response<RfAPI>) {
+                    if (response.isSuccessful) {
+                        val serverResponse = response.body()
+                        serverResponse?.let {
+                            // 서버로부터 받은 결과를 처리
+                            Log.d("예측값", "$serverResponse")
+
+                            processServerResponse(it.result)
+                        }
+                    }
                 }
-            }
+                override fun onFailure(call: Call<RfAPI>, t: Throwable) {
+                    // 서버 통신 실패 처리
+                    Log.e(TAG, "Server communication failed: ", t)
+                }
+            })
+        }
 
-            override fun onFailure(call: Call<ImageUploadResponse>, t: Throwable) {
-                // 네트워크 요청 실패 시의 처리
-                Log.e(TAG, "이미지 업로드 실패", t)
-                unBindCamera()
-            }
-        })
     }
-    private fun unBindCamera() {
-        cameraController.unbind()
-    }
-
-    // 231120 --- 결과에 따른 화면 이동 로직 추가 함수
-    private fun handleServerResult(result: String) {
+    private fun processServerResponse(result: String) {
+        // 결과에 따라 다른 액션을 수행합니다.
+        // 예를 들어, 결과에 따라 다른 Activity를 시작할 수 있습니다.
         when (result) {
-            "0" -> moveToSeniorScreen()
-            "1" -> moveToGeneralScreen()
+            "1" -> {
+                // 일반 고객으로 판단된 경우
+                val intent = Intent(this, Normal_IntroActivity::class.java)
+                startActivity(intent)
+            }
+            "0" -> {
+                // 시니어 고객으로 판단된 경우
+                val intent = Intent(this, Senior_IntroActivity::class.java)
+                startActivity(intent)
+            }
             else -> {
-                // 231120 예외 처리 코드
-                runOnUiThread {
-                    Toast.makeText(this, "서버 무응답: $result", Toast.LENGTH_LONG).show()
-                }
+                // 예외 처리
+                Log.e(TAG, "Unexpected server response")
             }
         }
+        finish()
     }
-
-    private fun moveToSeniorScreen() {
-        // 시니어용 화면으로 이동하는 로직
-        val intent = Intent(this, Senior_IntroActivity::class.java)
-        startActivity(intent)
+    private fun saveBitmapToFile(context: Context, bitmap: Bitmap): String? {
+        val fileName = "image_${System.currentTimeMillis()}.png"
+        val file = File(context.filesDir, fileName)
+        return try {
+            val outputStream = FileOutputStream(file)
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+            outputStream.flush()
+            outputStream.close()
+            file.absolutePath
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
     }
-
-    private fun moveToGeneralScreen() {
-        // 일반용 화면으로 이동하는 로직
-        val intent = Intent(this, Normal_IntroActivity::class.java)
-        startActivity(intent)
+    private fun createMultipartBodyPartFromFile(filePath: String): MultipartBody.Part {
+        val file = File(filePath)
+        val mediaType = "image/png".toMediaTypeOrNull()
+        val requestBody = mediaType?.let { RequestBody.create(it, file) }
+        return MultipartBody.Part.createFormData("image", file.name, requestBody!!)
     }
-
-
-
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(
             baseContext, it) == PackageManager.PERMISSION_GRANTED
     }
-
     override fun onDestroy() {
         super.onDestroy()
         cameraExecutor.shutdown()
         faceDetector.close()
     }
-
     companion object {
         private const val TAG = "CameraX-MLKit"
         private const val REQUEST_CODE_PERMISSIONS = 10
@@ -261,7 +253,6 @@ class LoadingSplashActivity : AppCompatActivity() {
                 Manifest.permission.CAMERA
             ).toTypedArray()
     }
-
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<String>, grantResults:
         IntArray) {
@@ -277,5 +268,4 @@ class LoadingSplashActivity : AppCompatActivity() {
             }
         }
     }
-
 }
