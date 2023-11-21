@@ -49,7 +49,7 @@ class NormalSelectBasketAdapter(
 
         // btnBasketPlus 클릭 시
         holder.btnBasketPlus.setOnClickListener {
-            // tvBasketCount 값을 증가시키는 로직 추가
+            // tvBasketCount 값을 증가
             selectedItem.tvCount++
             notifyItemChanged(position)
 
@@ -62,7 +62,7 @@ class NormalSelectBasketAdapter(
 
         // btnBasketMinus 클릭 시
         holder.btnBasketMinus.setOnClickListener {
-            // tvBasketCount가 2 이상일 때만 감소시키는 로직 추가
+            // tvBasketCount가 2 이상일 때만 감소
             if (selectedItem.tvCount > 1) {
                 selectedItem.tvCount--
                 notifyItemChanged(position)
@@ -83,8 +83,8 @@ class NormalSelectBasketAdapter(
 
             // 해당 아이템의 비용을 총 비용에서 차감
             val itemCost = calculateItemCost(selectedItem)
-            val optionTvCount = calculateOptionTvCount(selectedItem)
-            val remainingTotalCost = calculateTotalCost() - itemCost - optionTvCount
+//            val optionTvCount = calculateOptionTvCount(selectedItem)
+            val remainingTotalCost = calculateTotalCost() - itemCost
 
             // 로그로 현재 총 비용 출력
             Log.d("TotalCostUpdated", "Total Cost Decreased: $remainingTotalCost")
@@ -92,7 +92,7 @@ class NormalSelectBasketAdapter(
             // TotalCostListener에 알림
             totalCostListener.onTotalCostUpdated(remainingTotalCost, itemCost)
 
-            // 해당 아이템을 RecyclerView에서 삭제하는 로직 추가
+            // 해당 아이템을 RecyclerView에서 삭제
             val removedItemPosition = holder.adapterPosition
             basketList.removeAt(removedItemPosition)
             notifyItemRemoved(removedItemPosition)
@@ -107,7 +107,7 @@ class NormalSelectBasketAdapter(
     }
 
     private fun calculateOptionTvCount(item: NormalSelectedMenuInfo): Int {
-        return (item.tvCount1 + item.tvCount2 + item.tvCount3 + item.tvCount4) * 500
+        return item.tvCount1 * 500 + item.tvCount2 * 500 + item.tvCount3 * 500 + item.tvCount4 * 500
     }
 
 
