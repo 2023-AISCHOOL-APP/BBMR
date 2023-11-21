@@ -1,4 +1,3 @@
-
 /*
  * Copyright 2022 The Android Open Source Project
  *
@@ -57,7 +56,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewBinding: ActivityMainBinding
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var faceDetector: FaceDetector
-    private lateinit var cameraController: CameraController
+    private lateinit var cameraController: LifecycleCameraController // 231120 --  CameraController 중복 선언으로 인한 수정
     private lateinit var imageCapture: ImageCapture
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -112,10 +111,8 @@ class MainActivity : AppCompatActivity() {
                     previewView.overlay.clear()
                     previewView.setOnTouchListener { _, _ -> false } //no-op
                     return@MlKitAnalyzer
-                } else {        // 걍 스크린샷 캡처로 갑니다
+                } else {        // 걍 스크린샷 캡처로 갑니다 , 231120 --- 코드 수정
                     imageCaptureAndSend()
-
-                    cameraController.unbind()
                 }
                 val faceDetectModel = faceDetectModel(faceResults[0])
                 val faceDrawable = faceDrawable(faceDetectModel)
@@ -127,36 +124,39 @@ class MainActivity : AppCompatActivity() {
         cameraController.bindToLifecycle(this)
 
         previewView.controller = cameraController
-        // cameraController.
+
     }
 
-    // 이미지 캡처 및 업로드 메서드
+    // ----------- 231120 새로운 이미지 캡쳐 방식 : 카메라 프리뷰와 실제 캡쳐된 이미지가 달라지는 것을 방지하기 위함
     private fun imageCaptureAndSend() {
-        // 이미지를 캡처하고 Bitmap으로 변환
-        val rootView: View = window.decorView.rootView
-        rootView.isDrawingCacheEnabled = true
-        val bitmap: Bitmap = Bitmap.createBitmap(rootView.drawingCache)
-        rootView.isDrawingCacheEnabled = false
+        imageCapture.takePicture(
+            ContextCompat.getMainExecutor(this),
+            object : ImageCapture.OnImageCapturedCallback() {
+                override fun onCaptureSuccess(imageProxy: ImageProxy) {
+                    // imageProxy를 사용하여 Bitmap으로 변환
+                    val bitmap = imageProxyToBitmap(imageProxy)
+                    imageProxy.close()
 
-        //스크린 샷의 이미지 짜르기
-        val screenHeight = bitmap.height
-        val cutHeight = (screenHeight * 0.2).toInt()
-        val croppedBitmap = Bitmap.createBitmap(
-            bitmap,
-            0,
-            cutHeight,
-            bitmap.width,
-            screenHeight - 2 * cutHeight
+                    // Bitmap을 MultipartBody.Part로 변환 및 업로드 로직
+                    uploadBitmap(bitmap)
+                }
+
+                override fun onError(exception: ImageCaptureException) {
+                    Log.e(TAG, "이미지 캡처 실패: ${exception.message}", exception)
+                }
+            }
         )
+    }
 
+    private fun uploadBitmap(bitmap: Bitmap) {
         // Bitmap을 ByteArrayOutputStream을 사용하여 바이트 배열로 변환
         val byteArrayOutputStream = ByteArrayOutputStream()
-        croppedBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
         val byteArray = byteArrayOutputStream.toByteArray()
 
         // Bitmap을 MultipartBody.Part로 변환
         val imageRequestBody = RequestBody.create(MediaType.parse("image/*"), byteArray)
-        val imagePart = MultipartBody.Part.createFormData("image", "image.jpg", imageRequestBody)
+        val imagePart = MultipartBody.Part.createFormData("image", "image.png", imageRequestBody)
 
         // Retrofit API를 사용하여 이미지 업로드
         val retrofit = Retrofit.Builder()
@@ -165,17 +165,15 @@ class MainActivity : AppCompatActivity() {
             .build()
 
         val apiService = retrofit.create(RetrofitAPI::class.java)
-
         val call = apiService.uploadImage(imagePart)
 
         call.enqueue(object : Callback<ImageUploadResponse> {
             override fun onResponse(call: Call<ImageUploadResponse>, response: Response<ImageUploadResponse>) {
-                if (response.isSuccessful) {
-                    val result = response.body()?.result
-                    // 서버로부터 받은 결과 처리
-                    Log.d(TAG, "결과는: $result 성공")
+// 231120 --- 코드 수정
+                if (response.isSuccessful && response.body() != null) {
+                    val result = response.body()!!.result
+                    handleServerResult(result)  // 결과에 따른 화면 이동 로직
                 } else {
-                    // 서버로부터 실패 응답을 받았을 때의 처리
                     Log.d(TAG, "서버 응답 실패")
                 }
             }
@@ -186,6 +184,30 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+
+    // 231120 --- 결과에 따른 화면 이동 로직 추가 함수
+    private fun handleServerResult(result: String) {
+        when (result) {
+            "0" -> moveToSeniorScreen()
+            "1" -> moveToGeneralScreen()
+            else -> {
+                // 예외 처리
+            }
+        }
+    }
+
+    private fun moveToSeniorScreen() {
+        // 시니어용 화면으로 이동하는 로직
+        val intent = Intent(this, SeniorActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun moveToGeneralScreen() {
+        // 일반용 화면으로 이동하는 로직
+        val intent = Intent(this, GeneralActivity::class.java)
+        startActivity(intent)
+    }
+
 
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {

@@ -114,20 +114,27 @@ model = tf.keras.models.load_model('test_face_cnn_model.h5')
 ################################################################################
 
 ### 1번
-def preprocess_image(image):
-    # 이미지 전처리
-    img = image.resize((360, 480))
-    img_array = np.array(img) / 255.0
-    img_array = np.expand_dims(img_array, axis=0)
+def preprocess_image(image): # 231120 -- 이미지 전처리를 위한 코드 수정
+    # 이미지를 (360, 480) 크기로 재조정하고 채널을 3으로 설정
+    img = image.resize((480, 360))
+    img_array = np.array(img)
+
+    # 이미지 배열이 (360, 480, 3) 형태인지 확인
+    if img_array.shape != (360, 480, 3):
+        raise ValueError("이미지의 차원이 (360, 480, 3)이 아닙니다.")
+
+    img_array = img_array / 255.0  # 픽셀 값을 [0, 1] 범위로 정규화
+    img_array = np.expand_dims(img_array, axis=0)  # 모델 입력을 위한 차원 추가
     return img_array
 
-@app.route('/upload_and_predict', methods=['POST'])
+@app.route('/upload_and_predict', methods=['POST'])  ## 231120 해당 부분은 RetrofitAPI에 POST와 같은 경로로 설정해야함
 def upload_and_predict():
     # 클라이언트로부터 이미지 파일 받기
     if 'image' not in request.files:
         return jsonify({'error': 'No image part'})
 
     image_file = request.files['image']
+    image_file.seek(0)  # 231120 스트림 위치 초기화 --> 이미지 파일을 읽기 위해
     
     # 이미지를 PIL Image로 변환
     image = Image.open(io.BytesIO(image_file.read())).convert("RGB")
@@ -136,7 +143,7 @@ def upload_and_predict():
     preprocessed_image = preprocess_image(image)
 
     # 모델 예측
-    input_array = np.array([np.asarray(preprocessed_image)])
+    input_array = preprocessed_image # np.array([np.array(preprocessed_image)]) -- 231120 코드 수정 : 필요한 형태로 전처리 되어 있어 배열 형태 코드를 사용x
     predictions = model.predict(input_array)
 
     # 결과 전송
