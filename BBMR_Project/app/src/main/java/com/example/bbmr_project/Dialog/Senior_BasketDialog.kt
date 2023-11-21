@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.bbmr_project.CartStorage
+import com.example.bbmr_project.OnCartChangeListener
 import com.example.bbmr_project.Product
 import com.example.bbmr_project.Senior_TakeOutActivity
 import com.example.bbmr_project.databinding.DialogSeniorBasketBinding
@@ -17,7 +18,7 @@ import com.example.bbmr_project.databinding.DialogSeniorMenuBinding
 
 const val KeyProductBundleKey = "Product"
 
-class Senior_BasketDialog() : DialogFragment() {
+class Senior_BasketDialog() : DialogFragment(), OnCartChangeListener {
 
     private lateinit var binding: DialogSeniorBasketBinding
 
@@ -32,8 +33,6 @@ class Senior_BasketDialog() : DialogFragment() {
         dialog?.window?.setDimAmount(0.4f)
 
         isCancelable = false
-//        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-//        dialog?.window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
 
     }
 
@@ -69,30 +68,6 @@ class Senior_BasketDialog() : DialogFragment() {
 
         }
 
-//        val product = requireArguments().getParcelable<Product>(KeyProductBundleKey)
-//        binding.tvSeniorPayPrice.text= product?.price?.toString() ?: "0"
-
-        // val product = parentFragmentManager.fragments
-
-        val product = arguments?.getParcelable<Product>(KeyProductBundleKey)
-        Log.d("Senior_BasketDialog", "Received Product: $product")
-
-
-
-        if (product != null) {
-            // 인자가 있을 경우
-            binding.tvAmount.text = product.price.toString()
-            Log.d("장바구니", binding.tvAmount.text as String)
-
-        } else {
-            // 인자가 없을 경우
-            binding.tvAmount.text = ""
-
-        }
-
-
-        CartStorage.productList
-
 
         // 쿠폰은 바로 보내버리기
 
@@ -120,4 +95,11 @@ class Senior_BasketDialog() : DialogFragment() {
         }
 
     }
+
+    override fun onChange(productList: List<Product>) {
+        binding.tvAmount.text = productList.sumOf { it.price }.toString()
+            Log.d("값", "안녕하세요 : $productList")
+    }
+
+
 }

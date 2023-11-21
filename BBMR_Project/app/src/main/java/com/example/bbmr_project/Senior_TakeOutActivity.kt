@@ -19,14 +19,14 @@ import com.example.bbmr_project.Senior_Fragment.Senior_Fragment_Tab_Dessert
 import com.example.bbmr_project.Senior_Fragment.seniorAdapters.SeniorGetCartStorageAdapter
 
 
-class Senior_TakeOutActivity : AppCompatActivity() {
+class Senior_TakeOutActivity : AppCompatActivity(), OnCartChangeListener {
 
     var buttonDoubleDefend = false
 
 
     // CarStorage에서 상품정보를 받아옴
-    val productList = CartStorage.productList
-    val adapter = SeniorGetCartStorageAdapter(productList)
+//    val productList = CartStorage.productList
+//    val adapter = SeniorGetCartStorageAdapter(productList)
 
     // viewBinding 엑티비디 id에 맞는 변수를 자동으로 적용해줌.
     private lateinit var binding: ActivitySeniorTakeoutBinding
@@ -39,6 +39,7 @@ class Senior_TakeOutActivity : AppCompatActivity() {
         //viewBinding 추가 코드
         binding = ActivitySeniorTakeoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        CartStorage.setListener(this)
 
         // 일반 키오스크로 이동
         binding.btnToOrigin.setOnClickListener {
@@ -81,8 +82,7 @@ class Senior_TakeOutActivity : AppCompatActivity() {
 
                 val args = Bundle().apply {
 
-//                putParcelable(KeyProductBundleKey, Product("아메리카노", 1000,10))
-                    putParcelableArrayList(KeyProductBundleKey, ArrayList(CartStorage.productList))
+//                    putParcelableArrayList(KeyProductBundleKey, ArrayList(CartStorage.productList))
             }
 
                 fragment.arguments = args
@@ -96,16 +96,22 @@ class Senior_TakeOutActivity : AppCompatActivity() {
 
         }
 
-        // 가격측정
-        val PriceSenior = CartStorage.productList.sumBy { it.price }
-        binding.tvTotalSeniorPrice.text = "$PriceSenior 원"
-        Log.d("TakoutActivity", "Received Product: $PriceSenior")
 
 
     }
 
     private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().replace(R.id.fl1, fragment).addToBackStack(null).commit()
+    }
+
+    override fun onChange(productList: List<Product>) {
+        val TotalPrice = productList.sumOf { it.price }.toString()
+        binding.tvTotalSeniorPrice.text = "$TotalPrice 원"
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        CartStorage.release()
     }
 
 }

@@ -3,6 +3,7 @@ package com.example.bbmr_project.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -89,6 +90,15 @@ class Senior_MenuDialog : DialogFragment() {
         // 선택완료 누르면 값을 보내는 코드
         binding.btnComplet.setOnClickListener {
 
+            // 버튼 클릭시 어떤 값을 보내는지 확인하는 코드
+            val product = Product(
+                binding.tvMenuName.text.toString(),
+                binding.tvMenuPrice.text.toString().toInt(),
+                binding.tvMenuCount.text.toString().toInt()
+            )
+            Log.d("Senior_MenuDialog", "Selected Product: $product")
+
+            //클릭하면 onClick 실행 후 값을 보냄
             onClick.invoke(
                 Product(
                     binding.tvMenuName.text.toString(),
@@ -97,14 +107,16 @@ class Senior_MenuDialog : DialogFragment() {
                 )
             )
 
-
-            CartStorage.productList.add(
+            // CartStorage.productList에 값을 추가
+            CartStorage.addProduct(
                 Product(
                     binding.tvMenuName.text.toString(),
                     binding.tvMenuPrice.text.toString().toInt(),
                     binding.tvMenuCount.text.toString().toInt()
                 )
+
             )
+
 
             dismiss()
         }

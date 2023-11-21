@@ -28,7 +28,7 @@ class NormalSelectBasketAdapter(
         val tvBasketCount: TextView = view.findViewById(R.id.tvBasketCount)
         val btnBasketPlus: Button = view.findViewById(R.id.btnBasketPlus)
         val btnBasketMinus: Button = view.findViewById(R.id.btnBasketMinus)
-        val btnBasketCancel: Button = view.findViewById(R.id.btnBasketCancelSenior)
+        val btnBasketCancel: Button = view.findViewById(R.id.btnBasketCancel)
     }
 
     override fun onCreateViewHolder(
