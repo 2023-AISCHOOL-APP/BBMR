@@ -188,7 +188,8 @@ def upload_file():
     if file:
         # 이미지 읽기 및 리사이즈
         image = Image.open(io.BytesIO(file.read()))
-        print(image)
+        print("image -> ",image)
+        image.save('image/image.png')
         image = image.resize((480, 360))  # 너비 480, 높이 360으로 리사이즈
 
         # 필요한 추가 전처리 과정
@@ -199,7 +200,7 @@ def upload_file():
 
         # 모델 예측
         prediction = model.predict(image)
-        print(prediction)
+        print("prediction -> " , prediction)
 
         # 예측 결과 처리 및 반환
         # 예시: 예측 결과의 최대값 인덱스 반환
@@ -208,7 +209,7 @@ def upload_file():
         else:
             result = 1
         # result = 0
-        print(result)
+        print("result ->", result)
         return {'result': result}
 
 
