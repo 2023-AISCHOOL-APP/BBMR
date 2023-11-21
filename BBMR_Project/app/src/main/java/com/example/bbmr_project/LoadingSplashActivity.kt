@@ -53,6 +53,7 @@ class LoadingSplashActivity : AppCompatActivity() {
     private lateinit var faceDetector: FaceDetector
     private lateinit var cameraController: LifecycleCameraController // 231120 --  CameraController 중복 선언으로 인한 수정
     private lateinit var imageCapture: ImageCapture
+    private var isImagedCaptured = false // -- 231120 isImageCaptured 플래그 선언
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityLoadingSplashBinding.inflate(layoutInflater)
@@ -71,7 +72,7 @@ class LoadingSplashActivity : AppCompatActivity() {
     }
 
     private fun startCamera() {
-        var cameraController = LifecycleCameraController(baseContext)
+        cameraController = LifecycleCameraController(baseContext)
         val previewView: PreviewView = viewBinding.viewFinder
         // 카메라 전면 사용하기
         val cameraSelector = CameraSelector.Builder()
@@ -89,7 +90,7 @@ class LoadingSplashActivity : AppCompatActivity() {
 
         imageCapture = ImageCapture.Builder().build()
 
-        cameraController.cameraSelector = cameraSelector
+        //cameraController.cameraSelector = cameraSelector
         // 1 프레임 당 실시하는 analyzer
         cameraController.setImageAnalysisAnalyzer(
             ContextCompat.getMainExecutor(this),
@@ -108,9 +109,9 @@ class LoadingSplashActivity : AppCompatActivity() {
                     return@MlKitAnalyzer
                 } else {        // 걍 스크린샷 캡처로 갑니다
                     imageCaptureAndSend()
-                    cameraController.unbind()
 
-                    // cameraController.unbind() -- 231120 카메라가 언바인딩 되어 이미지 캡쳐가 불가능하여 주석처리
+
+                    cameraController.unbind()
                 }
                 val faceDetectModel = faceDetectModel(faceResults[0])
                 val faceDrawable = faceDrawable(faceDetectModel)
@@ -124,6 +125,7 @@ class LoadingSplashActivity : AppCompatActivity() {
         previewView.controller = cameraController
 
     }
+    // -- 이상이 없음 231120
     // --------- 231120 imageProxyToBitmap 함수 코드 추가
     private fun imageProxyToBitmap(imageProxy: ImageProxy): Bitmap {
         val buffer = imageProxy.planes[0].buffer
@@ -134,16 +136,23 @@ class LoadingSplashActivity : AppCompatActivity() {
 
     // ----------- 231120 새로운 이미지 캡쳐 방식 : 카메라 프리뷰와 실제 캡쳐된 이미지가 달라지는 것을 방지하기 위함
     private fun imageCaptureAndSend() {
+        // ImageCaptured 플래그 코드
+        if (isImagedCaptured){
+            return
+        }
+
         imageCapture.takePicture(
             ContextCompat.getMainExecutor(this),
             object : ImageCapture.OnImageCapturedCallback() {
                 override fun onCaptureSuccess(imageProxy: ImageProxy) {
+                    isImagedCaptured = true // 이미지 캡쳐 표시
                     // imageProxy를 사용하여 Bitmap으로 변환
                     val bitmap = imageProxyToBitmap(imageProxy)
                     imageProxy.close()
 
                     // Bitmap을 MultipartBody.Part로 변환 및 업로드 로직
                     uploadBitmap(bitmap)
+
                 }
 
                 override fun onError(exception: ImageCaptureException) {
@@ -152,6 +161,7 @@ class LoadingSplashActivity : AppCompatActivity() {
             }
         )
     }
+
 
     private fun uploadBitmap(bitmap: Bitmap) {
         // Bitmap을 ByteArrayOutputStream을 사용하여 바이트 배열로 변환
@@ -186,16 +196,22 @@ class LoadingSplashActivity : AppCompatActivity() {
                 if (response.isSuccessful && response.body() != null) {
                     val result = response.body()!!.result
                     handleServerResult(result)  // 결과에 따른 화면 이동 로직
+                    unBindCamera()
                 } else {
                     Log.d(TAG, "서버 응답 실패")
+                    unBindCamera()
                 }
             }
 
             override fun onFailure(call: Call<ImageUploadResponse>, t: Throwable) {
                 // 네트워크 요청 실패 시의 처리
                 Log.e(TAG, "이미지 업로드 실패", t)
+                unBindCamera()
             }
         })
+    }
+    private fun unBindCamera() {
+        cameraController.unbind()
     }
 
     // 231120 --- 결과에 따른 화면 이동 로직 추가 함수
@@ -204,7 +220,10 @@ class LoadingSplashActivity : AppCompatActivity() {
             "0" -> moveToSeniorScreen()
             "1" -> moveToGeneralScreen()
             else -> {
-                // 예외 처리
+                // 231120 예외 처리 코드
+                runOnUiThread {
+                    Toast.makeText(this, "서버 무응답: $result", Toast.LENGTH_LONG).show()
+                }
             }
         }
     }
