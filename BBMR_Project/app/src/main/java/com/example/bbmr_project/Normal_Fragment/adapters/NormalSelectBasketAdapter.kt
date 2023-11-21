@@ -11,8 +11,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 //import com.example.bbmr_project.Menu.NormalSelectedMenuInfo
 import com.example.bbmr_project.R
-import com.example.bbmr_project.VO.NormalSelectBasketVO
-
 class NormalSelectBasketAdapter(
     val context: Context,
     val layout: Int,
@@ -26,7 +24,7 @@ class NormalSelectBasketAdapter(
         val tvBasketCount: TextView = view.findViewById(R.id.tvBasketCount)
         val btnBasketPlus: Button = view.findViewById(R.id.btnBasketPlus)
         val btnBasketMinus: Button = view.findViewById(R.id.btnBasketMinus)
-        val btnBasketCancel: Button = view.findViewById(R.id.btnBasketCancel)
+        val btnBasketCancel: Button = view.findViewById(R.id.btnBasketCancelSenior)
     }
 
     override fun onCreateViewHolder(

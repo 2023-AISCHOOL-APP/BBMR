@@ -1,4 +1,4 @@
-package com.example.bbmr_project.Senior_Fragment.adapters1
+package com.example.bbmr_project.Senior_Fragment.seniorAdapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -18,12 +18,11 @@ interface ItemClickListener {
 }
 
 // RecyclerView Adapter 클래스 정의
-class SeniorTakeOutAdapter (val context: Context, val layout : Int, val menuList: ArrayList<Senior_TakeOutVO>,
-                            private val itemClickListener: ItemClickListener? = null,
-                            private val fragmentManager: FragmentManager
-)
-    : RecyclerView.Adapter<SeniorTakeOutAdapter.ViewHolder>() {
-
+class SeniorTakeOutAdapter(
+    val context: Context, val layout: Int, val menuList: ArrayList<Senior_TakeOutVO>,
+    private val itemClickListener: ItemClickListener? = null,
+    private val fragmentManager: FragmentManager
+) : RecyclerView.Adapter<SeniorTakeOutAdapter.ViewHolder>() {
 
 
     // LayoutInflater를 이용하여 레이아웃을 인플레이트하기 위한객체 초기화
@@ -43,7 +42,7 @@ class SeniorTakeOutAdapter (val context: Context, val layout : Int, val menuList
 
 
     // ViewHolder 생성
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = inflater.inflate(layout, parent, false)
         return ViewHolder(view)
     }
@@ -64,6 +63,7 @@ class SeniorTakeOutAdapter (val context: Context, val layout : Int, val menuList
 
         }
     }
+
     // 데이터 아이템 개수 반환
     override fun getItemCount(): Int {
         return menuList.size

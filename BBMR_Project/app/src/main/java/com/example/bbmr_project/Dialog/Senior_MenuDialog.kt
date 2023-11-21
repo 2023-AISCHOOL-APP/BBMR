@@ -22,6 +22,7 @@ class Senior_MenuDialog : DialogFragment() {
         val fragment = Senior_BasketDialog()
         fragment.arguments = args
         fragment.show(childFragmentManager, "")
+
     }
 
     // Adapter에서 값을 받아오는 코드
@@ -115,7 +116,17 @@ class Senior_MenuDialog : DialogFragment() {
         // Plus버튼 누르면 증가하는 코드
         binding.btnSeniorPlus.setOnClickListener {
             MenuCount++
+            // 상품 수량이 증가하는 코드
             binding.tvMenuCount.text = MenuCount.toString()
+            // 수량에 맞춰 가격이 증가하는 코드
+            val MenuPlusCountInt : Int? = binding.tvMenuCount.text.toString().toIntOrNull()
+            if (MenuPlusCountInt != null){
+                val getPrice = arguments?.getInt("sprice") ?:0
+                val plusPrice = getPrice*MenuPlusCountInt
+                binding.tvMenuPrice.text = plusPrice.toString()
+            }else{
+                binding.tvMenuPrice.text = "취소 후 다시 부탁드립니다."
+            }
             binding.btnSeniorMinus.isClickable = true  // Plus버튼 이후에 지속적으로 Minus버튼 클릭시 버튼 활성화
         }
 
@@ -128,7 +139,16 @@ class Senior_MenuDialog : DialogFragment() {
 
             if (MenuCount > 1) {
                 MenuCount--
+                // 상품 수랑이 감소하는 코드
                 binding.tvMenuCount.text = MenuCount.toString()
+                // 수량에 맞춰 가격이 감소하는 코드
+                val MenuMinusCountInt : Int? = binding.tvMenuCount.text.toString().toIntOrNull()
+                if (MenuMinusCountInt != null){
+                    val getPrice = arguments?.getInt("sprice") ?: 0
+                    val minusPrice = getPrice*MenuMinusCountInt
+                    binding.tvMenuPrice.text = minusPrice.toString()
+                }
+
             }
 
         }

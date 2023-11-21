@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bbmr_project.Menu.MenuListViewModel
 import com.example.bbmr_project.R
-import com.example.bbmr_project.Senior_Fragment.adapters1. ItemClickListener
-import com.example.bbmr_project.Senior_Fragment.adapters1.SeniorTakeOutAdapter
+import com.example.bbmr_project.Senior_Fragment.seniorAdapters. ItemClickListener
+import com.example.bbmr_project.Senior_Fragment.seniorAdapters.SeniorTakeOutAdapter
 import com.example.bbmr_project.VO.Senior_TakeOutVO
 
 

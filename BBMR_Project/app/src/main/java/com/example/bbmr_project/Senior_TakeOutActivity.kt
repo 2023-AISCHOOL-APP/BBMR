@@ -4,6 +4,8 @@ package com.example.bbmr_project
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
@@ -14,12 +16,17 @@ import com.example.bbmr_project.Senior_Fragment.Senior_Fragment_Tab_Recommend
 import com.example.bbmr_project.Senior_Fragment.Senior_Fragment_Tab_Coffee
 import com.example.bbmr_project.Senior_Fragment.Senior_Fragment_Tab_Beverage
 import com.example.bbmr_project.Senior_Fragment.Senior_Fragment_Tab_Dessert
+import com.example.bbmr_project.Senior_Fragment.seniorAdapters.SeniorGetCartStorageAdapter
 
 
 class Senior_TakeOutActivity : AppCompatActivity() {
 
     var buttonDoubleDefend = false
 
+
+    // CarStorage에서 상품정보를 받아옴
+    val productList = CartStorage.productList
+    val adapter = SeniorGetCartStorageAdapter(productList)
 
     // viewBinding 엑티비디 id에 맞는 변수를 자동으로 적용해줌.
     private lateinit var binding: ActivitySeniorTakeoutBinding
@@ -81,14 +88,19 @@ class Senior_TakeOutActivity : AppCompatActivity() {
                 fragment.arguments = args
                 fragment.show(supportFragmentManager, "Senior.BasketDialog")
 
-
+                Handler().postDelayed({
+                    buttonDoubleDefend = false
+                }, 1000)
 
             }
 
         }
 
         // 가격측정
-        binding.tvTotalSeniorPrice.text
+        val PriceSenior = CartStorage.productList.sumBy { it.price }
+        binding.tvTotalSeniorPrice.text = "$PriceSenior 원"
+        Log.d("TakoutActivity", "Received Product: $PriceSenior")
+
 
     }
 
