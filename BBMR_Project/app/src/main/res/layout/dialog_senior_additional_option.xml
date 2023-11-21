@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Dialog.Senior_AdditionalOptionDialog">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="40dp"
+        android:background="@drawable/normal_dialog_background"
+        android:backgroundTint="@color/subColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="추가옵션"
+            android:textSize="40dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textView16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.037"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.116" />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="메뉴를 누르시면 장바구니에 담깁니다."
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="45dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.733" />
+
+        <Button
+            android:id="@+id/btnCnclAddiOpDSAO"
+            android:layout_width="380dp"
+            android:layout_height="280dp"
+            android:backgroundTint="@color/mainColor"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="이전으로"
+            android:textSize="80dp"
+            android:textStyle="bold"
+            app:cornerRadius="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.056"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView16"
+            app:layout_constraintVertical_bias="0.539" />
+
+        <Button
+            android:id="@+id/btnOkAddiOpDSAO"
+            android:layout_width="380dp"
+            android:layout_height="280dp"
+            android:layout_marginStart="32dp"
+            android:backgroundTint="@color/mainColor"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="선택완료"
+            android:textSize="80dp"
+            android:textStyle="bold"
+            app:cornerRadius="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnCnclAddiOpDSAO"
+            app:layout_constraintTop_toBottomOf="@+id/textView16"
+            app:layout_constraintVertical_bias="0.539" />
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="추천메뉴"
+            android:textSize="40dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textView16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.037"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView15"
+            app:layout_constraintVertical_bias="0.485" />
+
+        <android.widget.Button
+            android:id="@+id/btnRecommend1"
+            android:layout_width="250dp"
+            android:layout_height="280dp"
+            android:background="@drawable/senior_menu_suggestion1_selector"
+            android:backgroundTint="#00FFFFFF"
+            android:backgroundTintMode="add"
+            android:drawablePadding="10dp"
+            android:drawingCacheQuality="auto"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:cornerRadius="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/textView16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.043"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView17"
+            app:layout_constraintVertical_bias="0.526" />
+
+        <android.widget.Button
+            android:id="@+id/btnRecommend2"
+            android:layout_width="250dp"
+            android:layout_height="280dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/senior_menu_suggestion2_selector"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:cornerRadius="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/btnRecommend1"
+            app:layout_constraintStart_toEndOf="@+id/btnRecommend1"
+            app:layout_constraintTop_toTopOf="@+id/btnRecommend1"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <android.widget.Button
+            android:id="@+id/btnRecommend3"
+            android:layout_width="250dp"
+            android:layout_height="280dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/senior_menu_suggestion3_selector"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:cornerRadius="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/btnRecommend2"
+            app:layout_constraintStart_toEndOf="@+id/btnRecommend2"
+            app:layout_constraintTop_toTopOf="@+id/btnRecommend2"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <CheckBox
+            android:id="@+id/cbSizeDSAO"
+            android:layout_width="250dp"
+            android:layout_height="280dp"
+            android:background="@drawable/senior_menu_size_checkbox"
+            android:button="@null"
+            app:layout_constraintBottom_toTopOf="@+id/textView17"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.043"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView15"
+            app:layout_constraintVertical_bias="0.471" />
+
+        <CheckBox
+            android:id="@+id/cbSugarDSAO"
+            android:layout_width="250dp"
+            android:layout_height="280dp"
+            android:layout_marginStart="20dp"
+            android:button="@null"
+            android:background="@drawable/senior_menu_sugar_checkbox"
+            app:layout_constraintBottom_toBottomOf="@+id/cbSizeDSAO"
+            app:layout_constraintStart_toEndOf="@+id/cbSizeDSAO"
+            app:layout_constraintTop_toTopOf="@+id/cbSizeDSAO"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <CheckBox
+            android:id="@+id/cbCreamDSAO"
+            android:layout_width="250dp"
+            android:layout_height="280dp"
+            android:layout_marginStart="20dp"
+            android:button="@null"
+            android:background="@drawable/senior_menu_cream_checkbox"
+            app:layout_constraintBottom_toBottomOf="@+id/cbSugarDSAO"
+            app:layout_constraintStart_toEndOf="@+id/cbSugarDSAO"
+            app:layout_constraintTop_toTopOf="@+id/cbSugarDSAO"
+            app:layout_constraintVertical_bias="0.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

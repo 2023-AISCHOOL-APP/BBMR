@@ -89,10 +89,7 @@ class Senior_BasketDialog() : DialogFragment() {
             binding.tvAmount.text = ""
 
         }
-
-
         CartStorage.productList
-
 
         // 쿠폰은 바로 보내버리기
 
