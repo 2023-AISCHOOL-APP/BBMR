@@ -8,7 +8,9 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.bbmr_project.Dialog.ConfirmBasketCancelListener
 import com.example.bbmr_project.Dialog.NormalSelectPayDialogListener
+import com.example.bbmr_project.Dialog.Normal_ConfirmBasketCancelDialog
 import com.example.bbmr_project.Dialog.Normal_MenuDialogListener
 import com.example.bbmr_project.Dialog.Normal_SelectPayDialog
 import com.example.bbmr_project.Dialog.TotalCostListener
@@ -21,7 +23,7 @@ import java.text.NumberFormat
 import java.util.Locale
 
 class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
-    NormalSelectPayDialogListener, TotalCostListener {
+    NormalSelectPayDialogListener, TotalCostListener, ConfirmBasketCancelListener {
 
     private lateinit var binding: ActivityNormalTakeoutBinding
     private lateinit var normalSelectBasketAdapter: NormalSelectBasketAdapter
@@ -44,7 +46,25 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
             val intent = Intent(this@Normal_TakeOutActivity, Senior_TakeOutActivity::class.java)
             startActivity(intent)
         }
+        binding.btnNormalCancel.setOnClickListener {
+            val confirmBasketCancelDialog = Normal_ConfirmBasketCancelDialog()
+            confirmBasketCancelDialog.setConfirmBasketCancelListener(this)
+            confirmBasketCancelDialog.show(supportFragmentManager, "Normal_ConfirmBasketCancelDialog")
+        }
     }
+
+    override fun onConfirmBasketCancel() {
+        Log.d("ConfirmBasketCancel", "onConfirmBasketCancel called")
+        // "Yes" 버튼이 클릭되었을 때의 동작 수행
+        selectedMenuList.clear()
+        normalSelectBasketAdapter.clearItems()
+        normalSelectBasketAdapter.notifyDataSetChanged()
+        // 총 비용을 0으로 초기화
+        totalCost = 0
+        // UI 상의 총 비용을 업데이트
+        updateTotalCostUI(totalCost)
+    }
+
 
     override fun onTotalCostUpdated(totalCost: Int, itemCost: Int) {
         // 활동에서 총 비용 UI 요소(tvNormalTotalMoney)를 업데이트
@@ -131,7 +151,8 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
     override fun onMenuAdded(
         normalSelectedMenuInfo: NormalSelectedMenuInfo,
         tvCount: Int,
-        menuCost: Int
+        menuCost: Int,
+        optionTvCount: Int
     ) {
         // 메뉴가 추가되었을 때 호출되는 콜백 함수 - MenuDialog
         Log.d("MenuAdded", "Menu added: $normalSelectedMenuInfo")
@@ -147,10 +168,11 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
         selectedMenuList.add(normalSelectedMenuInfo)
 
         // 총 비용 업데이트
-        totalCost += menuCost
+        totalCost += menuCost + optionTvCount
+
 
         // TotalCostListener에 알림
-        onTotalCostUpdated(totalCost, 0)
+        onTotalCostUpdated(totalCost, menuCost)
     }
 
 }
