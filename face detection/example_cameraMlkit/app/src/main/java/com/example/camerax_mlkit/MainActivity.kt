@@ -40,6 +40,9 @@ import com.google.mlkit.vision.face.FaceDetectorOptions
 import java.util.concurrent.ExecutorService
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.CameraController
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -53,7 +56,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewBinding: ActivityMainBinding
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var faceDetector: FaceDetector
-    private lateinit var cameraController: CameraController
+    private lateinit var cameraController: LifecycleCameraController // 231120 --  CameraController 중복 선언으로 인한 수정
     private lateinit var imageCapture: ImageCapture
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,11 +72,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         cameraExecutor = Executors.newSingleThreadExecutor()
-//        // 해당 함수 내에서 res = 1 일 경우 if문으로 해서 액티비티 이동 intent활용 해보면 됨
-//        // 다음 인텐트로 이동
-//        val intent = Intent("내가 보내야 하는 액티비티 화면", )
-//        startActivity(intent)
-//        finish()
 
     }
 
@@ -94,12 +92,7 @@ class MainActivity : AppCompatActivity() {
             .build()
         val faceDetector = FaceDetection.getClient(options)
 
-        // 이미지 캡처 객체를 생성하고 라이프 사이클에 바인딩하는 곳
-        // 걍 이미지 캡처하는 곳이라고 보면 됨
         imageCapture = ImageCapture.Builder().build()
-
-
-
 
         cameraController.cameraSelector = cameraSelector
         // 1 프레임 당 실시하는 analyzer
@@ -118,27 +111,8 @@ class MainActivity : AppCompatActivity() {
                     previewView.overlay.clear()
                     previewView.setOnTouchListener { _, _ -> false } //no-op
                     return@MlKitAnalyzer
-                } else {        // 걍 스크린샷 캡처로 갑니다
+                } else {        // 걍 스크린샷 캡처로 갑니다 , 231120 --- 코드 수정
                     imageCaptureAndSend()
-
-//                    imageCapture.takePicture(
-//                        ContextCompat.getMainExecutor(this),
-//                        object: ImageCapture.OnImageCapturedCallback() {
-//                            override fun onCaptureSuccess(image: ImageProxy) {
-//                                // 이미지 성공 시
-//
-//                                val tag :String = "이미지 캡처: "
-//                                Log.d(tag, "성공")
-//                            }
-//
-//                            override fun onError(exception: ImageCaptureException) {
-//                                val tag :String = "이미지 캡처: "
-//                                Log.e(tag, "실패", exception)
-//                            }
-//                        }
-//                    )
-
-                    cameraController.unbind()
                 }
                 val faceDetectModel = faceDetectModel(faceResults[0])
                 val faceDrawable = faceDrawable(faceDetectModel)
@@ -150,46 +124,91 @@ class MainActivity : AppCompatActivity() {
         cameraController.bindToLifecycle(this)
 
         previewView.controller = cameraController
-       // cameraController.
+
     }
 
-    //  private var previewView: PreviewView = viewBinding.viewFinder
-
+    // ----------- 231120 새로운 이미지 캡쳐 방식 : 카메라 프리뷰와 실제 캡쳐된 이미지가 달라지는 것을 방지하기 위함
     private fun imageCaptureAndSend() {
-        val rootView : View = window.decorView.rootView
-        rootView.isDrawingCacheEnabled = true
-        val bitmap : Bitmap = Bitmap.createBitmap(rootView.drawingCache)
-        rootView.isDrawingCacheEnabled = false
+        imageCapture.takePicture(
+            ContextCompat.getMainExecutor(this),
+            object : ImageCapture.OnImageCapturedCallback() {
+                override fun onCaptureSuccess(imageProxy: ImageProxy) {
+                    // imageProxy를 사용하여 Bitmap으로 변환
+                    val bitmap = imageProxyToBitmap(imageProxy)
+                    imageProxy.close()
 
-        // 스크린 샷의 이미지 짜르기
-        val screenHeight = bitmap.height
-        val cutHeight = (screenHeight * 0.2).toInt()
-        val croppedBitmap = Bitmap.createBitmap(
-            bitmap,
-            0,
-            cutHeight,
-            bitmap.width,
-            screenHeight - 2 * cutHeight
+                    // Bitmap을 MultipartBody.Part로 변환 및 업로드 로직
+                    uploadBitmap(bitmap)
+                }
+
+                override fun onError(exception: ImageCaptureException) {
+                    Log.e(TAG, "이미지 캡처 실패: ${exception.message}", exception)
+                }
+            }
         )
-        val byteArrayOutputStream = ByteArrayOutputStream()
-        croppedBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
-        val byteArray = byteArrayOutputStream.toByteArray()
-        // 이 곳에 byteArray를 받아와서 전송하시면 됩니다!
-
-
-
-        uploadImageToServer(byteArray)
-
-
-
-
-
-
-        val tag: String = "이미지 캡처: "
-        Log.d(tag, "성공")
-        Log.d(tag,"이미지 : $byteArray")
-
     }
+
+    private fun uploadBitmap(bitmap: Bitmap) {
+        // Bitmap을 ByteArrayOutputStream을 사용하여 바이트 배열로 변환
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+        val byteArray = byteArrayOutputStream.toByteArray()
+
+        // Bitmap을 MultipartBody.Part로 변환
+        val imageRequestBody = RequestBody.create(MediaType.parse("image/*"), byteArray)
+        val imagePart = MultipartBody.Part.createFormData("image", "image.png", imageRequestBody)
+
+        // Retrofit API를 사용하여 이미지 업로드
+        val retrofit = Retrofit.Builder()
+            .baseUrl(getString(R.string.baseUrl))
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val apiService = retrofit.create(RetrofitAPI::class.java)
+        val call = apiService.uploadImage(imagePart)
+
+        call.enqueue(object : Callback<ImageUploadResponse> {
+            override fun onResponse(call: Call<ImageUploadResponse>, response: Response<ImageUploadResponse>) {
+// 231120 --- 코드 수정
+                if (response.isSuccessful && response.body() != null) {
+                    val result = response.body()!!.result
+                    handleServerResult(result)  // 결과에 따른 화면 이동 로직
+                } else {
+                    Log.d(TAG, "서버 응답 실패")
+                }
+            }
+
+            override fun onFailure(call: Call<ImageUploadResponse>, t: Throwable) {
+                // 네트워크 요청 실패 시의 처리
+                Log.e(TAG, "이미지 업로드 실패", t)
+            }
+        })
+    }
+
+    // 231120 --- 결과에 따른 화면 이동 로직 추가 함수
+    private fun handleServerResult(result: String) {
+        when (result) {
+            "0" -> moveToSeniorScreen()
+            "1" -> moveToGeneralScreen()
+            else -> {
+                // 예외 처리
+            }
+        }
+    }
+
+    private fun moveToSeniorScreen() {
+        // 시니어용 화면으로 이동하는 로직
+        val intent = Intent(this, SeniorActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun moveToGeneralScreen() {
+        // 일반용 화면으로 이동하는 로직
+        val intent = Intent(this, GeneralActivity::class.java)
+        startActivity(intent)
+    }
+
+
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(
@@ -227,43 +246,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-    // retrofit 이미지 주고 받기
-    private fun uploadImageToServer(byteArray: ByteArray) {
-        val retrofit = Retrofit.Builder()
-            .baseUrl(getString(R.string.baseUrl))
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val apiService = retrofit.create(RetrofitAPI::class.java)
-
-//        // 이미지 데이터를 Base64로 인코딩
-//        val imageBase64 = Base64.encodeToString(byteArray, Base64.DEFAULT)
-//
-//        // JSON 데이터 구성
-//        val requestData = mapOf("image" to imageBase64)
-
-        // JSON 형식으로 전송
-        val call = apiService.uploadImage(byteArray)
-//        Log.d(TAG,"이미지 base64 : $requestData")
-
-        call.enqueue(object : Callback<ImageUploadResponse> {
-            override fun onResponse(call: Call<ImageUploadResponse>, response: Response<ImageUploadResponse>) {
-                if (response.isSuccessful) {
-                    val result = response.body()?.result
-                    // 서버로부터 받은 결과 처리
-                    Log.d(TAG,"결과는 : $result 성공")
-                } else {
-                    // 서버로부터 실패 응답을 받았을 때의 처리
-                    Log.d(TAG,"플라스크 서버에서 return값 받기 실패")
-                }
-            }
-
-            override fun onFailure(call: Call<ImageUploadResponse>, t: Throwable) {
-                // 네트워크 요청 실패 시의 처리
-                Log.d(TAG,"플라스크서버로 보내기 실패")
-            }
-        })
-    }
 }
-

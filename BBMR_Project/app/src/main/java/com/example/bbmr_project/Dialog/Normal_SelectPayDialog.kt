@@ -14,7 +14,12 @@ import com.example.bbmr_project.R
 import com.example.bbmr_project.databinding.DialogNormalSelectPayBinding
 
 interface NormalSelectPayDialogListener : Normal_MenuDialogListener {
-    override fun onMenuAdded(normalSelectedMenuInfo: NormalSelectedMenuInfo, tvCount: Int)
+    override fun onMenuAdded(
+        normalSelectedMenuInfo: NormalSelectedMenuInfo,
+        tvCount: Int,
+        totalCost: Int,
+        optionTvCount: Int
+    )
 }
 
 class Normal_SelectPayDialog : DialogFragment() {

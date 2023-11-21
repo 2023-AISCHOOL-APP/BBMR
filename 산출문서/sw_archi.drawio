@@ -1,0 +1,85 @@
+<mxfile host="app.diagrams.net" modified="2023-11-08T08:25:06.482Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36" etag="8KKjfBzJTqihXrkk2u0T" version="22.0.8" type="device">
+  <diagram name="페이지-1" id="mMikq2PK2ZRU6xXLe2LK">
+    <mxGraphModel dx="1434" dy="1919" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="rkOGXs2BnbchNS4tcqTu-75" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="rkOGXs2BnbchNS4tcqTu-46" target="rkOGXs2BnbchNS4tcqTu-26">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="590" y="-210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rkOGXs2BnbchNS4tcqTu-80" value="얼굴 감지" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontStyle=1;fontSize=14;" vertex="1" connectable="0" parent="rkOGXs2BnbchNS4tcqTu-75">
+          <mxGeometry x="0.3846" y="2" relative="1" as="geometry">
+            <mxPoint x="-58" y="35" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rkOGXs2BnbchNS4tcqTu-46" value="" style="swimlane;startSize=0;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;" vertex="1" parent="1">
+          <mxGeometry x="20" y="-60" width="500" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="rkOGXs2BnbchNS4tcqTu-40" value="&lt;b style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;MLKit&amp;nbsp;&lt;/font&gt;&lt;br&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;(Android face Detection API)&lt;/span&gt;&lt;/b&gt;" style="shape=folder;tabWidth=80;tabHeight=20;tabPosition=left;html=1;whiteSpace=wrap;align=center;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;" vertex="1" parent="rkOGXs2BnbchNS4tcqTu-46">
+          <mxGeometry x="60" y="20" width="160" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="rkOGXs2BnbchNS4tcqTu-41" value="&lt;b style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;CameraX&amp;nbsp;&lt;/font&gt;&lt;br&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;(Android Camera Control API)&lt;/span&gt;&lt;/b&gt;" style="shape=folder;tabWidth=80;tabHeight=20;tabPosition=left;html=1;whiteSpace=wrap;align=center;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;" vertex="1" parent="rkOGXs2BnbchNS4tcqTu-46">
+          <mxGeometry x="270" y="20" width="160" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="rkOGXs2BnbchNS4tcqTu-79" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.003;entryY=0.502;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="rkOGXs2BnbchNS4tcqTu-46" source="rkOGXs2BnbchNS4tcqTu-40" target="rkOGXs2BnbchNS4tcqTu-41">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rkOGXs2BnbchNS4tcqTu-50" value="&lt;b&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;Product Data&lt;/font&gt;&lt;/b&gt;" style="sketch=0;outlineConnect=0;fontColor=#000000;fillColor=#f0a30a;strokeColor=#BD7000;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.document;" vertex="1" parent="1">
+          <mxGeometry x="1592.5" y="-140" width="95" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="rkOGXs2BnbchNS4tcqTu-51" value="&lt;b&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;Sales Data&lt;/font&gt;&lt;/b&gt;" style="sketch=0;outlineConnect=0;fontColor=#000000;fillColor=#f0a30a;strokeColor=#BD7000;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.document;" vertex="1" parent="1">
+          <mxGeometry x="1590" y="370" width="95" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="rkOGXs2BnbchNS4tcqTu-20" value="" style="shape=actor;whiteSpace=wrap;html=1;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;container=0;labelBorderColor=#c77b02;" vertex="1" parent="1">
+          <mxGeometry x="227.5" y="-440" width="75" height="117.43902439024389" as="geometry" />
+        </mxCell>
+        <mxCell id="rkOGXs2BnbchNS4tcqTu-6" value="" style="shape=actor;whiteSpace=wrap;html=1;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;container=0;labelBorderColor=#c77b02;" vertex="1" parent="1">
+          <mxGeometry x="195" y="-400.8536585365854" width="75" height="117.43902439024389" as="geometry" />
+        </mxCell>
+        <mxCell id="rkOGXs2BnbchNS4tcqTu-19" value="" style="shape=actor;whiteSpace=wrap;html=1;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;container=0;labelBorderColor=#c77b02;" vertex="1" parent="1">
+          <mxGeometry x="270" y="-400.8536585365854" width="75" height="117.43902439024389" as="geometry" />
+        </mxCell>
+        <mxCell id="rkOGXs2BnbchNS4tcqTu-26" value="Users" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontStyle=1;fontSize=27;container=0;" vertex="1" parent="1">
+          <mxGeometry x="220" y="-291.2439024390244" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="rkOGXs2BnbchNS4tcqTu-76" value="&lt;b style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 21px;&quot;&gt;Web Device&lt;/font&gt;&lt;/b&gt;" style="fontColor=#000000;verticalAlign=top;verticalLabelPosition=bottom;labelPosition=center;align=center;html=1;outlineConnect=0;fillColor=#f0a30a;strokeColor=#BD7000;gradientDirection=north;strokeWidth=2;shape=mxgraph.networks.monitor;fontSize=19;" vertex="1" parent="1">
+          <mxGeometry x="916.68" y="390" width="206.63" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="rkOGXs2BnbchNS4tcqTu-15" value="&lt;b&gt;&lt;font style=&quot;font-size: 35px;&quot;&gt;MySQL&lt;/font&gt;&lt;/b&gt;" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.dynamo_db;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;" vertex="1" parent="1">
+          <mxGeometry x="1580" y="70" width="120" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="rkOGXs2BnbchNS4tcqTu-77" value="" style="swimlane;startSize=0;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;" vertex="1" parent="1">
+          <mxGeometry x="827" y="-340" width="200" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="rkOGXs2BnbchNS4tcqTu-78" value="" style="swimlane;startSize=0;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;" vertex="1" parent="1">
+          <mxGeometry x="730" y="100" width="580" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="rkOGXs2BnbchNS4tcqTu-47" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;Deep Learning Model&amp;nbsp;&lt;br&gt;CNN&lt;br&gt;(Binary Classification)&lt;/b&gt;&lt;/font&gt;" style="editableCssRules=.*;html=1;shape=image;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;aspect=fixed;imageAspect=0;image=data:image/svg+xml,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnY9Imh0dHBzOi8vdmVjdGEuaW8vbmFubyIgdmlld0JveD0iMCAwIDMwLjMwOTk5OTQ2NTk0MjM4MyAzMi41IiBoZWlnaHQ9IjEyMi44MzQiIHdpZHRoPSIxMTQuNTU3MjE4NDYyNTMyNiI+JiN4YTsJPHN0eWxlIHR5cGU9InRleHQvY3NzIj4mI3hhOwkuc3Qwe2ZpbGw6I2U1NWIyZDt9JiN4YTsJLnN0MXtmaWxsOiNlZDhlMjQ7fSYjeGE7CS5zdDJ7ZmlsbDojZjhiZjNjO30mI3hhOwk8L3N0eWxlPiYjeGE7CTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNy4zMiA1djVsOC42NiA1di01ek0wIDEwdjVsNC4zMyAyLjV2LTV6bTEyLjk5IDIuNUw4LjY1OSAxNXYxNWw0LjMzIDIuNXYtMTBsNC4zMyAyLjV2LTVsLTQuMzMtMi41eiIvPiYjeGE7CTxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik0xNy4zMiA1bC0xMi45OSA3LjV2NWw4LjY2LTV2NWw0LjMzLTIuNXptMTIuOTkgMi41TDI1Ljk4IDEwdjVsNC4zMy0yLjV6bS04LjY2IDEwTDE3LjMyIDIwdjVsNC4zMy0yLjV6TTE3LjMyIDI1bC00LjMzLTIuNXYxMGw0LjMzLTIuNXoiLz4mI3hhOwk8cGF0aCBjbGFzcz0ic3QyIiBkPSJNMTcuMzIgMEwwIDEwbDQuMzMgMi41TDE3LjMyIDVsOC42NiA1IDQuMzMtMi41em0wIDE1bC00LjMzIDIuNSA0LjMzIDIuNSA0LjMzLTIuNXoiLz4mI3hhOzwvc3ZnPg==;fontColor=default;" vertex="1" parent="rkOGXs2BnbchNS4tcqTu-78">
+          <mxGeometry x="60" y="24.759999999999998" width="144.5" height="152.11" as="geometry" />
+        </mxCell>
+        <mxCell id="rkOGXs2BnbchNS4tcqTu-8" value="Flask&amp;nbsp;" style="verticalLabelPosition=bottom;html=1;verticalAlign=top;strokeWidth=1;align=center;outlineConnect=0;dashed=0;outlineConnect=0;shape=mxgraph.aws3d.dataServer;strokeColor=#BD7000;aspect=fixed;fillColor=#f0a30a;fontColor=#000000;container=0;fontStyle=1;fontSize=35;" vertex="1" parent="rkOGXs2BnbchNS4tcqTu-78">
+          <mxGeometry x="310" y="24.75999999999999" width="205.7962995594714" height="177.35290856344693" as="geometry" />
+        </mxCell>
+        <mxCell id="rkOGXs2BnbchNS4tcqTu-30" value="&lt;b&gt;&lt;font style=&quot;font-size: 21px;&quot;&gt;Tablet Kiosk&lt;/font&gt;&lt;/b&gt;" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shadow=0;dashed=0;strokeWidth=1;shape=mxgraph.android.tab2;strokeColor=#BD7000;fillColor=#f0a30a;fontColor=#000000;gradientColor=none;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="205" y="95" width="130" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="rkOGXs2BnbchNS4tcqTu-74" value="" style="swimlane;startSize=0;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;" vertex="1" parent="1">
+          <mxGeometry x="20" y="340" width="500" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="rkOGXs2BnbchNS4tcqTu-38" value="&lt;b style=&quot;&quot;&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;Volley&amp;nbsp;&lt;/span&gt;&lt;br&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;(Android HTTP Library)&lt;/font&gt;&lt;/b&gt;" style="shape=folder;tabWidth=80;tabHeight=20;tabPosition=left;html=1;whiteSpace=wrap;align=center;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;" vertex="1" parent="rkOGXs2BnbchNS4tcqTu-74">
+          <mxGeometry x="60" y="20" width="160" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="rkOGXs2BnbchNS4tcqTu-39" value="&lt;b style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;RetroFit2&amp;nbsp;&lt;/font&gt;&lt;br&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;(Android HTTP Library)&lt;/span&gt;&lt;/b&gt;" style="shape=folder;tabWidth=80;tabHeight=20;tabPosition=left;html=1;whiteSpace=wrap;align=center;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;" vertex="1" parent="rkOGXs2BnbchNS4tcqTu-74">
+          <mxGeometry x="270" y="20" width="160" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="rkOGXs2BnbchNS4tcqTu-82" value="Preview로 전면 카메라 사용" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontStyle=1;fontSize=13;" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="380" y="-150" as="geometry">
+            <mxPoint x="-6" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
