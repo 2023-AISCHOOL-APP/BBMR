@@ -6,6 +6,7 @@ data class NormalSelectedMenuInfo(
     val name: String?,
     val price: String?,
     val temperature: String?,
+    val size: String?,
     var tvCount: Int,
     val tvCount1: Int,
     val tvCount2: Int,
@@ -14,9 +15,11 @@ data class NormalSelectedMenuInfo(
     var options: List<String>,
     val optionTvCount: Int,
     val totalCost: Int,
+    val menuPrice: Int
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -27,7 +30,8 @@ data class NormalSelectedMenuInfo(
         parcel.readInt(),
         parcel.createStringArrayList() ?: listOf(),
         0,
-        0
+        0,
+        parcel.readInt(),
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

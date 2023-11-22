@@ -24,6 +24,7 @@ interface Normal_MenuDialogListener {
         options: List<String>,
         optionTvCount: Int
     )
+
     fun onMenuSelectedForPayment(selectedMenuInfoList: List<NormalSelectedMenuInfo>)
 }
 
@@ -128,10 +129,11 @@ class Normal_MenuDialog : DialogFragment() {
 
             // 가격 문자열을 정수로 변환
             val priceString = price?.replace(",", "")?.replace("원", "")
-            val menuPrice = priceString?.toIntOrNull() ?: 0
+            val menuOnePrice = priceString?.toIntOrNull() ?: 0 // 메뉴 하나의 가격
+            val menuPrice = menuOnePrice * tvCount // 메뉴 * 수량
 
-            // 총 비용 계산
-            val totalCost = menuPrice * tvCount + optionTvCount
+            // 총 비용 계산 = (메뉴 * 수량) + 옵션
+            val totalCost = menuPrice + optionTvCount
 
             // 선택한 메뉴의 정보를 NormalSelectedMenuInfo 클래스에 저장
             val selectedMenuInfo = NormalSelectedMenuInfo(
@@ -139,17 +141,26 @@ class Normal_MenuDialog : DialogFragment() {
                 name = name,
                 price = price,
                 temperature = getSelectedTemperature(),
-                tvCount = binding.tvCount.text.toString().toIntOrNull() ?: 0, // tv값을 정수로 변환하거나 null 반환
+                size = getSelectedSize(),
+                tvCount = binding.tvCount.text.toString().toIntOrNull()
+                    ?: 0, // tv값을 정수로 변환하거나 null 반환
                 tvCount1 = binding.tvCount1.text.toString().toIntOrNull() ?: 0,
                 tvCount2 = binding.tvCount2.text.toString().toIntOrNull() ?: 0,
                 tvCount3 = binding.tvCount3.text.toString().toIntOrNull() ?: 0,
                 tvCount4 = binding.tvCount4.text.toString().toIntOrNull() ?: 0,
                 options = optionsList,
                 optionTvCount = optionTvCount, // 초기값으로 설정
-                totalCost = totalCost // 초기값으로 설정
+                totalCost = totalCost, // 초기값으로 설정
+                menuPrice = menuPrice
             )
             // 장바구니 + 총 금액 리스너
-            listener?.onMenuAdded(selectedMenuInfo, tvCount, totalCost, selectedMenuInfo.options, optionTvCount)
+            listener?.onMenuAdded(
+                selectedMenuInfo,
+                tvCount,
+                totalCost,
+                selectedMenuInfo.options,
+                optionTvCount
+            )
 
             // 선택한 메뉴를 리스트에 추가
             selectedMenuList.add(selectedMenuInfo)
@@ -165,6 +176,25 @@ class Normal_MenuDialog : DialogFragment() {
             if (tvCount > 1) {
                 tvCount--
                 binding.tvCount.text = tvCount.toString()
+
+                // 수량에 맞춰 가격이 감소하는 코드
+                val MenuPlusCountInt: Int? = binding.tvCount.text.toString().toIntOrNull()
+                if (MenuPlusCountInt != null) {
+                    val price: String? = arguments?.getString("normal_price")
+
+                    if (price != null) {
+                        val MenuPlusCountInt: Int? = binding.tvCount.text.toString().toIntOrNull()
+
+                        if (MenuPlusCountInt != null) {
+                            val priceInt: Int? = price.replace("[^0-9]".toRegex(), "").toIntOrNull()
+
+                            if (priceInt != null) {
+                                val plusPrice = priceInt * MenuPlusCountInt
+                                binding.price.text = String.format("%,d원", plusPrice)
+                            }
+                        }
+                    }
+                }
             }
             if (tvCount == 1) {
                 binding.btnMinus.isEnabled = false
@@ -175,6 +205,25 @@ class Normal_MenuDialog : DialogFragment() {
             binding.tvCount.text = tvCount.toString()
 
             binding.btnMinus.isEnabled = true
+
+            // 수량에 맞춰 가격이 증가하는 코드
+            val MenuPlusCountInt: Int? = binding.tvCount.text.toString().toIntOrNull()
+            if (MenuPlusCountInt != null) {
+                val price: String? = arguments?.getString("normal_price")
+
+                if (price != null) {
+                    val MenuPlusCountInt: Int? = binding.tvCount.text.toString().toIntOrNull()
+
+                    if (MenuPlusCountInt != null) {
+                        val priceInt: Int? = price.replace("[^0-9]".toRegex(), "").toIntOrNull()
+
+                        if (priceInt != null) {
+                            val plusPrice = priceInt * MenuPlusCountInt
+                            binding.price.text = String.format("%,d원", plusPrice)
+                        }
+                    }
+                }
+            }
         }
 
         // btnMinus1, btnPlus1 클릭 이벤트
@@ -260,6 +309,15 @@ class Normal_MenuDialog : DialogFragment() {
     private fun getSelectedTemperature(): String {
         // hot cold 라디오 버튼 선택
         return when (binding.btnNormalTempGroup.checkedRadioButtonId) {
+            R.id.btnLargeSize -> "Large"
+            R.id.btnExtraSize -> "Extra"
+            else -> ""
+        }
+    }
+
+    private fun getSelectedSize(): String? {
+        // size 라디오 버튼 선택
+        return when (binding.btnNormalSizeGroup.checkedRadioButtonId) {
             R.id.btnHot -> "Hot"
             R.id.btnCold -> "Cold"
             else -> ""

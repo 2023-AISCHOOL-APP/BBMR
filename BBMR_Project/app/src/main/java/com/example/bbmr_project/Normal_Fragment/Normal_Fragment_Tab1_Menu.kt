@@ -24,7 +24,7 @@ class Normal_Fragment_Tab1_Menu(val type: Int) : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.frag_normal_tab1_beverage, container, false)
+        val view = inflater.inflate(R.layout.frag_normal_tab1_menu, container, false)
         rvBeverage = view.findViewById(R.id.rvBeverage)
 
         val layoutManager = GridLayoutManager(requireContext(), 4)

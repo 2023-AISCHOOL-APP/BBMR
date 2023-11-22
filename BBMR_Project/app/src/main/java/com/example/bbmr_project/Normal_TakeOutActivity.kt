@@ -155,7 +155,7 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
     private fun showSelectPayDialog() {
         // 결제 창 띄우기
         val normalSelectPayDialog  = Normal_SelectPayDialog.newInstance(selectedMenuList)
-        normalSelectPayDialog .show(supportFragmentManager, "Normal_SelectPayDialog")
+        normalSelectPayDialog.show(supportFragmentManager, "Normal_SelectPayDialog")
     }
 
     override fun onMenuAdded(
