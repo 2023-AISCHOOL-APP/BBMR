@@ -111,7 +111,7 @@ class Senior_MenuDialog : DialogFragment() {
             onClick.invoke(
                 Product(
                     name = binding.tvMenuName.text.toString(),
-                    price = binding.tvMenuPrice.text.toString().toInt(),
+                    price = binding.tvMenuPrice.text.toString().replace(",", "").replace(" 원", "").toIntOrNull()?: 0,
                     count = binding.tvMenuCount.text.toString().toInt(),
                     temperature = coolhot
 

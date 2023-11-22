@@ -144,17 +144,16 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
                         cream = cream
                     )
                     Log.d("Product라는 data List", "${finalproduct}")
+                    val DialogFragment = Senior_MenuDialog()
+                    val bundle = Bundle()
+                    bundle.putSerializable("커스텀_옵션_완료", finalproduct)
 
+                    DialogFragment.arguments = bundle
+                    DialogFragment.show(childFragmentManager, "Senior_MenuDialog")
                 // ------ 객체 Product 값 수정하기 끝 ------
                 }
-                val DialogFragment = Senior_MenuDialog()
-                val bundle = Bundle()
-                bundle.putSerializable("커스텀_옵션_완료", "${finalproduct}")
-
-                DialogFragment.arguments = bundle
 //                val intent = Intent(view.context, Senior_TakeOutActivity::class.java)
 //                startActivity(intent)
-
             }
             // ------ Product라는 Class 담아오기 코드 끝 ------
             dismiss()
