@@ -9,9 +9,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.bbmr_project.CartStorage
 import com.example.bbmr_project.OnCartChangeListener
 import com.example.bbmr_project.Product
+import com.example.bbmr_project.R
+import com.example.bbmr_project.Senior_Fragment.seniorAdapters.SeniorSelectBasketAdapter
 import com.example.bbmr_project.Senior_TakeOutActivity
 import com.example.bbmr_project.databinding.DialogSeniorBasketBinding
 import com.example.bbmr_project.databinding.DialogSeniorMenuBinding
@@ -20,7 +25,10 @@ const val KeyProductBundleKey = "Product"
 
 class Senior_BasketDialog() : DialogFragment(), OnCartChangeListener {
 
+    private lateinit var viewModel: Product
     private lateinit var binding: DialogSeniorBasketBinding
+    private lateinit var adapter: SeniorSelectBasketAdapter
+    private lateinit var rvSeniorBasket: RecyclerView
 
     override fun onStart() {
         super.onStart()
@@ -36,13 +44,22 @@ class Senior_BasketDialog() : DialogFragment(), OnCartChangeListener {
 
     }
 
+    private fun setupRecyclerView(){
+        rvSeniorBasket = binding.root.findViewById(R.id.rvSeniorBasket) as RecyclerView
+        adapter = SeniorSelectBasketAdapter(requireContext(), R.layout.senior_basketlist, arrayListOf(), this)
+        rvSeniorBasket.adapter = adapter
+        rvSeniorBasket.layoutManager = GridLayoutManager(requireContext(),1, GridLayoutManager.HORIZONTAL, false )
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DialogSeniorBasketBinding.inflate(layoutInflater)
+        binding = DialogSeniorBasketBinding.inflate(inflater, container, false) //layoutInflater
+        setupRecyclerView()
+        Log.d("한글로 아무렇게나", "${setupRecyclerView()}")
         return binding.root
     }
 
@@ -61,6 +78,7 @@ class Senior_BasketDialog() : DialogFragment(), OnCartChangeListener {
         // 총 합계
         var amountPrice = binding.tvAmount.text.toString().toIntOrNull() ?: 0
 
+
         // 남은 금액
         var extraPrice = 0
 
@@ -74,7 +92,6 @@ class Senior_BasketDialog() : DialogFragment(), OnCartChangeListener {
             // 이 부분에서 남은 금액을 교환권에 되돌려 주기
             extraPrice = discountPrice - amountPrice
         } else {
-
         }
 
 
@@ -104,7 +121,6 @@ class Senior_BasketDialog() : DialogFragment(), OnCartChangeListener {
             dialogFragment.show(requireActivity().supportFragmentManager, "Senior_PaymentDialog")
         }
 
-
         binding.btnTurnDSB.setOnClickListener {
             dismiss()
         }
@@ -114,6 +130,11 @@ class Senior_BasketDialog() : DialogFragment(), OnCartChangeListener {
     // 값이 바뀌는 기능
     override fun onChange(productList: List<Product>) {
         binding.tvAmount.text = productList.sumOf { it.price }.toString()
+
+        if (::adapter.isInitialized){
+            adapter.updateData(productList as ArrayList<Product>)
+        }
+
     }
 
 }

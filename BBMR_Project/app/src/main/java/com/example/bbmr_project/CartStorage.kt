@@ -5,10 +5,8 @@ import android.util.Log
 import kotlinx.parcelize.Parcelize
 import java.io.Serializable
 
-
 @Parcelize
 data class Product(
-    val img: Int,
     val name: String,
     var price: Int = 0,
     var count: Int,
@@ -16,7 +14,8 @@ data class Product(
     var size: Boolean = false,
     var sugar: Boolean = false,
     var cream: Boolean = false,
-    val id: String = "001"
+    val id: String = "001",
+    var image: String = "BBMR/img/"
 ) : Parcelable, Serializable
 
 

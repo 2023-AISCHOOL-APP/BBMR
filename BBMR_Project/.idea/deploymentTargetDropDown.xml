@@ -16,10 +16,10 @@
         </deviceKey>
       </Target>
     </targetSelectedWithDropDown>
-<<<<<<< HEAD
-    <timeTargetWasSelectedWithDropDown value="2023-11-21T09:20:17.979232700Z" />
-=======
+<<<<<<<<< Temporary merge branch 1
     <timeTargetWasSelectedWithDropDown value="2023-11-21T00:26:50.745381500Z" />
->>>>>>> 22fd5e74a031469db9bd6b9bcdb886a974d63750
+=========
+    <timeTargetWasSelectedWithDropDown value="2023-11-21T09:20:17.979232700Z" />
+>>>>>>>>> Temporary merge branch 2
   </component>
 </project>

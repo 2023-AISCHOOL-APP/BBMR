@@ -67,6 +67,8 @@ class Senior_MenuDialog : DialogFragment() {
         return binding.root
     }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -116,17 +118,15 @@ class Senior_MenuDialog : DialogFragment() {
             val radioButton: RadioButton = binding.rbCooHot.findViewById(radiogroup)
             val coolhot: Boolean = radioButton.isChecked
 
-            // 클릭하면 값을 전송하는 코드
-            onClick.invoke(
-                Product(
-                    name = binding.tvMenuName.text.toString(),
-                    price = binding.tvMenuPrice.text.toString().replace(",", "").replace("원", "")
-                        .toIntOrNull() ?: 0,
-                    count = binding.tvMenuCount.text.toString().toInt(),
-                    temperature = coolhot
-
-                )
-            )
+            // 클릭하면 값을 전송하는 코드 -> 굳이 프로젝트에서는 필요없음
+//            onClick.invoke(
+//                Product(
+//                    name = binding.tvMenuName.text.toString() ,
+//                    price = binding.tvMenuPrice.text.toString().replace(",", "").replace(" 원", "").toIntOrNull()?: 0,
+//                    count = binding.tvMenuCount.text.toString().toInt(),
+//                    temperature = coolhot
+//                )
+//            )
 
             // CartStorage.productList에 값을 추가
             CartStorage.addProduct(
