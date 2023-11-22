@@ -16,7 +16,7 @@ import androidx.fragment.app.DialogFragment
 import com.example.bbmr_project.R
 import com.example.bbmr_project.databinding.DialogSeniorCouponpayBinding
 
-class Senior_CouponPayDialog: DialogFragment() {
+class Senior_CouponPayDialog : DialogFragment() {
     private lateinit var binding: DialogSeniorCouponpayBinding
     override fun onStart() {
         super.onStart()
@@ -52,7 +52,7 @@ class Senior_CouponPayDialog: DialogFragment() {
         binding.btn8.setOnClickListener { binding.tvCpnNumN.append("9") }
         binding.btnBckSpce.setOnClickListener {
             if (binding.tvCpnNumN.text.isNotEmpty()) {
-                val newText = binding.tvCpnNumN.text.substring(0, binding.tvCpnNumN.text.length -1)
+                val newText = binding.tvCpnNumN.text.substring(0, binding.tvCpnNumN.text.length - 1)
                 binding.tvCpnNumN.text = newText
             }
         }
@@ -76,11 +76,10 @@ class Senior_CouponPayDialog: DialogFragment() {
         }
 
 
-
     }
 
     // 쿠폰창에서 취소 다이얼로그
-    fun CancelDialog(view:View) {
+    fun CancelDialog(view: View) {
         val myLayout = layoutInflater.inflate(R.layout.dialog_senior_coupon_backspace, null)
         val build = AlertDialog.Builder(view.context).apply {
             setView(myLayout)
@@ -102,12 +101,13 @@ class Senior_CouponPayDialog: DialogFragment() {
     }
 
     // 각 이름과 가격을 가져오는 함수
-    fun SelectedGift(ProductName: TextView, ProductPrice: TextView, name:String, price:String) {
+    fun SelectedGift(ProductName: TextView, ProductPrice: TextView, name: String, price: String) {
         ProductName.text = name
         ProductPrice.text = price
     }
+
     // 쿠폰 번호 불일치 다이얼로그
-    fun CouponFailDialog(view:View) {
+    fun CouponFailDialog(view: View) {
         val myLayout = layoutInflater.inflate(R.layout.dialog_senior_coupon_fail, null)
         val build = AlertDialog.Builder(view.context).apply {
             setView(myLayout)
@@ -121,17 +121,19 @@ class Senior_CouponPayDialog: DialogFragment() {
             dialog.dismiss()
         }
     }
+
     // 쿠폰 번호 맞고, 쓸 건지 다이얼로그
     fun ChangedSuccessDialog(view: View) {
 
         val myLayout = layoutInflater.inflate(R.layout.dialog_senior_coupon_success, null)
-        val build = AlertDialog.Builder(view.context).apply{
+        val build = AlertDialog.Builder(view.context).apply {
             setView(myLayout)
         }
         val productName = myLayout.findViewById<TextView>(R.id.tvPdName)
         val productPrice = myLayout.findViewById<TextView>(R.id.tvPdPrice)
         SelectedGift(productName, productPrice, "콘치즈달걀빵", "2,900")
-        myLayout.findViewById<ImageView>(R.id.ivCoupon).setImageResource(R.drawable.corncheezeeggbread)
+        myLayout.findViewById<ImageView>(R.id.ivCoupon)
+            .setImageResource(R.drawable.corncheezeeggbread)
         val dialog = build.create()
         // 화면 밖 터치 잠금
         dialog.setCanceledOnTouchOutside(false)
@@ -140,7 +142,9 @@ class Senior_CouponPayDialog: DialogFragment() {
         // 교환권 성공 및 사용 버튼 누를 경우
         myLayout.findViewById<Button>(R.id.btnCpnUseDSCS).setOnClickListener {
             // couponPrice에다가 담아서 보내기
-            val CouponPrice = myLayout.findViewById<TextView>(R.id.tvPdPrice).text.toString().replace(",", "").toIntOrNull()?: 0
+            val CouponPrice =
+                myLayout.findViewById<TextView>(R.id.tvPdPrice).text.toString().replace(",", "")
+                    .toIntOrNull() ?: 0
             // 번들에 담아서 다이얼로그프래그먼트로 보내기
 
             val dialogFragment = Senior_BasketDialog()
@@ -157,10 +161,11 @@ class Senior_CouponPayDialog: DialogFragment() {
             dialog.dismiss()
         }
     }
+
     // 금액권 성공 및 사용 버튼 누를 경우
     fun CardSuccessDialog(view: View) {
         val myLayout = layoutInflater.inflate(R.layout.dialog_senior_coupon_success, null)
-        val build = AlertDialog.Builder(view.context).apply{
+        val build = AlertDialog.Builder(view.context).apply {
             setView(myLayout)
         }
         val couponNum = binding.tvCpnNumN.text
@@ -175,7 +180,9 @@ class Senior_CouponPayDialog: DialogFragment() {
         // 쿠폰 번호 맞는데 사용 버튼 누를 경우
         myLayout.findViewById<Button>(R.id.btnCpnUseDSCS).setOnClickListener {
             // couponPrice에다가 담아서 보내기
-            val CouponPrice = myLayout.findViewById<TextView>(R.id.tvPdPrice).text.toString().replace(",", "").toIntOrNull()?: 0
+            val CouponPrice =
+                myLayout.findViewById<TextView>(R.id.tvPdPrice).text.toString().replace(",", "")
+                    .toIntOrNull() ?: 0
             val dialogFragment = Senior_BasketDialog()
             val bundle = Bundle()
             bundle.putString("discount_price", "20,000")

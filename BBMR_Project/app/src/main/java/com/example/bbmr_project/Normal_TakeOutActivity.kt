@@ -74,6 +74,16 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
         this.totalCost = totalCost
     }
 
+    override fun onMenuSelectedForPayment(selectedMenuInfoList: List<NormalSelectedMenuInfo>) {
+        Log.d("Normal_TakeOutActivity", "Received selected menu list: $selectedMenuInfoList")
+
+        // Normal_SelectPayDialog에서 선택한 항목으로 업데이트
+        val selectPayDialog =
+            supportFragmentManager.findFragmentByTag("Normal_SelectPayDialog") as? Normal_SelectPayDialog
+        selectPayDialog?.updateSelectedMenuList(selectedMenuInfoList)
+    }
+
+
     private fun updateTotalCostUI(currentTotalCost: Int) {
         // 숫자를 한국 통화 단위로 포맷
         val formattedTotalCost = NumberFormat.getNumberInstance(Locale.KOREA).format(currentTotalCost)
@@ -144,23 +154,20 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
 
     private fun showSelectPayDialog() {
         // 결제 창 띄우기
-        val normalSelectpaydialog = Normal_SelectPayDialog()
-        normalSelectpaydialog.show(supportFragmentManager, "Normal_SelectPayDialog")
+        val normalSelectPayDialog  = Normal_SelectPayDialog.newInstance(selectedMenuList)
+        normalSelectPayDialog .show(supportFragmentManager, "Normal_SelectPayDialog")
     }
 
     override fun onMenuAdded(
         normalSelectedMenuInfo: NormalSelectedMenuInfo,
-        tvCount: Int,
-        menuCost: Int,
-        optionTvCount: Int
+        tvCount: Int, // 수량
+        menuCost: Int, // 아이템 하나의 값
+        options: List<String>, // 옵션들
+        optionTvCount: Int // 옵션 수량
     ) {
-        // 메뉴가 추가되었을 때 호출되는 콜백 함수 - MenuDialog
-        Log.d("MenuAdded", "Menu added: $normalSelectedMenuInfo")
-        Log.d("TotalCostUpdated", "Total Cost: $totalCost")
-        Log.d("TotalCostUpdated", "menu Cost: $menuCost")
-
         // 추가된 메뉴의 tvCount를 사용자가 선택한 값으로 설정
         normalSelectedMenuInfo.tvCount = tvCount
+        normalSelectedMenuInfo.options = options
 
         normalSelectBasketAdapter.addItem(normalSelectedMenuInfo)
         normalSelectBasketAdapter.notifyItemInserted(normalSelectBasketAdapter.itemCount - 1)
@@ -168,7 +175,7 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
         selectedMenuList.add(normalSelectedMenuInfo)
 
         // 총 비용 업데이트
-        totalCost += menuCost + optionTvCount
+        totalCost += menuCost
 
 
         // TotalCostListener에 알림

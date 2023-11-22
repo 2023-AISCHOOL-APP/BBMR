@@ -34,11 +34,15 @@
             android:name=".LoadingSplashActivity"
             android:exported="true">
 
+<<<<<<< HEAD
 
 
         </activity>
         <!-- 일반용 액티비티 -->
 
+=======
+        </activity> <!-- 일반용 액티비티 -->
+>>>>>>> 22fd5e74a031469db9bd6b9bcdb886a974d63750
         <activity
             android:name=".Normal_StayActivity"
             android:exported="true" />
@@ -47,10 +51,15 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+<<<<<<< HEAD
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+=======
+>>>>>>> 22fd5e74a031469db9bd6b9bcdb886a974d63750
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".Normal_IntroActivity"

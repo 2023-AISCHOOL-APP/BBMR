@@ -21,8 +21,10 @@ interface Normal_MenuDialogListener {
         normalSelectedMenuInfo: NormalSelectedMenuInfo,
         tvCount: Int,
         totalCost: Int,
+        options: List<String>,
         optionTvCount: Int
     )
+    fun onMenuSelectedForPayment(selectedMenuInfoList: List<NormalSelectedMenuInfo>)
 }
 
 // Normal_TakeOutActivity에서 총합계를 위한 인터페이스
@@ -32,6 +34,7 @@ interface TotalCostListener {
         normalSelectedMenuInfo: NormalSelectedMenuInfo,
         tvCount: Int,
         totalCost: Int,
+        options: List<String>,
         optionTvCount: Int
     )
 }
@@ -99,6 +102,38 @@ class Normal_MenuDialog : DialogFragment() {
 
         binding.btnBasketN.setOnClickListener {
             // 선택한 메뉴의 정보를 NormalSelectedMenuInfo 클래스에 저장
+            val optionsList = mutableListOf<String>()
+            if (binding.tvCount1.text.toString().toIntOrNull() ?: 0 > 0) {
+                optionsList.add(binding.tvOption1.text.toString())
+            }
+            if (binding.tvCount2.text.toString().toIntOrNull() ?: 0 > 0) {
+                optionsList.add(binding.tvOption2.text.toString())
+            }
+            if (binding.tvCount3.text.toString().toIntOrNull() ?: 0 > 0) {
+                optionsList.add(binding.tvOption3.text.toString())
+            }
+            if (binding.tvCount4.text.toString().toIntOrNull() ?: 0 > 0) {
+                optionsList.add(binding.tvOption4.text.toString())
+            }
+            // tvCount 계산
+            val tvCount = binding.tvCount.text.toString().toIntOrNull() ?: 0
+
+            // 옵션 수량 계산
+            val tvCount1 = binding.tvCount1.text.toString().toIntOrNull() ?: 0
+            val tvCount2 = binding.tvCount2.text.toString().toIntOrNull() ?: 0
+            val tvCount3 = binding.tvCount3.text.toString().toIntOrNull() ?: 0
+            val tvCount4 = binding.tvCount4.text.toString().toIntOrNull() ?: 0
+            // 각 옵션의 개수에 따라 가격 계산
+            val optionTvCount = tvCount1 * 500 + tvCount2 * 500 + tvCount3 * 500 + tvCount4 * 500
+
+            // 가격 문자열을 정수로 변환
+            val priceString = price?.replace(",", "")?.replace("원", "")
+            val menuPrice = priceString?.toIntOrNull() ?: 0
+
+            // 총 비용 계산
+            val totalCost = menuPrice * tvCount + optionTvCount
+
+            // 선택한 메뉴의 정보를 NormalSelectedMenuInfo 클래스에 저장
             val selectedMenuInfo = NormalSelectedMenuInfo(
                 menuImg = img ?: 0,
                 name = name,
@@ -109,24 +144,17 @@ class Normal_MenuDialog : DialogFragment() {
                 tvCount2 = binding.tvCount2.text.toString().toIntOrNull() ?: 0,
                 tvCount3 = binding.tvCount3.text.toString().toIntOrNull() ?: 0,
                 tvCount4 = binding.tvCount4.text.toString().toIntOrNull() ?: 0,
-                optionTvCount = 0, // 초기값으로 설정
-                totalCost = 0 // 초기값으로 설정
+                options = optionsList,
+                optionTvCount = optionTvCount, // 초기값으로 설정
+                totalCost = totalCost // 초기값으로 설정
             )
+            // 장바구니 + 총 금액 리스너
+            listener?.onMenuAdded(selectedMenuInfo, tvCount, totalCost, selectedMenuInfo.options, optionTvCount)
 
-            // 장바구니에 담고 나서도 수량 증감을 위해 따로 값 보내기
-            val tvCount = binding.tvCount.text.toString().toIntOrNull() ?: 0
-
-            // tvCount1, tvCount2, tvCount3, tvCount4 값을 합산하여 menuPrice 계산
-            val optionTvCount = (selectedMenuInfo.tvCount1 + selectedMenuInfo.tvCount2 +
-                    selectedMenuInfo.tvCount3 + selectedMenuInfo.tvCount4) * 500
-
-            // 총 비용 계산
-            val priceString =
-                selectedMenuInfo.price?.replace(",", "")?.replace("원", "") // 쉼표, 원 제거 후 정수변환
-            val menuPrice = priceString?.toIntOrNull() ?: 0
-            val totalCost = menuPrice * selectedMenuInfo.tvCount
-
-            listener?.onMenuAdded(selectedMenuInfo, tvCount, totalCost, optionTvCount)
+            // 선택한 메뉴를 리스트에 추가
+            selectedMenuList.add(selectedMenuInfo)
+            // 선택한 항목에 대해 리스너에 알림
+            listener?.onMenuSelectedForPayment(selectedMenuList)
             dismiss()
         }
 
