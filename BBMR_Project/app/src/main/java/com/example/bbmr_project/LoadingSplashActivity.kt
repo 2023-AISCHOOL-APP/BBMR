@@ -74,6 +74,7 @@ class LoadingSplashActivity : AppCompatActivity() {
     private fun startCamera() {
         var cameraController = LifecycleCameraController(baseContext)
 
+
         val previewView: PreviewView = viewBinding.viewFinder
         // 카메라 전면 사용하기
         val cameraSelector = CameraSelector.Builder()
@@ -103,9 +104,11 @@ class LoadingSplashActivity : AppCompatActivity() {
                 val faceResults = result?.getValue(faceDetector)
                 if (faceResults != null && faceResults.isNotEmpty()) {
                     imageCaptureAndSend(cameraController)
+                    imageCaptureAndSend(cameraController)
                 }
                 previewView.overlay.clear()
             }
+
         )
         cameraController.bindToLifecycle(this)
         previewView.controller = cameraController
@@ -193,6 +196,8 @@ class LoadingSplashActivity : AppCompatActivity() {
         }
         finish()
     }
+
+
 
 
     private fun saveBitmapToFile(context: Context, bitmap: Bitmap): String? {

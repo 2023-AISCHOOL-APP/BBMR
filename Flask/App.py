@@ -33,7 +33,7 @@ class TodoList(Resource):
         db_result = cursor.fetchall()
         menu = {}
         for item in db_result:
-            menu[item['menu_id']] = [item['name'],item['price'],item['menu_con'],item['size']]
+            menu[item['menu_id']] = [item['name'],item['price'],item['menu_con'],item['size'],item['imageUrl']]
         return menu
 
     def get(self):
@@ -188,9 +188,12 @@ def upload_file():
     if file:
         # 이미지 읽기 및 리사이즈
         image = Image.open(io.BytesIO(file.read()))
-        print(image)
-        image = image.resize((480, 360))  # 너비 480, 높이 360으로 리사이즈
-
+        image = image.rotate(90, expand=True)
+        
+        print("image -> ",image)
+        image.save('image/image1.png')
+        image = image.resize((360, 480))  # 너비 480, 높이 360으로 리사이즈
+        image.save('image/image2.png')
         # 필요한 추가 전처리 과정
         # 예시: 이미지를 numpy 배열로 변환
         image = np.array(image)
@@ -199,7 +202,7 @@ def upload_file():
 
         # 모델 예측
         prediction = model.predict(image)
-        print(prediction)
+        print("prediction -> " , prediction)
 
         # 예측 결과 처리 및 반환
         # 예시: 예측 결과의 최대값 인덱스 반환
@@ -208,7 +211,7 @@ def upload_file():
         else:
             result = 1
         # result = 0
-        print(result)
+        print("result ->", result)
         return {'result': result}
 
 
