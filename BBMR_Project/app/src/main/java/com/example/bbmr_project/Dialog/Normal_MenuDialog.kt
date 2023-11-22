@@ -139,8 +139,7 @@ class Normal_MenuDialog : DialogFragment() {
                 name = name,
                 price = price,
                 temperature = getSelectedTemperature(),
-                tvCount = binding.tvCount.text.toString().toIntOrNull()
-                    ?: 0, // tv값을 정수로 변환하거나 null 반환
+                tvCount = binding.tvCount.text.toString().toIntOrNull() ?: 0, // tv값을 정수로 변환하거나 null 반환
                 tvCount1 = binding.tvCount1.text.toString().toIntOrNull() ?: 0,
                 tvCount2 = binding.tvCount2.text.toString().toIntOrNull() ?: 0,
                 tvCount3 = binding.tvCount3.text.toString().toIntOrNull() ?: 0,

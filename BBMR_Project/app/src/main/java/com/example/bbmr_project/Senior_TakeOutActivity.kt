@@ -4,6 +4,8 @@ package com.example.bbmr_project
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
@@ -14,12 +16,17 @@ import com.example.bbmr_project.Senior_Fragment.Senior_Fragment_Tab_Recommend
 import com.example.bbmr_project.Senior_Fragment.Senior_Fragment_Tab_Coffee
 import com.example.bbmr_project.Senior_Fragment.Senior_Fragment_Tab_Beverage
 import com.example.bbmr_project.Senior_Fragment.Senior_Fragment_Tab_Dessert
+import com.example.bbmr_project.Senior_Fragment.seniorAdapters.SeniorGetCartStorageAdapter
 
 
-class Senior_TakeOutActivity : AppCompatActivity() {
+class Senior_TakeOutActivity : AppCompatActivity(), OnCartChangeListener {
 
     var buttonDoubleDefend = false
 
+
+    // CarStorage에서 상품정보를 받아옴
+//    val productList = CartStorage.productList
+//    val adapter = SeniorGetCartStorageAdapter(productList)
 
     // viewBinding 엑티비디 id에 맞는 변수를 자동으로 적용해줌.
     private lateinit var binding: ActivitySeniorTakeoutBinding
@@ -32,11 +39,14 @@ class Senior_TakeOutActivity : AppCompatActivity() {
         //viewBinding 추가 코드
         binding = ActivitySeniorTakeoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        CartStorage.setListener(this)
 
         // 일반 키오스크로 이동
         binding.btnToOrigin.setOnClickListener {
             val intent = Intent(this@Senior_TakeOutActivity, Normal_TakeOutActivity::class.java)
             startActivity(intent)
+
+            CartStorage.clearProduct()
         }
 
         // 초기 Fragment지정
@@ -74,26 +84,41 @@ class Senior_TakeOutActivity : AppCompatActivity() {
 
                 val args = Bundle().apply {
 
-//                putParcelable(KeyProductBundleKey, Product("아메리카노", 1000,10))
-                    putParcelableArrayList(KeyProductBundleKey, ArrayList(CartStorage.productList))
+//                    putParcelableArrayList(KeyProductBundleKey, ArrayList(CartStorage.productList))
             }
 
                 fragment.arguments = args
                 fragment.show(supportFragmentManager, "Senior.BasketDialog")
 
-
+                Handler().postDelayed({
+                    buttonDoubleDefend = false
+                }, 1000)
 
             }
 
         }
 
-        // 가격측정
-        binding.tvTotalSeniorPrice.text
+
 
     }
 
     private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().replace(R.id.fl1, fragment).addToBackStack(null).commit()
     }
+
+    override fun onChange(productList: List<Product>) {
+        // 값의 총합을 구하는 코드
+        val addPrice = productList.sumOf { it.price }
+        // 값을 1000단위마다 , 넣어주는 코드
+        val TotalPrice = String.format("%,d", addPrice) // String.format("%,d", 값) -> 1000 단위마다 , 표시
+        binding.tvTotalSeniorPrice.text = TotalPrice+"원"
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        CartStorage.release()
+    }
+
+
 
 }

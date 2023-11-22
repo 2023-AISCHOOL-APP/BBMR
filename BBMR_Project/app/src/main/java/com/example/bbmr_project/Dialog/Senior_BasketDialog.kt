@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.bbmr_project.CartStorage
+import com.example.bbmr_project.OnCartChangeListener
 import com.example.bbmr_project.Product
 import com.example.bbmr_project.Senior_TakeOutActivity
 import com.example.bbmr_project.databinding.DialogSeniorBasketBinding
@@ -17,7 +18,7 @@ import com.example.bbmr_project.databinding.DialogSeniorMenuBinding
 
 const val KeyProductBundleKey = "Product"
 
-class Senior_BasketDialog() : DialogFragment() {
+class Senior_BasketDialog() : DialogFragment(), OnCartChangeListener {
 
     private lateinit var binding: DialogSeniorBasketBinding
 
@@ -32,8 +33,6 @@ class Senior_BasketDialog() : DialogFragment() {
         dialog?.window?.setDimAmount(0.4f)
 
         isCancelable = false
-//        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-//        dialog?.window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
 
     }
 
@@ -50,8 +49,14 @@ class Senior_BasketDialog() : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val discountPrice = arguments?.getString("discount_price").toString().toIntOrNull()
-            ?: 0 // 여기서 각 상품에 맞는 게 String으로 가져와 짐
+        // 값이 변경되면 새로운 값을 받아오는 기능
+        onChange(CartStorage.getProductList())
+
+        val discountPrice = arguments?.getString("discount_price").toString().toIntOrNull() ?: 0 // 여기서 각 상품에 맞는 게 String으로 가져와 짐
+
+        //장바구니 함계 계산후 추가
+        binding.tvAmount.text = CartStorage.getProductList().sumOf { it.price }.toString()
+
         // 총 합계
         var amountPrice = binding.tvAmount.text.toString().toIntOrNull() ?: 0
 
@@ -60,7 +65,9 @@ class Senior_BasketDialog() : DialogFragment() {
 
         if (amountPrice >= discountPrice) {
             amountPrice = amountPrice - discountPrice
-            binding.tvAmount.text = amountPrice.toString()
+            // 1000의 단위마다 , 넣어주는 코드
+            var amountPrice = String.format("%,d", amountPrice)
+            binding.tvAmount.text = amountPrice+"원"
         } else if (amountPrice < discountPrice) {
             amountPrice = amountPrice - discountPrice
             // 이 부분에서 남은 금액을 교환권에 되돌려 주기
@@ -69,27 +76,13 @@ class Senior_BasketDialog() : DialogFragment() {
 
         }
 
+
 //        val product = requireArguments().getParcelable<Product>(KeyProductBundleKey)
 //        binding.tvSeniorPayPrice.text= product?.price?.toString() ?: "0"
 
         // val product = parentFragmentManager.fragments
 
-        val product = arguments?.getParcelable<Product>(KeyProductBundleKey)
-        Log.d("Senior_BasketDialog", "Received Product: $product")
 
-
-
-        if (product != null) {
-            // 인자가 있을 경우
-            binding.tvAmount.text = product.price.toString()
-            Log.d("장바구니", binding.tvAmount.text as String)
-
-        } else {
-            // 인자가 없을 경우
-            binding.tvAmount.text = ""
-
-        }
-        CartStorage.productList
 
         // 쿠폰은 바로 보내버리기
 
@@ -117,4 +110,10 @@ class Senior_BasketDialog() : DialogFragment() {
         }
 
     }
+
+    // 값이 바뀌는 기능
+    override fun onChange(productList: List<Product>) {
+        binding.tvAmount.text = productList.sumOf { it.price }.toString()
+    }
+
 }

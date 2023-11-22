@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bbmr_project.Dialog.TotalCostListener
 //import com.example.bbmr_project.Menu.NormalSelectedMenuInfo
 import com.example.bbmr_project.R
-import com.example.bbmr_project.VO.NormalSelectBasketVO
-
 class NormalSelectBasketAdapter(
     val context: Context,
     val layout: Int,
