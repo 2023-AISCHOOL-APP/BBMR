@@ -11,6 +11,7 @@ data class NormalSelectedMenuInfo(
     val tvCount2: Int,
     val tvCount3: Int,
     val tvCount4: Int,
+    var options: List<String>,
     val optionTvCount: Int,
     val totalCost: Int,
 ) : Parcelable {
@@ -24,6 +25,7 @@ data class NormalSelectedMenuInfo(
         parcel.readInt(),
         parcel.readInt(),
         parcel.readInt(),
+        parcel.createStringArrayList() ?: listOf(),
         0,
         0
     )
