@@ -3,6 +3,7 @@ package com.example.bbmr_project
 import android.os.Parcelable
 import android.util.Log
 import kotlinx.parcelize.Parcelize
+import java.io.Serializable
 
 
 @Parcelize
@@ -12,13 +13,15 @@ data class Product( val name: String,
                     val temperature: Boolean = false,
                     val size: Boolean = false,
                     val sugar: Boolean = false,
-                    val cream:Boolean = false ) : Parcelable
+                    val cream:Boolean = false ) : Parcelable, Serializable
 
 interface OnCartChangeListener {
     fun onChange(productList: List<Product>)
 }
 object CartStorage {
-    private val productList: ArrayList<Product> = ArrayList()
+
+    // private val 에서 private로 변경 -> 이유 : MenuDialog에서 86번줄 추가옵션 productList가 오류가 듬
+    val productList: ArrayList<Product> = ArrayList()
 
     private var onCartChangeListener: OnCartChangeListener? = null
 

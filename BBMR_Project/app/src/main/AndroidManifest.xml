@@ -7,6 +7,10 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!--  231121 안드로이드 앱 스토리지 퍼미션 코드  -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -24,12 +28,17 @@
             android:exported="false" />
         <activity
             android:name=".Normal_PaySuccessActivity"
-            android:exported="false" /> <!-- 공용 액티비티 -->
+            android:exported="false" />
+        <!-- 공용 액티비티 -->
         <activity
             android:name=".LoadingSplashActivity"
             android:exported="true">
 
-        </activity> <!-- 일반용 액티비티 -->
+
+
+        </activity>
+        <!-- 일반용 액티비티 -->
+
         <activity
             android:name=".Normal_StayActivity"
             android:exported="true" />
@@ -48,11 +57,16 @@
             android:exported="true" />
         <activity
             android:name=".Normal_MainActivity"
-            android:exported="true" /> <!-- 시니어용 액티비티 -->
+            android:exported="true" />
+        <!-- 시니어용 액티비티 -->
         <activity
             android:name=".Senior_TakeOutActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"

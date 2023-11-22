@@ -4,6 +4,8 @@ import android.content.ContentValues
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.example.bbmr_project.RetrofitAPI.FlaskSendRes
+import com.example.bbmr_project.RetrofitAPI.MenuData
 import com.example.bbmr_project.RetrofitAPI.RetrofitAPI
 import com.example.bbmr_project.VO.MenuVO
 import com.google.gson.JsonObject
@@ -38,6 +40,29 @@ class MainActivity : AppCompatActivity() {
         // }
         // 위와 같은 형태로 입력받는 쿠폰번호를 coupon 이란 변수에 담아주고
         // sendCouponToServer(coupon) 함수를 실행 시켜줘야 서버에서 처리하고 결과값을 받아올 수 있음
+
+
+        // 이곳에 결제완료 후 DB 저장하는 코드 작성
+        // 아래는 예시 코드 - btnOrder를 눌렀을때 주문 정보들을 보내고 서버에서 저장하고 주문번호를 받아옴
+        // menu_ids는 (메뉴id, 수량), (메뉴id,수량) .... 의 리스트
+        // total_amount는 총 금액(쿠폰으로 할인된 금액은 제외)
+        // coupon 은 입력한 쿠폰코드
+        // discount 는 쿠폰으로 할인된 금액이 있으면 해당 금액
+        // (교환권일때는 해당되는 제품의 가격, 금액권 일 경우 사용한 금액권 액수만큼)
+
+//        btnOrder.setOnClickListener{
+//            // SendOrderTask 인스턴스 생성
+//            val sendOrderTask = FlaskSendRes(this, getString(R.string.baseUrl))
+//
+//            // 주문 정보 전송 (예시)
+//            val menu_ids = listOf(MenuData(121, 2), MenuData(162, 1))
+//            val total_amount = 18000
+//            val coupon = "qwerasdfzxcv"
+//            val discount = 2500
+//            sendOrderTask.sendOrder(menu_ids, total_amount, coupon, discount)
+//        }
+
+
 
     }
 

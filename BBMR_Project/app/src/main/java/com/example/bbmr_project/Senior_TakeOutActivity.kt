@@ -45,6 +45,8 @@ class Senior_TakeOutActivity : AppCompatActivity(), OnCartChangeListener {
         binding.btnToOrigin.setOnClickListener {
             val intent = Intent(this@Senior_TakeOutActivity, Normal_TakeOutActivity::class.java)
             startActivity(intent)
+
+            CartStorage.clearProduct()
         }
 
         // 초기 Fragment지정
@@ -105,13 +107,18 @@ class Senior_TakeOutActivity : AppCompatActivity(), OnCartChangeListener {
     }
 
     override fun onChange(productList: List<Product>) {
-        val TotalPrice = productList.sumOf { it.price }.toString()
-        binding.tvTotalSeniorPrice.text = "$TotalPrice 원"
+        // 값의 총합을 구하는 코드
+        val addPrice = productList.sumOf { it.price }
+        // 값을 1000단위마다 , 넣어주는 코드
+        val TotalPrice = String.format("%,d", addPrice) // String.format("%,d", 값) -> 1000 단위마다 , 표시
+        binding.tvTotalSeniorPrice.text = TotalPrice+"원"
     }
 
     override fun onDestroy() {
         super.onDestroy()
         CartStorage.release()
     }
+
+
 
 }

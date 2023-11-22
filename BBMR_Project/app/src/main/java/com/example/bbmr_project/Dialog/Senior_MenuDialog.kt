@@ -3,10 +3,10 @@ package com.example.bbmr_project.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
 import androidx.fragment.app.DialogFragment
 import com.example.bbmr_project.CartStorage
 import com.example.bbmr_project.Product
@@ -15,7 +15,7 @@ import com.example.bbmr_project.databinding.DialogSeniorMenuBinding
 
 class Senior_MenuDialog : DialogFragment() {
 
-
+    // 클릭하면 Bakset으로 갑 전송 프로젝트 기능에는 영향 X
     var onClick: (Product) -> Unit = {
         val args = Bundle().apply {
             putParcelable(KeyProductBundleKey, it)
@@ -23,7 +23,6 @@ class Senior_MenuDialog : DialogFragment() {
         val fragment = Senior_BasketDialog()
         fragment.arguments = args
         fragment.show(childFragmentManager, "")
-
     }
 
     // Adapter에서 값을 받아오는 코드
@@ -76,11 +75,30 @@ class Senior_MenuDialog : DialogFragment() {
         val sprice = arguments?.getInt("sprice")
         val simg = arguments?.getInt("simg")
 
+//        val seniorgetprice = String.format("%,d", sprice)
+
         binding.tvMenuName.text = sname
-        binding.tvMenuPrice.text = sprice.toString()
+        binding.tvMenuPrice.text = String.format("%,d원",sprice) // String.format("%,d", 값) -> 1000 단위마다 , 표시
         if (simg != null) {
             binding.imgMenu.setImageResource(simg)
         }
+
+        // ------ 추가 옵션 이동 코드 시작 ------
+        binding.btnAddtionOption.setOnClickListener {
+
+            val product = Product(
+                binding.tvMenuName.text.toString(),
+                binding.tvMenuPrice.text.toString().toInt(),
+                binding.tvMenuCount.text.toString().toInt()
+            )
+            val dialogFragment = Senior_AdditionalOptionDialog()
+            val bundle = Bundle()
+            bundle.putSerializable("product_option", product)
+            dialogFragment.arguments = bundle
+            dialogFragment.show(childFragmentManager, "Senior_AdditionalOptionDialog")
+
+        }
+        // ------ 추가 옵션으로 이동 코드 끝 ------
 
         // ------ 이전으로 버튼 클릭시 화면 꺼지는 코드 ------
         binding.btnBack.setOnClickListener {
@@ -90,37 +108,41 @@ class Senior_MenuDialog : DialogFragment() {
         // 선택완료 누르면 값을 보내는 코드
         binding.btnComplet.setOnClickListener {
 
-            // 버튼 클릭시 어떤 값을 보내는지 확인하는 코드
-            val product = Product(
-                binding.tvMenuName.text.toString(),
-                binding.tvMenuPrice.text.toString().toInt(),
-                binding.tvMenuCount.text.toString().toInt()
-            )
-            Log.d("Senior_MenuDialog", "Selected Product: $product")
-
             //클릭하면 onClick 실행 후 값을 보냄
+
+            // ------ 라디오 버튼에서도 값 가져오기 시작------
+            val radiogroup = binding.rbCooHot.checkedRadioButtonId
+            val radioButton: RadioButton = binding.rbCooHot.findViewById(radiogroup)
+            val coolhot: Boolean = radioButton.isChecked
+
+             // 클릭하면 값을 전송하는 코드
             onClick.invoke(
                 Product(
-                    binding.tvMenuName.text.toString(),
-                    binding.tvMenuPrice.text.toString().toInt(),
-                    binding.tvMenuCount.text.toString().toInt()
+                    name = binding.tvMenuName.text.toString(),
+                    price = binding.tvMenuPrice.text.toString().replace(",","").replace("원","").toIntOrNull() ?: 0,
+                    count = binding.tvMenuCount.text.toString().toInt(),
+                    temperature = coolhot
+
                 )
             )
 
             // CartStorage.productList에 값을 추가
             CartStorage.addProduct(
                 Product(
-                    binding.tvMenuName.text.toString(),
-                    binding.tvMenuPrice.text.toString().toInt(),
-                    binding.tvMenuCount.text.toString().toInt()
+                    name = binding.tvMenuName.text.toString(),
+                    price = binding.tvMenuPrice.text.toString().replace(",","").replace("원","").toIntOrNull() ?: 0,
+                    count = binding.tvMenuCount.text.toString().toInt(),
+                    temperature = coolhot
                 )
 
             )
 
 
+
             dismiss()
         }
 
+        // ------ 라디오 버튼에서도 값 가져오기 시작------
 
         // ------ 상품의 수량 조절하는 코드 시작 ------
         var MenuCount = 1
@@ -135,7 +157,7 @@ class Senior_MenuDialog : DialogFragment() {
             if (MenuPlusCountInt != null){
                 val getPrice = arguments?.getInt("sprice") ?:0
                 val plusPrice = getPrice*MenuPlusCountInt
-                binding.tvMenuPrice.text = plusPrice.toString()
+                binding.tvMenuPrice.text = String.format("%,d원",plusPrice) // String.format("%,d", 값) -> 1000 단위마다 , 표시
             }else{
                 binding.tvMenuPrice.text = "취소 후 다시 부탁드립니다."
             }
@@ -145,7 +167,7 @@ class Senior_MenuDialog : DialogFragment() {
         // Minus버튼 누르면 감소하는 코드
         binding.btnSeniorMinus.setOnClickListener {
 
-            if (MenuCount == 1) {
+            if (MenuCount <= 1) {
                 binding.btnSeniorMinus.isClickable = false  // 수량이 1이면 Minus버튼 비활성화
             }
 
@@ -154,18 +176,17 @@ class Senior_MenuDialog : DialogFragment() {
                 // 상품 수랑이 감소하는 코드
                 binding.tvMenuCount.text = MenuCount.toString()
                 // 수량에 맞춰 가격이 감소하는 코드
-                val MenuMinusCountInt : Int? = binding.tvMenuCount.text.toString().toIntOrNull()
+                val MenuMinusCountInt : Int? = binding.tvMenuCount.text.toString().toIntOrNull()  //replace
                 if (MenuMinusCountInt != null){
                     val getPrice = arguments?.getInt("sprice") ?: 0
                     val minusPrice = getPrice*MenuMinusCountInt
-                    binding.tvMenuPrice.text = minusPrice.toString()
+                    binding.tvMenuPrice.text = String.format("%,d원",minusPrice) // String.format("%,d", 값) -> 1000 단위마다 , 표시 String.format("%, d 원", minusPrice)
                 }
 
             }
 
         }
         // ------ 상품의 수량 조절하는 코드 끝 ------
-
 
     }
 }
