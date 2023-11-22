@@ -31,13 +31,13 @@ class NormalSelectPayAdapter(
     }
 
     override fun onBindViewHolder(holder: NormalSelectPayAdapter.ViewHolder, position: Int) {
+        val item = selectedMenuList[position]
+
         holder.selectNormalName.text = selectedMenuList[position].name.toString()
         holder.selectNormalCount.text = selectedMenuList[position].tvCount.toString()
-        holder.selectNormalMoney.text = selectedMenuList[position].totalCost.toString()
+        holder.selectNormalMoney.text = selectedMenuList[position].menuPrice.toString()
         holder.selectNormalOption.text = selectedMenuList[position].options.toString()
         holder.selectNormalOptionCost.text = selectedMenuList[position].optionTvCount.toString()
-
-        val item = selectedMenuList[position]
 
         // 옵션 리스트가 비어있는지 확인
         if (item.options.isEmpty()) {

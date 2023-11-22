@@ -109,6 +109,44 @@
         </RadioGroup>
 
         <RadioGroup
+            android:id="@+id/btnNormalSizeGroup"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/guideline55"
+            app:layout_constraintEnd_toStartOf="@+id/guideline48"
+            app:layout_constraintStart_toStartOf="@+id/guideline47"
+            app:layout_constraintTop_toBottomOf="@+id/textView12">
+
+            <RadioButton
+                android:id="@+id/btnLargeSize"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="50dp"
+                android:layout_marginBottom="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_select_large_size"
+                android:button="@null"
+                android:checked="true" />
+
+            <RadioButton
+                android:id="@+id/btnExtraSize"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginBottom="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_select_extra_size"
+                android:button="@null" />
+        </RadioGroup>
+
+        <RadioGroup
             android:id="@+id/btnNormalTempGroup"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -145,6 +183,7 @@
                 android:textColor="@drawable/btn_normal_dialog_coldtext"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+
         </RadioGroup>
 
         <TextView

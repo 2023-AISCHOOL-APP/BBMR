@@ -128,10 +128,11 @@ class Normal_MenuDialog : DialogFragment() {
 
             // 가격 문자열을 정수로 변환
             val priceString = price?.replace(",", "")?.replace("원", "")
-            val menuPrice = priceString?.toIntOrNull() ?: 0
+            val menuOnePrice = priceString?.toIntOrNull() ?: 0 // 메뉴 하나의 가격
+            val menuPrice = menuOnePrice * tvCount // 메뉴 * 수량
 
-            // 총 비용 계산
-            val totalCost = menuPrice * tvCount + optionTvCount
+            // 총 비용 계산 = (메뉴 * 수량) + 옵션
+            val totalCost = menuPrice + optionTvCount
 
             // 선택한 메뉴의 정보를 NormalSelectedMenuInfo 클래스에 저장
             val selectedMenuInfo = NormalSelectedMenuInfo(
@@ -139,6 +140,7 @@ class Normal_MenuDialog : DialogFragment() {
                 name = name,
                 price = price,
                 temperature = getSelectedTemperature(),
+                size = getSelectedSize(),
                 tvCount = binding.tvCount.text.toString().toIntOrNull()
                     ?: 0, // tv값을 정수로 변환하거나 null 반환
                 tvCount1 = binding.tvCount1.text.toString().toIntOrNull() ?: 0,
@@ -147,7 +149,8 @@ class Normal_MenuDialog : DialogFragment() {
                 tvCount4 = binding.tvCount4.text.toString().toIntOrNull() ?: 0,
                 options = optionsList,
                 optionTvCount = optionTvCount, // 초기값으로 설정
-                totalCost = totalCost // 초기값으로 설정
+                totalCost = totalCost, // 초기값으로 설정
+                menuPrice = menuPrice
             )
             // 장바구니 + 총 금액 리스너
             listener?.onMenuAdded(selectedMenuInfo, tvCount, totalCost, selectedMenuInfo.options, optionTvCount)
@@ -261,6 +264,15 @@ class Normal_MenuDialog : DialogFragment() {
     private fun getSelectedTemperature(): String {
         // hot cold 라디오 버튼 선택
         return when (binding.btnNormalTempGroup.checkedRadioButtonId) {
+            R.id.btnLargeSize -> "Large"
+            R.id.btnExtraSize -> "Extra"
+            else -> ""
+        }
+    }
+
+    private fun getSelectedSize(): String? {
+        // size 라디오 버튼 선택
+        return when (binding.btnNormalSizeGroup.checkedRadioButtonId) {
             R.id.btnHot -> "Hot"
             R.id.btnCold -> "Cold"
             else -> ""

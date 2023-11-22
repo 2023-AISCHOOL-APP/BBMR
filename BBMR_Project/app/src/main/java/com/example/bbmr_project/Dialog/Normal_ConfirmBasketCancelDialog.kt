@@ -2,14 +2,13 @@ package com.example.bbmr_project.Dialog
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.bbmr_project.R
-import com.example.bbmr_project.databinding.ActivityNormalConfirmBasketCancelDialogBinding
+import com.example.bbmr_project.databinding.DialogNormalConfirmBasketCancelBinding
 
 // Normal_ConfirmBasketCancelDialog에서 사용할 인터페이스 정의
 interface ConfirmBasketCancelListener {
@@ -24,7 +23,7 @@ class Normal_ConfirmBasketCancelDialog : DialogFragment() {
         this.listener = listener
     }
 
-    private lateinit var binding: ActivityNormalConfirmBasketCancelDialogBinding
+    private lateinit var binding: DialogNormalConfirmBasketCancelBinding
 
     override fun onStart() {
         super.onStart()
@@ -44,7 +43,7 @@ class Normal_ConfirmBasketCancelDialog : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = ActivityNormalConfirmBasketCancelDialogBinding.inflate(layoutInflater)
+        binding = DialogNormalConfirmBasketCancelBinding.inflate(layoutInflater)
         return binding.root
     }
 
