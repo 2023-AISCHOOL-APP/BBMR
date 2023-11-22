@@ -12,7 +12,8 @@ data class Product(val name: String,
                    var temperature: Boolean = false,
                    var size: Boolean = false,
                    var sugar: Boolean = false,
-                   var cream:Boolean = false ) : Parcelable, Serializable
+                   var cream:Boolean = false,
+                   val id:String = "001" ) : Parcelable, Serializable
 
 object CartStorage {
     val productList: ArrayList<Product> = ArrayList()

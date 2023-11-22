@@ -123,14 +123,15 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
 
                 // ------ 옵션 선택 시 금액 추가(합산) 코드 시작 ------
                 var addprice : Int = customOption.price
+                val count : Int = customOption.count
                 if (size == true) {
-                    addprice = addprice + 500
+                    addprice += (500 * count)
                 }
                 if (sugar == true) {
-                    addprice = addprice + 300
+                    addprice += (300 * count)
                 }
                 if (cream == true) {
-                    addprice = addprice + 300
+                    addprice += (300 * count)
                 }
                 // ------ 옵션 선택 시 금액 추가(합산) 코드 끝   ------
 
@@ -143,13 +144,16 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
                         cream = cream
                     )
                     Log.d("Product라는 data List", "${finalproduct}")
-                    CartStorage.productList.add(finalproduct)
+
                 // ------ 객체 Product 값 수정하기 끝 ------
                 }
-//                val SeniorMenuDialogFragment = Senior_MenuDialog()
-//                SeniorMenuDialogFragment.dismiss()
-                val intent = Intent(view.context, Senior_TakeOutActivity::class.java)
-                startActivity(intent)
+                val DialogFragment = Senior_MenuDialog()
+                val bundle = Bundle()
+                bundle.putSerializable("커스텀_옵션_완료", "${finalproduct}")
+
+                DialogFragment.arguments = bundle
+//                val intent = Intent(view.context, Senior_TakeOutActivity::class.java)
+//                startActivity(intent)
 
             }
             // ------ Product라는 Class 담아오기 코드 끝 ------
@@ -157,9 +161,6 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
         }
         // ------ 이전, 선택 완료 코드 끝 ------
 
-    }
-    interface ProductDataListener{
-        fun onProductDataReceived(product: Product)
     }
     fun SuggestionProductAddDialog(view:View) {
         val myLayout = layoutInflater.inflate(R.layout.dialog_senior_menu_add, null)

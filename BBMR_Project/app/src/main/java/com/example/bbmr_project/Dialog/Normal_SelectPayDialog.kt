@@ -5,6 +5,7 @@ import NormalSelectedMenuInfo
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,7 @@ interface NormalSelectPayDialogListener : Normal_MenuDialogListener {
         normalSelectedMenuInfo: NormalSelectedMenuInfo,
         tvCount: Int,
         totalCost: Int,
+        options: List<String>,
         optionTvCount: Int
     )
 }
@@ -27,6 +29,7 @@ class Normal_SelectPayDialog : DialogFragment() {
     private lateinit var binding: DialogNormalSelectPayBinding
     private var listener: Normal_MenuDialogListener? = null
     private var selectedMenuList: MutableList<NormalSelectedMenuInfo> = mutableListOf()
+    private lateinit var adapter: NormalSelectPayAdapter
 
     companion object {
         fun newInstance(selectedMenuList: MutableList<NormalSelectedMenuInfo>): Normal_SelectPayDialog {
@@ -85,7 +88,7 @@ class Normal_SelectPayDialog : DialogFragment() {
         selectedMenuList = arguments?.getParcelableArrayList("selectedMenuList") ?: mutableListOf()
 
         // RecyclerView를 selectedMenuList로 설정
-        val adapter = NormalSelectPayAdapter(requireActivity(), R.layout.dialog_normal_select_pay, selectedMenuList)
+        adapter = NormalSelectPayAdapter(requireActivity(), R.layout.normal_selectpaylist, selectedMenuList)
         binding.rvSelectPayList.adapter = adapter
         binding.rvSelectPayList.layoutManager = LinearLayoutManager(requireContext())
     }
@@ -114,4 +117,12 @@ class Normal_SelectPayDialog : DialogFragment() {
     fun setListener(listener: NormalSelectPayDialogListener) {
         this.listener = listener
     }
+    fun updateSelectedMenuList(selectedMenuInfoList: List<NormalSelectedMenuInfo>) {
+        // 전달받은 리스트의 각 항목을 현재 리스트에 추가
+        selectedMenuList.addAll(selectedMenuInfoList)
+
+        // 어댑터에 변경 사항 알림
+        adapter.notifyDataSetChanged()
+    }
+
 }
