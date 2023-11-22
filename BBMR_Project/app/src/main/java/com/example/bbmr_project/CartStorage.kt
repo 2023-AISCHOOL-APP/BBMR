@@ -2,6 +2,7 @@ package com.example.bbmr_project
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import java.io.Serializable
 
 
 @Parcelize

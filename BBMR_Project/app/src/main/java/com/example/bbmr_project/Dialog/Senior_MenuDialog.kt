@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
 import androidx.fragment.app.DialogFragment
 import com.example.bbmr_project.CartStorage
 import com.example.bbmr_project.Product
@@ -79,6 +80,22 @@ class Senior_MenuDialog : DialogFragment() {
         if (simg != null) {
             binding.imgMenu.setImageResource(simg)
         }
+        // ------ 추가 옵션 이동 코드 시작 ------
+        binding.btnAddtionOption.setOnClickListener {
+
+            val product = Product(
+                binding.tvMenuName.text.toString(),
+                binding.tvMenuPrice.text.toString().toInt(),
+                binding.tvMenuCount.text.toString().toInt()
+            )
+            val dialogFragment = Senior_AdditionalOptionDialog()
+            val bundle = Bundle()
+            bundle.putSerializable("product_option", product)
+            dialogFragment.arguments = bundle
+            dialogFragment.show(childFragmentManager, "Senior_AdditionalOptionDialog")
+
+        }
+        // ------ 추가 옵션으로 이동 코드 끝 ------
 
         // ------ 이전으로 버튼 클릭시 화면 꺼지는 코드 ------
         binding.btnBack.setOnClickListener {
@@ -87,27 +104,34 @@ class Senior_MenuDialog : DialogFragment() {
 
         // 선택완료 누르면 값을 보내는 코드
         binding.btnComplet.setOnClickListener {
-
+            // ------ 라디오 버튼에서도 값 가져오기 시작------
+            val radiogroup = binding.rbCooHot.checkedRadioButtonId
+            val radioButton: RadioButton = binding.rbCooHot.findViewById(radiogroup)
+            val coolhot: Boolean = radioButton.isChecked
             onClick.invoke(
                 Product(
-                    binding.tvMenuName.text.toString(),
-                    binding.tvMenuPrice.text.toString().toInt(),
-                    binding.tvMenuCount.text.toString().toInt()
+                    name = binding.tvMenuName.text.toString(),
+                    price = binding.tvMenuPrice.text.toString().toInt(),
+                    count = binding.tvMenuCount.text.toString().toInt(),
+                    temperature = coolhot
+
+
                 )
             )
 
 
             CartStorage.productList.add(
                 Product(
-                    binding.tvMenuName.text.toString(),
-                    binding.tvMenuPrice.text.toString().toInt(),
-                    binding.tvMenuCount.text.toString().toInt()
+                    name = binding.tvMenuName.text.toString(),
+                    price = binding.tvMenuPrice.text.toString().toInt(),
+                    count = binding.tvMenuCount.text.toString().toInt(),
+                    temperature = coolhot
                 )
             )
 
             dismiss()
         }
-
+        // ------ 라디오 버튼에서도 값 가져오기 시작------
 
         // ------ 상품의 수량 조절하는 코드 시작 ------
         var MenuCount = 1
