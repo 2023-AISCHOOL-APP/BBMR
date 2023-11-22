@@ -88,7 +88,7 @@ class Senior_MenuDialog : DialogFragment() {
 
             val product = Product(
                 binding.tvMenuName.text.toString(),
-                binding.tvMenuPrice.text.toString().toInt(),
+                price = binding.tvMenuPrice.text.toString().replace(",", "").replace(" 원", "").toIntOrNull()?: 0,
                 binding.tvMenuCount.text.toString().toInt()
             )
             val dialogFragment = Senior_AdditionalOptionDialog()
