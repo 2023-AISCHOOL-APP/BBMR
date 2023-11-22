@@ -1,0 +1,139 @@
+[요약]
+- front
+키오스크는 종류를 최대한 많이 뽑아내기
+1. 일단 초기 흐름도 만들기(카페, 맥도날드 기준)
+2. 표준 키오스크 앱 만들기
+3. 소외계층 맞춤 키오스크 앱 제작
+	3-1. 키오스크 디스플레이 크기에 맞춰 4~6개 Button 제작
+	3-2. Yes or No 에 맞게 2가지 버튼만 흐름에 맞게 출력 
+4. 소요 기간에 맞춰 case 다양화 
+	
+
+- back, modeling
+db는 배운 걸로 - fire Base
+모델 학습 후 android연동 - 교내 선생님들 도움 요청
+
+[git 사용법]
+* 주의사항: []: 사용자가 임의대로 적어야할 공간
+1. 내 PC(로컬 저장소)를 git으로 사용하기
+(1) 경로 이동
+	cd [경로 이름]
+ex)	cd Desktop/Project1
+
+(2) 원하는 폴더를 깃으로 제어하게 초기화
+	git init
+
+2. github의 작업공간과 연동
+(1) 원격저장소의 repository에서 복제해서 가져오기
+	git clone [깃헙 주소]
+ex) 	git clone https://github.com/rkdgnlee/BBMR.git
+
+(2) 원격저장소와 연결하기
+	git remote add [repository를 부를 별명] [깃헙 주소]
+ex) 	git remote add origin https://github.com/rkdgnlee/BBMR.git
+
+(3) 원격저장소의 branch에서 가져오기
+	git pull [repository 별명] [branch이름]
+ex)	git pull origin master
+
+(4) 연결된 branch들 확인하기
+	git branch
+
+(5) branch 만들기
+	git branch [branch이름]
+ex) 	git branch rkdgnlee 
+
+(6) branch 변경
+	git checkout [branch이름]
+ex)	git checkout rkdgnlee
+
+(7) branch 삭제
+	git branch -d [branch이름]
+ex) 	git branch -d rkdgnlee
+
+
+3. 내 작업 제어하기
+(1)-1 내가 한 작업물 하나만 넣기
+	git add [init한 폴더 내 작업한 파일]
+ex) 	git add Login.kt
+(1)-2 폴더 내의 파일 전부 넣기
+	git add .
+
+(2) 변경 내용 현재 시점에서 취합해서 넣기? commit
+	git commit -m "[원하는 메시지]"
+ex) 	git commit -m "231122 작업시작 전 커밋"
+
+(3) 변경 내용 원격 브랜치에 push
+	git push [repository 별명] [branch 이름]
+ex)	git push origin main
+
+(4) 현재 merge fail / conflict 나온 부분 확인하기 
+	git status
+
+4. fetch가 뭐냐?
+	git fetch: 로컬과 원격의 변경 사항이 다를 때 비교·대조하고 + git merge와 함께 최신 데이터 반영 or 충돌 문제 해결
+* 순서
+1)	git fetch [repository 별명]
+ex) 	git fetch origin
+
+2) fetch 후 해당 브랜치로 checkout 해야 함. fetch할 수 있는 브랜치 내역이 나옴
+	git branch -r
+	git checkout [branch 이름]
+ex) 	git origin main
+
+3) 로그로 확인하기
+	git log
+
+* fetch와 pull 차이
+둘 다 원격 저장소의 내용을 가져오는 데 사용
+fetch는 로컬에 영향 X. 병합하기 전에 확인하는 용도
+pull은 로컬에 영향 O. 충돌이 일어날 수 있음 
+
+추천) fetch 후 pull을 로컬이 깨끗한 상태에서 사용. fetch와 pull을 적절히 사용하자
+
+
+
+
+git push origin 브랜치명
+[master라는 default branch 이름이 변경됨]
+git branch -m main master
+
+git fetch origin
+
+git branch -u origin/master master
+
+git remote set-head origin -a
+
+
+
+
+
+
+
+
+
+[20231024]
+Front
+업종 - 병원 
+요식업계
+카페 식당 - 메뉴가 많아 어려움 
+뭘 눌러야 할지를 
+전체적인 흐름을 모른다. 당황스러움이 선택지를 너무 많이 줘서 그런다. 
+선택지를 최소한의 줄일 것을 
+6칸 먹고
+40대 미만 이상 
+디지털 소외계층 
+어르신 
+커피 디카페인 ㅅ
+사이즈 시럽 옵션 -이지 선다 
+뭐 든지 yes or no
+안드로이드 스튜디오  
+요식업을 
+카페 식당 
+4*5정도  
+모델 일주일 11월 초중순 이미지 roboflow 
+open
+권한받고  
+모델연동하는 건 선생님들의 도움이 필요함 그래서 꽤 걸린다 
+
+

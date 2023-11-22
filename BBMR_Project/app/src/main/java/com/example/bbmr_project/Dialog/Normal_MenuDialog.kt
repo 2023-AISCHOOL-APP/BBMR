@@ -24,6 +24,7 @@ interface Normal_MenuDialogListener {
         options: List<String>,
         optionTvCount: Int
     )
+
     fun onMenuSelectedForPayment(selectedMenuInfoList: List<NormalSelectedMenuInfo>)
 }
 
@@ -153,7 +154,13 @@ class Normal_MenuDialog : DialogFragment() {
                 menuPrice = menuPrice
             )
             // 장바구니 + 총 금액 리스너
-            listener?.onMenuAdded(selectedMenuInfo, tvCount, totalCost, selectedMenuInfo.options, optionTvCount)
+            listener?.onMenuAdded(
+                selectedMenuInfo,
+                tvCount,
+                totalCost,
+                selectedMenuInfo.options,
+                optionTvCount
+            )
 
             // 선택한 메뉴를 리스트에 추가
             selectedMenuList.add(selectedMenuInfo)
@@ -169,6 +176,25 @@ class Normal_MenuDialog : DialogFragment() {
             if (tvCount > 1) {
                 tvCount--
                 binding.tvCount.text = tvCount.toString()
+
+                // 수량에 맞춰 가격이 감소하는 코드
+                val MenuPlusCountInt: Int? = binding.tvCount.text.toString().toIntOrNull()
+                if (MenuPlusCountInt != null) {
+                    val price: String? = arguments?.getString("normal_price")
+
+                    if (price != null) {
+                        val MenuPlusCountInt: Int? = binding.tvCount.text.toString().toIntOrNull()
+
+                        if (MenuPlusCountInt != null) {
+                            val priceInt: Int? = price.replace("[^0-9]".toRegex(), "").toIntOrNull()
+
+                            if (priceInt != null) {
+                                val plusPrice = priceInt * MenuPlusCountInt
+                                binding.price.text = String.format("%,d원", plusPrice)
+                            }
+                        }
+                    }
+                }
             }
             if (tvCount == 1) {
                 binding.btnMinus.isEnabled = false
@@ -179,6 +205,25 @@ class Normal_MenuDialog : DialogFragment() {
             binding.tvCount.text = tvCount.toString()
 
             binding.btnMinus.isEnabled = true
+
+            // 수량에 맞춰 가격이 증가하는 코드
+            val MenuPlusCountInt: Int? = binding.tvCount.text.toString().toIntOrNull()
+            if (MenuPlusCountInt != null) {
+                val price: String? = arguments?.getString("normal_price")
+
+                if (price != null) {
+                    val MenuPlusCountInt: Int? = binding.tvCount.text.toString().toIntOrNull()
+
+                    if (MenuPlusCountInt != null) {
+                        val priceInt: Int? = price.replace("[^0-9]".toRegex(), "").toIntOrNull()
+
+                        if (priceInt != null) {
+                            val plusPrice = priceInt * MenuPlusCountInt
+                            binding.price.text = String.format("%,d원", plusPrice)
+                        }
+                    }
+                }
+            }
         }
 
         // btnMinus1, btnPlus1 클릭 이벤트

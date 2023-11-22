@@ -1,4 +1,4 @@
-package com.example.bbmr_project.Senior_Fragment.adapters1
+package com.example.bbmr_project.Senior_Fragment.seniorAdapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -18,12 +18,11 @@ interface ItemClickListener {
 }
 
 // RecyclerView Adapter 클래스 정의
-class SeniorTakeOutAdapter (val context: Context, val layout : Int, val menuList: ArrayList<Senior_TakeOutVO>,
-                            private val itemClickListener: ItemClickListener? = null,
-                            private val fragmentManager: FragmentManager
-)
-    : RecyclerView.Adapter<SeniorTakeOutAdapter.ViewHolder>() {
-
+class SeniorTakeOutAdapter(
+    val context: Context, val layout: Int, val menuList: ArrayList<Senior_TakeOutVO>,
+    private val itemClickListener: ItemClickListener? = null,
+    private val fragmentManager: FragmentManager
+) : RecyclerView.Adapter<SeniorTakeOutAdapter.ViewHolder>() {
 
 
     // LayoutInflater를 이용하여 레이아웃을 인플레이트하기 위한객체 초기화
@@ -43,7 +42,7 @@ class SeniorTakeOutAdapter (val context: Context, val layout : Int, val menuList
 
 
     // ViewHolder 생성
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = inflater.inflate(layout, parent, false)
         return ViewHolder(view)
     }
@@ -53,7 +52,9 @@ class SeniorTakeOutAdapter (val context: Context, val layout : Int, val menuList
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.tvNameS.text = menuList[position].sname
-        holder.tvPriceS.text = menuList[position].sprice.toString()
+        // 기본값을 1000단위로 나누는 코드
+        val basicPrice = String.format("%,d", menuList[position].sprice)
+        holder.tvPriceS.text = basicPrice+"원"
         holder.imgS.setImageResource(menuList[position].simg)
         holder.itemView.setOnClickListener {
             itemClickListener?.onItemClick(menuList[position])
@@ -64,6 +65,7 @@ class SeniorTakeOutAdapter (val context: Context, val layout : Int, val menuList
 
         }
     }
+
     // 데이터 아이템 개수 반환
     override fun getItemCount(): Int {
         return menuList.size

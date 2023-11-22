@@ -33,9 +33,15 @@ class NormalSelectPayAdapter(
     override fun onBindViewHolder(holder: NormalSelectPayAdapter.ViewHolder, position: Int) {
         val item = selectedMenuList[position]
 
+        // price가 String이므로 Int로 변환
+        val priceInt: Int? = item.price?.replace("[^0-9]".toRegex(), "")?.toIntOrNull()
+
+        // priceInt가 null이 아닌 경우에 계산 수행 (장바구니에서 수량 증감해도 결제하기 rvSelectPayList에 반영하기 위해)
+        val calculateMenuCost = priceInt?.let { it * item.tvCount } ?: 0
+
         holder.selectNormalName.text = selectedMenuList[position].name.toString()
         holder.selectNormalCount.text = selectedMenuList[position].tvCount.toString()
-        holder.selectNormalMoney.text = selectedMenuList[position].menuPrice.toString()
+        holder.selectNormalMoney.text = calculateMenuCost.toString()
         holder.selectNormalOption.text = selectedMenuList[position].options.toString()
         holder.selectNormalOptionCost.text = selectedMenuList[position].optionTvCount.toString()
 
