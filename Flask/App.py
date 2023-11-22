@@ -33,7 +33,7 @@ class TodoList(Resource):
         db_result = cursor.fetchall()
         menu = {}
         for item in db_result:
-            menu[item['menu_id']] = [item['name'],item['price'],item['menu_con'],item['size']]
+            menu[item['menu_id']] = [item['name'],item['price'],item['menu_con'],item['size'],item['imageUrl']]
         return menu
 
     def get(self):
@@ -188,10 +188,12 @@ def upload_file():
     if file:
         # 이미지 읽기 및 리사이즈
         image = Image.open(io.BytesIO(file.read()))
+        image = image.rotate(90, expand=True)
+        
         print("image -> ",image)
-        image.save('image/image.png')
-        image = image.resize((480, 360))  # 너비 480, 높이 360으로 리사이즈
-
+        image.save('image/image1.png')
+        image = image.resize((360, 480))  # 너비 480, 높이 360으로 리사이즈
+        image.save('image/image2.png')
         # 필요한 추가 전처리 과정
         # 예시: 이미지를 numpy 배열로 변환
         image = np.array(image)
