@@ -104,54 +104,115 @@ class checkCoupon(Resource):
 
 
 
+
+# 결제 완료 후 DB 저장 / 주문번호 안드로이드로 보내기
+class SaveOrder(Resource):
+    def post(self):
+        try:
+            # 안드로이드 앱에서 전송한 JSON 데이터를 받음
+            data = request.get_json()
+            print(data)
+            # 메뉴리스트[(메뉴id,수량),(메뉴id,수량)...], 결제금액
+            menu_ids = data['menu_ids']
+            total_amount = data['total_amount']
+
+            conn = get_connection()
+            cursor = conn.cursor()
+            # Orders 테이블에 주문 정보 삽입(order_id(주문번호)는 자동생성), 총결제금액(쿠폰사용금액 제외)
+            cursor.execute("INSERT INTO orders (total_amount) VALUES (%s)", (total_amount,))
+            conn.commit()
+
+            # 삽입한 주문의 id값을 가져온다
+            order_id = cursor.lastrowid 
+            # order_detail테이블에 order_id, 메뉴id, 수량을 저장
+            for menu_id in menu_ids:
+                cursor.execute("INSERT INTO order_detail (order_id, menu_id, quantity) VALUES (%s, %s, %s)",
+                            (order_id, menu_id['menu_id'], menu_id['quantity']))
+                conn.commit()
+            conn.close()
+
+            # 쿠폰을 썼을때 JSON데이터에 coupon 값이 null이 아닌 값이 있을때
+            if 'coupon' in data:
+                # 쿠폰코드와 할인금액을 가져온다(할인금액은 금액권이나 교환권이나 상관없이 금액으로)
+                coupon_code = data['coupon']
+                discount = data['discount']
+
+                # 쿠폰코드에 해당되는 쿠폰정보를 가져옴
+                conn = get_connection()
+                cursor = conn.cursor()
+                cursor.execute("SELECT menu_id, C_use, amount FROM coupon WHERE coupon_code = %s", (coupon_code,))
+                coupon_data = cursor.fetchall()[0]
+                menu_id, C_use, amount = coupon_data
+                # 쿠폰의 amount(금액)이 0이고 메뉴id가 있을때 (교환권)
+                if amount ==0 and menu_id is not None:
+                    conn = get_connection()
+                    cursor = conn.cursor()
+                    cursor.execute(f"update coupon set C_use = 1 where coupon_code = '{coupon_code}'")
+                    conn.commit()
+                # 금액권
+                else:
+                    amount_result = amount-discount
+                    print(amount_result)
+                    conn = get_connection()
+                    cursor = conn.cursor()
+                    cursor.execute("UPDATE coupon SET amount = %s WHERE coupon_code = %s", (amount_result, coupon_code))
+                    conn.commit()
+                conn.close()
+
+            
+            response = {"response":order_id}
+            
+            return {"response":order_id}
+
+        except Exception as e:
+            print(str(e))
+            response = jsonify({"error": "Error saving order"})
+            
+            return response
+
    
 
 
 
 # 학습된 모델 로드
+# 231121
 model = tf.keras.models.load_model('test_face_cnn_model.h5')
-
-################################################################################
-
-### 1번
-def preprocess_image(image): # 231120 -- 이미지 전처리를 위한 코드 수정
-    # 이미지를 (360, 480) 크기로 재조정하고 채널을 3으로 설정
-    img = image.resize((480, 360))
-    img_array = np.array(img)
-
-    # 이미지 배열이 (360, 480, 3) 형태인지 확인
-    if img_array.shape != (360, 480, 3):
-        raise ValueError("이미지의 차원이 (360, 480, 3)이 아닙니다.")
-
-    img_array = img_array / 255.0  # 픽셀 값을 [0, 1] 범위로 정규화
-    img_array = np.expand_dims(img_array, axis=0)  # 모델 입력을 위한 차원 추가
-    return img_array
-
-@app.route('/upload_and_predict', methods=['POST'])  ## 231120 해당 부분은 RetrofitAPI에 POST와 같은 경로로 설정해야함
-def upload_and_predict():
-    # 클라이언트로부터 이미지 파일 받기
+@app.route('/upload', methods=['POST'])
+def upload_file():
     if 'image' not in request.files:
-        return jsonify({'error': 'No image part'})
+        return jsonify({'error': 'No image part'}), 400
 
-    image_file = request.files['image']
-    image_file.seek(0)  # 231120 스트림 위치 초기화 --> 이미지 파일을 읽기 위해
-    
-    # 이미지를 PIL Image로 변환
-    image = Image.open(io.BytesIO(image_file.read())).convert("RGB")
-    
-    # 전처리
-    preprocessed_image = preprocess_image(image)
+    file = request.files['image']
+    print(file)
 
-    # 모델 예측
-    input_array = preprocessed_image # np.array([np.array(preprocessed_image)]) -- 231120 코드 수정 : 필요한 형태로 전처리 되어 있어 배열 형태 코드를 사용x
-    predictions = model.predict(input_array)
+    if file:
+        # 이미지 읽기 및 리사이즈
+        image = Image.open(io.BytesIO(file.read()))
+        print(image)
+        image = image.resize((480, 360))  # 너비 480, 높이 360으로 리사이즈
 
-    # 결과 전송
-    result = {'prediction': predictions.tolist()}
-    return jsonify(result)
+        # 필요한 추가 전처리 과정
+        # 예시: 이미지를 numpy 배열로 변환
+        image = np.array(image)
+        image = image / 255.0  # 정규화
+        image = np.expand_dims(image, axis=0)  # 모델 입력 형태에 맞게 차원 확장
+
+        # 모델 예측
+        prediction = model.predict(image)
+        print(prediction)
+
+        # 예측 결과 처리 및 반환
+        # 예시: 예측 결과의 최대값 인덱스 반환
+        if prediction < 0.5:
+            result = 0
+        else:
+            result = 1
+        # result = 0
+        print(result)
+        return {'result': result}
 
 
-
+api.add_resource(SaveOrder,"/saveorder/")
 api.add_resource(checkCoupon,"/checkcoupon/")
 api.add_resource(TodoList,'/todos/')
 
