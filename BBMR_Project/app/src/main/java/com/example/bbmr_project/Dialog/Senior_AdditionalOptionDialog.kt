@@ -1,6 +1,5 @@
 package com.example.bbmr_project.Dialog
 
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -14,7 +13,6 @@ import androidx.fragment.app.DialogFragment
 import com.example.bbmr_project.CartStorage
 import com.example.bbmr_project.Product
 import com.example.bbmr_project.R
-import com.example.bbmr_project.Senior_TakeOutActivity
 import com.example.bbmr_project.databinding.DialogSeniorAdditionalOptionBinding
 
 class Senior_AdditionalOptionDialog : DialogFragment() {

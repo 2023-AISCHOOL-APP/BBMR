@@ -15,11 +15,11 @@ class StartActivity : AppCompatActivity() {
         binding = ActivityStartBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnOrderInASI.setOnClickListener {
-            val intent = Intent(this, LoadingSplashActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+//        binding.btnOrderInASI.setOnClickListener {
+//            val intent = Intent(this, LoadingSplashActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//        }
 
     }
 
