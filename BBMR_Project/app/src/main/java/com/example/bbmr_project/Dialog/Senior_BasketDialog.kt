@@ -27,7 +27,7 @@ const val KeyProductBundleKey = "Product"
 
 
 
-class Senior_BasketDialog() : DialogFragment(), OnCartChangeListener {
+class SeniorBasketDialog() : DialogFragment(), OnCartChangeListener {
 
     private lateinit var viewModel: Product
     private lateinit var binding: DialogSeniorBasketBinding
@@ -137,7 +137,7 @@ class Senior_BasketDialog() : DialogFragment(), OnCartChangeListener {
 
     // 값이 바뀌는 기능
     override fun onChange(productList: List<Product>) {
-        binding.tvAmount.text = productList.sumOf { it.price }.toString()
+        binding.tvAmount.text = String.format("%,d 원", productList.sumOf { it.price })
 
         if (::adapter.isInitialized){
             adapter.updateData(productList as ArrayList<Product>)
