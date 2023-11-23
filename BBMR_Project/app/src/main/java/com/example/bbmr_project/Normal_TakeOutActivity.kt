@@ -1,5 +1,6 @@
 package com.example.bbmr_project
 
+import NormalSelectPayAdapter
 import NormalSelectedMenuInfo
 import Normal_Fragment_Tab1
 import android.content.Intent
@@ -139,9 +140,10 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
     }
 
     private fun initializeRecyclerView() {
-        // 장바구니(rvNormalBasket)에 정보 담기
+        val normalSelectPayAdapter = NormalSelectPayAdapter(this, R.layout.normal_selectpaylist, mutableListOf())
+        // NormalSelectBasketAdapter 생성 시 NormalSelectPayAdapter를 전달
         normalSelectBasketAdapter =
-            NormalSelectBasketAdapter(this, R.layout.normal_basketlist, mutableListOf(), this)
+            NormalSelectBasketAdapter(this, R.layout.normal_basketlist, mutableListOf(), this, normalSelectPayAdapter)
         binding.rvNormalBasket.apply {
             adapter = normalSelectBasketAdapter
             layoutManager = LinearLayoutManager(

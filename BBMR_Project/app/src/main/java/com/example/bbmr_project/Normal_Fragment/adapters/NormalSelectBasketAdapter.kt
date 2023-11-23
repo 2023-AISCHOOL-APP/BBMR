@@ -1,5 +1,6 @@
 package com.example.bbmr_project.Normal_Fragment.adapters
 
+import NormalSelectPayAdapter
 import NormalSelectedMenuInfo
 import android.content.Context
 import android.util.Log
@@ -17,12 +18,13 @@ class NormalSelectBasketAdapter(
     val context: Context,
     val layout: Int,
     val basketList: MutableList<NormalSelectedMenuInfo>,
-    val totalCostListener: TotalCostListener
+    val totalCostListener: TotalCostListener,
+    val normalSelectPayAdapter: NormalSelectPayAdapter
+
 ) : RecyclerView.Adapter<NormalSelectBasketAdapter.ViewHolder>() {
 
     val inflater: LayoutInflater = LayoutInflater.from(context)
     private var selectedMenuList: MutableList<NormalSelectedMenuInfo> = mutableListOf()
-
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val basketImg: ImageView = view.findViewById(R.id.basketImg)
         val tvBasketCount: TextView = view.findViewById(R.id.tvBasketCount)
@@ -41,7 +43,6 @@ class NormalSelectBasketAdapter(
 
     override fun onBindViewHolder(holder: NormalSelectBasketAdapter.ViewHolder, position: Int) {
         val selectedItem = basketList[position]
-//        val optionMenuCost = (selectedItem.menuPrice * selectedItem.tvCount) + (selectedItem.optionTvCount * 500)
 
         holder.basketImg.setImageResource(selectedItem.menuImg)
         holder.tvBasketCount.text = selectedItem.tvCount.toString()
@@ -51,6 +52,9 @@ class NormalSelectBasketAdapter(
             // tvBasketCount 값을 증가
             selectedItem.tvCount++
             notifyItemChanged(position)
+
+            // NormalSelectPayAdapter를 업데이트
+            normalSelectPayAdapter.updateItems(basketList)
 
             // 현재 총 비용 출력
             val currentTotalCost = calculateTotalCost()
@@ -69,6 +73,9 @@ class NormalSelectBasketAdapter(
                 selectedItem.tvCount--
                 notifyItemChanged(position)
 
+                // NormalSelectPayAdapter를 업데이트
+                normalSelectPayAdapter.updateItems(basketList)
+
                 // 현재 총 비용 출력
                 val currentTotalCost = calculateTotalCost()
                 Log.d("TotalCostUpdated", "Total Cost Increased: $currentTotalCost")
@@ -79,13 +86,15 @@ class NormalSelectBasketAdapter(
 
         // btnBasketCancel 클릭 시
         holder.btnBasketCancel.setOnClickListener {
-
+            Log.d("ClickEvent", "btnBasketCancel Clicked")
             // 해당 아이템의 정보를 얻어옴
             val selectedItem = basketList[holder.adapterPosition]
 
+            // 출력: 현재 adapterPosition 확인
+            Log.d("현재 adapterPosition", "Current adapterPosition: ${holder.adapterPosition}")
+
             // 해당 아이템의 비용을 총 비용에서 차감
             val itemCost = calculateItemCost(selectedItem)
-//            val optionTvCount = calculateOptionTvCount(selectedItem)
             val remainingTotalCost = calculateTotalCost() - itemCost
 
             // 로그로 현재 총 비용 출력
@@ -96,17 +105,35 @@ class NormalSelectBasketAdapter(
 
             // 해당 아이템을 RecyclerView에서 삭제
             val removedItemPosition = holder.adapterPosition
-            basketList.removeAt(removedItemPosition)
-            notifyItemRemoved(removedItemPosition)
+            removeItemFromBasket(removedItemPosition)
+
+            // NormalSelectPayAdapter에도 삭제 반영
+            normalSelectPayAdapter.removeItem(removedItemPosition)
+            normalSelectPayAdapter.notifyItemRemoved(removedItemPosition)
+            // NormalSelectPayAdapter를 업데이트
+            normalSelectPayAdapter.updateItems(basketList)
+            normalSelectPayAdapter.notifyDataSetChanged()
 
             // 전체 취소인 경우 해당 메뉴의 비용을 전체에서 제거
             if (basketList.isEmpty()) {
                 Log.d("TotalCostUpdated", "Total Cost Reset: 0")
                 totalCostListener.onTotalCostUpdated(0, 0)
             }
+            // NormalSelectPayAdapter의 데이터 확인 로그
+            Log.d("삭제클릭_데이터확인로그", "PayAdapter Data: ${normalSelectPayAdapter.selectedMenuListProperty}")
+
         }
 
     }
+
+    private fun removeItemFromBasket(position: Int) { // 아이템 삭제 메서드
+        if (position in 0 until basketList.size) {
+            Log.d("바스켓어댑터", "Removing item at position $position")
+            basketList.removeAt(position)
+            notifyItemRemoved(position)
+        }
+    }
+
 
     private fun calculateOptionTvCount(item: NormalSelectedMenuInfo): Int {
         return item.tvCount1 * 500 + item.tvCount2 * 500 + item.tvCount3 * 500 + item.tvCount4 * 500

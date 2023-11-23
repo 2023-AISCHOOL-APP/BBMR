@@ -88,9 +88,14 @@ class Normal_SelectPayDialog : DialogFragment() {
         selectedMenuList = arguments?.getParcelableArrayList("selectedMenuList") ?: mutableListOf()
 
         // RecyclerView를 selectedMenuList로 설정
-        adapter = NormalSelectPayAdapter(requireActivity(), R.layout.normal_selectpaylist, selectedMenuList)
+        adapter = NormalSelectPayAdapter(
+            requireActivity(),
+            R.layout.normal_selectpaylist,
+            selectedMenuList
+        )
         binding.rvSelectPayList.adapter = adapter
-        binding.rvSelectPayList.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvSelectPayList.layoutManager = LinearLayoutManager(context)
+        binding.rvSelectPayList.invalidateItemDecorations()
     }
 
     private fun showNormalCardPayDialog() {
@@ -117,12 +122,16 @@ class Normal_SelectPayDialog : DialogFragment() {
     fun setListener(listener: NormalSelectPayDialogListener) {
         this.listener = listener
     }
+
     fun updateSelectedMenuList(selectedMenuInfoList: List<NormalSelectedMenuInfo>) {
         // 전달받은 리스트의 각 항목을 현재 리스트에 추가
         selectedMenuList.addAll(selectedMenuInfoList)
 
-        // 어댑터에 변경 사항 알림
-        adapter.notifyDataSetChanged()
+        // UI 스레드에서 어댑터에 변경 사항 알림
+        activity?.runOnUiThread {
+            adapter.notifyDataSetChanged()
+            Log.d("UpdateUI", "UI Updated")
+        }
     }
 
 }
