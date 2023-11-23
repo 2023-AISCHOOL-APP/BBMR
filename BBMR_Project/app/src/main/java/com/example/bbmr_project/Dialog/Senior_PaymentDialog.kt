@@ -1,8 +1,10 @@
 package com.example.bbmr_project.Dialog
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Handler
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.RelativeSizeSpan
@@ -10,8 +12,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ProgressBar
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import com.example.bbmr_project.Normal_PaySuccessActivity
 import com.example.bbmr_project.R
 import com.example.bbmr_project.databinding.DialogSeniorPaymentBinding
 
@@ -43,13 +47,7 @@ class Senior_PaymentDialog: DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
-
         binding.btnCnclDSP.setOnClickListener {
-            val dialogFragment = Senior_BasketDialog()
-            dialogFragment.show(requireActivity().supportFragmentManager, "Senior_BasketDialog")
-
             dismiss()
         }
         binding.clPayFailDSP.setOnClickListener{
@@ -87,8 +85,8 @@ class Senior_PaymentDialog: DialogFragment() {
         val fulltext = "아니오\n(주문번호 미발행)"
 
         val spannableStringBuilder = SpannableStringBuilder(fulltext)
-        spannableStringBuilder.setSpan(RelativeSizeSpan(2f), 0, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        spannableStringBuilder.setSpan(RelativeSizeSpan(0.9f),4, fulltext.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannableStringBuilder.setSpan(RelativeSizeSpan(2.3f), 0, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannableStringBuilder.setSpan(RelativeSizeSpan(0.8f),4, fulltext.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         cancelButton.text = spannableStringBuilder
 
 
@@ -96,6 +94,30 @@ class Senior_PaymentDialog: DialogFragment() {
         // 화면 밖 터치 잠금
         dialog.setCanceledOnTouchOutside(false)
         dialog.show()
+
+        // ------ 프로그레스 바 코드 시작 -------
+        val handler = Handler()
+        val progressBar: ProgressBar = myLayout.findViewById(R.id.progressBar3)
+        progressBar.max = 100
+        progressBar.progress = 0
+        val progressIncreaseAmount = 20
+        val runnable = object : Runnable {
+            var progressCount = 0
+            override fun run() {
+                if (progressCount < 5) {
+                    progressBar.incrementProgressBy(progressIncreaseAmount)
+                    progressCount++
+                    handler.postDelayed(this, 1000)
+                } else {
+                    val dialogFragment = Senior_PaySuccessDialog()
+                    dialogFragment.show(requireActivity().supportFragmentManager, "PaymentSuccessDialog")
+                    dialog.dismiss()
+                    dismiss()
+                }
+            }
+        }
+        handler.post(runnable)
+        // ------ 프로그레스 바 코드 끝 -------
 
         // 영수증 출력
         myLayout.findViewById<Button>(R.id.btnYesBillDSPB).setOnClickListener {

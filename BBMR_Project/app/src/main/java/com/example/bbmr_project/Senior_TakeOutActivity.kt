@@ -5,8 +5,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.LeadingMarginSpan
+import android.text.style.LineHeightSpan
+import android.text.style.RelativeSizeSpan
 import android.util.Log
 import android.view.View
+import androidx.core.widget.TextViewCompat.setLineHeight
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bbmr_project.Dialog.KeyProductBundleKey
@@ -41,6 +47,16 @@ class Senior_TakeOutActivity : AppCompatActivity(), OnCartChangeListener {
         setContentView(binding.root)
         CartStorage.setListener(this)
 
+        // ------ 장바구니 버튼 크기 변경 코드 시작 ------
+        val _text = "장바구니\n&\n결제하기"
+        val spannableStringBuilder = SpannableStringBuilder(_text)
+        spannableStringBuilder.setSpan(RelativeSizeSpan(1.4f), 0, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannableStringBuilder.setSpan(RelativeSizeSpan(0.5f), 4, 6, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannableStringBuilder.setSpan(RelativeSizeSpan(1.4f), 7, _text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        binding.btnBasket.text = spannableStringBuilder
+        binding.btnBasket.setLineSpacing(0.5f, 0.7f)
+        // ------ 장바구니 버튼 크기 변경 코드 끝 ------
+
         // 일반 키오스크로 이동
         binding.btnToOrigin.setOnClickListener {
             val intent = Intent(this@Senior_TakeOutActivity, Normal_TakeOutActivity::class.java)
@@ -69,11 +85,6 @@ class Senior_TakeOutActivity : AppCompatActivity(), OnCartChangeListener {
         binding.btnPre.setOnClickListener { (supportFragmentManager.findFragmentById(R.id.fl1) as? Senior_Fragment_Tab_Recommend)?.switchToMenuList1() }
         // 다음 버튼 클릭시 기존의 리스트 리셋후 새로운 리스트 추가
         binding.btnNext.setOnClickListener { (supportFragmentManager.findFragmentById(R.id.fl1) as? Senior_Fragment_Tab_Recommend)?.switchToMenuList2() }
-
-
-        //결제화면 이동
-        binding.btnPay.setOnClickListener {
-        }
 
         // 장바구니 버튼 기능
         binding.btnBasket.setOnClickListener {
