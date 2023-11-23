@@ -17,14 +17,13 @@ import com.example.bbmr_project.R
 class NormalSelectBasketAdapter(
     val context: Context,
     val layout: Int,
-    val basketList: MutableList<NormalSelectedMenuInfo>,
     val totalCostListener: TotalCostListener,
-    val normalSelectPayAdapter: NormalSelectPayAdapter
-
 ) : RecyclerView.Adapter<NormalSelectBasketAdapter.ViewHolder>() {
 
-    val inflater: LayoutInflater = LayoutInflater.from(context)
-    private var selectedMenuList: MutableList<NormalSelectedMenuInfo> = mutableListOf()
+    private val basketList: MutableList<NormalSelectedMenuInfo> = mutableListOf()
+
+    private val inflater: LayoutInflater = LayoutInflater.from(context)
+
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val basketImg: ImageView = view.findViewById(R.id.basketImg)
         val tvBasketCount: TextView = view.findViewById(R.id.tvBasketCount)
@@ -53,9 +52,6 @@ class NormalSelectBasketAdapter(
             selectedItem.tvCount++
             notifyItemChanged(position)
 
-            // NormalSelectPayAdapter를 업데이트
-            normalSelectPayAdapter.updateItems(basketList)
-
             // 현재 총 비용 출력
             val currentTotalCost = calculateTotalCost()
             Log.d("TotalCostUpdated", "Total Cost Increased: $currentTotalCost")
@@ -72,9 +68,6 @@ class NormalSelectBasketAdapter(
             if (selectedItem.tvCount > 1) {
                 selectedItem.tvCount--
                 notifyItemChanged(position)
-
-                // NormalSelectPayAdapter를 업데이트
-                normalSelectPayAdapter.updateItems(basketList)
 
                 // 현재 총 비용 출력
                 val currentTotalCost = calculateTotalCost()
@@ -107,21 +100,12 @@ class NormalSelectBasketAdapter(
             val removedItemPosition = holder.adapterPosition
             removeItemFromBasket(removedItemPosition)
 
-            // NormalSelectPayAdapter에도 삭제 반영
-            normalSelectPayAdapter.removeItem(removedItemPosition)
-            normalSelectPayAdapter.notifyItemRemoved(removedItemPosition)
-            // NormalSelectPayAdapter를 업데이트
-            normalSelectPayAdapter.updateItems(basketList)
-            normalSelectPayAdapter.notifyDataSetChanged()
 
             // 전체 취소인 경우 해당 메뉴의 비용을 전체에서 제거
             if (basketList.isEmpty()) {
                 Log.d("TotalCostUpdated", "Total Cost Reset: 0")
                 totalCostListener.onTotalCostUpdated(0, 0)
             }
-            // NormalSelectPayAdapter의 데이터 확인 로그
-            Log.d("삭제클릭_데이터확인로그", "PayAdapter Data: ${normalSelectPayAdapter.selectedMenuListProperty}")
-
         }
 
     }
@@ -179,8 +163,10 @@ class NormalSelectBasketAdapter(
     }
 
     fun clearItems() {
-        selectedMenuList.clear()
         basketList.clear()
     }
 
+    fun getCurrentList(): List<NormalSelectedMenuInfo> {
+        return basketList
+    }
 }

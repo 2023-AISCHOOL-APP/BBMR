@@ -32,7 +32,7 @@ class Normal_SelectPayDialog : DialogFragment() {
     private lateinit var adapter: NormalSelectPayAdapter
 
     companion object {
-        fun newInstance(selectedMenuList: MutableList<NormalSelectedMenuInfo>): Normal_SelectPayDialog {
+        fun newInstance(selectedMenuList: List<NormalSelectedMenuInfo>): Normal_SelectPayDialog {
             val args = Bundle().apply {
                 // selectedMenuList를 인자로 전달
                 putParcelableArrayList("selectedMenuList", ArrayList(selectedMenuList))
@@ -53,7 +53,9 @@ class Normal_SelectPayDialog : DialogFragment() {
             ViewGroup.LayoutParams.MATCH_PARENT
         )
         dialog?.window?.setDimAmount(0.4f)
-        isCancelable = false
+
+        isCancelable = true
+//        dialog?.setCanceledOnTouchOutside(true)
     }
 
     override fun onCreateView(
@@ -96,6 +98,7 @@ class Normal_SelectPayDialog : DialogFragment() {
         binding.rvSelectPayList.adapter = adapter
         binding.rvSelectPayList.layoutManager = LinearLayoutManager(context)
         binding.rvSelectPayList.invalidateItemDecorations()
+        adapter.notifyDataSetChanged()
     }
 
     private fun showNormalCardPayDialog() {
