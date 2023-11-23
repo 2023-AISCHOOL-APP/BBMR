@@ -41,13 +41,13 @@
       android:textColor="@color/mainColor"
       android:textSize="50sp"
       android:textStyle="bold"
-      app:layout_constraintBottom_toTopOf="@+id/btnOrder"
+      app:layout_constraintBottom_toTopOf="@+id/btnOrderInASI"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="@+id/tv3" />
 
   <Button
-      android:id="@+id/btnOrder"
+      android:id="@+id/btnOrderInASI"
       android:layout_width="500dp"
       android:layout_height="225dp"
       android:layout_marginBottom="128dp"

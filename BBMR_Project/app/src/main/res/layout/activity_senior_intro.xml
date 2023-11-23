@@ -10,7 +10,7 @@
     <TextView
         android:id="@+id/tv3"
         android:layout_width="0dp"
-        android:layout_height="700dp"
+        android:layout_height="800dp"
         android:background="@drawable/tv_main_radius"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,37 +41,45 @@
         android:textColor="@color/mainColor"
         android:textSize="50sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/btnOrder"
+        app:layout_constraintBottom_toTopOf="@+id/btnOrderInASI"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.463"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv3" />
+        app:layout_constraintTop_toTopOf="@+id/tv3"
+        app:layout_constraintVertical_bias="0.422" />
 
     <Button
-        android:id="@+id/btnOrder"
-        android:layout_width="300dp"
-        android:layout_height="225dp"
-        android:layout_marginBottom="128dp"
+        android:id="@+id/btnOrderInASI"
+        android:layout_width="420dp"
+        android:layout_height="340dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="@color/mainColor"
         android:text="매장"
-        android:textSize="100dp"
+        android:textSize="120dp"
         android:textStyle="bold"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline8"
+        app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="300dp"
-        android:layout_height="225dp"
-        android:layout_marginBottom="128dp"
+        android:id="@+id/btnOrderOutASI"
+        android:layout_width="420dp"
+        android:layout_height="340dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="@color/mainColor"
         android:text="포장"
-        android:textSize="100dp"
+        android:textSize="120dp"
         android:textStyle="bold"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="@+id/guideline8" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -79,5 +87,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
+        app:layout_constraintGuide_begin="462dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
