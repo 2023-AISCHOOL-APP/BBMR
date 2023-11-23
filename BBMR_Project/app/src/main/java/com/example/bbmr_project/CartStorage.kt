@@ -5,20 +5,26 @@ import android.util.Log
 import kotlinx.parcelize.Parcelize
 import java.io.Serializable
 
-
 @Parcelize
-data class Product(val name: String,
-                   var price: Int,
-                   var count: Int,
-                   var temperature: Boolean = false,
-                   var size: Boolean = false,
-                   var sugar: Boolean = false,
-                   var cream:Boolean = false,
-                   val id:String = "001" ) : Parcelable, Serializable
+data class Product(
+    val name: String,
+    var price: Int = 0,
+    var count: Int,
+    var temperature: Boolean = false,
+    var size: Boolean = false,
+    var sugar: Boolean = false,
+    var cream: Boolean = false,
+    val id: String = "001",
+    var image: String = "BBMR/img/",
+) : Parcelable, Serializable
+
+
+
 
 interface OnCartChangeListener {
     fun onChange(productList: List<Product>)
 }
+
 object CartStorage {
 
     // private val 에서 private로 변경 -> 이유 : MenuDialog에서 86번줄 추가옵션 productList가 오류가 듬
@@ -46,7 +52,6 @@ object CartStorage {
     fun getProductList(): List<Product> {
         Log.d("CartStore", "getProductList()=$productList")
         return productList
-
     }
 
     fun addProduct(product: Product) {
@@ -64,4 +69,6 @@ object CartStorage {
         productList.clear()
         notifyProductListChanged()
     }
+
+
 }

@@ -1,5 +1,6 @@
 package com.example.bbmr_project.Dialog
 
+import android.app.SearchManager.OnCancelListener
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -14,6 +15,8 @@ import com.example.bbmr_project.VO.Senior_TakeOutVO
 import com.example.bbmr_project.databinding.DialogSeniorMenuBinding
 
 class Senior_MenuDialog : DialogFragment() {
+
+
 
     // 클릭하면 Bakset으로 갑 전송 프로젝트 기능에는 영향 X
     var onClick: (Product) -> Unit = {
@@ -67,6 +70,8 @@ class Senior_MenuDialog : DialogFragment() {
         return binding.root
     }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -78,7 +83,8 @@ class Senior_MenuDialog : DialogFragment() {
 //        val seniorgetprice = String.format("%,d", sprice)
 
         binding.tvMenuName.text = sname
-        binding.tvMenuPrice.text = String.format("%,d원",sprice) // String.format("%,d", 값) -> 1000 단위마다 , 표시
+        binding.tvMenuPrice.text =
+            String.format("%,d원", sprice) // String.format("%,d", 값) -> 1000 단위마다 , 표시
         if (simg != null) {
             binding.imgMenu.setImageResource(simg)
         }
@@ -115,22 +121,22 @@ class Senior_MenuDialog : DialogFragment() {
             val radioButton: RadioButton = binding.rbCooHot.findViewById(radiogroup)
             val coolhot: Boolean = radioButton.isChecked
 
-             // 클릭하면 값을 전송하는 코드
-            onClick.invoke(
-                Product(
-                    name = binding.tvMenuName.text.toString(),
-                    price = binding.tvMenuPrice.text.toString().replace(",", "").replace(" 원", "").toIntOrNull()?: 0,
-                    count = binding.tvMenuCount.text.toString().toInt(),
-                    temperature = coolhot
-
-                )
-            )
+            // 클릭하면 값을 전송하는 코드 -> 굳이 프로젝트에서는 필요없음
+//            onClick.invoke(
+//                Product(
+//                    name = binding.tvMenuName.text.toString() ,
+//                    price = binding.tvMenuPrice.text.toString().replace(",", "").replace(" 원", "").toIntOrNull()?: 0,
+//                    count = binding.tvMenuCount.text.toString().toInt(),
+//                    temperature = coolhot
+//                )
+//            )
 
             // CartStorage.productList에 값을 추가
             CartStorage.addProduct(
                 Product(
                     name = binding.tvMenuName.text.toString(),
-                    price = binding.tvMenuPrice.text.toString().replace(",","").replace("원","").toIntOrNull() ?: 0,
+                    price = binding.tvMenuPrice.text.toString().replace(",", "").replace("원", "")
+                        .toIntOrNull() ?: 0,
                     count = binding.tvMenuCount.text.toString().toInt(),
                     temperature = coolhot
                 )
@@ -153,12 +159,13 @@ class Senior_MenuDialog : DialogFragment() {
             // 상품 수량이 증가하는 코드
             binding.tvMenuCount.text = MenuCount.toString()
             // 수량에 맞춰 가격이 증가하는 코드
-            val MenuPlusCountInt : Int? = binding.tvMenuCount.text.toString().toIntOrNull()
-            if (MenuPlusCountInt != null){
-                val getPrice = arguments?.getInt("sprice") ?:0
-                val plusPrice = getPrice*MenuPlusCountInt
-                binding.tvMenuPrice.text = String.format("%,d원",plusPrice) // String.format("%,d", 값) -> 1000 단위마다 , 표시
-            }else{
+            val MenuPlusCountInt: Int? = binding.tvMenuCount.text.toString().toIntOrNull()
+            if (MenuPlusCountInt != null) {
+                val getPrice = arguments?.getInt("sprice") ?: 0
+                val plusPrice = getPrice * MenuPlusCountInt
+                binding.tvMenuPrice.text =
+                    String.format("%,d원", plusPrice) // String.format("%,d", 값) -> 1000 단위마다 , 표시
+            } else {
                 binding.tvMenuPrice.text = "취소 후 다시 부탁드립니다."
             }
             binding.btnSeniorMinus.isClickable = true  // Plus버튼 이후에 지속적으로 Minus버튼 클릭시 버튼 활성화
@@ -176,11 +183,15 @@ class Senior_MenuDialog : DialogFragment() {
                 // 상품 수랑이 감소하는 코드
                 binding.tvMenuCount.text = MenuCount.toString()
                 // 수량에 맞춰 가격이 감소하는 코드
-                val MenuMinusCountInt : Int? = binding.tvMenuCount.text.toString().toIntOrNull()  //replace
-                if (MenuMinusCountInt != null){
+                val MenuMinusCountInt: Int? =
+                    binding.tvMenuCount.text.toString().toIntOrNull()  //replace
+                if (MenuMinusCountInt != null) {
                     val getPrice = arguments?.getInt("sprice") ?: 0
-                    val minusPrice = getPrice*MenuMinusCountInt
-                    binding.tvMenuPrice.text = String.format("%,d원",minusPrice) // String.format("%,d", 값) -> 1000 단위마다 , 표시 String.format("%, d 원", minusPrice)
+                    val minusPrice = getPrice * MenuMinusCountInt
+                    binding.tvMenuPrice.text = String.format(
+                        "%,d원",
+                        minusPrice
+                    ) // String.format("%,d", 값) -> 1000 단위마다 , 표시 String.format("%, d 원", minusPrice)
                 }
 
             }

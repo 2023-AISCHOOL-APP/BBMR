@@ -2,7 +2,6 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
 
-
     // parcelable 사용
     id("kotlin-parcelize")
 
@@ -82,4 +81,8 @@ dependencies {
     // 231121 --- 코드 추가(google, okhttp3)
     implementation ("com.google.code.gson:gson:2.8.9")
     implementation ("com.squareup.okhttp3:logging-interceptor:4.2.1")
+
+    // Glide 사용 -> 사진을 URL로 받아옴
+    implementation ("com.github.bumptech.glide:glide:4.12.0") // 최신 버전 확인 필요
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
 }

@@ -18,6 +18,7 @@ class SeniorGetCartStorageAdapter (private val productList : List<Product>)
         val tvMenuPrice : TextView = view.findViewById(R.id.tvMenuPrice)
         val tvCount : TextView = view.findViewById(R.id.tvCount)
     }
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int

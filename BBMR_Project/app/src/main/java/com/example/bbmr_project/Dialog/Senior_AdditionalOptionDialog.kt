@@ -59,6 +59,7 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
         // ------ 추가 옵션 코드 끝 ------
 
         // ------ 추천 메뉴 코드 시작 ------
+
         binding.btnRecommend1.setOnClickListener {
             val bread = Product(
                 name = "데블스 초코케이크",
@@ -68,6 +69,7 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
                 size = false,
                 sugar = false,
                 cream = false,
+                image = "BBMR/"
             )
             CartStorage.productList.add(bread)
             SuggestionProductAddDialog(view.rootView)
@@ -81,6 +83,7 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
                 size = false,
                 sugar = false,
                 cream = false,
+                image = "BBMR/"
             )
             CartStorage.productList.add(bread)
             SuggestionProductAddDialog(view.rootView)
@@ -94,6 +97,7 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
                 size = false,
                 sugar = false,
                 cream = false,
+                image = "BBMR/"
             )
             CartStorage.productList.add(bread)
             SuggestionProductAddDialog(view.rootView)
