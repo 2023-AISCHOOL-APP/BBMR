@@ -10,11 +10,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.bbmr_project.R
 import com.example.bbmr_project.databinding.DialogNormalMenuDessertBinding
-import com.example.bbmr_project.databinding.DialogNormalNoSelectPayBinding
+import com.example.bbmr_project.databinding.DialogNormalMenuMdBinding
 
-class Normal_MenuDessertDialog : DialogFragment() {
-
-    private lateinit var binding: DialogNormalMenuDessertBinding
+class Normal_MenuMDDialog : DialogFragment() {
+    private lateinit var binding: DialogNormalMenuMdBinding
     override fun onStart() {
         super.onStart()
         // 검은색에 80% 투명도를 적용한 Color
@@ -33,7 +32,7 @@ class Normal_MenuDessertDialog : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DialogNormalMenuDessertBinding.inflate(layoutInflater)
+        binding = DialogNormalMenuMdBinding.inflate(layoutInflater)
         return binding.root
     }
 

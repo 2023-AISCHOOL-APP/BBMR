@@ -50,10 +50,10 @@ class NormalSelectBasketAdapter(
         holder.btnBasketPlus.setOnClickListener {
             // tvBasketCount 값을 증가
             selectedItem.tvCount++
-            notifyItemChanged(position)
+            notifyDataSetChanged()
 
             // 현재 총 비용 출력
-            val currentTotalCost = calculateTotalCost()
+            val currentTotalCost = calculateItemCost(selectedItem)
             Log.d("TotalCostUpdated", "Total Cost Increased: $currentTotalCost")
 
             // 아이템 비용 출력
@@ -67,10 +67,10 @@ class NormalSelectBasketAdapter(
             // tvBasketCount가 2 이상일 때만 감소
             if (selectedItem.tvCount > 1) {
                 selectedItem.tvCount--
-                notifyItemChanged(position)
+                notifyDataSetChanged()
 
                 // 현재 총 비용 출력
-                val currentTotalCost = calculateTotalCost()
+                val currentTotalCost = calculateItemCost(selectedItem)
                 Log.d("TotalCostUpdated", "Total Cost Increased: $currentTotalCost")
 
                 totalCostListener.onTotalCostUpdated(currentTotalCost,calculateItemCost(selectedItem))
@@ -80,9 +80,6 @@ class NormalSelectBasketAdapter(
         // btnBasketCancel 클릭 시
         holder.btnBasketCancel.setOnClickListener {
             Log.d("ClickEvent", "btnBasketCancel Clicked")
-            // 해당 아이템의 정보를 얻어옴
-            val selectedItem = basketList[holder.adapterPosition]
-
             // 출력: 현재 adapterPosition 확인
             Log.d("현재 adapterPosition", "Current adapterPosition: ${holder.adapterPosition}")
 
@@ -145,21 +142,15 @@ class NormalSelectBasketAdapter(
         }
         return totalCost
     }
-
-
-
+    
 
     // 아이템의 비용 계산
     private fun calculateItemCost(item: NormalSelectedMenuInfo): Int {
         // 각 메뉴의 tvCount와 price, optionTvCount를 곱해서 반환 (음수 값이 아닌 0을 반환하도록 수정)
         val menuPrice = (item.price?.replace(",", "")?.replace("원", "")?.toIntOrNull() ?: 0)
-        val optionCost = calculateOptionTvCount(item)
+        val optionCost = item.tvCount1*500 + item.tvCount2*500 + item.tvCount3*500 + item.tvCount4*500
         val cost = item.tvCount * (menuPrice + optionCost)
         return if (cost < 0) 0 else cost
-
-        // 디버깅을 위한 로그
-        Log.d("CalculateItemCost", "Menu: ${item.name}, TVCount: ${item.tvCount}, MenuPrice: $menuPrice, OptionCost: $optionCost, TotalCost: $cost")
-
     }
 
     fun clearItems() {
