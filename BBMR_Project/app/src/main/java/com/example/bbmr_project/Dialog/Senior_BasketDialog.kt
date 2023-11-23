@@ -23,6 +23,9 @@ import com.example.bbmr_project.databinding.DialogSeniorMenuBinding
 
 const val KeyProductBundleKey = "Product"
 
+
+
+
 class Senior_BasketDialog() : DialogFragment(), OnCartChangeListener {
 
     private lateinit var viewModel: Product

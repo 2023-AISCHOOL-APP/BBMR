@@ -15,12 +15,10 @@ data class Product(
     var sugar: Boolean = false,
     var cream: Boolean = false,
     val id: String = "001",
-    var image: String = "BBMR/img/"
-) : Parcelable, Serializable{
-//    fun formatPrice(): String{
-//        return String.format("%,d원", price)
-//    }
-}
+    var image: String = "BBMR/img/",
+) : Parcelable, Serializable
+
+
 
 
 interface OnCartChangeListener {
@@ -57,9 +55,6 @@ object CartStorage {
     }
 
     fun addProduct(product: Product) {
-//        product.price.toString().also {
-//            product.price = it.toInt()
-//        }
         productList.add(product)
         notifyProductListChanged()
     }
@@ -75,10 +70,5 @@ object CartStorage {
         notifyProductListChanged()
     }
 
-//    fun getFormmatPrice(product: Product): String{
-//        return product.formatPrice()
-//    }
-    fun close(product: Product){
-    notifyProductListChanged()
-}
+
 }
