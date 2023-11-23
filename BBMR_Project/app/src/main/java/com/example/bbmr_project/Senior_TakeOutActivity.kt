@@ -54,7 +54,7 @@ class Senior_TakeOutActivity : AppCompatActivity(), OnCartChangeListener {
         spannableStringBuilder.setSpan(RelativeSizeSpan(0.5f), 4, 6, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         spannableStringBuilder.setSpan(RelativeSizeSpan(1.4f), 7, _text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         binding.btnBasket.text = spannableStringBuilder
-        binding.btnBasket.setLineSpacing(0.5f, 0.7f)
+        binding.btnBasket.setLineSpacing(0.4f, 0.7f)
         // ------ 장바구니 버튼 크기 변경 코드 끝 ------
 
         // 일반 키오스크로 이동
