@@ -18,15 +18,7 @@ class Senior_MenuDialog : DialogFragment() {
 
 
 
-    // 클릭하면 Bakset으로 갑 전송 프로젝트 기능에는 영향 X
-    var onClick: (Product) -> Unit = {
-        val args = Bundle().apply {
-            putParcelable(KeyProductBundleKey, it)
-        }
-        val fragment = Senior_BasketDialog()
-        fragment.arguments = args
-        fragment.show(childFragmentManager, "")
-    }
+
 
     // Adapter에서 값을 받아오는 코드
     companion object {
@@ -120,16 +112,9 @@ class Senior_MenuDialog : DialogFragment() {
             val radiogroup = binding.rbCooHot.checkedRadioButtonId
             val radioButton: RadioButton = binding.rbCooHot.findViewById(radiogroup)
             val coolhot: Boolean = radioButton.isChecked
+            val totalCost : Int
 
-            // 클릭하면 값을 전송하는 코드 -> 굳이 프로젝트에서는 필요없음
-//            onClick.invoke(
-//                Product(
-//                    name = binding.tvMenuName.text.toString() ,
-//                    price = binding.tvMenuPrice.text.toString().replace(",", "").replace(" 원", "").toIntOrNull()?: 0,
-//                    count = binding.tvMenuCount.text.toString().toInt(),
-//                    temperature = coolhot
-//                )
-//            )
+
 
             // CartStorage.productList에 값을 추가
             CartStorage.addProduct(
@@ -138,7 +123,8 @@ class Senior_MenuDialog : DialogFragment() {
                     price = binding.tvMenuPrice.text.toString().replace(",", "").replace("원", "")
                         .toIntOrNull() ?: 0,
                     count = binding.tvMenuCount.text.toString().toInt(),
-                    temperature = coolhot
+                    temperature = coolhot,
+
                 )
 
             )

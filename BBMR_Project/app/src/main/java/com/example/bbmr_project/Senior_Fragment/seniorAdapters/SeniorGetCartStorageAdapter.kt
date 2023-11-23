@@ -10,7 +10,23 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bbmr_project.Product
 import com.example.bbmr_project.R
 //val context: Context, val layout : Int, val cartlist : ArrayList<Product>
-class SeniorGetCartStorageAdapter (private val productList : List<Product>)
+
+// Senior_MenuDialog
+interface Senior_MenuDialogListener{
+    fun onSeniorMenuAdd(
+        price : Int,
+        count : Int,
+    )
+    fun onSeniorMenuSelectForPay(selectMenuInof : List<Product>)
+}
+
+interface TotalSeniorCostListener{
+    fun onTotalCostUpdate(totalCost : Int,  )
+}
+
+
+
+class SeniorGetCartStorageAdapter (val context: Context, private val productList : List<Product>)
     :RecyclerView.Adapter<SeniorGetCartStorageAdapter.ViewHolder>(){
 
     class ViewHolder(view : View) : RecyclerView.ViewHolder(view){

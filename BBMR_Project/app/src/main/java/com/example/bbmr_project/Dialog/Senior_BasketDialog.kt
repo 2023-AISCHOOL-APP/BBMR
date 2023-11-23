@@ -20,6 +20,7 @@ import com.example.bbmr_project.Senior_Fragment.seniorAdapters.SeniorSelectBaske
 import com.example.bbmr_project.Senior_TakeOutActivity
 import com.example.bbmr_project.databinding.DialogSeniorBasketBinding
 import com.example.bbmr_project.databinding.DialogSeniorMenuBinding
+import okhttp3.internal.notify
 
 const val KeyProductBundleKey = "Product"
 
@@ -128,6 +129,7 @@ class Senior_BasketDialog() : DialogFragment(), OnCartChangeListener {
         }
 
         binding.btnTurnDSB.setOnClickListener {
+
             dismiss()
         }
 
