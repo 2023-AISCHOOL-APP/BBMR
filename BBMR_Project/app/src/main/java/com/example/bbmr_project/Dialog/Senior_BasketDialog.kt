@@ -85,8 +85,11 @@ class Senior_BasketDialog() : DialogFragment(), OnCartChangeListener {
         if (amountPrice >= discountPrice) {
             amountPrice = amountPrice - discountPrice
             // 1000의 단위마다 , 넣어주는 코드
-            var amountPrice = String.format("%,d", amountPrice)
-            binding.tvAmount.text = amountPrice + "원"
+            var amountPrice = String.format("%,d 원", amountPrice)
+            binding.tvAmount.text = amountPrice
+//            if (::adapter.isInitialized){
+//                adapter.updateData(CartStorage.getProductList() as ArrayList<Product>)
+//            }
         } else if (amountPrice < discountPrice) {
             amountPrice = amountPrice - discountPrice
             // 이 부분에서 남은 금액을 교환권에 되돌려 주기

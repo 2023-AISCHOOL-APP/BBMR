@@ -1,5 +1,6 @@
 package com.example.bbmr_project.Dialog
 
+import android.app.SearchManager.OnCancelListener
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -14,6 +15,10 @@ import com.example.bbmr_project.VO.Senior_TakeOutVO
 import com.example.bbmr_project.databinding.DialogSeniorMenuBinding
 
 class Senior_MenuDialog : DialogFragment() {
+
+    interface seniorTotalCost{
+
+    }
 
     // 클릭하면 Bakset으로 갑 전송 프로젝트 기능에는 영향 X
     var onClick: (Product) -> Unit = {

@@ -53,25 +53,39 @@ class SeniorSelectBasketAdapter(
         holder.tvBasketNameSenior.text = selectSeniorItem.name
         holder.tvBasketCountSenior.text = selectSeniorItem.count.toString()
 
-        // 시니어 장바구니에서 + 버튼 클릭
+        // 시니어 장바구니에서 plus 버튼 클릭
         holder.btnBasketPlusSenior.setOnClickListener {
             var basicCount = selectSeniorItem.count
             var basicPrice = selectSeniorItem.price
             Log.d("기본값 ", "${basicCount}")
+            Log.d("기본값 ", "${basicPrice}")
 
             selectSeniorItem.count++
-            selectSeniorItem.price = basicPrice + selectSeniorItem.price - (basicPrice / basicCount)
-
+            selectSeniorItem.price = basicPrice + (basicPrice / basicCount)
             notifyItemChanged(position)
+
+//            CartStorage.getFormmatPrice(selectSeniorItem)
             seniorTotalCost.onChange(CartStorage.getProductList())
 
+//            val addPrice = selectSeniorItem.formatPrice()
+//            Log.d("더한 값", addPrice)
 
         }
-        // 시니어 장바구니에서 - 버튼 클릭Bak
+        // 시니어 장바구니에서 minus 버튼 클릭Bak
         holder.btnBasketMinusSenior.setOnClickListener {
            if (selectSeniorItem.count > 1){
+//               selectSeniorItem.count--
+//               notifyItemChanged(position)
+               var basicCount = selectSeniorItem.count
+               var basicPrice = selectSeniorItem.price
+               Log.d("기본값 ", "${basicCount}")
+               Log.d("기본값 ", "${basicPrice}")
+
                selectSeniorItem.count--
+               selectSeniorItem.price = basicPrice - (basicPrice / basicCount)
+
                notifyItemChanged(position)
+               seniorTotalCost.onChange(CartStorage.getProductList())
 
            }
         }
