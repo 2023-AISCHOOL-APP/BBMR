@@ -146,9 +146,10 @@ class MainActivity : AppCompatActivity() {
                     for ((menu_id, data) in categoryResult.entrySet()) {
                         val name = data.asJsonArray[0].asString // 메뉴명
                         val price = data.asJsonArray[1].asInt   // 메뉴 가격
-                        val menu_con = data.asJsonArray[1].asString // 음료 온도 (HOT,ICED,N_drink)
-                        val size = data.asJsonArray[1].asInt    // 음료 사이즈 (0, 1, 2)
-                        categoryList.add(MenuVO(menu_id, name, price, menu_con, size))
+                        val menu_con = data.asJsonArray[2].asString // 음료 온도 (HOT,ICED,N_drink)
+                        val size = data.asJsonArray[3].asInt    // 음료 사이즈 (0, 1, 2)
+                        val imageUrl = data.asJsonArray[4].asString // 메뉴 이미지 url 추가
+                        categoryList.add(MenuVO(menu_id, name, price, menu_con, size, imageUrl))
                     }
                 }
             }

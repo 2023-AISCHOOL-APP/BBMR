@@ -1,4 +1,4 @@
-package com.android.example.MainActivity
+package com.android.example
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -93,7 +93,7 @@ class MainActivity : ComponentActivity() {
             .build()
 
         // Set up image capture listener, which is triggered after photo has
-        // been taken
+        // been takenz
         imageCapture.takePicture(
             outputOptions, //일단 savedUri
             ContextCompat.getMainExecutor(this),
@@ -125,13 +125,14 @@ class MainActivity : ComponentActivity() {
                 .also { it.setSurfaceProvider(viewBinding.viewFinder.surfaceProvider) }
 
             imageCapture = ImageCapture.Builder().build()
+
             val imageAnalyzer = ImageAnalysis.Builder()
                 .build()
                 .also {
                     it.setAnalyzer(cameraExecutor, LuminosityAnalyzer { luma ->
                         Log.d(TAG, "Average luminosity: $luma")
                     })
-                }
+                }.also {  }
             // Select back camera as a default
             val cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
 
