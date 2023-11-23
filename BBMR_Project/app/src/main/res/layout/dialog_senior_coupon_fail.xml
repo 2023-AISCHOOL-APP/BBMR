@@ -16,6 +16,7 @@
         android:gravity="center|center_horizontal"
         android:paddingTop="24dp"
         android:text="번호가 일치하지 않습니다.\n\n다시 입력해주세요!"
+        android:textColor="@color/black"
         android:textSize="50dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

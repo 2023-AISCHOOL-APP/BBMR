@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:layout_margin="20dp"
         android:background="@drawable/normal_dialog_background"
-        android:backgroundTint="@color/subColor"
+        android:backgroundTint="@color/white"
         tools:layout_editor_absoluteX="40dp"
         tools:layout_editor_absoluteY="40dp">
 
@@ -55,6 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="128dp"
             android:text="카드를 투입해주세요"
+            android:textColor="@color/black"
             android:textSize="80sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"

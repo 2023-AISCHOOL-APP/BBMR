@@ -11,8 +11,8 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="50dp"
-        android:background="@drawable/dialog_senior_subcolor_background"
+        android:layout_margin="40dp"
+        android:background="@drawable/normal_dialog_background"
         tools:layout_editor_absoluteX="50dp"
         tools:layout_editor_absoluteY="50dp">
 
@@ -33,41 +33,39 @@
 
         <android.widget.Button
             android:id="@+id/btnAddtionOption"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
-            android:layout_marginBottom="40dp"
+            android:layout_width="380dp"
+            android:layout_height="280dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/button_normal"
             android:padding="32dp"
             android:text="추가메뉴"
             android:textColor="@drawable/button_text"
-            android:textSize="50sp"
+            android:textSize="80sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline22"
             app:layout_constraintStart_toStartOf="parent" />
 
         <android.widget.Button
             android:id="@+id/btnComplet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="100dp"
-            android:layout_marginBottom="40dp"
+            android:layout_width="380dp"
+            android:layout_height="280dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/button_normal"
             android:padding="32dp"
             android:text="선택완료"
             android:textColor="@drawable/button_text"
-            android:textSize="50sp"
+            android:textSize="80sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline22" />
 
         <RadioGroup
             android:id="@+id/rbCooHot"
             android:layout_width="0dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="80dp"
-            android:layout_marginEnd="80dp"
-            android:layout_marginBottom="150dp"
+            android:layout_height="200dp"
+            android:layout_marginBottom="80dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/btnAddtionOption"
             app:layout_constraintEnd_toEndOf="parent"
@@ -85,7 +83,7 @@
                 android:gravity="center"
                 android:text="차가운거"
                 android:textColor="@drawable/text_cool"
-                android:textSize="50sp"
+                android:textSize="60sp"
                 android:textStyle="bold" />
 
             <RadioButton
@@ -99,32 +97,38 @@
                 android:gravity="center"
                 android:text="뜨거운거"
                 android:textColor="@drawable/text_hot"
-                android:textSize="50sp"
+                android:textSize="60sp"
                 android:textStyle="bold" />
         </RadioGroup>
 
         <ImageView
             android:id="@+id/imgMenu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
+            android:layout_width="0dp"
+            android:layout_height="357dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
             android:layout_marginBottom="100dp"
             android:src="@drawable/coffee"
             app:layout_constraintBottom_toTopOf="@+id/rbCooHot"
+            app:layout_constraintEnd_toStartOf="@+id/guideline22"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnBack" />
+            app:layout_constraintTop_toBottomOf="@+id/btnBack"
+            app:layout_constraintVertical_bias="0.611" />
 
         <TextView
             android:id="@+id/tvMenuName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="아메리카노"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:gravity="center"
+            android:text="아메리카노awerawer"
             android:textColor="#000000"
-            android:textSize="75sp"
+            android:textSize="70sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imgMenu"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline22"
             app:layout_constraintTop_toTopOf="@+id/imgMenu" />
 
         <TextView
@@ -147,7 +151,7 @@
             android:layout_marginTop="35dp"
             android:text="1"
             android:textColor="#000000"
-            android:textSize="50sp"
+            android:textSize="80sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/tvMenuPrice"
             app:layout_constraintHorizontal_bias="0.498"
@@ -156,8 +160,8 @@
 
         <android.widget.Button
             android:id="@+id/btnSeniorMinus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
             android:layout_marginEnd="21dp"
             android:background="@drawable/minus"
             app:layout_constraintBottom_toBottomOf="@+id/tvMenuCount"
@@ -166,13 +170,20 @@
 
         <android.widget.Button
             android:id="@+id/btnSeniorPlus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
             android:layout_marginStart="20dp"
             android:background="@drawable/plus"
             app:layout_constraintBottom_toBottomOf="@+id/tvMenuCount"
             app:layout_constraintStart_toEndOf="@+id/tvMenuCount"
             app:layout_constraintTop_toTopOf="@+id/tvMenuCount" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
