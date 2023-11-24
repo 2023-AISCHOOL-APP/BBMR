@@ -39,9 +39,10 @@
             android:layout_marginStart="16dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/button_senior"
-            android:text="카드"
+            android:paddingBottom="10dp"
+            android:text="카드\n&amp;\n삼성페이"
             android:textColor="@color/white"
-            android:textSize="130sp"
+            android:textSize="70sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -70,7 +71,7 @@
             android:textColor="#F60000"
             android:textSize="90sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/btnCardDSB"
+            app:layout_constraintBottom_toTopOf="@+id/btnCpnDSB"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent" />
