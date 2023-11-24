@@ -7,22 +7,14 @@ import android.os.Bundle
 import android.os.Handler
 import android.text.Spannable
 import android.text.SpannableStringBuilder
-import android.text.style.LeadingMarginSpan
-import android.text.style.LineHeightSpan
 import android.text.style.RelativeSizeSpan
-import android.util.Log
-import android.view.View
-import androidx.core.widget.TextViewCompat.setLineHeight
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
-import com.example.bbmr_project.Dialog.KeyProductBundleKey
-import com.example.bbmr_project.Dialog.Senior_BasketDialog
+import com.example.bbmr_project.Dialog.SeniorBasketDialog
 import com.example.bbmr_project.databinding.ActivitySeniorTakeoutBinding
 import com.example.bbmr_project.Senior_Fragment.Senior_Fragment_Tab_Recommend
 import com.example.bbmr_project.Senior_Fragment.Senior_Fragment_Tab_Coffee
 import com.example.bbmr_project.Senior_Fragment.Senior_Fragment_Tab_Beverage
 import com.example.bbmr_project.Senior_Fragment.Senior_Fragment_Tab_Dessert
-import com.example.bbmr_project.Senior_Fragment.seniorAdapters.SeniorGetCartStorageAdapter
 
 
 class Senior_TakeOutActivity : AppCompatActivity(), OnCartChangeListener {
@@ -91,12 +83,12 @@ class Senior_TakeOutActivity : AppCompatActivity(), OnCartChangeListener {
             if (!buttonDoubleDefend){
                 buttonDoubleDefend = true
 
-                val fragment = Senior_BasketDialog()
+                val fragment = SeniorBasketDialog()
 
                 val args = Bundle().apply {
 
 //                    putParcelableArrayList(KeyProductBundleKey, ArrayList(CartStorage.productList))
-            }
+                }
 
                 fragment.arguments = args
                 fragment.show(supportFragmentManager, "Senior.BasketDialog")

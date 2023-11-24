@@ -1,6 +1,5 @@
 package com.example.bbmr_project.Dialog
 
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -14,7 +13,6 @@ import androidx.fragment.app.DialogFragment
 import com.example.bbmr_project.CartStorage
 import com.example.bbmr_project.Product
 import com.example.bbmr_project.R
-import com.example.bbmr_project.Senior_TakeOutActivity
 import com.example.bbmr_project.databinding.DialogSeniorAdditionalOptionBinding
 
 class Senior_AdditionalOptionDialog : DialogFragment() {
@@ -154,7 +152,7 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
 
                     DialogFragment.arguments = bundle
                     DialogFragment.show(childFragmentManager, "Senior_MenuDialog")
-                // ------ 객체 Product 값 수정하기 끝 ------
+                    // ------ 객체 Product 값 수정하기 끝 ------
                 }
 //                val intent = Intent(view.context, Senior_TakeOutActivity::class.java)
 //                startActivity(intent)
@@ -185,7 +183,7 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
         }
         myLayout.findViewById<Button>(R.id.btnOkDSMA).setOnClickListener {
             dialog.dismiss()
-            val dialogFragment = Senior_BasketDialog()
+            val dialogFragment = SeniorBasketDialog()
             dialogFragment.show(childFragmentManager, "Senior_BasketDialog")
         }
     }

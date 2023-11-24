@@ -43,7 +43,7 @@ object CartStorage {
     /**
      * 장바구니 구성이 변경되었음을 알림.
      */
-    private fun notifyProductListChanged() {
+    fun notifyProductListChanged() {
         onCartChangeListener?.onChange(productList)
         Log.d("CartStore", "productList=$productList")
 

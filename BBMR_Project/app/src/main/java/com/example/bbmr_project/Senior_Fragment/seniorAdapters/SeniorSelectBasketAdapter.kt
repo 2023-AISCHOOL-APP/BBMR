@@ -14,46 +14,46 @@ import com.example.bbmr_project.OnCartChangeListener
 import com.example.bbmr_project.Product
 import com.example.bbmr_project.R
 
-
-
-
-
-
-
 class SeniorSelectBasketAdapter(
     val context: Context,
     val layout: Int,
-    val basketSeniorList: ArrayList<Product>,
-    val seniorTotalCost : OnCartChangeListener
+    val onChanged: (List<Product>) -> Unit,
 ) : RecyclerView.Adapter<SeniorSelectBasketAdapter.ViewHolder>() {
 
-    fun updateData(newList : ArrayList<Product>){
-        basketSeniorList.clear()
-        basketSeniorList.addAll(newList)
+    private val productList: ArrayList<Product> = arrayListOf()
+
+    fun updateData(newList: ArrayList<Product>) {
+        productList.clear()
+        productList.addAll(newList)
         notifyDataSetChanged()
     }
 
-    val inflater : LayoutInflater = LayoutInflater.from(context)
+    private fun updateItem(position: Int, product: Product) {
+        productList[position] = product
+        notifyItemChanged(position)
+    }
+
+    private val inflater: LayoutInflater = LayoutInflater.from(context)
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-//        val basketImgSenior : ImageView = view.findViewById(R.id.basketImgSenior)
-        val tvBasketNameSenior : TextView = view.findViewById(R.id.tvBasketNameSenior)
-        val tvBasketCountSenior : TextView = view.findViewById(R.id.tvBasketCountSenior)
-        val btnBasketMinusSenior : Button = view.findViewById(R.id.btnBasketMinusSenior)
-        val btnBasketPlusSenior : Button = view.findViewById(R.id.btnBasketPlusSenior)
-        val btnBasketCancellSenior : Button = view.findViewById(R.id.btnBasketCancelSenior)
+        //        val basketImgSenior : ImageView = view.findViewById(R.id.basketImgSenior)
+        val tvBasketNameSenior: TextView = view.findViewById(R.id.tvBasketNameSenior)
+        val tvBasketCountSenior: TextView = view.findViewById(R.id.tvBasketCountSenior)
+        val btnBasketMinusSenior: Button = view.findViewById(R.id.btnBasketMinusSenior)
+        val btnBasketPlusSenior: Button = view.findViewById(R.id.btnBasketPlusSenior)
+        val btnBasketCancellSenior: Button = view.findViewById(R.id.btnBasketCancelSenior)
     }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): SeniorSelectBasketAdapter.ViewHolder {
+    ): ViewHolder {
         val view = inflater.inflate(layout, parent, false)
-        return SeniorSelectBasketAdapter.ViewHolder(view)
+        return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: SeniorSelectBasketAdapter.ViewHolder, position: Int) {
-        val selectSeniorItem = basketSeniorList[position]
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val selectSeniorItem = productList[position]
 
 //        holder.basketImgSenior.setImageResource(selectSeniorItem.image)
         holder.tvBasketNameSenior.text = selectSeniorItem.name
@@ -70,46 +70,47 @@ class SeniorSelectBasketAdapter(
             selectSeniorItem.price = basicPrice + (basicPrice / basicCount)
             notifyItemChanged(position)
 
+//            val newItem = selectSeniorItem.copy(
+//                count = selectSeniorItem.count + 1
+//            )
+//            updateItem(position, newItem)
+
+            onChanged.invoke(productList)
 //            CartStorage.getFormmatPrice(selectSeniorItem)
-            seniorTotalCost.onChange(CartStorage.getProductList())
 
 //            val addPrice = selectSeniorItem.formatPrice()
 //            Log.d("더한 값", addPrice)
-
         }
+
         // 시니어 장바구니에서 minus 버튼 클릭Bak
         holder.btnBasketMinusSenior.setOnClickListener {
-           if (selectSeniorItem.count > 1){
+            if (selectSeniorItem.count > 1) {
 //               selectSeniorItem.count--
 //               notifyItemChanged(position)
-               var basicCount = selectSeniorItem.count
-               var basicPrice = selectSeniorItem.price
-               Log.d("기본값 ", "${basicCount}")
-               Log.d("기본값 ", "${basicPrice}")
+                var basicCount = selectSeniorItem.count
+                var basicPrice = selectSeniorItem.price
+                Log.d("기본값 ", "${basicCount}")
+                Log.d("기본값 ", "${basicPrice}")
 
-               selectSeniorItem.count--
-               selectSeniorItem.price = basicPrice - (basicPrice / basicCount)
+                selectSeniorItem.count--
+                selectSeniorItem.price = basicPrice - (basicPrice / basicCount)
 
-               notifyItemChanged(position)
-               seniorTotalCost.onChange(CartStorage.getProductList())
-
-           }
+                notifyItemChanged(position)
+                onChanged.invoke(productList)
+            }
         }
+
         // 시니어 장바구니에서 X 버튼 클릭
         holder.btnBasketCancellSenior.setOnClickListener {
             val removedPosition = holder.adapterPosition
-            val removedItem = basketSeniorList.removeAt(removedPosition)
+            val removedItem = productList.removeAt(removedPosition)
             notifyItemChanged(removedPosition)
-
             CartStorage.removeProduct(removedItem)
-            seniorTotalCost.onChange(CartStorage.getProductList())
+            onChanged.invoke(productList)
         }
     }
 
     override fun getItemCount(): Int {
-        return basketSeniorList.size
+        return productList.size
     }
-
-
-
 }

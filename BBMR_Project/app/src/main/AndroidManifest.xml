@@ -65,7 +65,7 @@
             android:name=".MainActivity"
             android:exported="true" />
         <activity
-            android:name=".Dialog.Senior_BasketDialog"
+            android:name=".Dialog.SeniorBasketDialog"
             android:exported="true" />
 
         <activity

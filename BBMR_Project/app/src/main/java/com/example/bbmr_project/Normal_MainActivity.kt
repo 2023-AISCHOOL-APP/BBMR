@@ -11,7 +11,7 @@ class Normal_MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_start)
 
         // 주문하기 버튼 클릭 시 Intro2로 이동
-        val btnOrder: Button = findViewById(R.id.btnOrder)
+        val btnOrder: Button = findViewById(R.id.btnOrderInASI)
         btnOrder.setOnClickListener {
             val intent = Intent(this@Normal_MainActivity, LoadingSplashActivity::class.java)
             startActivity(intent)
