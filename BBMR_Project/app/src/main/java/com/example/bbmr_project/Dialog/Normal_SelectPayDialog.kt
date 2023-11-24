@@ -133,7 +133,6 @@ class Normal_SelectPayDialog : DialogFragment() {
         // UI 스레드에서 어댑터에 변경 사항 알림
         activity?.runOnUiThread {
             adapter.notifyDataSetChanged()
-            Log.d("UpdateUI", "UI Updated")
         }
     }
 

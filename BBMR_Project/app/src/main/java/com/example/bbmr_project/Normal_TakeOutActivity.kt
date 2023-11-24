@@ -25,6 +25,7 @@ import com.example.bbmr_project.Normal_Fragment.adapters.NormalViewPagerAdapter
 import java.text.NumberFormat
 import java.util.Locale
 
+
 class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
     NormalSelectPayDialogListener, TotalCostListener, ConfirmBasketCancelListener, Normal_MenuDessertDialogListener, Normal_MenuMDDialogListener {
 
@@ -69,7 +70,7 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
     }
 
 
-    override fun onTotalCostUpdated(totalCost: Int, itemCost: Int) {
+    override fun onTotalCostUpdated(totalCost: Int) {
         // 활동에서 총 비용 UI 요소(tvNormalTotalMoney)를 업데이트
         updateTotalCostUI(totalCost)
 
@@ -184,7 +185,7 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
         totalCost += menuCost
 
         // TotalCostListener에 알림
-        onTotalCostUpdated(totalCost, menuCost)
+        onTotalCostUpdated(totalCost)
     }
 
     // Normal_MenuDessertDialog 메서드
@@ -198,7 +199,7 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
         totalCost += normalSelectedMenuInfo.menuPrice
 
         // TotalCostListener에 알림
-        onTotalCostUpdated(totalCost, normalSelectedMenuInfo.menuPrice)
+        onTotalCostUpdated(totalCost)
     }
 
     // Normal_MenuMDDialog 메서드
@@ -212,7 +213,7 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
         totalCost += normalSelectedMenuInfo.menuPrice
 
         // TotalCostListener에 알림
-        onTotalCostUpdated(totalCost, normalSelectedMenuInfo.menuPrice)
+        onTotalCostUpdated(totalCost)
     }
 
 }
