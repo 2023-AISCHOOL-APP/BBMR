@@ -63,12 +63,12 @@ class LoadingSplashActivity : AppCompatActivity() {
         cameraExecutor = Executors.newSingleThreadExecutor()
 
 
-        val Handler = Handler(Looper.getMainLooper())
-        Handler.postDelayed({
-            val intent = Intent(this, Normal_IntroActivity::class.java)
-            startActivity(intent)
-            finish()
-        }, 700)
+//        val Handler = Handler(Looper.getMainLooper())
+//        Handler.postDelayed({
+//            val intent = Intent(this, Normal_IntroActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//        }, 10000)
     }
 
     private fun startCamera() {
@@ -104,7 +104,6 @@ class LoadingSplashActivity : AppCompatActivity() {
                 val faceResults = result?.getValue(faceDetector)
                 if (faceResults != null && faceResults.isNotEmpty()) {
                     imageCaptureAndSend(cameraController)
-                    imageCaptureAndSend(cameraController)
                 }
                 previewView.overlay.clear()
             }
@@ -128,13 +127,14 @@ class LoadingSplashActivity : AppCompatActivity() {
             val byteArrayOutputStream = ByteArrayOutputStream()
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
             val filePath = saveBitmapToFile(this, bitmap)
+            Log.d("확인용 로그", "filePath 성공")
             filePath?.let {
                 // 파일로부터 MultipartBody.Part 생성
                 val multipartBody = createMultipartBodyPartFromFile(it)
-
+                Log.d("확인용 로그", "multipartBody 성공")
                 // Retrofit 인스턴스 생성 및 이미지 전송
                 val retrofit = Retrofit.Builder()
-                    .baseUrl(getString(R.string.baseUrl)) // 서버 URL 설정
+                    .baseUrl(getString(R.string.baseUrl)) // 서버 URL 설정/
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
 
@@ -149,6 +149,8 @@ class LoadingSplashActivity : AppCompatActivity() {
 
                                 processServerResponse(it.result)
                             }
+                        }else{
+                            Log.d("서버 응답 코드", "${response.code()}")
                         }
                     }
                     override fun onFailure(call: Call<RfAPI>, t: Throwable) {
@@ -158,9 +160,13 @@ class LoadingSplashActivity : AppCompatActivity() {
                 })
             }
             // 처리가 완료된 후에는 imageProxy를 해제해야 합니다.
+            cameraController.unbind()
             imageProxy.close()
         }
     }
+
+
+
     private fun processServerResponse(result: String) {
         // 결과에 따라 다른 액션을 수행합니다.
         // 예를 들어, 결과에 따라 다른 Activity를 시작할 수 있습니다.
