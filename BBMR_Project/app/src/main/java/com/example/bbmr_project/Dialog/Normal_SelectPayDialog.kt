@@ -99,10 +99,10 @@ class Normal_SelectPayDialog : DialogFragment() {
     }
 
     private fun showNormalCouponPayDialog() {
-        val normalCouponPayDialog = Normal_CouponPayDialog()
+        val normalCouponPayDialog = Normal_CardSelectPayDialog()
         normalCouponPayDialog.show(
             requireActivity().supportFragmentManager,
-            "Normal_CouponPayDialog"
+            "Normal_CardSelectPayDialog"
         )
     }
 

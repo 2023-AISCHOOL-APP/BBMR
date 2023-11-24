@@ -7,19 +7,11 @@
         <deviceKey>
           <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
-<<<<<<< HEAD
-            <value value="C:\Users\GJ AI school\.android\avd\TabletS8Ultra_API_34_API_34.avd" />
-=======
-            <value value="C:\Users\gjaischool1\.android\avd\S8_Ultra_API_34.avd" />
->>>>>>> 22fd5e74a031469db9bd6b9bcdb886a974d63750
+            <value value="C:\Users\aischool185\.android\avd\S8_Ultra_API_34.avd" />
           </Key>
         </deviceKey>
       </Target>
     </targetSelectedWithDropDown>
-<<<<<<<<< Temporary merge branch 1
-    <timeTargetWasSelectedWithDropDown value="2023-11-21T00:26:50.745381500Z" />
-=========
-    <timeTargetWasSelectedWithDropDown value="2023-11-21T09:20:17.979232700Z" />
->>>>>>>>> Temporary merge branch 2
+    <timeTargetWasSelectedWithDropDown value="2023-11-23T09:08:09.218609500Z" />
   </component>
 </project>

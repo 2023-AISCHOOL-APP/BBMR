@@ -3,6 +3,9 @@ package com.example.bbmr_project.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.RelativeSizeSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,6 +51,15 @@ class SeniorBasketDialog() : BaseDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val _text = "카드\n&\n삼성페이"
+        val spannableStringBuilder = SpannableStringBuilder(_text)
+        spannableStringBuilder.setSpan(RelativeSizeSpan(1.3f), 0, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannableStringBuilder.setSpan(RelativeSizeSpan(0.5f), 3, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannableStringBuilder.setSpan(RelativeSizeSpan(1.2f), 5, _text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        binding.btnCardDSB.text = spannableStringBuilder
+        binding.btnCardDSB.setLineSpacing(0.6f, 0.63f)
+
 
         val discountPrice = arguments?.getString("discount_price").toString().toIntOrNull()
             ?: 0 // 여기서 각 상품에 맞는 게 String으로 가져와 짐

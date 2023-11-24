@@ -176,15 +176,16 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
         dialog.setCanceledOnTouchOutside(false)
         dialog.show()
 
-
-
         myLayout.findViewById<Button>(R.id.btnCnclDSMA).setOnClickListener {
             dialog.dismiss()
         }
+
+        // ------ 추천 상품 담겨야 하는 곳 코드 시작 ------
         myLayout.findViewById<Button>(R.id.btnOkDSMA).setOnClickListener {
-            dialog.dismiss()
-            val dialogFragment = SeniorBasketDialog()
-            dialogFragment.show(childFragmentManager, "Senior_BasketDialog")
+
+        // ------ 추천 상품 담겨야 하는 곳 코드 끝 ------
+
+        dialog.dismiss()
         }
     }
 }
