@@ -21,21 +21,33 @@
             android:id="@+id/textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="180dp"
+            android:layout_marginTop="92dp"
             android:text="카드를 그림과 같이\nIC카드 리더기에 꽂아주세요"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="34sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:id="@+id/clPaySuccessDNC"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/guideline19">-->
+
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="400dp"
-            android:layout_height="400dp"
-            android:layout_marginTop="50dp"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="52dp"
             app:layout_constraintEnd_toEndOf="@+id/textView"
             app:layout_constraintStart_toStartOf="@+id/textView"
             app:layout_constraintTop_toBottomOf="@+id/textView"
@@ -54,21 +66,9 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/imageView"
-            app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintStart_toStartOf="@+id/imageView"
             app:layout_constraintTop_toBottomOf="@+id/imageView"
-            app:layout_constraintVertical_bias="0.12" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clPaySuccessDNC"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline19">
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintVertical_bias="0.0" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline19"
@@ -77,15 +77,39 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.5" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clPayFailDNC"
+        <TextView
+            android:id="@+id/textView18"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline19"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="148dp"
+            android:gravity="center_horizontal"
+            android:text="애플/삼성페이 결제 시 휴대폰 뒷면을\n카드 리더기에 가까이 대주세요."
+            android:textColor="@color/black"
+            android:textSize="34sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="@+id/guideline19" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            android:src="@drawable/nfc_pay"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView18"
+            app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+        <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:id="@+id/clPayFailDNC"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/guideline19"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent">-->
+
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

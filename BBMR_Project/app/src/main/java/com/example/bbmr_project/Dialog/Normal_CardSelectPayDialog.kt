@@ -48,44 +48,47 @@ class Normal_CardSelectPayDialog : DialogFragment() {
         binding.btn1DNCSP.setOnClickListener {
             val DialogFragment = Normal_CardPayDialog()
             DialogFragment.show(requireActivity().supportFragmentManager, "Normal_CardPayDialog")
-            dismiss()
+//            dismiss()
         }
         binding.btn2DNCSP.setOnClickListener {
             val DialogFragment = Normal_CardPayDialog()
             DialogFragment.show(requireActivity().supportFragmentManager, "Normal_CardPayDialog")
-            dismiss()
+//            dismiss()
         }
         binding.btn3DNCSP.setOnClickListener {
             val DialogFragment = Normal_CardPayDialog()
             DialogFragment.show(requireActivity().supportFragmentManager, "Normal_CardPayDialog")
-            dismiss()
+//            dismiss()
         }
         binding.btn4DNCSP.setOnClickListener {
             val DialogFragment = Normal_CardPayDialog()
             DialogFragment.show(requireActivity().supportFragmentManager, "Normal_CardPayDialog")
-            dismiss()
+//            dismiss()
         }
         binding.btn5DNCSP.setOnClickListener {
             val DialogFragment = Normal_CardPayDialog()
             DialogFragment.show(requireActivity().supportFragmentManager, "Normal_CardPayDialog")
-            dismiss()
+//            dismiss()
         }
         binding.btn6DNCSP.setOnClickListener {
             val DialogFragment = Normal_CardPayDialog()
             DialogFragment.show(requireActivity().supportFragmentManager, "Normal_CardPayDialog")
-            dismiss()
+//            dismiss()
         }
         binding.btn7DNCSP.setOnClickListener {
             val DialogFragment = Normal_CardPayDialog()
             DialogFragment.show(requireActivity().supportFragmentManager, "Normal_CardPayDialog")
-            dismiss()
+//            dismiss()
         }
         binding.btn8DNCSP.setOnClickListener {
             val DialogFragment = Normal_CardPayDialog()
             DialogFragment.show(requireActivity().supportFragmentManager, "Normal_CardPayDialog")
-            dismiss()
+//            dismiss()
         }
-
+        binding.btn9DNCSP.setOnClickListener {
+            val DialogFragment = Normal_CouponPayDialog()
+            DialogFragment.show(requireActivity().supportFragmentManager, "Normal_CouponPayDialog")
+        }
 
 
     }

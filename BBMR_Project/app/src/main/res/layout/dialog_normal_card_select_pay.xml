@@ -238,7 +238,27 @@
             app:layout_constraintTop_toBottomOf="@+id/btn8DNCSP"
             app:layout_constraintVertical_bias="0.25" />
 
-        set
+        <android.widget.Button
+            android:id="@+id/btn9DNCSP"
+            android:layout_width="200dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="44dp"
+            android:background="@drawable/normal_pay_background"
+            android:backgroundTint="@color/white"
+            android:drawableTop="@drawable/paylogo_coupon"
+            android:gravity="bottom|center_horizontal"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:paddingTop="30dp"
+            android:paddingBottom="4dp"
+            android:text="모바일 교환권"
+            android:textColor="@color/mainColor"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:cornerRadius="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn6DNCSP" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
