@@ -2,6 +2,7 @@ package com.example.bbmr_project
 
 import NormalSelectedMenuInfo
 import Normal_Fragment_Tab1
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,7 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bbmr_project.Dialog.ConfirmBasketCancelListener
 import com.example.bbmr_project.Dialog.NormalSelectPayDialogListener
 import com.example.bbmr_project.Dialog.Normal_ConfirmBasketCancelDialog
+import com.example.bbmr_project.Dialog.Normal_MenuDessertDialogListener
 import com.example.bbmr_project.Dialog.Normal_MenuDialogListener
+import com.example.bbmr_project.Dialog.Normal_MenuMDDialogListener
 import com.example.bbmr_project.Dialog.Normal_SelectPayDialog
 import com.example.bbmr_project.Dialog.TotalCostListener
 import com.example.bbmr_project.Normal_Fragment.Normal_Fragment_Tab2
@@ -23,11 +26,11 @@ import java.text.NumberFormat
 import java.util.Locale
 
 class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
-    NormalSelectPayDialogListener, TotalCostListener, ConfirmBasketCancelListener {
+    NormalSelectPayDialogListener, TotalCostListener, ConfirmBasketCancelListener, Normal_MenuDessertDialogListener, Normal_MenuMDDialogListener {
 
     private lateinit var binding: ActivityNormalTakeoutBinding
     private lateinit var normalSelectBasketAdapter: NormalSelectBasketAdapter
-    private var selectedMenuList: MutableList<NormalSelectedMenuInfo> = mutableListOf()
+
     private var totalCost: Int = 0  // 누적 총 비용
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,10 +56,10 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onConfirmBasketCancel() {
         Log.d("ConfirmBasketCancel", "onConfirmBasketCancel called")
         // "Yes" 버튼이 클릭되었을 때의 동작 수행
-        selectedMenuList.clear()
         normalSelectBasketAdapter.clearItems()
         normalSelectBasketAdapter.notifyDataSetChanged()
         // 총 비용을 0으로 초기화
@@ -139,9 +142,13 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
     }
 
     private fun initializeRecyclerView() {
-        // 장바구니(rvNormalBasket)에 정보 담기
+        // NormalSelectBasketAdapter 생성 시 NormalSelectPayAdapter를 전달
         normalSelectBasketAdapter =
-            NormalSelectBasketAdapter(this, R.layout.normal_basketlist, mutableListOf(), this)
+            NormalSelectBasketAdapter(
+                this,
+                R.layout.normal_basketlist,
+                this,
+            )
         binding.rvNormalBasket.apply {
             adapter = normalSelectBasketAdapter
             layoutManager = LinearLayoutManager(
@@ -153,11 +160,13 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
     }
 
     private fun showSelectPayDialog() {
+        val currentList = normalSelectBasketAdapter.getCurrentList()
         // 결제 창 띄우기
-        val normalSelectPayDialog  = Normal_SelectPayDialog.newInstance(selectedMenuList)
-        normalSelectPayDialog.show(supportFragmentManager, "Normal_SelectPayDialog")
+        val dialog = Normal_SelectPayDialog.newInstance(currentList)
+        dialog.show(supportFragmentManager, "Normal_SelectPayDialog")
     }
 
+    // Normal_MenuDialog 메서드
     override fun onMenuAdded(
         normalSelectedMenuInfo: NormalSelectedMenuInfo,
         tvCount: Int, // 수량
@@ -170,16 +179,40 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
         normalSelectedMenuInfo.options = options
 
         normalSelectBasketAdapter.addItem(normalSelectedMenuInfo)
-        normalSelectBasketAdapter.notifyItemInserted(normalSelectBasketAdapter.itemCount - 1)
-
-        selectedMenuList.add(normalSelectedMenuInfo)
 
         // 총 비용 업데이트
         totalCost += menuCost
 
-
         // TotalCostListener에 알림
         onTotalCostUpdated(totalCost, menuCost)
+    }
+
+    // Normal_MenuDessertDialog 메서드
+    override fun onDessertMenuAdded(normalSelectedMenuInfo: NormalSelectedMenuInfo) {
+        // 추가된 메뉴의 tvCount를 사용자가 선택한 값으로 설정
+        normalSelectedMenuInfo.tvCount = normalSelectedMenuInfo.tvCount
+
+        normalSelectBasketAdapter.addItem(normalSelectedMenuInfo)
+
+        // 총 비용 업데이트
+        totalCost += normalSelectedMenuInfo.menuPrice
+
+        // TotalCostListener에 알림
+        onTotalCostUpdated(totalCost, normalSelectedMenuInfo.menuPrice)
+    }
+
+    // Normal_MenuMDDialog 메서드
+    override fun onMDMenuAdded(normalSelectedMenuInfo: NormalSelectedMenuInfo) {
+        // 추가된 메뉴의 tvCount를 사용자가 선택한 값으로 설정
+        normalSelectedMenuInfo.tvCount = normalSelectedMenuInfo.tvCount
+
+        normalSelectBasketAdapter.addItem(normalSelectedMenuInfo)
+
+        // 총 비용 업데이트
+        totalCost += normalSelectedMenuInfo.menuPrice
+
+        // TotalCostListener에 알림
+        onTotalCostUpdated(totalCost, normalSelectedMenuInfo.menuPrice)
     }
 
 }

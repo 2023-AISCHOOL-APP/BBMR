@@ -297,15 +297,6 @@ class Normal_MenuDialog : DialogFragment() {
             binding.btnMinus4.isEnabled = true
         }
     }
-
-    private fun calculateTotalTvCount(selectedMenuInfo: NormalSelectedMenuInfo): Int {
-        return selectedMenuInfo.tvCount +
-                selectedMenuInfo.tvCount1 +
-                selectedMenuInfo.tvCount2 +
-                selectedMenuInfo.tvCount3 +
-                selectedMenuInfo.tvCount4
-    }
-
     private fun getSelectedTemperature(): String {
         // hot cold 라디오 버튼 선택
         return when (binding.btnNormalTempGroup.checkedRadioButtonId) {

@@ -174,7 +174,7 @@
         android:elevation="20dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
-        android:text="취소하기"
+        android:text="전체취소"
         android:textColor="#000000"
         android:textSize="28sp"
         android:textStyle="bold"
