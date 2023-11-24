@@ -21,31 +21,32 @@
             android:id="@+id/imgDessert"
             android:layout_width="300dp"
             android:layout_height="300dp"
+            android:layout_marginBottom="28dp"
             android:src="@drawable/cake"
-            app:layout_constraintEnd_toEndOf="@+id/tvDessertName"
-            app:layout_constraintHorizontal_bias="0.501"
-            app:layout_constraintStart_toStartOf="@+id/tvDessertName"
-            tools:layout_editor_absoluteY="218dp" />
+            app:layout_constraintBottom_toTopOf="@+id/guideline27"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDessertPrice" />
 
         <TextView
             android:id="@+id/tvDessertName"
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:gravity="center"
-            android:text="TextView"
+            android:text="초코케이크"
             android:textColor="#000000"
             android:textSize="40sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/imgDessert"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/guideline26" />
 
         <RadioGroup
             android:id="@+id/radioGroup"
             android:layout_width="0dp"
-            android:layout_height="116dp"
-            android:layout_marginBottom="100dp"
+            android:layout_height="70dp"
+            android:layout_marginBottom="160dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline22"
@@ -109,28 +110,75 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.75" />
 
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button"
-            tools:layout_editor_absoluteX="203dp"
-            tools:layout_editor_absoluteY="540dp" />
-
-        <Button
-            android:id="@+id/button5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button"
-            tools:layout_editor_absoluteX="410dp"
-            tools:layout_editor_absoluteY="549dp" />
-
         <TextView
-            android:id="@+id/textView23"
+            android:id="@+id/tvCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1"
-            tools:layout_editor_absoluteX="325dp"
-            tools:layout_editor_absoluteY="561dp" />
+            android:textColor="#000000"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/guideline28"
+            app:layout_constraintEnd_toEndOf="@+id/imgDessert"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="@+id/imgDessert"
+            app:layout_constraintTop_toTopOf="@+id/guideline27" />
+
+        <android.widget.Button
+            android:id="@+id/btnMinus"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/minus"
+            app:layout_constraintBottom_toBottomOf="@+id/tvCount"
+            app:layout_constraintEnd_toStartOf="@+id/tvCount"
+            app:layout_constraintStart_toStartOf="@+id/imgDessert"
+            app:layout_constraintTop_toTopOf="@+id/tvCount" />
+
+        <android.widget.Button
+            android:id="@+id/btnPlus"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="30dp"
+            android:background="@drawable/plus"
+            app:layout_constraintBottom_toBottomOf="@+id/tvCount"
+            app:layout_constraintEnd_toEndOf="@+id/imgDessert"
+            app:layout_constraintStart_toEndOf="@+id/tvCount"
+            app:layout_constraintTop_toTopOf="@+id/tvCount" />
+
+        <TextView
+            android:id="@+id/tvDessertPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="5,000원"
+            android:textColor="#FF0000"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/imgDessert"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/imgDessert"
+            app:layout_constraintTop_toBottomOf="@+id/tvDessertName" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline26"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.15" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline27"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.64" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline28"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.74" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

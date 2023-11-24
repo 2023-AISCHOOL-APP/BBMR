@@ -2,12 +2,15 @@ package com.example.bbmr_project.Normal_Fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bbmr_project.Dialog.Normal_MenuDessertDialog
+import com.example.bbmr_project.Dialog.Normal_MenuDessertDialogListener
 import com.example.bbmr_project.Dialog.Normal_MenuDialog
 import com.example.bbmr_project.Dialog.Normal_MenuDialogListener
 import com.example.bbmr_project.Normal_Fragment.adapters.ItemClickListener
@@ -31,8 +34,8 @@ class Normal_Fragment_Tab2 : Fragment() {
         rvDessert.layoutManager = layoutManager
 
         val frag1List: ArrayList<NormalTakeOutVO> = ArrayList()
-        frag1List.add(NormalTakeOutVO(R.drawable.coffee, "디저트", "2,000원"))
-        frag1List.add(NormalTakeOutVO(R.drawable.coffee, "디저트", "2,000원"))
+        frag1List.add(NormalTakeOutVO(R.drawable.cake, "초코 케이크", "5,000원"))
+        frag1List.add(NormalTakeOutVO(R.drawable.cake, "호떡", "2,000원"))
 
         val adapter =
             NormalTakeOutAdapter(
@@ -42,10 +45,11 @@ class Normal_Fragment_Tab2 : Fragment() {
                 childFragmentManager,
                 object : ItemClickListener {
                     override fun onItemClick(item: NormalTakeOutVO) {
-                        // NMenuDialog를 보여주기
-                        val normalMenuDialog = Normal_MenuDialog.newInstance(item)
-                        normalMenuDialog.show(childFragmentManager, "NMenuDialog")
-                        normalMenuDialog.setListener(requireActivity() as Normal_MenuDialogListener)
+                        // NMenuDessertDialog를 보여주기
+                        val normalMenuDessertDialog = Normal_MenuDessertDialog.newInstance(item)
+                        normalMenuDessertDialog.show(childFragmentManager, "NMenuDessertDialog")
+                        normalMenuDessertDialog.setDessertListener(requireActivity() as Normal_MenuDessertDialogListener)
+                        Log.d("프래그먼트2 클릭", "프래그먼트2 클릭 오류")
                     }
                 })
         rvDessert.adapter = adapter

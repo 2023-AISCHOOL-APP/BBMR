@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bbmr_project.Dialog.ConfirmBasketCancelListener
 import com.example.bbmr_project.Dialog.NormalSelectPayDialogListener
 import com.example.bbmr_project.Dialog.Normal_ConfirmBasketCancelDialog
+import com.example.bbmr_project.Dialog.Normal_MenuDessertDialogListener
 import com.example.bbmr_project.Dialog.Normal_MenuDialogListener
+import com.example.bbmr_project.Dialog.Normal_MenuMDDialogListener
 import com.example.bbmr_project.Dialog.Normal_SelectPayDialog
 import com.example.bbmr_project.Dialog.TotalCostListener
 import com.example.bbmr_project.Normal_Fragment.Normal_Fragment_Tab2
@@ -24,13 +26,12 @@ import java.text.NumberFormat
 import java.util.Locale
 
 class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
-    NormalSelectPayDialogListener, TotalCostListener, ConfirmBasketCancelListener {
+    NormalSelectPayDialogListener, TotalCostListener, ConfirmBasketCancelListener, Normal_MenuDessertDialogListener, Normal_MenuMDDialogListener {
 
     private lateinit var binding: ActivityNormalTakeoutBinding
     private lateinit var normalSelectBasketAdapter: NormalSelectBasketAdapter
 
     private var totalCost: Int = 0  // 누적 총 비용
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,8 +75,6 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
 
         // 아이템 비용을 빼고 업데이트된 총 비용으로 totalCost 변수를 업데이트
         this.totalCost = totalCost
-
-
     }
 
     override fun onMenuSelectedForPayment(selectedMenuInfoList: List<NormalSelectedMenuInfo>) {
@@ -167,6 +166,7 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
         dialog.show(supportFragmentManager, "Normal_SelectPayDialog")
     }
 
+    // Normal_MenuDialog 메서드
     override fun onMenuAdded(
         normalSelectedMenuInfo: NormalSelectedMenuInfo,
         tvCount: Int, // 수량
@@ -183,9 +183,36 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
         // 총 비용 업데이트
         totalCost += menuCost
 
-
         // TotalCostListener에 알림
         onTotalCostUpdated(totalCost, menuCost)
+    }
+
+    // Normal_MenuDessertDialog 메서드
+    override fun onDessertMenuAdded(normalSelectedMenuInfo: NormalSelectedMenuInfo) {
+        // 추가된 메뉴의 tvCount를 사용자가 선택한 값으로 설정
+        normalSelectedMenuInfo.tvCount = normalSelectedMenuInfo.tvCount
+
+        normalSelectBasketAdapter.addItem(normalSelectedMenuInfo)
+
+        // 총 비용 업데이트
+        totalCost += normalSelectedMenuInfo.menuPrice
+
+        // TotalCostListener에 알림
+        onTotalCostUpdated(totalCost, normalSelectedMenuInfo.menuPrice)
+    }
+
+    // Normal_MenuMDDialog 메서드
+    override fun onMDMenuAdded(normalSelectedMenuInfo: NormalSelectedMenuInfo) {
+        // 추가된 메뉴의 tvCount를 사용자가 선택한 값으로 설정
+        normalSelectedMenuInfo.tvCount = normalSelectedMenuInfo.tvCount
+
+        normalSelectBasketAdapter.addItem(normalSelectedMenuInfo)
+
+        // 총 비용 업데이트
+        totalCost += normalSelectedMenuInfo.menuPrice
+
+        // TotalCostListener에 알림
+        onTotalCostUpdated(totalCost, normalSelectedMenuInfo.menuPrice)
     }
 
 }

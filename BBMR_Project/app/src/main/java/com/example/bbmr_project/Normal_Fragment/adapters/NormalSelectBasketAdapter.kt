@@ -51,15 +51,16 @@ class NormalSelectBasketAdapter(
             // tvBasketCount 값을 증가
             selectedItem.tvCount++
             notifyDataSetChanged()
-
+            // 아이템 비용 계산
+            val itemCost = calculateItemCost(selectedItem)
             // 현재 총 비용 출력
-            val currentTotalCost = calculateItemCost(selectedItem)
+            val currentTotalCost = calculateTotalCost()
             Log.d("TotalCostUpdated", "Total Cost Increased: $currentTotalCost")
 
             // 아이템 비용 출력
             Log.d("CalculateItemCost", "Item Cost: ${calculateItemCost(selectedItem)}")
 
-            totalCostListener.onTotalCostUpdated(currentTotalCost,calculateItemCost(selectedItem))
+            totalCostListener.onTotalCostUpdated(currentTotalCost, itemCost)
         }
 
         // btnBasketMinus 클릭 시
@@ -69,11 +70,15 @@ class NormalSelectBasketAdapter(
                 selectedItem.tvCount--
                 notifyDataSetChanged()
 
+                // 아이템 비용
+                val itemCost = calculateItemCost(selectedItem)
+                // 옵션 비용
+                val optionCost = calculateOptionCost(selectedItem)
                 // 현재 총 비용 출력
-                val currentTotalCost = calculateItemCost(selectedItem)
+                val currentTotalCost = calculateTotalCost()
                 Log.d("TotalCostUpdated", "Total Cost Increased: $currentTotalCost")
 
-                totalCostListener.onTotalCostUpdated(currentTotalCost,calculateItemCost(selectedItem))
+                totalCostListener.onTotalCostUpdated(currentTotalCost, itemCost)
             }
         }
 
@@ -107,6 +112,10 @@ class NormalSelectBasketAdapter(
 
     }
 
+    private fun calculateOptionCost(selectedItem: NormalSelectedMenuInfo): Any {
+        return selectedItem.tvCount1 * 500 + selectedItem.tvCount2 * 500 + selectedItem.tvCount3 * 500 + selectedItem.tvCount4 * 500
+    }
+
     private fun removeItemFromBasket(position: Int) { // 아이템 삭제 메서드
         if (position in 0 until basketList.size) {
             Log.d("바스켓어댑터", "Removing item at position $position")
@@ -114,12 +123,6 @@ class NormalSelectBasketAdapter(
             notifyItemRemoved(position)
         }
     }
-
-
-    private fun calculateOptionTvCount(item: NormalSelectedMenuInfo): Int {
-        return item.tvCount1 * 500 + item.tvCount2 * 500 + item.tvCount3 * 500 + item.tvCount4 * 500
-    }
-
 
     override fun getItemCount(): Int {
         return basketList.size
@@ -134,22 +137,23 @@ class NormalSelectBasketAdapter(
     private fun calculateTotalCost(): Int {
         var totalCost = 0
         for (item in basketList) {
-            // 각 메뉴의 tvCount에 상관없이 price를 곱해서 누적
-            totalCost += item.tvCount * (item.price?.replace(",", "")?.replace("원", "")?.toIntOrNull() ?: 0)
+            val optionCost = item.tvCount1*500 + item.tvCount2*500 + item.tvCount3*500 + item.tvCount4*500
 
-            // 옵션 비용도 더해줘야 함
-            totalCost += calculateOptionTvCount(item)
+            // 각 메뉴의 tvCount에 상관없이 price를 곱해서 누적
+            totalCost += item.tvCount * (item.price?.replace(",", "")?.replace("원", "")?.toIntOrNull() ?: 0) + optionCost
         }
         return totalCost
     }
-    
+
+
+
 
     // 아이템의 비용 계산
     private fun calculateItemCost(item: NormalSelectedMenuInfo): Int {
         // 각 메뉴의 tvCount와 price, optionTvCount를 곱해서 반환 (음수 값이 아닌 0을 반환하도록 수정)
         val menuPrice = (item.price?.replace(",", "")?.replace("원", "")?.toIntOrNull() ?: 0)
         val optionCost = item.tvCount1*500 + item.tvCount2*500 + item.tvCount3*500 + item.tvCount4*500
-        val cost = item.tvCount * (menuPrice + optionCost)
+        val cost = menuPrice + optionCost
         return if (cost < 0) 0 else cost
     }
 

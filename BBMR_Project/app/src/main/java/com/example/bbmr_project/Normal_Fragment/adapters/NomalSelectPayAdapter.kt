@@ -12,15 +12,10 @@ import java.util.Locale
 class NormalSelectPayAdapter(
     val context: Context,
     val layout: Int,
-    val _selectedMenuList: MutableList<NormalSelectedMenuInfo>
+    val selectedMenuList: MutableList<NormalSelectedMenuInfo>
 ) : RecyclerView.Adapter<NormalSelectPayAdapter.ViewHolder>() {
 
     val inflater: LayoutInflater = LayoutInflater.from(context)
-
-    // 속성의 이름을 변경
-    val selectedMenuListProperty: List<NormalSelectedMenuInfo>
-        get() = _selectedMenuList
-
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val selectNormalName: TextView = view.findViewById(R.id.tvSelectNormalName)
         val selectNormalCount: TextView = view.findViewById(R.id.tvSelectNormalCount)
@@ -38,7 +33,7 @@ class NormalSelectPayAdapter(
     }
 
     override fun onBindViewHolder(holder: NormalSelectPayAdapter.ViewHolder, position: Int) {
-        val item = _selectedMenuList[position]
+        val item = selectedMenuList[position]
 
         // price가 String이므로 Int로 변환
         val priceInt: Int? = item.price?.replace("[^0-9]".toRegex(), "")?.toIntOrNull()
@@ -48,11 +43,11 @@ class NormalSelectPayAdapter(
         val formattedCost =
             NumberFormat.getNumberInstance(Locale.KOREA).format(calculateMenuCost) // 원화단위로 변경
 
-        holder.selectNormalName.text = _selectedMenuList[position].name.toString()
-        holder.selectNormalCount.text = _selectedMenuList[position].tvCount.toString()
+        holder.selectNormalName.text = selectedMenuList[position].name.toString()
+        holder.selectNormalCount.text = selectedMenuList[position].tvCount.toString()
         holder.selectNormalMoney.text = formattedCost
-        holder.selectNormalOption.text = _selectedMenuList[position].options.toString()
-        holder.selectNormalOptionCost.text = _selectedMenuList[position].optionTvCount.toString()
+        holder.selectNormalOption.text = selectedMenuList[position].options.toString()
+        holder.selectNormalOptionCost.text = selectedMenuList[position].optionTvCount.toString()
 
         // 옵션 리스트가 비어있는지 확인
         if (item.options.isEmpty()) {
@@ -69,23 +64,6 @@ class NormalSelectPayAdapter(
     }
 
     override fun getItemCount(): Int {
-        return _selectedMenuList.size
-    }
-
-    fun removeItem(position: Int) {
-        Log.d("RemoveItem", "Trying to remove item at position $position")
-        if (position in 0 until _selectedMenuList.size) {
-            Log.d("페이어댑터", "Removing item at position $position")
-            _selectedMenuList.removeAt(position)
-            notifyItemRemoved(position) // 특정 위치의 아이템 갱신
-            Log.d("페이어댑터", "Item removed. Updated data: $_selectedMenuList")
-        }
-    }
-
-    fun updateItems(selectedMenuInfoList: List<NormalSelectedMenuInfo>) {
-        _selectedMenuList.clear()  // 기존 데이터를 모두 지우고
-        _selectedMenuList.addAll(selectedMenuInfoList)  // 새로운 아이템 추가
-        notifyDataSetChanged()
-        Log.d("페이어댑터", "Data updated. Updated data: $_selectedMenuList")
+        return selectedMenuList.size
     }
 }
