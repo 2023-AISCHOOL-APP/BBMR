@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bbmr_project.Dialog.Senior_MenuDialog
 import com.example.bbmr_project.R
+import com.example.bbmr_project.Senior_Fragment.Senior_Fragment_Tab_Dessert
 import com.example.bbmr_project.VO.Senior_TakeOutVO
 
 
@@ -20,9 +21,11 @@ interface ItemClickListener {
 // RecyclerView Adapter 클래스 정의
 class SeniorTakeOutAdapter(
     val context: Context, val layout: Int, val menuList: ArrayList<Senior_TakeOutVO>,
-    private val itemClickListener: ItemClickListener? = null,
-    private val fragmentManager: FragmentManager
-) : RecyclerView.Adapter<SeniorTakeOutAdapter.ViewHolder>() {
+    private val itemClickListener: ItemClickListener,
+    private val fragmentManager: FragmentManager,
+
+
+    ) : RecyclerView.Adapter<SeniorTakeOutAdapter.ViewHolder>() {
 
 
     // LayoutInflater를 이용하여 레이아웃을 인플레이트하기 위한객체 초기화
@@ -58,11 +61,9 @@ class SeniorTakeOutAdapter(
         holder.imgS.setImageResource(menuList[position].simg)
         holder.itemView.setOnClickListener {
             itemClickListener?.onItemClick(menuList[position])
-
             // MenuDialog에 값을 보내주기 위한 코드
             val siniorDialog = Senior_MenuDialog.Senior_Menu(menuList[position])
             siniorDialog.show(fragmentManager, "siniorDialog")
-
         }
     }
 

@@ -14,44 +14,45 @@
         android:layout_height="match_parent"
         android:layout_margin="20dp"
         android:background="@drawable/normal_dialog_background"
-        tools:layout_editor_absoluteX="50dp"
-        tools:layout_editor_absoluteY="50dp">
+        tools:layout_editor_absoluteX="64dp"
+        tools:layout_editor_absoluteY="-44dp">
 
         <Button
             android:id="@+id/btnBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:backgroundTint="@color/mainColor"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:padding="32dp"
-            android:text="이전으로"
-            android:textColor="@color/white"
-            android:textSize="40sp"
-            android:textStyle="bold"
-            app:cornerRadius="16dp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline22"
-            app:layout_constraintHorizontal_bias="0.144"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/btnAddtionOption"
             android:layout_width="390dp"
             android:layout_height="280dp"
             android:layout_marginBottom="16dp"
             android:backgroundTint="@color/mainColor"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            android:text="추가메뉴"
+            android:padding="32dp"
+            android:text="선택취소"
             android:textColor="@color/white"
-
             android:textSize="80sp"
             android:textStyle="bold"
             app:cornerRadius="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline22"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btnAddtionOption"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="70dp"
+            android:backgroundTint="@color/mainColor"
+            android:insetTop="0dp"
+
+            android:insetBottom="0dp"
+            android:text="추가메뉴&amp;옵션"
+            android:textColor="@color/white"
+            android:textSize="80sp"
+            android:textStyle="bold"
+            app:cornerRadius="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/btnBack"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
@@ -77,10 +78,11 @@
             android:id="@+id/rbCooHot"
             android:layout_width="0dp"
             android:layout_height="200dp"
-            android:layout_marginBottom="80dp"
+            android:layout_marginBottom="60dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/btnAddtionOption"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent">
 
             <RadioButton
@@ -118,36 +120,34 @@
             android:layout_width="0dp"
             android:layout_height="357dp"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="80dp"
             android:layout_marginEnd="30dp"
-            android:layout_marginBottom="100dp"
             android:src="@drawable/coffee"
-            app:layout_constraintBottom_toTopOf="@+id/rbCooHot"
             app:layout_constraintEnd_toStartOf="@+id/guideline22"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnBack"
-            app:layout_constraintVertical_bias="0.611" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvMenuName"
             android:layout_width="0dp"
             android:layout_height="200dp"
+            android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="아메리카노awerawer"
+            android:text="아메리카노"
             android:textColor="#000000"
             android:textSize="70sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/guideline22"
-            app:layout_constraintTop_toTopOf="@+id/imgMenu" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvMenuPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:text="2000원"
             android:textColor="#FF0000"
             android:textSize="60sp"

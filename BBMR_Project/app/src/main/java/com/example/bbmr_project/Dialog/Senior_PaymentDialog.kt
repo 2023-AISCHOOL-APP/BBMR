@@ -1,6 +1,5 @@
 package com.example.bbmr_project.Dialog
 
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -15,7 +14,6 @@ import android.widget.Button
 import android.widget.ProgressBar
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-import com.example.bbmr_project.Normal_PaySuccessActivity
 import com.example.bbmr_project.R
 import com.example.bbmr_project.databinding.DialogSeniorPaymentBinding
 

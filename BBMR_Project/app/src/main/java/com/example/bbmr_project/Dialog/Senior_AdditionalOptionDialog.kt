@@ -20,7 +20,7 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
 
     override fun onStart() {
         super.onStart()
-        val darkTransparentBlack = Color.argb((255 * 0.6).toInt(), 0, 0, 0)
+        val darkTransparentBlack = Color.argb((255 * 0).toInt(), 0, 0, 0)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(darkTransparentBlack))
         dialog?.window?.setLayout(
             ViewGroup.LayoutParams.MATCH_PARENT,
@@ -63,10 +63,6 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
                 name = "데블스 초코케이크",
                 price = 4800,
                 count = 1,
-                temperature = false,
-                size = false,
-                sugar = false,
-                cream = false,
                 image = "BBMR/"
             )
             CartStorage.productList.add(bread)
@@ -77,10 +73,6 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
                 name = "콘치즈 계란빵",
                 price = 2900,
                 count = 1,
-                temperature = false,
-                size = false,
-                sugar = false,
-                cream = false,
                 image = "BBMR/"
             )
             CartStorage.productList.add(bread)
@@ -91,10 +83,6 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
                 name = "허니 카라멜 브레드",
                 price = 4800,
                 count = 1,
-                temperature = false,
-                size = false,
-                sugar = false,
-                cream = false,
                 image = "BBMR/"
             )
             CartStorage.productList.add(bread)
@@ -104,16 +92,6 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
 
         // ------ 이전, 선택 완료 코드 시작 ------
         binding.btnCnclAddiOpDSAO.setOnClickListener {
-            val bundle = arguments
-            if (bundle != null) {
-                val customOption = bundle.getSerializable("product_option") as Product
-                Log.d("Product라는 data List", "${customOption}")
-                val bundle2 = Bundle()
-                val dialogFragment = Senior_MenuDialog()
-                bundle2.putSerializable("final_product", customOption)
-                dialogFragment.arguments = bundle2
-                dialogFragment.show(childFragmentManager, "Senior_MenuDialog")
-            }
             dismiss()
         }
 
@@ -168,11 +146,11 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
         val build = AlertDialog.Builder(view.context).apply {
             setView(myLayout)
             // 화면밖 터치 했을 때 안 됨
-            setCancelable(false)
+//            setCancelable(false)
         }
 
         val dialog = build.create()
-        // 화면 밖 터치 잠금
+//        // 화면 밖 터치 잠금
         dialog.setCanceledOnTouchOutside(false)
         dialog.show()
 

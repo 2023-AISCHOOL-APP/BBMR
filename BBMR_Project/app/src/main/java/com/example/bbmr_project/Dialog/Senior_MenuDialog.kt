@@ -1,6 +1,5 @@
 package com.example.bbmr_project.Dialog
 
-import android.app.SearchManager.OnCancelListener
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -57,8 +56,6 @@ class Senior_MenuDialog : DialogFragment() {
     ): View? {
         binding = DialogSeniorMenuBinding.inflate(layoutInflater)
 
-
-
         return binding.root
     }
 
@@ -112,7 +109,6 @@ class Senior_MenuDialog : DialogFragment() {
             val radiogroup = binding.rbCooHot.checkedRadioButtonId
             val radioButton: RadioButton = binding.rbCooHot.findViewById(radiogroup)
             val coolhot: Boolean = radioButton.isChecked
-            val totalCost : Int
 
 
 

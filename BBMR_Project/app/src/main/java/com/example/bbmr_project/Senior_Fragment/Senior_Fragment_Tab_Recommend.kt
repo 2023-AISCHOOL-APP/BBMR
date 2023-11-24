@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bbmr_project.Menu.MenuListViewModel
 import com.example.bbmr_project.R
-import com.example.bbmr_project.Senior_Fragment.seniorAdapters.ItemClickListener
+import com.example.bbmr_project.Senior_Fragment.seniorAdapters. ItemClickListener
 import com.example.bbmr_project.Senior_Fragment.seniorAdapters.SeniorTakeOutAdapter
 import com.example.bbmr_project.VO.Senior_TakeOutVO
 
@@ -44,7 +44,7 @@ class Senior_Fragment_Tab_Recommend : Fragment(), ItemClickListener {
 
 
         // RecyclerView 어댑터 초기화
-        adapter = SeniorTakeOutAdapter(requireContext(), R.layout.frag_senior_list, arrayListOf(), this,  parentFragmentManager)
+        adapter = SeniorTakeOutAdapter(requireContext(), R.layout.frag_senior_list, arrayListOf(), this, parentFragmentManager)
         rvRecommend.adapter = adapter
         rvRecommend.layoutManager = GridLayoutManager(requireContext(), 3)
 

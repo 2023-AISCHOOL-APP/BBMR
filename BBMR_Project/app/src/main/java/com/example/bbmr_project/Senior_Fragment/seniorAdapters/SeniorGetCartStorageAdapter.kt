@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bbmr_project.Product
@@ -32,7 +31,7 @@ class SeniorGetCartStorageAdapter (val context: Context, private val productList
     class ViewHolder(view : View) : RecyclerView.ViewHolder(view){
         val tvMenuName : TextView = view.findViewById(R.id.tvMenuName)
         val tvMenuPrice : TextView = view.findViewById(R.id.tvMenuPrice)
-        val tvCount : TextView = view.findViewById(R.id.tvCount)
+        val tvCount : TextView = view.findViewById(R.id.tvSeniorCount)
     }
 
     override fun onCreateViewHolder(

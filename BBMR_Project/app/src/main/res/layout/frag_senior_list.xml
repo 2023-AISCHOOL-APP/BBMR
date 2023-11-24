@@ -16,8 +16,8 @@
 
         <ImageView
             android:id="@+id/imgS"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="195dp"
+            android:layout_height="195dp"
             android:src="@drawable/coffee"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

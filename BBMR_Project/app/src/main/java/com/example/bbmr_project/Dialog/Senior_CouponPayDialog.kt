@@ -19,7 +19,7 @@ class Senior_CouponPayDialog : DialogFragment() {
     private lateinit var binding: DialogSeniorCouponpayBinding
     override fun onStart() {
         super.onStart()
-        val darkTransparentBlack = Color.argb((255 * 0.6).toInt(), 0, 0, 0)
+        val darkTransparentBlack = Color.argb((255 * 0).toInt(), 0, 0, 0)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(darkTransparentBlack))
         dialog?.window?.setLayout(
             ViewGroup.LayoutParams.MATCH_PARENT,
@@ -189,6 +189,8 @@ class Senior_CouponPayDialog : DialogFragment() {
             dialogFragment.show(childFragmentManager, "Senior_BasketDialog")
             // 다이얼로그창 끄기
             dialog.dismiss()
+            // 쿠폰 화면 끄기
+            dismiss()
         }
         // 쿠펀 번호 맞는데 취소 버튼 누를 경우
         myLayout.findViewById<Button>(R.id.btnCpnCnclDSCS).setOnClickListener {

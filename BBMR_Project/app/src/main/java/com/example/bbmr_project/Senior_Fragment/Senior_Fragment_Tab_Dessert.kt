@@ -17,12 +17,13 @@ import com.example.bbmr_project.VO.Senior_TakeOutVO
 
 class Senior_Fragment_Tab_Dessert : Fragment(), ItemClickListener {
 
+
     override fun onItemClick(item: Senior_TakeOutVO) {
     }
 
-    private lateinit var viewModel : MenuListViewModel
-    private lateinit var adapter : SeniorTakeOutAdapter
-    private lateinit var rvDessert : RecyclerView
+    private lateinit var viewModel: MenuListViewModel
+    private lateinit var adapter: SeniorTakeOutAdapter
+    private lateinit var rvDessert: RecyclerView
 
 
     override fun onCreateView(
@@ -33,18 +34,25 @@ class Senior_Fragment_Tab_Dessert : Fragment(), ItemClickListener {
         viewModel = ViewModelProvider(this).get(MenuListViewModel::class.java)
 
         val view = inflater.inflate(R.layout.frag_senior_tab_dessert, container, false)
-        rvDessert =view.findViewById(R.id.rvDessert)
+        rvDessert = view.findViewById(R.id.rvDessert)
 
-        adapter = SeniorTakeOutAdapter(requireContext(), R.layout.frag_senior_list, arrayListOf(), this, parentFragmentManager)
-        rvDessert.adapter =adapter
+        adapter = SeniorTakeOutAdapter(
+            requireContext(),
+            R.layout.frag_senior_list,
+            arrayListOf(),
+            this
+            ,parentFragmentManager
+        )
+        rvDessert.adapter = adapter
         rvDessert.layoutManager = GridLayoutManager(requireContext(), 3)
 
-        viewModel.menuList3.observe(viewLifecycleOwner){menuList ->
+        viewModel.menuList3.observe(viewLifecycleOwner) { menuList ->
             adapter.updateList(menuList)
         }
 
         return view
     }
+
 
 
 }
