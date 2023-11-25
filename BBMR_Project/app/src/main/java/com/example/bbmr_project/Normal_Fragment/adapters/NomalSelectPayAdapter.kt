@@ -26,7 +26,6 @@ class NormalSelectPayAdapter(
         // 옵션가격
         val selectNormalOptionCost1: TextView = view.findViewById(R.id.selectNormalOptionCost1)
 
-        val selectNormalOptionCost: TextView = view.findViewById(R.id.selectNormalOptionCost1)
     }
 
     override fun onCreateViewHolder(
@@ -51,7 +50,6 @@ class NormalSelectPayAdapter(
         holder.selectNormalName.text = selectedMenuList[position].name.toString()
         holder.selectNormalCount.text = selectedMenuList[position].tvCount.toString()
         holder.selectNormalMoney.text = formattedCost
-
         holder.selectNormalOption1.text = selectedMenuList[position].options.toString()
         holder.selectNormalOptionCost1.text = selectedMenuList[position].optionTvCount.toString()
 
@@ -59,13 +57,13 @@ class NormalSelectPayAdapter(
         if (item.options.isEmpty()) {
             // 옵션 리스트가 비어있으면 관련 UI 숨기기
             holder.selectNormalOption1.visibility = View.GONE
-            holder.selectNormalOptionCost.visibility = View.GONE
+            holder.selectNormalOptionCost1.visibility = View.GONE
         } else {
             // 옵션 리스트가 있으면 텍스트 설정
             holder.selectNormalOption1.text = item.options.joinToString(", ")
             holder.selectNormalOption1.visibility = View.VISIBLE
-            holder.selectNormalOptionCost.text = item.optionTvCount.toString()
-            holder.selectNormalOptionCost.visibility = View.VISIBLE
+            holder.selectNormalOptionCost1.text = item.optionTvCount.toString()
+            holder.selectNormalOptionCost1.visibility = View.VISIBLE
         }
     }
 
