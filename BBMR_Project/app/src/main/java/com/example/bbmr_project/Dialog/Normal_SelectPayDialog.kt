@@ -11,8 +11,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.bbmr_project.Normal_TakeOutActivity
 import com.example.bbmr_project.R
 import com.example.bbmr_project.databinding.DialogNormalSelectPayBinding
+import java.text.NumberFormat
+import java.util.Locale
 
 interface NormalSelectPayDialogListener : Normal_MenuDialogListener {
     override fun onMenuAdded(
@@ -99,6 +102,26 @@ class Normal_SelectPayDialog : DialogFragment() {
         binding.rvSelectPayList.layoutManager = LinearLayoutManager(context)
         binding.rvSelectPayList.invalidateItemDecorations()
         adapter.notifyDataSetChanged()
+
+        // 총 결제 금액을 계산하여 표시
+        val totalSumCost = calculateTotalSumCost()
+        val formattedTotalSumCost =
+            NumberFormat.getNumberInstance(Locale.KOREA).format(totalSumCost)
+        binding.totalSumCostPrice.text = formattedTotalSumCost
+    }
+
+    private fun calculateTotalSumCost(): Any {
+        // 총 합계 출력을 위한 메서드
+        var totalSumCost = 0
+
+        for (menuInfo in selectedMenuList) {
+            val menuCost = menuInfo.menuPrice ?: 0
+            val menuCount = menuInfo.tvCount ?: 0
+            val optionCount = menuInfo.optionTvCount ?: 0
+
+            totalSumCost += (menuCost + optionCount) * menuCount // 총 합계 = (음료값 + 옵션값) * 수량
+        }
+        return totalSumCost
     }
 
     private fun showNormalCardPayDialog() {

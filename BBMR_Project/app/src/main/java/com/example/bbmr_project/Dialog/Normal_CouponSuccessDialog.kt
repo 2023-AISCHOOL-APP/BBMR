@@ -1,5 +1,6 @@
 package com.example.bbmr_project.Dialog
 
+import NormalSelectedMenuInfo
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -8,11 +9,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import com.example.bbmr_project.Normal_Fragment.adapters.NormalSelectBasketAdapter
 import com.example.bbmr_project.Normal_PaySuccessActivity
+import com.example.bbmr_project.Normal_TakeOutActivity
 import com.example.bbmr_project.databinding.DialogNormalCouponSuccessBinding
 
-class Normal_CouponSuccessDialog: DialogFragment() {
-    private lateinit var binding : DialogNormalCouponSuccessBinding
+class Normal_CouponSuccessDialog : DialogFragment() {
+    private lateinit var binding: DialogNormalCouponSuccessBinding
     override fun onStart() {
         super.onStart()
         val darkTransparentBlack = Color.argb((255 * 0.6).toInt(), 0, 0, 0)
@@ -53,17 +56,21 @@ class Normal_CouponSuccessDialog: DialogFragment() {
             dismiss()
         }
         // 쿠폰 사용 --> 장바구니로 돌아가기
-        binding.btnCpnUseDNCS.setOnClickListener{
-            // argument에 데이터를 담음
-            val dialogFragment = Normal_SelectPayDialog()
-            val bundle = Bundle()
-//            // 쿠폰 성공 시
-            bundle.putString("CouponPrice", binding.tvCpnPriceDNCS.text.toString())
-            dialogFragment.arguments = bundle
-            dialogFragment.show(requireActivity().supportFragmentManager, "Normal_SelectPayDialog")
-//            val intent = Intent(view.context, Normal_PaySuccessActivity::class.java)
-//            startActivity(intent)
-
+        binding.btnCpnUseDNCS.setOnClickListener {
+            showSelectPayDialog()
         }
+    }
+
+    private fun showSelectPayDialog() {
+        // 현재 선택된 항목 리스트 가져오기
+        val currentList = (activity as? Normal_TakeOutActivity)?.getNormalSelectBasketAdapter()
+            ?.getCurrentList()
+
+        // 형변환해서 가져오기
+        if (currentList != null) {
+            val dialog = Normal_SelectPayDialog.newInstance(currentList)
+            dialog.show(requireActivity().supportFragmentManager, "Normal_SelectPayDialog")
+        }
+//        binding.tvCpnPriceDNCS.text = "2000"
     }
 }

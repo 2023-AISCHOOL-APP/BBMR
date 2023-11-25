@@ -27,12 +27,18 @@ import java.util.Locale
 
 
 class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
-    NormalSelectPayDialogListener, TotalCostListener, ConfirmBasketCancelListener, Normal_MenuDessertDialogListener, Normal_MenuMDDialogListener {
+    NormalSelectPayDialogListener, TotalCostListener, ConfirmBasketCancelListener,
+    Normal_MenuDessertDialogListener, Normal_MenuMDDialogListener {
 
     private lateinit var binding: ActivityNormalTakeoutBinding
     private lateinit var normalSelectBasketAdapter: NormalSelectBasketAdapter
 
     private var totalCost: Int = 0  // 누적 총 비용
+
+    // 외부 클래스에서 어댑터에 접근할 수 있는 메소드 추가
+    fun getNormalSelectBasketAdapter(): NormalSelectBasketAdapter {
+        return normalSelectBasketAdapter
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +59,10 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
         binding.btnNormalCancel.setOnClickListener {
             val confirmBasketCancelDialog = Normal_ConfirmBasketCancelDialog()
             confirmBasketCancelDialog.setConfirmBasketCancelListener(this)
-            confirmBasketCancelDialog.show(supportFragmentManager, "Normal_ConfirmBasketCancelDialog")
+            confirmBasketCancelDialog.show(
+                supportFragmentManager,
+                "Normal_ConfirmBasketCancelDialog"
+            )
         }
     }
 
@@ -90,7 +99,8 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
 
     private fun updateTotalCostUI(currentTotalCost: Int) {
         // 숫자를 한국 통화 단위로 포맷
-        val formattedTotalCost = NumberFormat.getNumberInstance(Locale.KOREA).format(currentTotalCost)
+        val formattedTotalCost =
+            NumberFormat.getNumberInstance(Locale.KOREA).format(currentTotalCost)
 
         // 활동에서 총 비용 UI 요소(tvNormalTotalMoney)를 업데이트
         binding.tvNormalTotalMoney.text = String.format("%s 원", formattedTotalCost)
@@ -216,4 +226,7 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
         onTotalCostUpdated(totalCost)
     }
 
+    fun getTotalCost(): Int {
+        return totalCost
+    }
 }
