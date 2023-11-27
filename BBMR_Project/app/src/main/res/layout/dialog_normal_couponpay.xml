@@ -33,9 +33,10 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.087" />
+            app:layout_constraintVertical_bias="0.036" />
 
         <ImageView
             android:id="@+id/imageView3"
@@ -82,7 +83,7 @@
             android:id="@+id/btnCpnCnclDNC"
             android:layout_width="130dp"
             android:layout_height="60dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="80dp"
             android:backgroundTint="@color/mainColor"
             android:insetTop="0dp"
             android:insetBottom="0dp"
@@ -91,7 +92,7 @@
             android:textStyle="bold"
             app:cornerRadius="10dp"
             app:layout_constraintEnd_toEndOf="@+id/tvBckGnd"
-            app:layout_constraintHorizontal_bias="0.317"
+            app:layout_constraintHorizontal_bias="0.312"
             app:layout_constraintStart_toStartOf="@+id/tvBckGnd"
             app:layout_constraintTop_toBottomOf="@+id/tvBckGnd" />
 
@@ -99,7 +100,7 @@
             android:id="@+id/btnCpnOkDNC"
             android:layout_width="130dp"
             android:layout_height="60dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="80dp"
             android:backgroundTint="@color/mainColor"
             android:insetTop="0dp"
             android:insetBottom="0dp"
@@ -108,7 +109,7 @@
             android:textStyle="bold"
             app:cornerRadius="10dp"
             app:layout_constraintEnd_toEndOf="@+id/tvBckGnd"
-            app:layout_constraintHorizontal_bias="0.68"
+            app:layout_constraintHorizontal_bias="0.676"
             app:layout_constraintStart_toStartOf="@+id/tvBckGnd"
             app:layout_constraintTop_toBottomOf="@+id/tvBckGnd" />
 
@@ -342,7 +343,7 @@
             android:id="@+id/textView8"
             android:layout_width="660dp"
             android:layout_height="4dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="24dp"
             android:background="@color/mainColor"
             android:backgroundTint="#000000"
             android:backgroundTintMode="add"

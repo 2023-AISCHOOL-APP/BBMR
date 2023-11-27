@@ -11,8 +11,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.bbmr_project.Normal_TakeOutActivity
 import com.example.bbmr_project.R
 import com.example.bbmr_project.databinding.DialogNormalSelectPayBinding
+import java.text.NumberFormat
+import java.util.Locale
 
 interface NormalSelectPayDialogListener : Normal_MenuDialogListener {
     override fun onMenuAdded(
@@ -25,14 +28,18 @@ interface NormalSelectPayDialogListener : Normal_MenuDialogListener {
 }
 
 class Normal_SelectPayDialog : DialogFragment() {
-
+    //private lateinit var couponPrice2 : String
     private lateinit var binding: DialogNormalSelectPayBinding
     private var listener: Normal_MenuDialogListener? = null
     private var selectedMenuList: MutableList<NormalSelectedMenuInfo> = mutableListOf()
     private lateinit var adapter: NormalSelectPayAdapter
 
     companion object {
-        fun newInstance(selectedMenuList: List<NormalSelectedMenuInfo>): Normal_SelectPayDialog {
+        private lateinit var couponPrice2: String
+
+        fun newInstance(selectedMenuList: List<NormalSelectedMenuInfo>, couponPrice : String): Normal_SelectPayDialog {
+            couponPrice2 = couponPrice // 받아온 쿠폰 값
+
             val args = Bundle().apply {
                 // selectedMenuList를 인자로 전달
                 putParcelableArrayList("selectedMenuList", ArrayList(selectedMenuList))
@@ -70,6 +77,8 @@ class Normal_SelectPayDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.couponPrice.text = couponPrice2
+        Log.d("couponprice", arguments?.getString("coupon").toString())
         // 이전으로 클릭 시 NormalTakeOut으로 이동
         binding.btnNormalSelectPayBack.setOnClickListener {
             dismiss()
@@ -99,6 +108,44 @@ class Normal_SelectPayDialog : DialogFragment() {
         binding.rvSelectPayList.layoutManager = LinearLayoutManager(context)
         binding.rvSelectPayList.invalidateItemDecorations()
         adapter.notifyDataSetChanged()
+
+        // 총 결제 금액을 계산하여 표시
+        val totalSumCost = calculateTotalSumCost()
+        val formattedTotalSumCost = NumberFormat.getNumberInstance(Locale.KOREA).format(totalSumCost)
+        binding.totalSumCostPrice.text = formattedTotalSumCost
+
+        Log.d("Normal_SelectPayDialog", "formattedTotalSumCost: $formattedTotalSumCost")
+        Log.d("Normal_SelectPayDialog", "couponPrice2: $couponPrice2")
+
+        val totalSumCostWithoutComma = formattedTotalSumCost.replace(",", "")
+        val couponInt = couponPrice2.replace(",", "").toIntOrNull()
+
+        if (totalSumCostWithoutComma != null && couponInt != null) {
+            val result = totalSumCostWithoutComma.toInt() - couponInt
+
+            // 한화(₩)로 포맷팅
+            val currencyFormat = NumberFormat.getCurrencyInstance(Locale.KOREA)
+            val formattedResult = currencyFormat.format(result)
+
+            // "₩" 표시 제거
+            val formattedResultWithoutCurrencySymbol = formattedResult.replace("₩", "")
+
+            binding.totalCouponMinusPrice.text = formattedResultWithoutCurrencySymbol
+        }
+    }
+
+    private fun calculateTotalSumCost(): Any {
+        // 총 합계 출력을 위한 메서드
+        var totalSumCost = 0
+
+        for (menuInfo in selectedMenuList) {
+            val menuCost = menuInfo.menuPrice ?: 0
+            val menuCount = menuInfo.tvCount ?: 0
+            val optionCount = menuInfo.optionTvCount ?: 0
+
+            totalSumCost += (menuCost + optionCount) * menuCount // 총 합계 = (음료값 + 옵션값) * 수량
+        }
+        return totalSumCost
     }
 
     private fun showNormalCardPayDialog() {
@@ -133,7 +180,6 @@ class Normal_SelectPayDialog : DialogFragment() {
         // UI 스레드에서 어댑터에 변경 사항 알림
         activity?.runOnUiThread {
             adapter.notifyDataSetChanged()
-            Log.d("UpdateUI", "UI Updated")
         }
     }
 
