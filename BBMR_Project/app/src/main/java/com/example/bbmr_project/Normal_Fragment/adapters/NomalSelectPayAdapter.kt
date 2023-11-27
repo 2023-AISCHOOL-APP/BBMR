@@ -1,10 +1,13 @@
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bbmr_project.R
+import java.text.NumberFormat
+import java.util.Locale
 
 class NormalSelectPayAdapter(
     val context: Context,
@@ -13,7 +16,6 @@ class NormalSelectPayAdapter(
 ) : RecyclerView.Adapter<NormalSelectPayAdapter.ViewHolder>() {
 
     val inflater: LayoutInflater = LayoutInflater.from(context)
-
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val selectNormalName: TextView = view.findViewById(R.id.tvSelectNormalName)
         val selectNormalCount: TextView = view.findViewById(R.id.tvSelectNormalCount)
@@ -36,12 +38,14 @@ class NormalSelectPayAdapter(
         // price가 String이므로 Int로 변환
         val priceInt: Int? = item.price?.replace("[^0-9]".toRegex(), "")?.toIntOrNull()
 
-        // priceInt가 null이 아닌 경우에 계산 수행 (장바구니에서 수량 증감해도 결제하기 rvSelectPayList에 반영하기 위해)
+        // 장바구니에서 수량 증감해도 결제하기 rvSelectPayList에 반영하기 위해
         val calculateMenuCost = priceInt?.let { it * item.tvCount } ?: 0
+        val formattedCost =
+            NumberFormat.getNumberInstance(Locale.KOREA).format(calculateMenuCost) // 원화단위로 변경
 
         holder.selectNormalName.text = selectedMenuList[position].name.toString()
         holder.selectNormalCount.text = selectedMenuList[position].tvCount.toString()
-        holder.selectNormalMoney.text = calculateMenuCost.toString()
+        holder.selectNormalMoney.text = formattedCost
         holder.selectNormalOption.text = selectedMenuList[position].options.toString()
         holder.selectNormalOptionCost.text = selectedMenuList[position].optionTvCount.toString()
 
@@ -61,10 +65,5 @@ class NormalSelectPayAdapter(
 
     override fun getItemCount(): Int {
         return selectedMenuList.size
-    }
-
-    fun updateItems(selectedMenuInfoList: List<NormalSelectedMenuInfo>) {
-        selectedMenuList.addAll(selectedMenuInfoList)  // 새로운 아이템 추가
-        notifyDataSetChanged()
     }
 }

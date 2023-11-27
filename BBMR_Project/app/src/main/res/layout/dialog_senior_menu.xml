@@ -5,58 +5,70 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#00000000"
+    android:padding="20dp"
     tools:context=".Dialog.Senior_MenuDialog">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="40dp"
+        android:layout_margin="20dp"
         android:background="@drawable/normal_dialog_background"
         tools:layout_editor_absoluteX="50dp"
         tools:layout_editor_absoluteY="50dp">
 
-        <android.widget.Button
+        <Button
             android:id="@+id/btnBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/button_normal"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/mainColor"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
             android:padding="32dp"
             android:text="이전으로"
-            android:textColor="@drawable/button_text"
+            android:textColor="@color/white"
             android:textSize="40sp"
             android:textStyle="bold"
+            app:cornerRadius="16dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline22"
+            app:layout_constraintHorizontal_bias="0.144"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <android.widget.Button
+        <Button
             android:id="@+id/btnAddtionOption"
-            android:layout_width="380dp"
+            android:layout_width="390dp"
             android:layout_height="280dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/button_normal"
-            android:padding="32dp"
+            android:backgroundTint="@color/mainColor"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
             android:text="추가메뉴"
-            android:textColor="@drawable/button_text"
+            android:textColor="@color/white"
+
             android:textSize="80sp"
             android:textStyle="bold"
+            app:cornerRadius="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline22"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <android.widget.Button
+        <Button
             android:id="@+id/btnComplet"
-            android:layout_width="380dp"
+            android:layout_width="390dp"
             android:layout_height="280dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/button_normal"
-            android:padding="32dp"
+            android:backgroundTint="@color/mainColor"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
             android:text="선택완료"
-            android:textColor="@drawable/button_text"
-            android:textSize="80sp"
+            android:textColor="@color/white"
+
+            android:textSize="80dp"
+
             android:textStyle="bold"
+            app:cornerRadius="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline22" />

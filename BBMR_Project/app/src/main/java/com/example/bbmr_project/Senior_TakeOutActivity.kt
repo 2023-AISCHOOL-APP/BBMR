@@ -7,22 +7,14 @@ import android.os.Bundle
 import android.os.Handler
 import android.text.Spannable
 import android.text.SpannableStringBuilder
-import android.text.style.LeadingMarginSpan
-import android.text.style.LineHeightSpan
 import android.text.style.RelativeSizeSpan
-import android.util.Log
-import android.view.View
-import androidx.core.widget.TextViewCompat.setLineHeight
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
-import com.example.bbmr_project.Dialog.KeyProductBundleKey
-import com.example.bbmr_project.Dialog.Senior_BasketDialog
+import com.example.bbmr_project.Dialog.SeniorBasketDialog
 import com.example.bbmr_project.databinding.ActivitySeniorTakeoutBinding
 import com.example.bbmr_project.Senior_Fragment.Senior_Fragment_Tab_Recommend
 import com.example.bbmr_project.Senior_Fragment.Senior_Fragment_Tab_Coffee
 import com.example.bbmr_project.Senior_Fragment.Senior_Fragment_Tab_Beverage
 import com.example.bbmr_project.Senior_Fragment.Senior_Fragment_Tab_Dessert
-import com.example.bbmr_project.Senior_Fragment.seniorAdapters.SeniorGetCartStorageAdapter
 
 
 class Senior_TakeOutActivity : AppCompatActivity(), OnCartChangeListener {
@@ -54,7 +46,7 @@ class Senior_TakeOutActivity : AppCompatActivity(), OnCartChangeListener {
         spannableStringBuilder.setSpan(RelativeSizeSpan(0.5f), 4, 6, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         spannableStringBuilder.setSpan(RelativeSizeSpan(1.4f), 7, _text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         binding.btnBasket.text = spannableStringBuilder
-        binding.btnBasket.setLineSpacing(0.5f, 0.7f)
+        binding.btnBasket.setLineSpacing(0.4f, 0.7f)
         // ------ 장바구니 버튼 크기 변경 코드 끝 ------
 
         // 일반 키오스크로 이동
@@ -91,12 +83,12 @@ class Senior_TakeOutActivity : AppCompatActivity(), OnCartChangeListener {
             if (!buttonDoubleDefend){
                 buttonDoubleDefend = true
 
-                val fragment = Senior_BasketDialog()
+                val fragment = SeniorBasketDialog()
 
                 val args = Bundle().apply {
 
 //                    putParcelableArrayList(KeyProductBundleKey, ArrayList(CartStorage.productList))
-            }
+                }
 
                 fragment.arguments = args
                 fragment.show(supportFragmentManager, "Senior.BasketDialog")
@@ -121,8 +113,8 @@ class Senior_TakeOutActivity : AppCompatActivity(), OnCartChangeListener {
         // 값의 총합을 구하는 코드
         val addPrice = productList.sumOf { it.price }
         // 값을 1000단위마다 , 넣어주는 코드
-        val TotalPrice = String.format("%,d", addPrice) // String.format("%,d", 값) -> 1000 단위마다 , 표시
-        binding.tvTotalSeniorPrice.text = TotalPrice+"원"
+        val TotalPrice = String.format("%,d원", addPrice) // String.format("%,d", 값) -> 1000 단위마다 , 표시
+        binding.tvTotalSeniorPrice.text = TotalPrice
     }
 
     override fun onDestroy() {

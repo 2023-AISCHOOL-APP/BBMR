@@ -10,7 +10,7 @@
   <TextView
       android:id="@+id/tv3"
       android:layout_width="0dp"
-      android:layout_height="700dp"
+      android:layout_height="1000dp"
       android:background="@drawable/tv_main_radius"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
@@ -20,8 +20,9 @@
   <TextView
       android:id="@+id/tv1"
       android:layout_width="0dp"
-      android:layout_height="0dp"
+      android:layout_height="400dp"
       android:layout_margin="80dp"
+      android:layout_marginTop="4dp"
       android:gravity="center|left"
       android:text="Kinior\n시니어를 위한\n키오스크"
       android:textColor="#FFFFFF"
@@ -43,14 +44,16 @@
       android:textStyle="bold"
       app:layout_constraintBottom_toTopOf="@+id/btnOrderInASI"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.503"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="@+id/tv3" />
+      app:layout_constraintTop_toTopOf="@+id/tv3"
+      app:layout_constraintVertical_bias="0.75" />
 
   <Button
       android:id="@+id/btnOrderInASI"
       android:layout_width="500dp"
       android:layout_height="225dp"
-      android:layout_marginBottom="128dp"
+      android:layout_marginBottom="104dp"
       android:backgroundTint="@color/mainColor"
       android:text="주문하기"
       android:textSize="80dp"
@@ -58,6 +61,6 @@
       app:cornerRadius="10dp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.524"
       app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

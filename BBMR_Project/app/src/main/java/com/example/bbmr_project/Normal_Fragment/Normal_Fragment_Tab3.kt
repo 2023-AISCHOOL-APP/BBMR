@@ -8,8 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bbmr_project.Dialog.Normal_MenuDessertDialogListener
 import com.example.bbmr_project.Dialog.Normal_MenuDialog
 import com.example.bbmr_project.Dialog.Normal_MenuDialogListener
+import com.example.bbmr_project.Dialog.Normal_MenuMDDialog
+import com.example.bbmr_project.Dialog.Normal_MenuMDDialogListener
 import com.example.bbmr_project.Normal_Fragment.adapters.ItemClickListener
 import com.example.bbmr_project.R
 import com.example.bbmr_project.VO.NormalTakeOutVO
@@ -30,8 +33,8 @@ class Normal_Fragment_Tab3 : Fragment() {
         rvMD.layoutManager = layoutManager
 
         val frag1List: ArrayList<NormalTakeOutVO> = ArrayList()
-        frag1List.add(NormalTakeOutVO(R.drawable.coffee, "MD", "2,000원"))
-        frag1List.add(NormalTakeOutVO(R.drawable.coffee, "MD", "2,000원"))
+        frag1List.add(NormalTakeOutVO(R.drawable.giftcard, "MD 원두", "10,000원"))
+        frag1List.add(NormalTakeOutVO(R.drawable.giftcard, "MD 비니스트", "15,000원"))
 
         val adapter =
             NormalTakeOutAdapter(
@@ -42,9 +45,9 @@ class Normal_Fragment_Tab3 : Fragment() {
                 object : ItemClickListener {
                     override fun onItemClick(item: NormalTakeOutVO) {
                         // NMenuDialog를 보여주기
-                        val normalMenuDialog = Normal_MenuDialog.newInstance(item)
-                        normalMenuDialog.show(childFragmentManager, "NMenuDialog")
-                        normalMenuDialog.setListener(requireActivity() as Normal_MenuDialogListener)
+                        val normalMenuMDDialog = Normal_MenuMDDialog.newInstance(item)
+                        normalMenuMDDialog.show(childFragmentManager, "NMenuMDDialog")
+                        normalMenuMDDialog.setMDListener(requireActivity() as Normal_MenuMDDialogListener)
                     }
                 })
         rvMD.adapter = adapter

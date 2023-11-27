@@ -1,6 +1,5 @@
 package com.example.bbmr_project.Dialog
 
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -90,7 +89,7 @@ class Senior_CouponPayDialog : DialogFragment() {
         dialog.show()
         myLayout.findViewById<Button>(R.id.btnYesDSCB).setOnClickListener {
             dialog.dismiss()
-            val dialogFragment = Senior_BasketDialog()
+            val dialogFragment = SeniorBasketDialog()
             dialogFragment.show(childFragmentManager, "Senior_BasketDialog")
             dismiss()
 
@@ -147,7 +146,7 @@ class Senior_CouponPayDialog : DialogFragment() {
                     .toIntOrNull() ?: 0
             // 번들에 담아서 다이얼로그프래그먼트로 보내기
 
-            val dialogFragment = Senior_BasketDialog()
+            val dialogFragment = SeniorBasketDialog()
             val bundle = Bundle()
             bundle.putString("discount_price", "2,900")
             dialogFragment.arguments = bundle
@@ -183,7 +182,7 @@ class Senior_CouponPayDialog : DialogFragment() {
             val CouponPrice =
                 myLayout.findViewById<TextView>(R.id.tvPdPrice).text.toString().replace(",", "")
                     .toIntOrNull() ?: 0
-            val dialogFragment = Senior_BasketDialog()
+            val dialogFragment = SeniorBasketDialog()
             val bundle = Bundle()
             bundle.putString("discount_price", "20,000")
             dialogFragment.arguments = bundle

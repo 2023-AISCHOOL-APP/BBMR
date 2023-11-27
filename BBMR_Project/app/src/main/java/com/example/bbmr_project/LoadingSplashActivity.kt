@@ -62,13 +62,21 @@ class LoadingSplashActivity : AppCompatActivity() {
         }
         cameraExecutor = Executors.newSingleThreadExecutor()
 
+<<<<<<< HEAD
 
+=======
+//
+>>>>>>> 700c024f97b16d087edcac6479175aa2e1124a41
 //        val Handler = Handler(Looper.getMainLooper())
 //        Handler.postDelayed({
 //            val intent = Intent(this, Normal_IntroActivity::class.java)
 //            startActivity(intent)
 //            finish()
+<<<<<<< HEAD
 //        }, 10000)
+=======
+//        }, 70000)
+>>>>>>> 700c024f97b16d087edcac6479175aa2e1124a41
     }
 
     private fun startCamera() {
@@ -104,6 +112,10 @@ class LoadingSplashActivity : AppCompatActivity() {
                 val faceResults = result?.getValue(faceDetector)
                 if (faceResults != null && faceResults.isNotEmpty()) {
                     imageCaptureAndSend(cameraController)
+<<<<<<< HEAD
+=======
+                    cameraController.unbind()
+>>>>>>> 700c024f97b16d087edcac6479175aa2e1124a41
                 }
                 previewView.overlay.clear()
             }
@@ -146,7 +158,6 @@ class LoadingSplashActivity : AppCompatActivity() {
                             serverResponse?.let {
                                 // 서버로부터 받은 결과를 처리
                                 Log.d("예측값", "$serverResponse")
-
                                 processServerResponse(it.result)
                             }
                         }else{
@@ -165,8 +176,11 @@ class LoadingSplashActivity : AppCompatActivity() {
         }
     }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 700c024f97b16d087edcac6479175aa2e1124a41
     private fun processServerResponse(result: String) {
         // 결과에 따라 다른 액션을 수행합니다.
         // 예를 들어, 결과에 따라 다른 Activity를 시작할 수 있습니다.
@@ -176,7 +190,7 @@ class LoadingSplashActivity : AppCompatActivity() {
                 val Handler = Handler(Looper.getMainLooper())
                 viewBinding.progressBar.visibility = View.INVISIBLE
                 viewBinding.tvguide1.text = "고객님"
-                viewBinding.tvguide2.text = "환영합니다"
+                viewBinding.tvguide2.text = "안녕하세요"
                 Handler.postDelayed({
                     val intent = Intent(this, Normal_IntroActivity::class.java)
                     startActivity(intent)
@@ -187,8 +201,8 @@ class LoadingSplashActivity : AppCompatActivity() {
                 // 시니어 고객으로 판단된 경우
                 val Handler = Handler(Looper.getMainLooper())
                 viewBinding.progressBar.visibility = View.INVISIBLE
-                viewBinding.tvguide1.text = "어르신"
-                viewBinding.tvguide2.text = "어서오세요"
+                viewBinding.tvguide1.text = "시니어님"
+                viewBinding.tvguide2.text = "환영합니다"
                 Handler.postDelayed({
                     val intent = Intent(this, Senior_IntroActivity::class.java)
                     startActivity(intent)
@@ -234,6 +248,8 @@ class LoadingSplashActivity : AppCompatActivity() {
         super.onDestroy()
         cameraExecutor.shutdown()
         faceDetector.close()
+//        cameraController.unbind()
+//        viewBinding.previewView.controller = null
     }
     companion object {
         private const val TAG = "CameraX-MLKit"
