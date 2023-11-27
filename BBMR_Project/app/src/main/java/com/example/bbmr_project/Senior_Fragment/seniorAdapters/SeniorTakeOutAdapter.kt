@@ -57,7 +57,7 @@ class SeniorTakeOutAdapter(
         // 기본값을 1000단위로 나누는 코드
         val basicPrice = String.format("%,d 원", menuList[position].sprice)
         holder.tvPriceS.text = basicPrice
-        holder.imgS.setImageResource(menuList[position].simg)
+//        holder.imgS.setImageResource(menuList[position].simg)
 
         holder.itemView.setOnClickListener {
             itemClickListener?.onItemClick(menuList[position])

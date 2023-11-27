@@ -38,18 +38,16 @@
             android:exported="false" /> <!-- 공용 액티비티 -->
         <activity
             android:name=".LoadingSplashActivity"
-            android:exported="true" /> <!-- 일반용 액티비티 -->
+            android:exported="true">
+
+        </activity>
+        <!-- 일반용 액티비티 -->
         <activity
             android:name=".Normal_StayActivity"
             android:exported="true" />
         <activity
             android:name=".Normal_TakeOutActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Normal_IntroActivity"
@@ -60,25 +58,28 @@
         <activity
             android:name=".SeniorTakeOutActivity"
             android:exported="true">
+
         </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true" />
+
         <activity
             android:name=".Dialog.SeniorBasketDialog"
             android:exported="true" />
         <activity
             android:name=".SeniorIntroActivity"
             android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".StartActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".StartActivity"
-            android:exported="true"></activity>
     </application>
 
 </manifest>

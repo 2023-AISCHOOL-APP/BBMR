@@ -61,7 +61,6 @@ class Normal_CouponPayDialog : DialogFragment() {
             binding.tvCpnNumDNC.text = ""
         }
 
-
         // 버튼 클릭 리스너
         binding.btnCpnCnclDNC.setOnClickListener {
             dismiss()

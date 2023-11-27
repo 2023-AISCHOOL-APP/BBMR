@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:id="@+id/linearLayout2"
+            android:id="@+id/L"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -59,16 +59,16 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/L1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
-            app:layout_constraintStart_toStartOf="@+id/linearLayout2"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+            app:layout_constraintEnd_toEndOf="@+id/L"
+            app:layout_constraintStart_toStartOf="@+id/L"
+            app:layout_constraintTop_toBottomOf="@+id/L">
 
             <TextView
-                android:id="@+id/selectNormalOption"
+                android:id="@+id/selectNormalOption1"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="bottom|left"
@@ -80,7 +80,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/selectNormalOptionCost"
+                android:id="@+id/selectNormalOptionCost1"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginRight="20dp"
@@ -92,6 +92,7 @@
                 android:textStyle="bold" />
 
         </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

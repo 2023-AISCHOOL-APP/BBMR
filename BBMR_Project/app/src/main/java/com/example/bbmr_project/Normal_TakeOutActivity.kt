@@ -25,6 +25,7 @@ import com.example.bbmr_project.Normal_Fragment.adapters.NormalViewPagerAdapter
 import java.text.NumberFormat
 import java.util.Locale
 
+
 class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
     NormalSelectPayDialogListener, TotalCostListener, ConfirmBasketCancelListener, Normal_MenuDessertDialogListener, Normal_MenuMDDialogListener {
 
@@ -32,6 +33,11 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
     private lateinit var normalSelectBasketAdapter: NormalSelectBasketAdapter
 
     private var totalCost: Int = 0  // 누적 총 비용
+
+    // 외부 클래스에서 어댑터에 접근할 수 있는 메소드 추가
+    fun getNormalSelectBasketAdapter(): NormalSelectBasketAdapter {
+        return normalSelectBasketAdapter
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,7 +75,7 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
     }
 
 
-    override fun onTotalCostUpdated(totalCost: Int, itemCost: Int) {
+    override fun onTotalCostUpdated(totalCost: Int) {
         // 활동에서 총 비용 UI 요소(tvNormalTotalMoney)를 업데이트
         updateTotalCostUI(totalCost)
 
@@ -162,7 +168,7 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
     private fun showSelectPayDialog() {
         val currentList = normalSelectBasketAdapter.getCurrentList()
         // 결제 창 띄우기
-        val dialog = Normal_SelectPayDialog.newInstance(currentList)
+        val dialog = Normal_SelectPayDialog.newInstance(currentList, "0")
         dialog.show(supportFragmentManager, "Normal_SelectPayDialog")
     }
 
@@ -184,7 +190,7 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
         totalCost += menuCost
 
         // TotalCostListener에 알림
-        onTotalCostUpdated(totalCost, menuCost)
+        onTotalCostUpdated(totalCost)
     }
 
     // Normal_MenuDessertDialog 메서드
@@ -198,7 +204,7 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
         totalCost += normalSelectedMenuInfo.menuPrice
 
         // TotalCostListener에 알림
-        onTotalCostUpdated(totalCost, normalSelectedMenuInfo.menuPrice)
+        onTotalCostUpdated(totalCost)
     }
 
     // Normal_MenuMDDialog 메서드
@@ -212,7 +218,7 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
         totalCost += normalSelectedMenuInfo.menuPrice
 
         // TotalCostListener에 알림
-        onTotalCostUpdated(totalCost, normalSelectedMenuInfo.menuPrice)
+        onTotalCostUpdated(totalCost)
     }
 
 }

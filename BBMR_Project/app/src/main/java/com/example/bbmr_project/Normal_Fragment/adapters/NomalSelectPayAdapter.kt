@@ -1,5 +1,4 @@
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,8 +19,8 @@ class NormalSelectPayAdapter(
         val selectNormalName: TextView = view.findViewById(R.id.tvSelectNormalName)
         val selectNormalCount: TextView = view.findViewById(R.id.tvSelectNormalCount)
         val selectNormalMoney: TextView = view.findViewById(R.id.tvSelectNormalMoney)
-        val selectNormalOption: TextView = view.findViewById(R.id.selectNormalOption)
-        val selectNormalOptionCost: TextView = view.findViewById(R.id.selectNormalOptionCost)
+        val selectNormalOption1: TextView = view.findViewById(R.id.selectNormalOption1)
+        val selectNormalOptionCost: TextView = view.findViewById(R.id.selectNormalOptionCost1)
     }
 
     override fun onCreateViewHolder(
@@ -46,18 +45,18 @@ class NormalSelectPayAdapter(
         holder.selectNormalName.text = selectedMenuList[position].name.toString()
         holder.selectNormalCount.text = selectedMenuList[position].tvCount.toString()
         holder.selectNormalMoney.text = formattedCost
-        holder.selectNormalOption.text = selectedMenuList[position].options.toString()
+        holder.selectNormalOption1.text = selectedMenuList[position].options.toString()
         holder.selectNormalOptionCost.text = selectedMenuList[position].optionTvCount.toString()
 
         // 옵션 리스트가 비어있는지 확인
         if (item.options.isEmpty()) {
             // 옵션 리스트가 비어있으면 관련 UI 숨기기
-            holder.selectNormalOption.visibility = View.GONE
+            holder.selectNormalOption1.visibility = View.GONE
             holder.selectNormalOptionCost.visibility = View.GONE
         } else {
             // 옵션 리스트가 있으면 텍스트 설정
-            holder.selectNormalOption.text = item.options.joinToString(", ")
-            holder.selectNormalOption.visibility = View.VISIBLE
+            holder.selectNormalOption1.text = item.options.joinToString(", ")
+            holder.selectNormalOption1.visibility = View.VISIBLE
             holder.selectNormalOptionCost.text = item.optionTvCount.toString()
             holder.selectNormalOptionCost.visibility = View.VISIBLE
         }
