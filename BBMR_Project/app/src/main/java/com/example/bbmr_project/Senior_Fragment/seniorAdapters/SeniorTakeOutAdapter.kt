@@ -1,6 +1,7 @@
 package com.example.bbmr_project.Senior_Fragment.seniorAdapters
 
 import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,6 +56,7 @@ class SeniorTakeOutAdapter(
     // 메뉴 사진, 이름, 가격 설정
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         Glide.with(context).load(menuList[position].simg.toString()).into(holder.imgS)
+
         holder.tvNameS.text = menuList[position].sname
         // 기본값을 1000단위로 나누는 코드
         val basicPrice = String.format("%,d 원", menuList[position].sprice)
@@ -64,8 +66,12 @@ class SeniorTakeOutAdapter(
         holder.itemView.setOnClickListener {
             itemClickListener?.onItemClick(menuList[position])
             // MenuDialog에 값을 보내주기 위한 코드
-            val siniorDialog = Senior_MenuDialog.Senior_Menu(menuList[position])
-            siniorDialog.show(fragmentManager, "seniorDialog")
+            val seniorMenuDialog = Senior_MenuDialog()
+            val bundle = Bundle().apply{
+                putParcelable("seniorTakeOutVO", menuList[position])
+            }
+            seniorMenuDialog.arguments = bundle
+            seniorMenuDialog.show(fragmentManager, "seniorDialog")
         }
     }
 

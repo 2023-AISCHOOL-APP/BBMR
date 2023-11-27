@@ -10,7 +10,7 @@ data class Product(
     val name: String = "",
     var price: Int = 0,
     var count: Int = 0,
-    var temperature: String = "HOT",
+    var temperature: String = "ICED",
     var size: Int = 1,
     var sugar: Boolean = false,
     var cream: Boolean = false,

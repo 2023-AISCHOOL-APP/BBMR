@@ -47,7 +47,7 @@ class Senior_Fragment_Tab_Dessert : Fragment(), ItemClickListener {
         rvDessert.adapter = adapter
         rvDessert.layoutManager = GridLayoutManager(requireContext(), 3)
 
-        viewModel.menuList3.observe(viewLifecycleOwner) { menuList ->
+        viewModel.menuList4.observe(viewLifecycleOwner) { menuList ->
             adapter.updateList(menuList)
         }
 

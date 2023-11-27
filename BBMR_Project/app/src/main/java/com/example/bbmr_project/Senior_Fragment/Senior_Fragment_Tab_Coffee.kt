@@ -44,7 +44,7 @@ class Senior_Fragment_Tab_Coffee : Fragment(), ItemClickListener {
         rvCoffee.layoutManager = GridLayoutManager(requireContext(), 3)
 
 
-        viewModel.menuList3.observe(viewLifecycleOwner){ menuList ->
+        viewModel.menuList2.observe(viewLifecycleOwner){ menuList ->
             adapter.updateList(menuList)
         }
 
