@@ -25,28 +25,28 @@ api = Api(app)
 
 # DB에서 메뉴정보 가져오기
 class TodoList(Resource):
-    def fetch_menu(self, category):
+    def get(self):
         conn = get_connection()
-        query = f"SELECT * FROM menu WHERE category = '{category}'"
-        cursor = conn.cursor(dictionary=True)
+        query = "SELECT * FROM menu"
+        cursor = conn.cursor()
         cursor.execute(query)
         db_result = cursor.fetchall()
+
         menu = {}
         for item in db_result:
-            menu[item['menu_id']] = [item['name'],item['price'],item['menu_con'],item['size'],item['imageUrl']]
-        return menu
+            menu[item[0]] = {
+                "name": item[1],
+                "price": item[3],
+                "menu_con": item[4],
+                "size": item[5],
+                "imageUrl": item[6],
+                "category": item[2]
+            }
+        print(menu)
 
-    def get(self):
-        coffee = self.fetch_menu('coffee')
-        dessert = self.fetch_menu('dessert')
-        tea = self.fetch_menu('tea')
-        md = self.fetch_menu('md')
-        flatccino = self.fetch_menu('flatccino')
-        beverage = self.fetch_menu('beverage')
-        etc = self.fetch_menu('etc')
+        return jsonify({"menu": menu})
 
-        return {"coffee": coffee, "dessert": dessert, "etc": etc,
-                "tea":tea, "md":md, "flatccino": flatccino,"beverage" : beverage}
+
 
 
 

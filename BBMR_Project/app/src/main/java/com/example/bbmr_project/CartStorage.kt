@@ -7,15 +7,16 @@ import java.io.Serializable
 
 @Parcelize
 data class Product(
-    val name: String,
+    val name: String = "",
     var price: Int = 0,
-    var count: Int,
+    var count: Int = 0,
     var temperature: String = "HOT",
     var size: Int = 1,
     var sugar: Boolean = false,
     var cream: Boolean = false,
     val id: String = "001",
     var image: String = "BBMR/img/",
+    val cate : String = ""
 ) : Parcelable, Serializable
 
 
