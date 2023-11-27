@@ -3,6 +3,7 @@ package com.example.bbmr_project.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Handler
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.RelativeSizeSpan
@@ -17,12 +18,13 @@ import com.example.bbmr_project.Senior_Fragment.seniorAdapters.SeniorSelectBaske
 import com.example.bbmr_project.base.BaseDialogFragment
 import com.example.bbmr_project.databinding.DialogSeniorBasketBinding
 
-const val KeyProductBundleKey = "Product"
-
+//const val KeyProductBundleKey = "Product"
 
 class SeniorBasketDialog() : BaseDialogFragment() {
 
 
+
+    var buttonDoubleDefend = false
     private lateinit var binding: DialogSeniorBasketBinding
     private val adapter: SeniorSelectBasketAdapter by lazy {
         SeniorSelectBasketAdapter(
@@ -67,7 +69,7 @@ class SeniorBasketDialog() : BaseDialogFragment() {
         var totalAmount = CartStorage.getProductList().sumOf { it.price }
 
         // 남은 금액
-        var extraPrice = 0
+//        var extraPrice = 0
 //
 //        if (totalAmount >= discountPrice) {
 //            totalAmount = totalAmount - discountPrice
@@ -96,8 +98,18 @@ class SeniorBasketDialog() : BaseDialogFragment() {
         // 쿠폰 클릭 시, 쿠폰 창으로 넘어가기
 
         binding.btnCpnDSB.setOnClickListener {
-            val dialogFragment = Senior_CouponPayDialog()
-            dialogFragment.show(requireActivity().supportFragmentManager, "Senior_CouponPayDialog")
+            if (!buttonDoubleDefend) {
+                buttonDoubleDefend = true
+
+                val dialogFragment = Senior_CouponPayDialog()
+                dialogFragment.show(
+                    requireActivity().supportFragmentManager,
+                    "Senior_CouponPayDialog"
+                )
+                Handler().postDelayed({
+                    buttonDoubleDefend = false
+                }, 2000)
+            }
         }
 
         // 결제창 클릭했을 때, 결제로 넘어가기

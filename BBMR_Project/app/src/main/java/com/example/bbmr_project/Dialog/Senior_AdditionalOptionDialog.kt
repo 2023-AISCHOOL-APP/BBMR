@@ -11,9 +11,13 @@ import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.example.bbmr_project.CartStorage
+import com.example.bbmr_project.Menu.MenuListViewModel
 import com.example.bbmr_project.Product
 import com.example.bbmr_project.R
+import com.example.bbmr_project.Senior_Fragment.seniorAdapters.SeniorSelectBasketAdapter
+import com.example.bbmr_project.Senior_Fragment.seniorAdapters.SeniorTakeOutAdapter
 import com.example.bbmr_project.databinding.DialogSeniorAdditionalOptionBinding
+import okhttp3.internal.notifyAll
 
 class Senior_AdditionalOptionDialog : DialogFragment() {
     private lateinit var binding : DialogSeniorAdditionalOptionBinding
@@ -49,7 +53,6 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
         }
         binding.cbSugarDSAO.setOnCheckedChangeListener { _, isChecked ->
             sugar = isChecked
-
         }
         binding.cbCreamDSAO.setOnCheckedChangeListener { _, isChecked ->
             cream = isChecked
@@ -65,8 +68,7 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
                 count = 1,
                 image = "BBMR/"
             )
-            CartStorage.productList.add(bread)
-            SuggestionProductAddDialog(view.rootView)
+            SuggestionProductAddDialog(view.rootView, bread)
         }
         binding.btnRecommend2.setOnClickListener {
             val bread = Product(
@@ -75,8 +77,7 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
                 count = 1,
                 image = "BBMR/"
             )
-            CartStorage.productList.add(bread)
-            SuggestionProductAddDialog(view.rootView)
+            SuggestionProductAddDialog(view.rootView,bread)
         }
         binding.btnRecommend3.setOnClickListener {
             val bread = Product(
@@ -85,8 +86,7 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
                 count = 1,
                 image = "BBMR/"
             )
-            CartStorage.productList.add(bread)
-            SuggestionProductAddDialog(view.rootView)
+            SuggestionProductAddDialog(view.rootView, bread)
         }
         // ------ 추천 메뉴 코드 끝 ------
 
@@ -141,7 +141,7 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
         // ------ 이전, 선택 완료 코드 끝 ------
 
     }
-    fun SuggestionProductAddDialog(view:View) {
+    private fun SuggestionProductAddDialog(view:View, product: Product) {
         val myLayout = layoutInflater.inflate(R.layout.dialog_senior_menu_add, null)
         val build = AlertDialog.Builder(view.context).apply {
             setView(myLayout)
@@ -150,7 +150,7 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
         }
 
         val dialog = build.create()
-//        // 화면 밖 터치 잠금
+        // 화면 밖 터치 잠금
         dialog.setCanceledOnTouchOutside(false)
         dialog.show()
 
@@ -160,6 +160,10 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
 
         // ------ 추천 상품 담겨야 하는 곳 코드 시작 ------
         myLayout.findViewById<Button>(R.id.btnOkDSMA).setOnClickListener {
+            // 추가메뉴 -> 추천메뉴 -> 예 버튼을 누르면 값을 추가하는 코드
+            CartStorage.productList.add(product)
+            // 변한 값을 UI에 바꿔주는 코드
+            CartStorage.notifyProductListChanged()
 
         // ------ 추천 상품 담겨야 하는 곳 코드 끝 ------
 

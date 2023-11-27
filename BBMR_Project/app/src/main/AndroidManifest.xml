@@ -58,7 +58,7 @@
             android:name=".Normal_MainActivity"
             android:exported="true" /> <!-- 시니어용 액티비티 -->
         <activity
-            android:name=".Senior_TakeOutActivity"
+            android:name=".SeniorTakeOutActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -72,7 +72,7 @@
             android:name=".Dialog.SeniorBasketDialog"
             android:exported="true" />
         <activity
-            android:name=".Senior_IntroActivity"
+            android:name=".SeniorIntroActivity"
             android:exported="true">
 
         </activity>

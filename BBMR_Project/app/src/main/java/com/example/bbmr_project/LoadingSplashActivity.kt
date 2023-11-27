@@ -184,7 +184,7 @@ class LoadingSplashActivity : AppCompatActivity() {
                 viewBinding.tvguide1.text = "시니어님"
                 viewBinding.tvguide2.text = "환영합니다"
                 Handler.postDelayed({
-                    val intent = Intent(this, Senior_IntroActivity::class.java)
+                    val intent = Intent(this, SeniorIntroActivity::class.java)
                     startActivity(intent)
                     finish()
                 }, 700)

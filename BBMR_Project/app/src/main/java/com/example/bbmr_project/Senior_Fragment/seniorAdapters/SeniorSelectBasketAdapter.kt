@@ -67,25 +67,16 @@ class SeniorSelectBasketAdapter(
 
             selectSeniorItem.count++
             selectSeniorItem.price = basicPrice + (basicPrice / basicCount)
-            notifyItemChanged(position)
-
-//            val newItem = selectSeniorItem.copy(
-//                count = selectSeniorItem.count + 1
-//            )
-//            updateItem(position, newItem)
 
             onChanged.invoke(productList)
-//            CartStorage.getFormmatPrice(selectSeniorItem)
+            notifyItemChanged(position)
 
-//            val addPrice = selectSeniorItem.formatPrice()
-//            Log.d("더한 값", addPrice)
         }
 
         // 시니어 장바구니에서 minus 버튼 클릭Bak
         holder.btnBasketMinusSenior.setOnClickListener {
             if (selectSeniorItem.count > 1) {
-//               selectSeniorItem.count--
-//               notifyItemChanged(position)
+
                 var basicCount = selectSeniorItem.count
                 var basicPrice = selectSeniorItem.price
                 Log.d("기본값 ", "${basicCount}")
@@ -94,18 +85,17 @@ class SeniorSelectBasketAdapter(
                 selectSeniorItem.count--
                 selectSeniorItem.price = basicPrice - (basicPrice / basicCount)
 
-                notifyItemChanged(position)
                 onChanged.invoke(productList)
+                notifyItemChanged(position)
             }
         }
 
         // 시니어 장바구니에서 X 버튼 클릭
         holder.btnBasketCancellSenior.setOnClickListener {
-            val removedPosition = holder.adapterPosition
-            val removedItem = productList.removeAt(removedPosition)
-            notifyItemChanged(removedPosition)
+            val removedItem = productList.removeAt(position)
             CartStorage.removeProduct(removedItem)
             onChanged.invoke(productList)
+            notifyDataSetChanged()
         }
     }
 

@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.bbmr_project.databinding.ActivitySeniorIntroBinding
 
-class Senior_IntroActivity : AppCompatActivity() {
+class SeniorIntroActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySeniorIntroBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -14,13 +14,13 @@ class Senior_IntroActivity : AppCompatActivity() {
 
         // ------ 포장하기 매장하기 시작 ------
         binding.btnOrderInASI.setOnClickListener {
-            val intent = Intent(this@Senior_IntroActivity, Senior_TakeOutActivity::class.java)
+            val intent = Intent(this@SeniorIntroActivity, SeniorTakeOutActivity::class.java)
             startActivity(intent)
             finish()
         }
 
         binding.btnOrderOutASI.setOnClickListener {
-            val intent = Intent(this@Senior_IntroActivity, Senior_TakeOutActivity::class.java)
+            val intent = Intent(this@SeniorIntroActivity, SeniorTakeOutActivity::class.java)
             startActivity(intent)
             finish()
         }

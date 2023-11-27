@@ -21,7 +21,7 @@ interface ItemClickListener {
 // RecyclerView Adapter 클래스 정의
 class SeniorTakeOutAdapter(
     val context: Context, val layout: Int, val menuList: ArrayList<Senior_TakeOutVO>,
-    private val itemClickListener: ItemClickListener,
+    private val itemClickListener: ItemClickListener?,
     private val fragmentManager: FragmentManager,
 
 
@@ -56,14 +56,15 @@ class SeniorTakeOutAdapter(
 
         holder.tvNameS.text = menuList[position].sname
         // 기본값을 1000단위로 나누는 코드
-        val basicPrice = String.format("%,d", menuList[position].sprice)
-        holder.tvPriceS.text = basicPrice+"원"
+        val basicPrice = String.format("%,d 원", menuList[position].sprice)
+        holder.tvPriceS.text = basicPrice
         holder.imgS.setImageResource(menuList[position].simg)
+
         holder.itemView.setOnClickListener {
             itemClickListener?.onItemClick(menuList[position])
             // MenuDialog에 값을 보내주기 위한 코드
             val siniorDialog = Senior_MenuDialog.Senior_Menu(menuList[position])
-            siniorDialog.show(fragmentManager, "siniorDialog")
+            siniorDialog.show(fragmentManager, "seniorDialog")
         }
     }
 

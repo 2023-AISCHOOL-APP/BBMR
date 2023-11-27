@@ -31,7 +31,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/clPayFailDNC"
             android:layout_width="469dp"
             android:layout_height="443dp"
             android:layout_marginBottom="140dp"

@@ -3,6 +3,7 @@ package com.example.bbmr_project.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,9 +16,7 @@ import com.example.bbmr_project.databinding.DialogSeniorMenuBinding
 
 class Senior_MenuDialog : DialogFragment() {
 
-
-
-
+    var buttonDoubleDefend = false
 
     // Adapter에서 값을 받아오는 코드
     companion object {
@@ -80,17 +79,25 @@ class Senior_MenuDialog : DialogFragment() {
 
         // ------ 추가 옵션 이동 코드 시작 ------
         binding.btnAddtionOption.setOnClickListener {
+            // -- 연속클릭 방지 -- //
+            if (!buttonDoubleDefend) {
+                buttonDoubleDefend = true
 
-            val product = Product(
+                val product = Product(
                 binding.tvMenuName.text.toString(),
-                price = binding.tvMenuPrice.text.toString().replace(",", "").replace(" 원", "").toIntOrNull()?: 0,
+                price = binding.tvMenuPrice.text.toString().replace(",", "").replace(" 원", "")
+                    .toIntOrNull() ?: 0,
                 binding.tvMenuCount.text.toString().toInt()
             )
-            val dialogFragment = Senior_AdditionalOptionDialog()
-            val bundle = Bundle()
-            bundle.putSerializable("product_option", product)
-            dialogFragment.arguments = bundle
-            dialogFragment.show(childFragmentManager, "Senior_AdditionalOptionDialog")
+                val dialogFragment = Senior_AdditionalOptionDialog()
+                val bundle = Bundle()
+                bundle.putSerializable("product_option", product)
+                dialogFragment.arguments = bundle
+                dialogFragment.show(childFragmentManager, "Senior_AdditionalOptionDialog")
+                Handler().postDelayed({
+                    buttonDoubleDefend = false
+                }, 1000)
+        }
 
         }
         // ------ 추가 옵션으로 이동 코드 끝 ------

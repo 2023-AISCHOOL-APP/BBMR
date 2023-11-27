@@ -46,7 +46,7 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
         }
 
         binding.btnToSenior.setOnClickListener {
-            val intent = Intent(this@Normal_TakeOutActivity, Senior_TakeOutActivity::class.java)
+            val intent = Intent(this@Normal_TakeOutActivity, SeniorTakeOutActivity::class.java)
             startActivity(intent)
         }
         binding.btnNormalCancel.setOnClickListener {

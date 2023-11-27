@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bbmr_project.Menu.MenuListViewModel
 import com.example.bbmr_project.R
@@ -19,36 +20,25 @@ class Senior_Fragment_Tab_Recommend : Fragment(), ItemClickListener {
     override fun onItemClick(item: Senior_TakeOutVO) {
     }
 
-
-
-
     private lateinit var viewModel: MenuListViewModel
     private lateinit var adapter: SeniorTakeOutAdapter
     private lateinit var rvRecommend: RecyclerView
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-
-
-
         // ViewModel 초기화
         viewModel = ViewModelProvider(this).get(MenuListViewModel::class.java)
 
-
         val view = inflater.inflate(R.layout.frag_senior_tab_recommend, container, false)
         rvRecommend = view.findViewById(R.id.rvRecommend)
-
 
         // RecyclerView 어댑터 초기화
         adapter = SeniorTakeOutAdapter(requireContext(), R.layout.frag_senior_list, arrayListOf(), this, parentFragmentManager)
         rvRecommend.adapter = adapter
         rvRecommend.layoutManager = GridLayoutManager(requireContext(), 3)
-
-
 
 
         // menuList1 LiveData 어댑터 업데이트
@@ -57,8 +47,6 @@ class Senior_Fragment_Tab_Recommend : Fragment(), ItemClickListener {
         }
 
         return view
-
-
     }
 
 
