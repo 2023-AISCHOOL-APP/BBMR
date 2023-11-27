@@ -21,6 +21,7 @@ class SeniorTabFragment(
     private val category: Category,
 ) : Fragment(), ItemClickListener {
     override fun onItemClick(item: Senior_TakeOutVO) {
+        //TODO
     }
 
     private val viewModelFactory = MenuListViewModel.MenuListViewModelFactory(category)
@@ -50,7 +51,7 @@ class SeniorTabFragment(
         adapter = SeniorTakeOutAdapter(
             requireContext(),
             R.layout.frag_senior_list,
-            arrayListOf(),
+            category = category,
             this,
             parentFragmentManager
         )
