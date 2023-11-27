@@ -24,7 +24,7 @@ class Senior_MenuDialog : DialogFragment() {
             val args = Bundle().apply {
                 putString("sname", item.sname)
                 putInt("sprice", item.sprice)
-                putInt("simg", item.simg)
+//                putInt("simg", item.simg)
             }
             val fragment = Senior_MenuDialog()
             fragment.arguments = args

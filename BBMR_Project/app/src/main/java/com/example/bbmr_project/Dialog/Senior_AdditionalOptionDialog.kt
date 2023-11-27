@@ -45,11 +45,11 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // ------ 추가 옵션 코드 시작 ------
-        var size : Boolean = false
+        var size : Int = 1
         var sugar: Boolean = false
         var cream: Boolean = false
         binding.cbSizeDSAO.setOnCheckedChangeListener { _, isChecked ->
-            size = isChecked
+            size = 2
         }
         binding.cbSugarDSAO.setOnCheckedChangeListener { _, isChecked ->
             sugar = isChecked
@@ -92,8 +92,7 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
 
         // ------ 이전, 선택 완료 코드 시작 ------
         binding.btnCnclAddiOpDSAO.setOnClickListener {
-<<<<<<< HEAD
-=======
+
                     val bundle = arguments
                     if (bundle != null) {
                         val customOption = bundle.getSerializable("product_option") as Product
@@ -104,7 +103,6 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
                         dialogFragment.arguments = bundle2
                         dialogFragment.show(childFragmentManager, "Senior_MenuDialog")
             }
->>>>>>> 201f638f9aa1c263247bd9ef260f7f2bdca47060
             dismiss()
         }
 
@@ -117,7 +115,7 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
                 // ------ 옵션 선택 시 금액 추가(합산) 코드 시작 ------
                 var addprice : Int = customOption.price
                 val count : Int = customOption.count
-                if (size == true) {
+                if (size == 1) {
                     addprice += (500 * count)
                 }
                 if (sugar == true) {

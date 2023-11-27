@@ -1,6 +1,6 @@
 package com.example.bbmr_project
 
-
+import android.content.ContentValues
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.os.Handler
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.RelativeSizeSpan
+import android.util.Log
 import android.view.Menu
 import android.view.View
 import androidx.fragment.app.Fragment
