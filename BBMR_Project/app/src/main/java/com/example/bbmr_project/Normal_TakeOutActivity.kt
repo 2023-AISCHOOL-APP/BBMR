@@ -27,8 +27,7 @@ import java.util.Locale
 
 
 class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
-    NormalSelectPayDialogListener, TotalCostListener, ConfirmBasketCancelListener,
-    Normal_MenuDessertDialogListener, Normal_MenuMDDialogListener {
+    NormalSelectPayDialogListener, TotalCostListener, ConfirmBasketCancelListener, Normal_MenuDessertDialogListener, Normal_MenuMDDialogListener {
 
     private lateinit var binding: ActivityNormalTakeoutBinding
     private lateinit var normalSelectBasketAdapter: NormalSelectBasketAdapter
@@ -59,10 +58,7 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
         binding.btnNormalCancel.setOnClickListener {
             val confirmBasketCancelDialog = Normal_ConfirmBasketCancelDialog()
             confirmBasketCancelDialog.setConfirmBasketCancelListener(this)
-            confirmBasketCancelDialog.show(
-                supportFragmentManager,
-                "Normal_ConfirmBasketCancelDialog"
-            )
+            confirmBasketCancelDialog.show(supportFragmentManager, "Normal_ConfirmBasketCancelDialog")
         }
     }
 
@@ -99,8 +95,7 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
 
     private fun updateTotalCostUI(currentTotalCost: Int) {
         // 숫자를 한국 통화 단위로 포맷
-        val formattedTotalCost =
-            NumberFormat.getNumberInstance(Locale.KOREA).format(currentTotalCost)
+        val formattedTotalCost = NumberFormat.getNumberInstance(Locale.KOREA).format(currentTotalCost)
 
         // 활동에서 총 비용 UI 요소(tvNormalTotalMoney)를 업데이트
         binding.tvNormalTotalMoney.text = String.format("%s 원", formattedTotalCost)
@@ -173,7 +168,7 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
     private fun showSelectPayDialog() {
         val currentList = normalSelectBasketAdapter.getCurrentList()
         // 결제 창 띄우기
-        val dialog = Normal_SelectPayDialog.newInstance(currentList)
+        val dialog = Normal_SelectPayDialog.newInstance(currentList, "0")
         dialog.show(supportFragmentManager, "Normal_SelectPayDialog")
     }
 
@@ -226,7 +221,4 @@ class Normal_TakeOutActivity : AppCompatActivity(), Normal_MenuDialogListener,
         onTotalCostUpdated(totalCost)
     }
 
-    fun getTotalCost(): Int {
-        return totalCost
-    }
 }

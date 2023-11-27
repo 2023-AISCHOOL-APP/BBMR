@@ -40,10 +40,14 @@ class Normal_CouponSuccessDialog : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // couponPay 프래그먼트에서 담아놓은 데이터 불러오기
+
+
+
         val receivedCouponNum = arguments?.getString("CouponNum")
 
         if (receivedCouponNum == "3333 5582 4458") {
-            binding.tvCpnPriceDNCS.text = "2000"
+
+            binding.tvCpnPriceDNCS.text = "2,000"
             // 교환권을 추가할 공간
         } else if (receivedCouponNum == "1") {
             // 금액권을 추가할 공간
@@ -63,12 +67,14 @@ class Normal_CouponSuccessDialog : DialogFragment() {
 
     private fun showSelectPayDialog() {
         // 현재 선택된 항목 리스트 가져오기
-        val currentList = (activity as? Normal_TakeOutActivity)?.getNormalSelectBasketAdapter()
-            ?.getCurrentList()
-
+        val currentList = (activity as? Normal_TakeOutActivity)?.getNormalSelectBasketAdapter()?.getCurrentList()
+        val bundle = Bundle()
+        val selectPay = Normal_SelectPayDialog()
         // 형변환해서 가져오기
         if (currentList != null) {
-            val dialog = Normal_SelectPayDialog.newInstance(currentList)
+            bundle.putString("coupon", binding.tvCpnPriceDNCS.text.toString())
+            selectPay.arguments = bundle
+            val dialog = Normal_SelectPayDialog.newInstance(currentList, binding.tvCpnPriceDNCS.text.toString())
             dialog.show(requireActivity().supportFragmentManager, "Normal_SelectPayDialog")
         }
 //        binding.tvCpnPriceDNCS.text = "2000"

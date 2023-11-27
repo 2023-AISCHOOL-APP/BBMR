@@ -19,11 +19,7 @@ class NormalSelectPayAdapter(
         val selectNormalName: TextView = view.findViewById(R.id.tvSelectNormalName)
         val selectNormalCount: TextView = view.findViewById(R.id.tvSelectNormalCount)
         val selectNormalMoney: TextView = view.findViewById(R.id.tvSelectNormalMoney)
-//        val totalSumCost: TextView = view.findViewById(R.id.totalSumCost)
-//        val totalSumCostPrice: TextView = view.findViewById(R.id.totalSumCostPrice)
-        // 옵션이름
         val selectNormalOption1: TextView = view.findViewById(R.id.selectNormalOption1)
-        // 옵션가격
         val selectNormalOptionCost: TextView = view.findViewById(R.id.selectNormalOptionCost1)
     }
 
@@ -46,17 +42,11 @@ class NormalSelectPayAdapter(
         val formattedCost =
             NumberFormat.getNumberInstance(Locale.KOREA).format(calculateMenuCost) // 원화단위로 변경
 
-//        val totalSumCost = item.optionTvCount + calculateMenuCost
-//        val totalSumCostPrice =
-//            NumberFormat.getNumberInstance(Locale.KOREA).format(totalSumCost) // 총합계
-
         holder.selectNormalName.text = selectedMenuList[position].name.toString()
         holder.selectNormalCount.text = selectedMenuList[position].tvCount.toString()
         holder.selectNormalMoney.text = formattedCost
         holder.selectNormalOption1.text = selectedMenuList[position].options.toString()
         holder.selectNormalOptionCost.text = selectedMenuList[position].optionTvCount.toString()
-//        holder.totalSumCost.text = selectedMenuList[position].optionTvCount.toString()
-//        holder.totalSumCostPrice.text = totalSumCostPrice
 
         // 옵션 리스트가 비어있는지 확인
         if (item.options.isEmpty()) {

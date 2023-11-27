@@ -19,31 +19,32 @@
         <RadioGroup
             android:id="@+id/btnNormalSelectPay"
             android:layout_width="0dp"
-            android:layout_height="250dp"
-            android:layout_marginTop="30dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="150dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="150dp"
             android:orientation="horizontal"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTopSelectPay"
             tools:ignore="MissingConstraints">
 
             <RadioButton
                 android:id="@+id/btnNormalCardPay"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="60dp"
-                android:layout_marginRight="40dp"
+                android:layout_width="80dp"
+                android:layout_height="150dp"
+                android:layout_marginRight="20dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_select_cardpay"
                 android:button="@null" />
 
             <RadioButton
                 android:id="@+id/btnNormalCouponPay"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="60dp"
+                android:layout_width="80dp"
+                android:layout_height="150dp"
+                android:layout_marginLeft="20dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_select_coupon_pay"
                 android:button="@null" />
@@ -54,6 +55,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
+            android:layout_marginTop="16dp"
             android:gravity="center"
             android:text="결제 방식을 선택해 주세요"
             android:textColor="@color/mainColor"
@@ -67,7 +69,7 @@
             android:id="@+id/view7"
             android:layout_width="600dp"
             android:layout_height="2dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="10dp"
             android:background="@color/gray"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -77,7 +79,7 @@
             android:id="@+id/textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:text="주문 정보를 확인해 주세요"
             android:textColor="@color/mainColor"
             android:textSize="30sp"
@@ -105,21 +107,29 @@
             android:id="@+id/constraintLayout2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_margin="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/dialog_normal_subcolor_background"
             app:layout_constraintBottom_toTopOf="@+id/btnNormalSelectPayBack"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.266"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView10">
+            app:layout_constraintTop_toBottomOf="@+id/textView10"
+            app:layout_constraintVertical_bias="0.216">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvSelectPayList"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_margin="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="16dp"
                 android:background="@drawable/dialog_normal_subcolor_background"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+                app:layout_constraintBottom_toTopOf="@+id/view"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.375"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view8" />
 
@@ -127,7 +137,7 @@
                 android:id="@+id/linearLayout"
                 android:layout_width="600dp"
                 android:layout_height="49dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="@+id/rvSelectPayList"
                 app:layout_constraintStart_toStartOf="@+id/rvSelectPayList"
@@ -188,15 +198,23 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
+            <View
+                android:id="@+id/view5"
+                android:layout_width="600dp"
+                android:layout_height="2dp"
+                android:background="@color/black"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
             <LinearLayout
                 android:id="@+id/linearLayout2"
                 android:layout_width="0dp"
                 android:layout_height="49dp"
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
-                android:layout_marginBottom="16dp"
                 android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
                 app:layout_constraintEnd_toEndOf="@+id/rvSelectPayList"
                 app:layout_constraintStart_toStartOf="@+id/rvSelectPayList">
 
@@ -224,6 +242,80 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="0dp"
+                android:layout_height="49dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+                app:layout_constraintEnd_toEndOf="@+id/rvSelectPayList"
+                app:layout_constraintStart_toStartOf="@+id/rvSelectPayList">
+
+                <TextView
+                    android:id="@+id/coupon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:text="쿠폰 할인"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/couponPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center|right"
+                    android:text="0"
+                    android:textColor="#FF0000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout4"
+                android:layout_width="0dp"
+                android:layout_height="49dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/rvSelectPayList"
+                app:layout_constraintStart_toStartOf="@+id/rvSelectPayList">
+
+                <TextView
+                    android:id="@+id/totalCouponMinus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:text="결제할 금액"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/totalCouponMinusPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center|right"
+                    android:text="결제할 금액"
+                    android:textColor="#FF0000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <android.widget.Button
