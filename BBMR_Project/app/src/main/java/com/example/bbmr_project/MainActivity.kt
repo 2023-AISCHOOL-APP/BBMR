@@ -4,10 +4,8 @@ import android.content.ContentValues
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.example.bbmr_project.RetrofitAPI.FlaskSendRes
-import com.example.bbmr_project.RetrofitAPI.MenuData
+import com.example.bbmr_project.CartStorage.productList
 import com.example.bbmr_project.RetrofitAPI.RetrofitAPI
-import com.example.bbmr_project.VO.MenuVO
 import com.google.gson.JsonObject
 import okhttp3.FormBody
 import retrofit2.Call
@@ -16,15 +14,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
-//    lateinit var mRetrofit : Retrofit
-//    lateinit var mRetrofitAPI: RetrofitAPI
-//    lateinit var mCallTodoList : retrofit2.Call<JsonObject>
-//    val coffeeList : ArrayList<MenuVO> = ArrayList()
-//    val dessertList : ArrayList<MenuVO> = ArrayList()
-//    val teaList : ArrayList<MenuVO> = ArrayList()
-//    val mdList : ArrayList<MenuVO> = ArrayList()
-//    val flatccinoList : ArrayList<MenuVO> = ArrayList()
-//    val beverageList : ArrayList<MenuVO> = ArrayList()
+    lateinit var mRetrofit : Retrofit
+    lateinit var mRetrofitAPI: RetrofitAPI
+    lateinit var mCallTodoList : retrofit2.Call<JsonObject>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -112,59 +105,45 @@ class MainActivity : AppCompatActivity() {
 //
 
     // DB에서 메뉴리스트 가져오는 함수
-//    private val mRetrofitCallback  = (object : retrofit2.Callback<JsonObject>{
-//        override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-//            t.printStackTrace()
-//            Log.d(ContentValues.TAG, "에러입니다. => ${t.message.toString()}")
-//        }
-//        override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-//            val coffeeResult = response.body()?.getAsJsonObject("coffee")
-//            val dessertResult = response.body()?.getAsJsonObject("dessert")
-//            val teaResult = response.body()?.getAsJsonObject("tea")
-//            val mdResult = response.body()?.getAsJsonObject("md")
-//            val flatccinoResult = response.body()?.getAsJsonObject("flatccino")
-//            val beverageResult = response.body()?.getAsJsonObject("beverage")
-//            val etcResult = response.body()?.getAsJsonObject("etc")
-//
-//            // JsonObject를 MenuVO로 변환하여 각각 List에 추가
-//            if (response.isSuccessful && coffeeResult != null && dessertResult != null &&
-//                teaResult != null && mdResult != null && flatccinoResult != null &&
-//                beverageResult != null) {
-//
-//                // 카테고리 별로 리스트 초기화
-//                val categories = listOf(
-//                    Pair(coffeeResult, coffeeList),
-//                    Pair(dessertResult, dessertList),
-//                    Pair(teaResult, teaList),
-//                    Pair(mdResult, mdList),
-//                    Pair(flatccinoResult, flatccinoList),
-//                    Pair(beverageResult, beverageList)
-//                )
-//
-//                // 각 카테고리에 대해 처리
-//                for ((categoryResult, categoryList) in categories) {
-//                    for ((menu_id, data) in categoryResult.entrySet()) {
-//                        val name = data.asJsonArray[0].asString // 메뉴명
-//                        val price = data.asJsonArray[1].asInt   // 메뉴 가격
-//                        val menu_con = data.asJsonArray[2].asString // 음료 온도 (HOT,ICED,N_drink)
-//                        val size = data.asJsonArray[3].asInt    // 음료 사이즈 (0, 1, 2)
-//                        val imageUrl = data.asJsonArray[4].asString // 메뉴 이미지 url 추가
-//                        categoryList.add(MenuVO(menu_id, name, price, menu_con, size, imageUrl))
-//                    }
-//                }
-//            }
-//        }
-//    })
-//
-//
-//    // Retrofit 연결 설정
-//    private fun setRetrofit() {
-//        mRetrofit = Retrofit
-//            .Builder()
-//            .baseUrl(getString(R.string.baseUrl))   // baseUrl은 strings.xml에서 플라스크서버 IP 확인 후 수정
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .build()
-//
-//        mRetrofitAPI = mRetrofit.create(RetrofitAPI::class.java)
+    private val mRetrofitCallback  = (object : retrofit2.Callback<JsonObject>{
+        override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+            t.printStackTrace()
+            Log.d(ContentValues.TAG, "에러입니다. => ${t.message.toString()}")
+        }
+        override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+            val menu = response.body()?.getAsJsonObject("menu")
+            Log.d("메뉴","$menu")
+
+            // JsonObject를 MenuVO로 변환하여 각각 List에 추가
+            if (response.isSuccessful && menu != null) {
+
+
+                // 각 카테고리에 대해 처리
+                for ((id, data) in menu.entrySet()) {
+                    val name = data.asJsonObject["name"].asString
+                    val price = data.asJsonObject["price"].asInt
+                    val temperature = data.asJsonObject["menu_con"].asString
+                    val size = data.asJsonObject["size"].asInt
+                    val image = data.asJsonObject["imageUrl"].asString
+                    val cate = data.asJsonObject["category"].asString
+                    productList.add(Product(name=name, price=price,  temperature = temperature, size = size ,id= id, image = image,cate=cate))
+                }
+                Log.d("메뉴리스트","$productList")
+                // adapter 초기화 해줘야 함
+                // adapter.notifyDataSetChanged()
+            }
+        }
+    })
+
+
+    // Retrofit 연결 설정
+    private fun setRetrofit() {
+        mRetrofit = Retrofit
+            .Builder()
+            .baseUrl(getString(R.string.baseUrl))   // baseUrl은 strings.xml에서 플라스크서버 IP 확인 후 수정
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        mRetrofitAPI = mRetrofit.create(RetrofitAPI::class.java)
     }
     }
