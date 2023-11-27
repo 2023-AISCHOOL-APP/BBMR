@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="100dp"
-        android:background="@drawable/normal_dialog_background"
+        android:background="@drawable/dialog_normal_subcolor_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +21,7 @@
             android:id="@+id/textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="220dp"
+            android:layout_marginTop="92dp"
             android:text="카드를 그림과 같이\nIC카드 리더기에 꽂아주세요"
             android:textAlignment="center"
             android:textColor="@color/black"
@@ -32,7 +32,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clPaySuccessDNC"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -44,40 +44,30 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="400dp"
-            android:layout_height="400dp"
-            android:layout_marginTop="100dp"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="52dp"
             app:layout_constraintEnd_toEndOf="@+id/textView"
             app:layout_constraintStart_toStartOf="@+id/textView"
             app:layout_constraintTop_toBottomOf="@+id/textView"
             app:srcCompat="@drawable/iccard" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clPaySuccessDNC"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+        <android.widget.Button
+            android:id="@+id/btnCardPayBack"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/btn_normal_dialog_menu"
+            android:text="이전으로"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline19">
-
-            <android.widget.Button
-                android:id="@+id/btnCardPayBack"
-                android:layout_width="150dp"
-                android:layout_height="70dp"
-                android:background="@drawable/btn_normal_dialog_menu"
-                android:text="이전으로"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.699" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintEnd_toEndOf="@+id/clPayFailDNC"
+            app:layout_constraintStart_toStartOf="@+id/clPayFailDNC"
+            app:layout_constraintTop_toBottomOf="@+id/clPayFailDNC"
+            app:layout_constraintVertical_bias="0.0" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline19"
@@ -101,7 +91,6 @@
             app:layout_constraintTop_toTopOf="@+id/guideline19" />
 
         <ImageView
-            android:id="@+id/clPaySuccessDNC"
             android:layout_width="0dp"
             android:layout_height="300dp"
             android:src="@drawable/nfc_pay"
@@ -110,7 +99,7 @@
             app:layout_constraintStart_toStartOf="@+id/textView18"
             app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clPayFailDNC"
             android:layout_width="0dp"
             android:layout_height="0dp"
