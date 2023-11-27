@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.bbmr_project.Dialog.Senior_MenuDialog
 import com.example.bbmr_project.R
 import com.example.bbmr_project.Senior_Fragment.Senior_Fragment_Tab_Dessert
@@ -53,12 +54,12 @@ class SeniorTakeOutAdapter(
     // ViewHolder에 데이터 바인딩
     // 메뉴 사진, 이름, 가격 설정
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
+        Glide.with(context).load(menuList[position].simg.toString()).into(holder.imgS)
         holder.tvNameS.text = menuList[position].sname
         // 기본값을 1000단위로 나누는 코드
         val basicPrice = String.format("%,d 원", menuList[position].sprice)
         holder.tvPriceS.text = basicPrice
-        holder.imgS.setImageResource(menuList[position].simg)
+//        holder.imgS.setImageResource(menuList[position].simg)
 
         holder.itemView.setOnClickListener {
             itemClickListener?.onItemClick(menuList[position])

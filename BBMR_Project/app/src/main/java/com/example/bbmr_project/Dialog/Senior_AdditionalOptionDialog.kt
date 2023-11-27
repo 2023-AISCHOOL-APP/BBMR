@@ -11,7 +11,6 @@ import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.example.bbmr_project.CartStorage
-import com.example.bbmr_project.Menu.MenuListViewModel
 import com.example.bbmr_project.Product
 import com.example.bbmr_project.R
 import com.example.bbmr_project.Senior_Fragment.seniorAdapters.SeniorSelectBasketAdapter
@@ -45,11 +44,11 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // ------ 추가 옵션 코드 시작 ------
-        var size : Boolean = false
+        var size : Int = 1
         var sugar: Boolean = false
         var cream: Boolean = false
         binding.cbSizeDSAO.setOnCheckedChangeListener { _, isChecked ->
-            size = isChecked
+            size = 2
         }
         binding.cbSugarDSAO.setOnCheckedChangeListener { _, isChecked ->
             sugar = isChecked
@@ -114,7 +113,7 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
                 // ------ 옵션 선택 시 금액 추가(합산) 코드 시작 ------
                 var addprice : Int = customOption.price
                 val count : Int = customOption.count
-                if (size == true) {
+                if (size == 1) {
                     addprice += (500 * count)
                 }
                 if (sugar == true) {

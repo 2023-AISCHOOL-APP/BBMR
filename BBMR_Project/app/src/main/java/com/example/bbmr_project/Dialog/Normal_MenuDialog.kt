@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import com.example.bbmr_project.Product
 import com.example.bbmr_project.R
 import com.example.bbmr_project.VO.NormalTakeOutVO
 import com.example.bbmr_project.databinding.DialogNormalMenuBinding
@@ -51,9 +52,9 @@ class Normal_MenuDialog : DialogFragment() {
     companion object {
         fun newInstance(item: NormalTakeOutVO): Normal_MenuDialog {
             val args = Bundle().apply {
-                putInt("normal_img", item.img)
+                putString("normal_img", item.img)
                 putString("normal_name", item.name)
-                putString("normal_price", item.price)
+                putInt("normal_price", item.price)
             }
             val fragment = Normal_MenuDialog()
             fragment.arguments = args

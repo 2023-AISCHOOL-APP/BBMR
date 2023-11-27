@@ -3,15 +3,13 @@ package com.example.bbmr_project.Dialog
 import NormalSelectedMenuInfo
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import com.example.bbmr_project.R
+import com.example.bbmr_project.Product
 import com.example.bbmr_project.VO.NormalTakeOutVO
-import com.example.bbmr_project.databinding.DialogNormalMenuDessertBinding
 import com.example.bbmr_project.databinding.DialogNormalMenuMdBinding
 
 interface Normal_MenuMDDialogListener {
@@ -25,9 +23,9 @@ class Normal_MenuMDDialog : DialogFragment() {
     companion object {
         fun newInstance(item: NormalTakeOutVO): Normal_MenuMDDialog {
             val args = Bundle().apply {
-                putInt("normal_img", item.img)
+                putString("normal_img", item.img)
                 putString("normal_name", item.name)
-                putString("normal_price", item.price)
+                putInt("normal_price", item.price)
             }
             val fragment = Normal_MenuMDDialog()
             fragment.arguments = args

@@ -1,6 +1,5 @@
 package com.example.bbmr_project.Normal_Fragment.adapters
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bbmr_project.Dialog.Normal_MenuDialog
+import com.example.bbmr_project.CartStorage.menuList
 import com.example.bbmr_project.R
 import com.example.bbmr_project.VO.NormalTakeOutVO
 
@@ -35,17 +34,15 @@ class NormalTakeOutAdapter(
         return NormalTakeOutAdapter.ViewHolder(view)
     }
     override fun onBindViewHolder(holder: NormalTakeOutAdapter.ViewHolder, position: Int) {
-        holder.img.setImageResource(frag1List[position].img)
+//        holder.img.setImageResource(frag1List[position].img)
         holder.tvName.text = frag1List[position].name
-        holder.tvPrice.text = frag1List[position].price
+        holder.tvPrice.text = frag1List[position].price.toString()
         holder.itemView.setOnClickListener {
-            Log.d("TakeOut2Adapter", "Item clicked at position $position")
-            // 아이템 클릭 이벤트 전달
             itemClickListener?.onItemClick(frag1List[position])
         }
 
     }
     override fun getItemCount(): Int {
-        return frag1List.size
+        return menuList.size
     }
 }

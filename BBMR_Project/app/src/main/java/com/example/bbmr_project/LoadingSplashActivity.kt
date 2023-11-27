@@ -61,14 +61,16 @@ class LoadingSplashActivity : AppCompatActivity() {
             )
         }
         cameraExecutor = Executors.newSingleThreadExecutor()
+        // ------ emulator 작업 시 해당 activity 1초 후 자동 이동 ------
+        val Handler = Handler(Looper.getMainLooper())
+        Handler.postDelayed({
+            val intent = Intent(this, Normal_IntroActivity::class.java)
+            startActivity(intent)
+            finish()
 
-//
-//        val Handler = Handler(Looper.getMainLooper())
-//        Handler.postDelayed({
-//            val intent = Intent(this, Normal_IntroActivity::class.java)
-//            startActivity(intent)
-//            finish()
-//        }, 70000)
+        }, 3000)
+
+
     }
 
     private fun startCamera() {
@@ -104,7 +106,7 @@ class LoadingSplashActivity : AppCompatActivity() {
                 val faceResults = result?.getValue(faceDetector)
                 if (faceResults != null && faceResults.isNotEmpty()) {
                     imageCaptureAndSend(cameraController)
-                    cameraController.unbind()
+
                 }
                 previewView.overlay.clear()
             }
@@ -164,6 +166,7 @@ class LoadingSplashActivity : AppCompatActivity() {
             imageProxy.close()
         }
     }
+
 
     private fun processServerResponse(result: String) {
         // 결과에 따라 다른 액션을 수행합니다.

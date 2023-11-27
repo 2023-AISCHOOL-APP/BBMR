@@ -24,7 +24,7 @@ class Senior_MenuDialog : DialogFragment() {
             val args = Bundle().apply {
                 putString("sname", item.sname)
                 putInt("sprice", item.sprice)
-                putInt("simg", item.simg)
+//                putInt("simg", item.simg)
             }
             val fragment = Senior_MenuDialog()
             fragment.arguments = args
@@ -126,9 +126,7 @@ class Senior_MenuDialog : DialogFragment() {
                     price = binding.tvMenuPrice.text.toString().replace(",", "").replace("원", "")
                         .toIntOrNull() ?: 0,
                     count = binding.tvMenuCount.text.toString().toInt(),
-
                 )
-
             )
 
 

@@ -28,7 +28,7 @@ class Senior_Fragment_Tab_Recommend : Fragment(), ItemClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+//        val factory = MenuListViewModel.MenuListViewModelFactory(getString(R.string.baseUrl))
         // ViewModel 초기화
         viewModel = ViewModelProvider(this).get(MenuListViewModel::class.java)
 

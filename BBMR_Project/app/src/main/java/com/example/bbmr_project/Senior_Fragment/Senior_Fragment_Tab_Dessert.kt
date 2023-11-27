@@ -30,7 +30,8 @@ class Senior_Fragment_Tab_Dessert : Fragment(), ItemClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        // ------ server인 base url을 간접적으로 가져와야 하는 곳 ------
+//        val factory = MenuListViewModel.MenuListViewModelFactory(getString(R.string.baseUrl))
         viewModel = ViewModelProvider(this).get(MenuListViewModel::class.java)
 
         val view = inflater.inflate(R.layout.frag_senior_tab_dessert, container, false)

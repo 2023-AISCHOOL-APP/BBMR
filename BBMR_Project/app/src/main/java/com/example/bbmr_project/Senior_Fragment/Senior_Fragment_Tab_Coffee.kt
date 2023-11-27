@@ -33,6 +33,7 @@ class Senior_Fragment_Tab_Coffee : Fragment(), ItemClickListener {
     ): View? {
 
 
+        // ViewModel 초기화
         viewModel = ViewModelProvider(this).get(MenuListViewModel::class.java)
 
         val view = inflater.inflate(R.layout.frag_senior_tab_coffee, container, false)

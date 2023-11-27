@@ -9,18 +9,32 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bbmr_project.CartStorage
 import com.example.bbmr_project.Dialog.Normal_MenuDessertDialog
 import com.example.bbmr_project.Dialog.Normal_MenuDessertDialogListener
-import com.example.bbmr_project.Dialog.Normal_MenuDialog
-import com.example.bbmr_project.Dialog.Normal_MenuDialogListener
 import com.example.bbmr_project.Normal_Fragment.adapters.ItemClickListener
 import com.example.bbmr_project.R
 import com.example.bbmr_project.VO.NormalTakeOutVO
 import com.example.bbmr_project.Normal_Fragment.adapters.NormalTakeOutAdapter
+import com.example.bbmr_project.Product
 
 class Normal_Fragment_Tab2 : Fragment() {
 
     private lateinit var rvDessert: RecyclerView
+
+    private fun createNormalTab2List(): List<NormalTakeOutVO> {
+        val menuList: ArrayList<Product> = CartStorage.menuList
+        val dessertList: List<NormalTakeOutVO> = menuList.filter { product ->
+            product.cate == "dessert" && product.size == 1
+        }.map { product ->
+            NormalTakeOutVO(
+                img = product.image,
+                name = product.name,
+                price = product.price
+            )
+        }
+        return dessertList
+    }
 
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
@@ -33,9 +47,7 @@ class Normal_Fragment_Tab2 : Fragment() {
         val layoutManager = GridLayoutManager(requireContext(), 4)
         rvDessert.layoutManager = layoutManager
 
-        val frag1List: ArrayList<NormalTakeOutVO> = ArrayList()
-        frag1List.add(NormalTakeOutVO(R.drawable.cake, "초코 케이크", "5,000원"))
-        frag1List.add(NormalTakeOutVO(R.drawable.cake, "호떡", "2,000원"))
+        val frag1List: List<NormalTakeOutVO> = createNormalTab2List()
 
         val adapter =
             NormalTakeOutAdapter(
