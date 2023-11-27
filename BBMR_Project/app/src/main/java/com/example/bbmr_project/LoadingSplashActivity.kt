@@ -63,13 +63,13 @@ class LoadingSplashActivity : AppCompatActivity() {
         cameraExecutor = Executors.newSingleThreadExecutor()
 
 
-//        val Handler = Handler(Looper.getMainLooper())
-//        Handler.postDelayed({
-//            val intent = Intent(this, Normal_IntroActivity::class.java)
-//            startActivity(intent)
-//            finish()
+        val Handler = Handler(Looper.getMainLooper())
+        Handler.postDelayed({
+            val intent = Intent(this, Normal_IntroActivity::class.java)
+            startActivity(intent)
+            finish()
 
-//        }, 10000)
+        }, 1000)
 
     }
 

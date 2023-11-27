@@ -30,7 +30,7 @@ object CartStorage {
 
     // private val 에서 private로 변경 -> 이유 : MenuDialog에서 86번줄 추가옵션 productList가 오류가 듬
     val productList: ArrayList<Product> = ArrayList()
-
+    val menuList: ArrayList<Product> = ArrayList()
     private var onCartChangeListener: OnCartChangeListener? = null
 
     fun setListener(onCartChangeListener: OnCartChangeListener) {

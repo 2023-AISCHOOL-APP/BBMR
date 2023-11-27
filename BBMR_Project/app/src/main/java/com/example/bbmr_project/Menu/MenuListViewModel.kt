@@ -51,6 +51,7 @@ class MenuListViewModel(private val retrofitService: RetrofitService) : ViewMode
     init {
         // 초기 데이터 설정
         snior_MenuList1.value = createMenuList1()
+
     }
 
     //첫 번째 메뉴 리스트 생성 메서드
