@@ -8,14 +8,14 @@ from connection import get_connection
 from mysql.connector import Error
 from flask import Flask, request, jsonify, send_file
 from flask_restful import Resource, Api, reqparse, abort
-from tensorflow import keras
-from keras import models, layers
-from keras.layers import Dense
-from keras.preprocessing import image
-from keras.applications.vgg16 import preprocess_input
+# from tensorflow import keras
+# from keras import models, layers
+# from keras.layers import Dense
+# from keras.preprocessing import image
+# from keras.applications.vgg16 import preprocess_input
 from werkzeug.utils import secure_filename # 231116 filename불러오기 위한 import
 import joblib # 231115 모델 로딩 라이브러리 사용 - 정희석(8-12)
-import tensorflow as tf
+# import tensorflow as tf
 import numpy as np
 import os # 231116 추가 - 이미지를 PIL Image로 변환
 
@@ -25,28 +25,28 @@ api = Api(app)
 
 # DB에서 메뉴정보 가져오기
 class TodoList(Resource):
-    def fetch_menu(self, category):
+    def get(self):
         conn = get_connection()
-        query = f"SELECT * FROM menu WHERE category = '{category}'"
-        cursor = conn.cursor(dictionary=True)
+        query = "SELECT * FROM menu"
+        cursor = conn.cursor()
         cursor.execute(query)
         db_result = cursor.fetchall()
+
         menu = {}
         for item in db_result:
-            menu[item['menu_id']] = [item['name'],item['price'],item['menu_con'],item['size'],item['imageUrl']]
-        return menu
+            menu[item[0]] = {
+                "name": item[1],
+                "price": item[3],
+                "menu_con": item[4],
+                "size": item[5],
+                "imageUrl": item[6],
+                "category": item[2]
+            }
+        print(menu)
 
-    def get(self):
-        coffee = self.fetch_menu('coffee')
-        dessert = self.fetch_menu('dessert')
-        tea = self.fetch_menu('tea')
-        md = self.fetch_menu('md')
-        flatccino = self.fetch_menu('flatccino')
-        beverage = self.fetch_menu('beverage')
-        etc = self.fetch_menu('etc')
+        return jsonify({"menu": menu})
 
-        return {"coffee": coffee, "dessert": dessert, "etc": etc,
-                "tea":tea, "md":md, "flatccino": flatccino,"beverage" : beverage}
+
 
 
 
@@ -172,50 +172,52 @@ class SaveOrder(Resource):
 
    
 
+#  ------ 모델 코드 시작 ------
 
+# # 학습된 모델 로드
+# # 231121
+# model = tf.keras.models.load_model('test_face_cnn_model.h5')
+# @app.route('/upload', methods=['POST'])
+# def upload_file():
+#     if 'image' not in request.files:
+#         return jsonify({'error': 'No image part'}), 400
 
-# 학습된 모델 로드
-# 231121
-model = tf.keras.models.load_model('test_face_cnn_model.h5')
-@app.route('/upload', methods=['POST'])
-def upload_file():
-    if 'image' not in request.files:
-        return jsonify({'error': 'No image part'}), 400
+#     file = request.files['image']
+#     print(file)
 
-    file = request.files['image']
-    print(file)
+#     if file:
+#         # 이미지 읽기 및 리사이즈
+#         image = Image.open(io.BytesIO(file.read()))
+#         image = image.rotate(90, expand=True)
 
-    if file:
-        # 이미지 읽기 및 리사이즈
-        image = Image.open(io.BytesIO(file.read()))
-        image = image.rotate(90, expand=True)
-
-        # RGBA에서 RGB로 변환
-        image = image.convert('RGB')
+#         # RGBA에서 RGB로 변환
+#         image = image.convert('RGB')
         
-        print("image -> ",image)
-        image.save('image/image1.png')
-        image = image.resize((480, 360))  # 너비 480, 높이 360으로 리사이즈
-        image.save('image/image2.png')
-        # 필요한 추가 전처리 과정
-        # 예시: 이미지를 numpy 배열로 변환
-        image = np.array(image)
-        image = image / 255.0  # 정규화
-        image = np.expand_dims(image, axis=0)  # 모델 입력 형태에 맞게 차원 확장
+#         print("image -> ",image)
+#         image.save('image/image1.png')
+#         image = image.resize((480, 360))  # 너비 480, 높이 360으로 리사이즈
+#         image.save('image/image2.png')
+#         # 필요한 추가 전처리 과정
+#         # 예시: 이미지를 numpy 배열로 변환
+#         image = np.array(image)
+#         image = image / 255.0  # 정규화
+#         image = np.expand_dims(image, axis=0)  # 모델 입력 형태에 맞게 차원 확장
 
-        # 모델 예측
-        prediction = model.predict(image)
-        print("prediction -> " , prediction[0][0])
+#         # 모델 예측
+#         prediction = model.predict(image)
+#         print("prediction -> " , prediction[0][0])
 
-        # 예측 결과 처리 및 반환
-        # 예시: 예측 결과의 최대값 인덱스 반환
-        if prediction[0][0] < 0.5:
-            result = 0
-        else:
-            result = 1
-        # result = 0
-        print("result ->", result)
-        return {'result': result}
+#         # 예측 결과 처리 및 반환
+#         # 예시: 예측 결과의 최대값 인덱스 반환
+#         if prediction[0][0] < 0.5:
+#             result = 0
+#         else:
+#             result = 1
+#         # result = 0
+#         print("result ->", result)
+#         return {'result': result}
+
+#  ------ 모델 코드 끝 -------
 
 
 api.add_resource(SaveOrder,"/saveorder/")
