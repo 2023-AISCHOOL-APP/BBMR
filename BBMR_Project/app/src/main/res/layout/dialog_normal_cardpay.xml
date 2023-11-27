@@ -44,7 +44,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
-            android:id="@+id/clPayFailDNC"
             android:layout_width="300dp"
             android:layout_height="300dp"
             android:layout_marginTop="52dp"
@@ -92,7 +91,6 @@
             app:layout_constraintTop_toTopOf="@+id/guideline19" />
 
         <ImageView
-            android:id="@+id/clPaySuccessDNC"
             android:layout_width="0dp"
             android:layout_height="300dp"
             android:src="@drawable/nfc_pay"

@@ -18,9 +18,10 @@ class Senior_Fragment_Tab_Beverage : Fragment(), ItemClickListener {
 
     override fun onItemClick(item: Senior_TakeOutVO) {
     }
+
     private lateinit var viewModel: MenuListViewModel
     private lateinit var adapter: SeniorTakeOutAdapter
-    private lateinit var rvBeverage : RecyclerView
+    private lateinit var rvBeverage: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,22 +30,26 @@ class Senior_Fragment_Tab_Beverage : Fragment(), ItemClickListener {
 
         viewModel = ViewModelProvider(this).get(MenuListViewModel::class.java)
 
-        val view =  inflater.inflate(R.layout.frag_senior_tab_beverage, container, false)
+        val view = inflater.inflate(R.layout.frag_senior_tab_beverage, container, false)
         rvBeverage = view.findViewById(R.id.rvBeverage)
 
-        adapter = SeniorTakeOutAdapter(requireContext(), R.layout.frag_senior_list, arrayListOf(), this, parentFragmentManager)
+        adapter = SeniorTakeOutAdapter(
+            requireContext(),
+            R.layout.frag_senior_list,
+            arrayListOf(),
+            this,
+            parentFragmentManager
+        )
         rvBeverage.adapter = adapter
         rvBeverage.layoutManager = GridLayoutManager(requireContext(), 3)
 
-        viewModel.menuList3.observe(viewLifecycleOwner){menuList ->
+        viewModel.menuList3.observe(viewLifecycleOwner) { menuList ->
             adapter.updateList(menuList)
 
         }
 
         return view
     }
-
-
 
 
 }

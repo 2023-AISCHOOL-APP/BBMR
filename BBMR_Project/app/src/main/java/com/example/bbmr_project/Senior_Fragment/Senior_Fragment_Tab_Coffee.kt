@@ -21,10 +21,9 @@ class Senior_Fragment_Tab_Coffee : Fragment(), ItemClickListener {
 
     }
 
-    private  lateinit var viewModel: MenuListViewModel
-    private  lateinit var adapter : SeniorTakeOutAdapter
-    private  lateinit var rvCoffee : RecyclerView
-
+    private lateinit var viewModel: MenuListViewModel
+    private lateinit var adapter: SeniorTakeOutAdapter
+    private lateinit var rvCoffee: RecyclerView
 
 
     override fun onCreateView(
@@ -38,16 +37,22 @@ class Senior_Fragment_Tab_Coffee : Fragment(), ItemClickListener {
         val view = inflater.inflate(R.layout.frag_senior_tab_coffee, container, false)
         rvCoffee = view.findViewById(R.id.rvCoffee)
 
-        adapter = SeniorTakeOutAdapter(requireContext(), R.layout.frag_senior_list, arrayListOf(), this, parentFragmentManager)
+        adapter = SeniorTakeOutAdapter(
+            requireContext(),
+            R.layout.frag_senior_list,
+            arrayListOf(),
+            this,
+            parentFragmentManager
+        )
         rvCoffee.adapter = adapter
         rvCoffee.layoutManager = GridLayoutManager(requireContext(), 3)
 
 
-        viewModel.menuList3.observe(viewLifecycleOwner){ menuList ->
+        viewModel.menuList3.observe(viewLifecycleOwner) { menuList ->
             adapter.updateList(menuList)
         }
 
-        return  view
+        return view
     }
 
 

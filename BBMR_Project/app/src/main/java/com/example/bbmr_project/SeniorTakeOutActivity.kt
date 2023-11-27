@@ -10,6 +10,7 @@ import android.text.SpannableStringBuilder
 import android.text.style.RelativeSizeSpan
 import android.view.Menu
 import android.view.View
+import android.widget.ScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.bbmr_project.Dialog.SeniorBasketDialog
@@ -35,6 +36,7 @@ class SeniorTakeOutActivity() : AppCompatActivity(), OnCartChangeListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         //viewBinding 추가 코드
         binding = ActivitySeniorTakeoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -43,9 +45,24 @@ class SeniorTakeOutActivity() : AppCompatActivity(), OnCartChangeListener {
         // ------ 장바구니 버튼 크기 변경 코드 시작 ------//
         val _text = "장바구니\n&\n결제하기"
         val spannableStringBuilder = SpannableStringBuilder(_text)
-        spannableStringBuilder.setSpan(RelativeSizeSpan(1.4f), 0, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        spannableStringBuilder.setSpan(RelativeSizeSpan(0.5f), 4, 6, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        spannableStringBuilder.setSpan(RelativeSizeSpan(1.4f), 7, _text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannableStringBuilder.setSpan(
+            RelativeSizeSpan(1.4f),
+            0,
+            4,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        spannableStringBuilder.setSpan(
+            RelativeSizeSpan(0.5f),
+            4,
+            6,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        spannableStringBuilder.setSpan(
+            RelativeSizeSpan(1.4f),
+            7,
+            _text.length,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
         binding.btnBasket.text = spannableStringBuilder
         binding.btnBasket.setLineSpacing(0.4f, 0.7f)
         // ----------- 장바구니 버튼 크기 변경 코드 끝 -----------//
@@ -60,7 +77,8 @@ class SeniorTakeOutActivity() : AppCompatActivity(), OnCartChangeListener {
         //-------------일반 키오스크로 이동 끝---------------//
 
         //초기 Fragment지정
-        supportFragmentManager.beginTransaction().replace(R.id.fl1, Senior_Fragment_Tab_Recommend() ).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.fl1, Senior_Fragment_Tab_Recommend())
+            .commit()
 
 
         // 상단->메뉴 카테고리 Fragment 화면 전환
@@ -74,12 +92,25 @@ class SeniorTakeOutActivity() : AppCompatActivity(), OnCartChangeListener {
             }
         }
 
-        val fragment = supportFragmentManager.findFragmentByTag("fragment")
-        var scrollPosition = 0
-
         binding.btnNext.setOnClickListener {
-            val scrollAmount = 6
-            scrollPosition += scrollAmount
+            val fragment =
+                supportFragmentManager.findFragmentById(R.id.fl1) as? Senior_Fragment_Tab_Recommend
+
+            fragment?.let {
+                it.menuIndex += 6
+                it.scrollToPosition(it.menuIndex)
+            }
+        }
+        binding.btnPre.setOnClickListener {
+            val fragment =
+                supportFragmentManager.findFragmentById(R.id.fl1) as? Senior_Fragment_Tab_Recommend
+            fragment?.let {
+                if (it.menuIndex != 0 && it.menuIndex >=6){
+                    it.menuIndex -= 6
+                    it.scrollToPosition(it.menuIndex)
+                }
+
+            }
 
         }
 
@@ -91,7 +122,7 @@ class SeniorTakeOutActivity() : AppCompatActivity(), OnCartChangeListener {
 
         // ------------장바구니 버튼 기능 & 연속클릭 방지-----------//
         binding.btnBasket.setOnClickListener {
-            if (!buttonDoubleDefend){
+            if (!buttonDoubleDefend) {
                 buttonDoubleDefend = true
                 val fragment = SeniorBasketDialog()
                 val args = Bundle().apply {
@@ -111,7 +142,8 @@ class SeniorTakeOutActivity() : AppCompatActivity(), OnCartChangeListener {
 
     //------프레그먼트 화면이동 함수------//
     private fun replaceFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction().replace(R.id.fl1, fragment).addToBackStack(null).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.fl1, fragment).addToBackStack(null)
+            .commit()
     }
 
     //------화면 변화를 적용해주는 함수-----//
@@ -119,7 +151,8 @@ class SeniorTakeOutActivity() : AppCompatActivity(), OnCartChangeListener {
         // 값의 총합을 구하는 코드
         val addPrice = productList.sumOf { it.price }
         // 값을 1000단위마다 , 넣어주는 코드
-        val TotalPrice = String.format("%,d원", addPrice) // String.format("%,d", 값) -> 1000 단위마다 , 표시
+        val TotalPrice =
+            String.format("%,d원", addPrice) // String.format("%,d", 값) -> 1000 단위마다 , 표시
         binding.tvTotalSeniorPrice.text = TotalPrice
     }
 
@@ -127,5 +160,4 @@ class SeniorTakeOutActivity() : AppCompatActivity(), OnCartChangeListener {
         super.onDestroy()
         CartStorage.release()
     }
-
 }

@@ -34,18 +34,36 @@ object MenuListViewModel : ViewModel() {
     private fun createMenuList1(): List<Senior_TakeOutVO> {
         return listOf(
             Senior_TakeOutVO(R.drawable.coffee, "아메리카노", 2000),
+            Senior_TakeOutVO(R.drawable.coffee, "아메리카노", 2000),
+            Senior_TakeOutVO(R.drawable.coffee, "아메리카노", 2000),
+            Senior_TakeOutVO(R.drawable.coffee, "아메리카노", 2000),
+            Senior_TakeOutVO(R.drawable.coffee, "아메리카노", 2000),
+            Senior_TakeOutVO(R.drawable.coffee, "아메리카노", 2000),
+            Senior_TakeOutVO(R.drawable.coffee, "메리카노아", 3000),
+            Senior_TakeOutVO(R.drawable.coffee, "메리카노아", 3000),
+            Senior_TakeOutVO(R.drawable.coffee, "메리카노아", 3000),
+            Senior_TakeOutVO(R.drawable.coffee, "메리카노아", 3000),
+            Senior_TakeOutVO(R.drawable.coffee, "메리카노아", 3000),
             Senior_TakeOutVO(R.drawable.coffee, "메리카노아", 3000),
             Senior_TakeOutVO(R.drawable.coffee, "리카노아메", 4000),
-            Senior_TakeOutVO(R.drawable.coffee, "카노아메리", 5000),
-            Senior_TakeOutVO(R.drawable.coffee, "노아메리카", 6000),
-            Senior_TakeOutVO(R.drawable.coffee, "아메리카노", 2000),
-            Senior_TakeOutVO(R.drawable.coffee, "아메리카노", 2000),
-            Senior_TakeOutVO(R.drawable.coffee, "메리카노아", 3000),
+            Senior_TakeOutVO(R.drawable.coffee, "리카노아메", 4000),
+            Senior_TakeOutVO(R.drawable.coffee, "리카노아메", 4000),
+            Senior_TakeOutVO(R.drawable.coffee, "리카노아메", 4000),
+            Senior_TakeOutVO(R.drawable.coffee, "리카노아메", 4000),
             Senior_TakeOutVO(R.drawable.coffee, "리카노아메", 4000),
             Senior_TakeOutVO(R.drawable.coffee, "카노아메리", 5000),
+            Senior_TakeOutVO(R.drawable.coffee, "카노아메리", 5000),
+            Senior_TakeOutVO(R.drawable.coffee, "카노아메리", 5000),
+            Senior_TakeOutVO(R.drawable.coffee, "카노아메리", 5000),
+            Senior_TakeOutVO(R.drawable.coffee, "카노아메리", 5000),
+            Senior_TakeOutVO(R.drawable.coffee, "카노아메리", 5000),
             Senior_TakeOutVO(R.drawable.coffee, "노아메리카", 6000),
-            Senior_TakeOutVO(R.drawable.coffee, "아메리카노", 2000),
-        )
+            Senior_TakeOutVO(R.drawable.coffee, "노아메리카", 6000),
+            Senior_TakeOutVO(R.drawable.coffee, "노아메리카", 6000),
+            Senior_TakeOutVO(R.drawable.coffee, "노아메리카", 6000),
+            Senior_TakeOutVO(R.drawable.coffee, "노아메리카", 6000),
+            Senior_TakeOutVO(R.drawable.coffee, "노아메리카", 6000),
+            )
     }
 
     // 두 번째 메뉴 리스트 생성 메서드

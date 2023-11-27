@@ -10,7 +10,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bbmr_project.Dialog.Senior_MenuDialog
 import com.example.bbmr_project.R
-import com.example.bbmr_project.Senior_Fragment.Senior_Fragment_Tab_Dessert
 import com.example.bbmr_project.VO.Senior_TakeOutVO
 
 
