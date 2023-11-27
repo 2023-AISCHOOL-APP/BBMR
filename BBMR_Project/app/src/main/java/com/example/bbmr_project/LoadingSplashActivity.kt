@@ -61,8 +61,7 @@ class LoadingSplashActivity : AppCompatActivity() {
             )
         }
         cameraExecutor = Executors.newSingleThreadExecutor()
-
-
+        // ------ emulator 작업 시 해당 activity 1초 후 자동 이동 ------
         val Handler = Handler(Looper.getMainLooper())
         Handler.postDelayed({
             val intent = Intent(this, Normal_IntroActivity::class.java)
@@ -70,6 +69,7 @@ class LoadingSplashActivity : AppCompatActivity() {
             finish()
 
         }, 1000)
+
 
     }
 

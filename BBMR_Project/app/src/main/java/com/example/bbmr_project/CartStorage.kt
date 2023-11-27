@@ -15,7 +15,7 @@ data class Product(
     var sugar: Boolean = false,
     var cream: Boolean = false,
     val id: String = "001",
-    var image: String = "BBMR/img/",
+    var image: String = "",
     val cate : String = ""
 ) : Parcelable, Serializable
 

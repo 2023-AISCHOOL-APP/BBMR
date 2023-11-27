@@ -31,9 +31,9 @@ class Senior_Fragment_Tab_Coffee : Fragment(), ItemClickListener {
         savedInstanceState: Bundle?
     ): View? {
 
-        val factory = MenuListViewModel.MenuListViewModelFactory(getString(R.string.baseUrl))
+
         // ViewModel 초기화
-        viewModel = ViewModelProvider(this, factory).get(MenuListViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(MenuListViewModel::class.java)
 
         val view = inflater.inflate(R.layout.frag_senior_tab_coffee, container, false)
         rvCoffee = view.findViewById(R.id.rvCoffee)
