@@ -72,6 +72,7 @@ class StartActivity : AppCompatActivity() {
                     menuList.add(Product(name=name, price=price,  temperature = temperature, size = size ,id= id, image = image,cate=cate))
                 }
                 Log.d("메뉴리스트","$menuList")
+                Log.d("메뉴리스트","${menuList.size}")
                 // adapter 초기화 해줘야 함
                 // adapter.notifyDataSetChanged()
             }
