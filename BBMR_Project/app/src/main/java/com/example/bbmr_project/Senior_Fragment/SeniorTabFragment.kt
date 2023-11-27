@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bbmr_project.Menu.MenuListViewModel
@@ -15,11 +17,16 @@ import com.example.bbmr_project.Senior_Fragment.seniorAdapters.SeniorTakeOutAdap
 import com.example.bbmr_project.VO.Senior_TakeOutVO
 
 
-class Senior_Fragment_Tab_Recommend : Fragment(), ItemClickListener {
+class SeniorTabFragment(
+    private val category: Category,
+) : Fragment(), ItemClickListener {
     override fun onItemClick(item: Senior_TakeOutVO) {
     }
 
-    private lateinit var viewModel: MenuListViewModel
+    private val viewModelFactory = MenuListViewModel.MenuListViewModelFactory(category)
+    private val viewModel: MenuListViewModel by viewModels {
+        viewModelFactory
+    }
     private lateinit var adapter: SeniorTakeOutAdapter
     private lateinit var rvRecommend: RecyclerView
 
@@ -36,10 +43,6 @@ class Senior_Fragment_Tab_Recommend : Fragment(), ItemClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-//        val factory = MenuListViewModel.MenuListViewModelFactory(getString(R.string.baseUrl))
-        // ViewModel 초기화
-        viewModel = ViewModelProvider(this).get(MenuListViewModel::class.java)
-
         val view = inflater.inflate(R.layout.frag_senior_tab_recommend, container, false)
         rvRecommend = view.findViewById(R.id.rvRecommend)
 
@@ -56,28 +59,16 @@ class Senior_Fragment_Tab_Recommend : Fragment(), ItemClickListener {
 
 
         // menuList1 LiveData 어댑터 업데이트
-        viewModel.menuList1.observe(viewLifecycleOwner) { menuList ->
+        viewModel.seniorMenuList.observe(viewLifecycleOwner) { menuList ->
             adapter.updateList(menuList)
         }
 
         return view
     }
 
-
-    // menuList1로 전환하는 함수
-    fun switchToMenuList1() {
-        viewModel.menuList1.value?.let { menuList1 ->
-            adapter.updateList(menuList1)
-        }
+    fun getMenuListSize(): Int {
+        return viewModel.seniorMenuList.value?.size ?: 0
     }
-
-    // menuList2로 전환하는 함수
-    fun switchToMenuList2() {
-        viewModel.menuList2.value?.let { menuList2 ->
-            adapter.updateList(menuList2)
-        }
-    }
-
 }
 
 
