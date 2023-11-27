@@ -23,7 +23,6 @@ import com.example.bbmr_project.databinding.DialogSeniorBasketBinding
 class SeniorBasketDialog() : BaseDialogFragment() {
 
 
-
     var buttonDoubleDefend = false
     private lateinit var binding: DialogSeniorBasketBinding
     private val adapter: SeniorSelectBasketAdapter by lazy {
@@ -56,9 +55,24 @@ class SeniorBasketDialog() : BaseDialogFragment() {
 
         val _text = "카드\n&\n삼성페이"
         val spannableStringBuilder = SpannableStringBuilder(_text)
-        spannableStringBuilder.setSpan(RelativeSizeSpan(1.3f), 0, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        spannableStringBuilder.setSpan(RelativeSizeSpan(0.5f), 3, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        spannableStringBuilder.setSpan(RelativeSizeSpan(1.2f), 5, _text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannableStringBuilder.setSpan(
+            RelativeSizeSpan(1.3f),
+            0,
+            2,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        spannableStringBuilder.setSpan(
+            RelativeSizeSpan(0.5f),
+            3,
+            4,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        spannableStringBuilder.setSpan(
+            RelativeSizeSpan(1.2f),
+            5,
+            _text.length,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
         binding.btnCardDSB.text = spannableStringBuilder
         binding.btnCardDSB.setLineSpacing(0.6f, 0.63f)
 
@@ -131,7 +145,8 @@ class SeniorBasketDialog() : BaseDialogFragment() {
 
     private fun initView() {
         initRecyclerView()
-        binding.tvAmount.text = String.format("%,d 원", CartStorage.getProductList().sumOf { it.price })
+        binding.tvAmount.text =
+            String.format("%,d 원", CartStorage.getProductList().sumOf { it.price })
     }
 
     private fun initRecyclerView() {

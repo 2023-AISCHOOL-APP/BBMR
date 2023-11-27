@@ -129,7 +129,6 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
                 customOption?.let { product ->
                     val finalproduct = product.copy(
                         price = addprice,
-                        size = size,
                         sugar = sugar,
                         cream = cream
                     )

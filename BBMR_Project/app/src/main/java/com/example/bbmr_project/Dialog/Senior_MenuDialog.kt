@@ -41,6 +41,7 @@ class Senior_MenuDialog : DialogFragment() {
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val seniorTakeoutVO = arguments?.getParcelable<Senior_TakeOutVO>("seniorTakeOutVO")
@@ -59,11 +60,11 @@ class Senior_MenuDialog : DialogFragment() {
                 buttonDoubleDefend = true
 
                 val product = Product(
-                binding.tvMenuName.text.toString(),
-                price = binding.tvMenuPrice.text.toString().replace(",", "").replace(" 원", "")
-                    .toIntOrNull() ?: 0,
-                binding.tvMenuCount.text.toString().toInt()
-            )
+                    binding.tvMenuName.text.toString(),
+                    price = binding.tvMenuPrice.text.toString().replace(",", "").replace(" 원", "")
+                        .toIntOrNull() ?: 0,
+                    binding.tvMenuCount.text.toString().toInt()
+                )
                 val dialogFragment = Senior_AdditionalOptionDialog()
                 val bundle = Bundle()
                 bundle.putSerializable("product_option", product)
@@ -72,7 +73,7 @@ class Senior_MenuDialog : DialogFragment() {
                 Handler().postDelayed({
                     buttonDoubleDefend = false
                 }, 1000)
-        }
+            }
 
         }
         // ------ 추가 옵션으로 이동 코드 끝 ------
@@ -93,14 +94,14 @@ class Senior_MenuDialog : DialogFragment() {
             val coolhot: Boolean = radioButton.isChecked
 
 
-
             // CartStorage.productList에 값을 추가
             CartStorage.addProduct(
                 Product(
                     name = binding.tvMenuName.text.toString(),
                     price = binding.tvMenuPrice.text.toString().replace(",", "").replace("원", "")
                         .toIntOrNull() ?: 0,
-                    count = binding.tvMenuCount.text.toString().toInt(),
+                    count = binding.tvMenuCount.text.toString().toInt()
+
                 )
 
             )

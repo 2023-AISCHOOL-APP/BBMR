@@ -7,11 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bbmr_project.Menu.MenuListViewModel
 import com.example.bbmr_project.R
-import com.example.bbmr_project.Senior_Fragment.seniorAdapters. ItemClickListener
+import com.example.bbmr_project.Senior_Fragment.seniorAdapters.ItemClickListener
 import com.example.bbmr_project.Senior_Fragment.seniorAdapters.SeniorTakeOutAdapter
 import com.example.bbmr_project.VO.Senior_TakeOutVO
 
@@ -23,6 +22,15 @@ class Senior_Fragment_Tab_Recommend : Fragment(), ItemClickListener {
     private lateinit var viewModel: MenuListViewModel
     private lateinit var adapter: SeniorTakeOutAdapter
     private lateinit var rvRecommend: RecyclerView
+
+    var menuIndex = 6
+
+    // 특정 위치로 스크롤하는 함수
+    fun scrollToPosition(position: Int) {
+        rvRecommend.post {
+            rvRecommend.smoothScrollToPosition(position)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +44,13 @@ class Senior_Fragment_Tab_Recommend : Fragment(), ItemClickListener {
         rvRecommend = view.findViewById(R.id.rvRecommend)
 
         // RecyclerView 어댑터 초기화
-        adapter = SeniorTakeOutAdapter(requireContext(), R.layout.frag_senior_list, arrayListOf(), this, parentFragmentManager)
+        adapter = SeniorTakeOutAdapter(
+            requireContext(),
+            R.layout.frag_senior_list,
+            arrayListOf(),
+            this,
+            parentFragmentManager
+        )
         rvRecommend.adapter = adapter
         rvRecommend.layoutManager = GridLayoutManager(requireContext(), 3)
 
@@ -56,6 +70,7 @@ class Senior_Fragment_Tab_Recommend : Fragment(), ItemClickListener {
             adapter.updateList(menuList1)
         }
     }
+
     // menuList2로 전환하는 함수
     fun switchToMenuList2() {
         viewModel.menuList2.value?.let { menuList2 ->

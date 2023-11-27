@@ -62,6 +62,10 @@ class MenuListViewModel() : ViewModel() {
             Senior_TakeOutVO("", "메리카노아", 3000),
             Senior_TakeOutVO("", "리카노아메", 4000),
             Senior_TakeOutVO("", "카노아메리", 5000),
+            Senior_TakeOutVO("", "아메리카노", 2000),
+            Senior_TakeOutVO("", "메리카노아", 3000),
+            Senior_TakeOutVO("", "리카노아메", 4000),
+            Senior_TakeOutVO("", "카노아메리", 5000),
         )
     }
 

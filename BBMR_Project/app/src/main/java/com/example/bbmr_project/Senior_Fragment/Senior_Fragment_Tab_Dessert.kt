@@ -41,8 +41,7 @@ class Senior_Fragment_Tab_Dessert : Fragment(), ItemClickListener {
             requireContext(),
             R.layout.frag_senior_list,
             arrayListOf(),
-            this
-            ,parentFragmentManager
+            this, parentFragmentManager
         )
         rvDessert.adapter = adapter
         rvDessert.layoutManager = GridLayoutManager(requireContext(), 3)
@@ -53,7 +52,6 @@ class Senior_Fragment_Tab_Dessert : Fragment(), ItemClickListener {
 
         return view
     }
-
 
 
 }
