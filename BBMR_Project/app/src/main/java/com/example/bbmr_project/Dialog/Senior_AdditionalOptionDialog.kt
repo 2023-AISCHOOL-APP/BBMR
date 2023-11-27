@@ -92,8 +92,6 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
 
         // ------ 이전, 선택 완료 코드 시작 ------
         binding.btnCnclAddiOpDSAO.setOnClickListener {
-<<<<<<< HEAD
-=======
                     val bundle = arguments
                     if (bundle != null) {
                         val customOption = bundle.getSerializable("product_option") as Product
@@ -104,7 +102,6 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
                         dialogFragment.arguments = bundle2
                         dialogFragment.show(childFragmentManager, "Senior_MenuDialog")
             }
->>>>>>> 201f638f9aa1c263247bd9ef260f7f2bdca47060
             dismiss()
         }
 
@@ -132,7 +129,6 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
                 customOption?.let { product ->
                     val finalproduct = product.copy(
                         price = addprice,
-                        size = size,
                         sugar = sugar,
                         cream = cream
                     )
