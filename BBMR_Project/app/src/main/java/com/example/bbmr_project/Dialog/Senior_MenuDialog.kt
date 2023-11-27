@@ -126,8 +126,6 @@ class Senior_MenuDialog : DialogFragment() {
                     price = binding.tvMenuPrice.text.toString().replace(",", "").replace("원", "")
                         .toIntOrNull() ?: 0,
                     count = binding.tvMenuCount.text.toString().toInt(),
-                    temperature = coolhot,
-
                 )
 
             )
