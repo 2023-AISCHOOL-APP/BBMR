@@ -62,21 +62,15 @@ class LoadingSplashActivity : AppCompatActivity() {
         }
         cameraExecutor = Executors.newSingleThreadExecutor()
 
-<<<<<<< HEAD
 
-=======
-//
->>>>>>> 700c024f97b16d087edcac6479175aa2e1124a41
 //        val Handler = Handler(Looper.getMainLooper())
 //        Handler.postDelayed({
 //            val intent = Intent(this, Normal_IntroActivity::class.java)
 //            startActivity(intent)
 //            finish()
-<<<<<<< HEAD
+
 //        }, 10000)
-=======
-//        }, 70000)
->>>>>>> 700c024f97b16d087edcac6479175aa2e1124a41
+
     }
 
     private fun startCamera() {
@@ -112,10 +106,7 @@ class LoadingSplashActivity : AppCompatActivity() {
                 val faceResults = result?.getValue(faceDetector)
                 if (faceResults != null && faceResults.isNotEmpty()) {
                     imageCaptureAndSend(cameraController)
-<<<<<<< HEAD
-=======
-                    cameraController.unbind()
->>>>>>> 700c024f97b16d087edcac6479175aa2e1124a41
+
                 }
                 previewView.overlay.clear()
             }
@@ -176,11 +167,7 @@ class LoadingSplashActivity : AppCompatActivity() {
         }
     }
 
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 700c024f97b16d087edcac6479175aa2e1124a41
     private fun processServerResponse(result: String) {
         // 결과에 따라 다른 액션을 수행합니다.
         // 예를 들어, 결과에 따라 다른 Activity를 시작할 수 있습니다.

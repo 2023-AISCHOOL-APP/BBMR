@@ -35,7 +35,6 @@
             android:exported="false" /> <!-- 공용 액티비티 -->
         <activity
             android:name=".LoadingSplashActivity"
-<<<<<<< HEAD
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,19 +43,12 @@
             </intent-filter>
         </activity>
         <!-- 일반용 액티비티 -->
-=======
-            android:exported="true" /> <!-- 일반용 액티비티 -->
->>>>>>> 700c024f97b16d087edcac6479175aa2e1124a41
         <activity
             android:name=".Normal_StayActivity"
             android:exported="true" />
         <activity
             android:name=".Normal_TakeOutActivity"
             android:exported="true">
-<<<<<<< HEAD
-
-=======
->>>>>>> 700c024f97b16d087edcac6479175aa2e1124a41
 
         </activity>
         <activity
@@ -68,15 +60,7 @@
         <activity
             android:name=".Senior_TakeOutActivity"
             android:exported="true">
-<<<<<<< HEAD
 
-
-=======
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
->>>>>>> 700c024f97b16d087edcac6479175aa2e1124a41
         </activity>
         <activity
             android:name=".MainActivity"
