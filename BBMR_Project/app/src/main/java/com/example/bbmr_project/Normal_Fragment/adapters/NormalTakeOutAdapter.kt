@@ -43,7 +43,8 @@ class NormalTakeOutAdapter(
             .into(holder.img)
 
         holder.tvName.text = frag1List[position].name
-        holder.tvPrice.text = frag1List[position].price.toString()
+        val basicPrice = String.format("%,d 원", frag1List[position].price) // 1,000단위
+        holder.tvPrice.text = basicPrice
         holder.itemView.setOnClickListener {
             itemClickListener?.onItemClick(frag1List[position])
         }
