@@ -25,11 +25,15 @@ class Normal_Fragment_Tab1_Menu(val type: Int) : Fragment() {
 
     private fun createNormalTab1List(): List<NormalTakeOutVO> {
         val menuList: ArrayList<Product> = CartStorage.menuList
-        Log.d("카트스토리지", "${CartStorage.menuList}")
+
+
+        // 예제로 로그 출력
+        Log.d("DebugTag", "createNormalTab1List() called. Type: $type")
+
         return when (type) {
             0 -> {
                 // Coffee 카테고리에 해당하는 NormalTakeOutVO 리스트 생성
-                menuList.filter { product ->
+                val coffeeList = menuList.filter { product ->
                     product.cate == "coffee" && product.size == 1
                 }.map { product ->
                     NormalTakeOutVO(
@@ -38,10 +42,12 @@ class Normal_Fragment_Tab1_Menu(val type: Int) : Fragment() {
                         price = product.price
                     )
                 }
+                Log.d("DebugTag", "coffee List: $coffeeList")
+                return coffeeList
             }
             1 -> {
                 // Beverage 카테고리에 해당하는 NormalTakeOutVO 리스트 생성
-                menuList.filter { product ->
+                val beverageList = menuList.filter { product ->
                     product.cate == "beverage" && product.size == 1
                 }.map { product ->
                     NormalTakeOutVO(
@@ -50,11 +56,14 @@ class Normal_Fragment_Tab1_Menu(val type: Int) : Fragment() {
                         price = product.price
                     )
                 }
+
+                Log.d("DebugTag", "Beverage List: $beverageList")
+                return beverageList
             }
             2 -> {
                 // FlatChino 카테고리에 해당하는 NormalTakeOutVO 리스트 생성
                 menuList.filter { product ->
-                    product.cate == "flatchino" && product.size == 1
+                    product.cate == "flatccino" && product.size == 1
                 }.map { product ->
                     NormalTakeOutVO(
                         img = product.image,
@@ -83,6 +92,9 @@ class Normal_Fragment_Tab1_Menu(val type: Int) : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // 예제로 로그 출력
+        Log.d("DebugTag", "onCreateView() called.")
+
         val view = inflater.inflate(R.layout.frag_normal_tab1_menu, container, false)
         rvBeverage = view.findViewById(R.id.rvBeverage)
 

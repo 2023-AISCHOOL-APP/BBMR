@@ -7,6 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.bbmr_project.CartStorage.menuList
 import com.example.bbmr_project.R
 import com.example.bbmr_project.VO.NormalTakeOutVO
@@ -34,7 +36,12 @@ class NormalTakeOutAdapter(
         return NormalTakeOutAdapter.ViewHolder(view)
     }
     override fun onBindViewHolder(holder: NormalTakeOutAdapter.ViewHolder, position: Int) {
-//        holder.img.setImageResource(frag1List[position].img)
+        val item = frag1List[position]
+        Glide.with(context)
+            .load(item.img)
+            .apply(RequestOptions().placeholder(null)) // 로딩 중에 표시할 플레이스홀더 이미지
+            .into(holder.img)
+
         holder.tvName.text = frag1List[position].name
         holder.tvPrice.text = frag1List[position].price.toString()
         holder.itemView.setOnClickListener {
