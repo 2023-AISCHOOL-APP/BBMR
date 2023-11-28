@@ -20,7 +20,7 @@ class SeniorMenuDialog : DialogFragment() {
     private lateinit var binding: DialogSeniorMenuBinding
 
     companion object {
-        fun Senior_Menu(item: Senior_TakeOutVO): SeniorMenuDialog {
+        fun SeniorMenu(item: Senior_TakeOutVO): SeniorMenuDialog {
             val args = Bundle().apply {
                 putString("sname", item.sname)
                 putInt("sprice", item.sprice)
@@ -116,7 +116,6 @@ class SeniorMenuDialog : DialogFragment() {
                     count = binding.tvMenuCount.text.toString().toInt()
 
                 )
-
             )
 
 

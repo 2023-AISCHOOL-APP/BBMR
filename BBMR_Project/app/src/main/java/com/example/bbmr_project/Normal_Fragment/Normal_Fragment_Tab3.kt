@@ -8,18 +8,31 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bbmr_project.Dialog.Normal_MenuDessertDialogListener
-import com.example.bbmr_project.Dialog.Normal_MenuDialog
-import com.example.bbmr_project.Dialog.Normal_MenuDialogListener
+import com.example.bbmr_project.CartStorage
 import com.example.bbmr_project.Dialog.Normal_MenuMDDialog
 import com.example.bbmr_project.Dialog.Normal_MenuMDDialogListener
 import com.example.bbmr_project.Normal_Fragment.adapters.ItemClickListener
 import com.example.bbmr_project.R
 import com.example.bbmr_project.VO.NormalTakeOutVO
 import com.example.bbmr_project.Normal_Fragment.adapters.NormalTakeOutAdapter
+import com.example.bbmr_project.Product
 
 class Normal_Fragment_Tab3 : Fragment() {
     private lateinit var rvMD: RecyclerView
+
+    private fun createNormalTab3List(): List<NormalTakeOutVO> {
+        val menuList: ArrayList<Product> = CartStorage.menuList
+        val MDList: List<NormalTakeOutVO> = menuList.filter { product ->
+            product.cate == "md" && product.size == 0
+        }.map { product ->
+            NormalTakeOutVO(
+                img = product.image,
+                name = product.name,
+                price = product.price
+            )
+        }
+        return MDList
+    }
 
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
@@ -32,9 +45,7 @@ class Normal_Fragment_Tab3 : Fragment() {
         val layoutManager = GridLayoutManager(requireContext(), 4)
         rvMD.layoutManager = layoutManager
 
-        val frag1List: ArrayList<NormalTakeOutVO> = ArrayList()
-        frag1List.add(NormalTakeOutVO(R.drawable.giftcard, "MD 원두", "10,000원"))
-        frag1List.add(NormalTakeOutVO(R.drawable.giftcard, "MD 비니스트", "15,000원"))
+        val frag1List: List<NormalTakeOutVO> = createNormalTab3List()
 
         val adapter =
             NormalTakeOutAdapter(

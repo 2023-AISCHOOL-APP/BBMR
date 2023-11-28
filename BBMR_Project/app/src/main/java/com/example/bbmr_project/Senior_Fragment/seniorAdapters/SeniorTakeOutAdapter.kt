@@ -1,6 +1,7 @@
 package com.example.bbmr_project.Senior_Fragment.seniorAdapters
 
 import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -78,8 +79,12 @@ class SeniorTakeOutAdapter(
 
     private fun showMenuDialog(position: Int){
         // MenuDialog에 값을 보내주는 코드
-        val seniorDialog = SeniorMenuDialog.Senior_Menu(menuList[position])
-        seniorDialog.show(fragmentManager, "seniorDialog")
+        val seniorMenuDialog = SeniorMenuDialog()
+        val bundle = Bundle().apply{
+            putParcelable("seniorTakeOutVO", menuList[position])
+        }
+        seniorMenuDialog.arguments = bundle
+        seniorMenuDialog.show(fragmentManager, "seniorDialog")
     }
 
     private fun showDessertDialaog(position: Int){

@@ -88,7 +88,6 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
 
         // ------ 이전, 선택 완료 코드 시작 ------
         binding.btnCnclAddiOpDSAO.setOnClickListener {
-
                     val bundle = arguments
                     if (bundle != null) {
                         val customOption = bundle.getSerializable("product_option") as Product

@@ -77,7 +77,7 @@ dependencies {
 
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
-
+    implementation("com.squareup.okhttp3:okhttp:4.9.3")
     // 231121 --- 코드 추가(google, okhttp3)
     implementation ("com.google.code.gson:gson:2.8.9")
     implementation ("com.squareup.okhttp3:logging-interceptor:4.2.1")
