@@ -19,6 +19,19 @@ class Senior_MenuDialog : DialogFragment() {
     var buttonDoubleDefend = false
     private lateinit var binding: DialogSeniorMenuBinding
 
+    companion object {
+        fun Senior_Menu(item: Senior_TakeOutVO): Senior_MenuDialog {
+            val args = Bundle().apply {
+                putString("sname", item.sname)
+                putInt("sprice", item.sprice)
+//                putInt("simg", item.simg)
+            }
+            val fragment = Senior_MenuDialog()
+            fragment.arguments = args
+            return fragment
+        }
+    }
+
     override fun onStart() {
         super.onStart()
         val darkTransparentBlack = Color.argb((255 * 0.6).toInt(), 0, 0, 0)
