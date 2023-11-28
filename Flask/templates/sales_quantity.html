@@ -9,31 +9,24 @@
   <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>
-      
-      메뉴
+      메뉴별 판매량
     </title>
   </head>
   <body>
-    <h3> 메뉴 </h3>
+    <h3> 메뉴별 판매량 {{date1}} ~ {{date2}} </h3>
     <table>
       <tr>
             <th>메뉴ID</th>
             <th>메뉴</th>
-            <th>카테고리</th>
-            <th>가격</th>
-            <th>온도</th>
-            <th>사이즈</th>
+            <th>판매량</th>
             <th>이미지</th>
         </tr>
-        {% for item in menu %}
+        {% for item in sales_quantity %}
             <tr>
                 <td>{{ item[0] }}</td>
                 <td>{{ item[1] }}</td>
                 <td>{{ item[2] }}</td>
-                <td>{{ item[3] }}</td>
-                <td>{{ item[4] }}</td>
-                <td>{{ item[5] }}</td>
-                <td><img src ="{{ item[6] }}" alt="이미지" style="max-width: 70px;"></td>
+                <td><img src ="{{ item[3] }}" alt="이미지" style="max-width: 70px;"></td>
             </tr>
         {% endfor %}            
     </table>

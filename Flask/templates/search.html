@@ -64,7 +64,16 @@
         <button type="submit" class="btn">매출 조회</button>
       </div>
     </form>
-
+    <h3> 메뉴별 판매량(기간 미입력시 전체 조회) </h3>
+    <form method="POST" action='/sales_quantity'>
+        <div class="form-group"> 
+          <label for="name">시작일</label>
+            <input type="date" class="form-control" id="date1" name="date1" style="margin-right: 10px;"> 
+            <label for="name">종료일</label>
+            <input type="date" class="form-control" id="date2" name="date2"> 
+        <button type="submit" class="btn">메뉴별 판매량 조회</button>
+      </div>
+    </form>
   </body>
 </html>
 

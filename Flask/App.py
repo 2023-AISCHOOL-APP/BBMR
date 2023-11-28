@@ -215,6 +215,23 @@ def sales():
     conn.close()
     return render_template('sales.html', day_sales=day_sales ,month_sales=month_sales) 
 
+# 메뉴별 판매량
+@app.route('/sales_quantity', methods=['GET','POST'])
+def sales_quantity():
+    date1 = request.form.get('date1')
+    date2 = request.form.get('date2')
+    conn = get_connection()
+    cursor = conn.cursor()
+    if date1 and date2:
+        query = "SELECT B.menu_id, B.name, SUM(A.quantity) AS total_quantity, B.imageUrl FROM order_detail A LEFT JOIN menu B ON A.menu_id = B.menu_id LEFT JOIN orders C ON A.order_id = C.order_id WHERE C.Date >= %s and C.Date <= %s GROUP BY B.menu_id ORDER BY total_quantity DESC"
+        cursor.execute(query,(date1,date2))    
+    else:
+        query = "SELECT B.menu_id, B.name, SUM(A.quantity) AS total_quantity, B.imageUrl FROM order_detail A left join menu B ON A.menu_id=B.menu_id GROUP BY menu_id ORDER BY total_quantity DESC"
+        cursor.execute(query)
+    sales_quantity = cursor.fetchall()
+    conn.close()
+    return render_template('sales_quantity.html', sales_quantity=sales_quantity, date1=date1,date2=date2)
+
 
 
 
