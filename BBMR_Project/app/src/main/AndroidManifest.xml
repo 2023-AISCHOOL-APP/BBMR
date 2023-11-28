@@ -49,6 +49,7 @@
         <activity
             android:name=".Normal_TakeOutActivity"
             android:exported="true">
+
         </activity>
         <activity
             android:name=".Normal_IntroActivity"
@@ -80,6 +81,7 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
     </application>
 
