@@ -15,18 +15,18 @@ import com.example.bbmr_project.Product
 import com.example.bbmr_project.VO.Senior_TakeOutVO
 import com.example.bbmr_project.databinding.DialogSeniorMenuBinding
 
-class Senior_MenuDialog : DialogFragment() {
+class SeniorMenuDialog : DialogFragment() {
     var buttonDoubleDefend = false
     private lateinit var binding: DialogSeniorMenuBinding
 
     companion object {
-        fun Senior_Menu(item: Senior_TakeOutVO): Senior_MenuDialog {
+        fun Senior_Menu(item: Senior_TakeOutVO): SeniorMenuDialog {
             val args = Bundle().apply {
                 putString("sname", item.sname)
                 putInt("sprice", item.sprice)
 //                putInt("simg", item.simg)
             }
-            val fragment = Senior_MenuDialog()
+            val fragment = SeniorMenuDialog()
             fragment.arguments = args
             return fragment
         }

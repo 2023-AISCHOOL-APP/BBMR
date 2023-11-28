@@ -13,10 +13,7 @@ import androidx.fragment.app.DialogFragment
 import com.example.bbmr_project.CartStorage
 import com.example.bbmr_project.Product
 import com.example.bbmr_project.R
-import com.example.bbmr_project.Senior_Fragment.seniorAdapters.SeniorSelectBasketAdapter
-import com.example.bbmr_project.Senior_Fragment.seniorAdapters.SeniorTakeOutAdapter
 import com.example.bbmr_project.databinding.DialogSeniorAdditionalOptionBinding
-import okhttp3.internal.notifyAll
 
 class Senior_AdditionalOptionDialog : DialogFragment() {
     private lateinit var binding : DialogSeniorAdditionalOptionBinding
@@ -97,7 +94,7 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
                         val customOption = bundle.getSerializable("product_option") as Product
                         Log.d("Product라는 data List", "${customOption}")
                         val bundle2 = Bundle()
-                        val dialogFragment = Senior_MenuDialog()
+                        val dialogFragment = SeniorMenuDialog()
                         bundle2.putSerializable("final_product", customOption)
                         dialogFragment.arguments = bundle2
                         dialogFragment.show(childFragmentManager, "Senior_MenuDialog")
@@ -133,7 +130,7 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
                         cream = cream
                     )
                     Log.d("Product라는 data List", "${finalproduct}")
-                    val DialogFragment = Senior_MenuDialog()
+                    val DialogFragment = SeniorMenuDialog()
                     val bundle = Bundle()
                     bundle.putSerializable("커스텀_옵션_완료", finalproduct)
 

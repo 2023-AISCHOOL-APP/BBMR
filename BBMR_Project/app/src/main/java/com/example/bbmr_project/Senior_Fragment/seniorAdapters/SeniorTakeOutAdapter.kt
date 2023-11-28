@@ -1,8 +1,6 @@
 package com.example.bbmr_project.Senior_Fragment.seniorAdapters
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +10,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.bbmr_project.Dialog.SeniorDessertDialog
-import com.example.bbmr_project.Dialog.Senior_MenuDialog
+import com.example.bbmr_project.Dialog.SeniorMenuDialog
 import com.example.bbmr_project.R
 import com.example.bbmr_project.Senior_Fragment.Category
 import com.example.bbmr_project.VO.Senior_TakeOutVO
@@ -80,7 +78,7 @@ class SeniorTakeOutAdapter(
 
     private fun showMenuDialog(position: Int){
         // MenuDialog에 값을 보내주는 코드
-        val seniorDialog = Senior_MenuDialog.Senior_Menu(menuList[position])
+        val seniorDialog = SeniorMenuDialog.Senior_Menu(menuList[position])
         seniorDialog.show(fragmentManager, "seniorDialog")
     }
 

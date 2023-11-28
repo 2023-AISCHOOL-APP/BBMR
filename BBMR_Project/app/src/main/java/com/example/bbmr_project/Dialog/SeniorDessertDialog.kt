@@ -14,15 +14,9 @@ import com.example.bbmr_project.VO.Senior_TakeOutVO
 import com.example.bbmr_project.base.BaseDialogFragment
 import com.example.bbmr_project.databinding.DialogSeniorDessertBinding
 
-
-interface ItemClickListnenr{
-    fun onItemClick(item: Senior_TakeOutVO)
-}
 class SeniorDessertDialog : BaseDialogFragment() {
 
     private lateinit var binding: DialogSeniorDessertBinding
-//    private var dessertDialogListnenr : ItemClickListnenr ?= null
-
 
     // Adapter에서 값을 받아오는 코드
     companion object {
