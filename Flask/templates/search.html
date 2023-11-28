@@ -17,12 +17,14 @@
     <h3> 메뉴 조회 </h3>
     <form method="POST" action='/menuSearch'>
       <div class="form-group">
+          <label for="name">메뉴명 조회</label>
           <input type="text" class="form-control" id="menu_name" placeholder="메뉴명" name="menu_name"/>
           <button type="submit" class="btn" name="menu_search" value="name" >메뉴 조회</button>
       </div>
     </form>
     <form method="POST" action='/menuSearch'>
       <div class="form-group">
+        <label for="name">카테고리별 조회</label>
         <select name = "cate_search" id = "cate_search">
           <option value="coffee">coffee</option>
           <option value="tea">tea</option>
