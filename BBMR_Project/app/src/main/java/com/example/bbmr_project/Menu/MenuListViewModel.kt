@@ -64,8 +64,8 @@ class MenuListViewModel(
     // 두 번째 메뉴 리스트 생성 메서드
     private fun createMenuList2(): List<Senior_TakeOutVO> {
         val menuList: ArrayList<Product> = CartStorage.menuList
-        val coffeeList: List<Senior_TakeOutVO> = menuList.filter { product ->
-            product.cate == "coffee" && product.size == 1
+        val coffeeList : List<Senior_TakeOutVO> = menuList.filter { product ->
+            product.cate == "coffee" && product.size == 1 && product.temperature == "ICED"
         }.map { product ->
             Senior_TakeOutVO(
                 sname = product.name,
@@ -77,8 +77,8 @@ class MenuListViewModel(
     }
     private fun createMenuList3(): List<Senior_TakeOutVO> {
         val menuList: ArrayList<Product> = CartStorage.menuList
-        val teaList: List<Senior_TakeOutVO> = menuList.filter { product ->
-            product.cate == "tea" && product.size == 1
+        val teaList : List<Senior_TakeOutVO> = menuList.filter { product ->
+            product.cate == "tea" && product.size == 1 && product.temperature == "HOT"
         }.map { product ->
             Senior_TakeOutVO(
                 sname = product.name,
@@ -86,8 +86,8 @@ class MenuListViewModel(
                 simg = product.image
             )
         }
-        val beverageList: List<Senior_TakeOutVO> = menuList.filter { product ->
-            product.cate == "beverage" && product.size == 1
+        val beverageList : List<Senior_TakeOutVO> = menuList.filter { product ->
+            product.cate == "beverage" && product.size == 1 && product.temperature == "ICED"
         }.map { product ->
             Senior_TakeOutVO(
                 sname = product.name,
@@ -102,8 +102,8 @@ class MenuListViewModel(
     }
     private fun createMenuList4(): List<Senior_TakeOutVO> {
         val menuList: ArrayList<Product> = CartStorage.menuList
-        val mdList: List<Senior_TakeOutVO> = menuList.filter { product ->
-            product.cate == "md" && product.size == 0
+        val mdList : List<Senior_TakeOutVO> = menuList.filter { product ->
+            product.cate == "md"
         }.map { product ->
             Senior_TakeOutVO(
                 sname = product.name,
@@ -111,8 +111,8 @@ class MenuListViewModel(
                 simg = product.image
             )
         }
-        val dessertList: List<Senior_TakeOutVO> = menuList.filter { product ->
-            product.cate == "dessert" && product.size == 0
+        val dessertList : List<Senior_TakeOutVO> = menuList.filter { product ->
+            product.cate == "dessert"
         }.map { product ->
             Senior_TakeOutVO(
                 sname = product.name,
