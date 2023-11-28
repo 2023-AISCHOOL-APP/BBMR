@@ -25,7 +25,7 @@ class Normal_Fragment_Tab1_Menu(val type: Int) : Fragment() {
 
     private fun createCoffeeList(): List<NormalTakeOutVO> {
         return CartStorage.menuList.filter { product ->
-            product.cate == "coffee" && product.size == 1
+            product.cate == "coffee" && product.size == 1 && product.temperature == "ICED"
         }.map { product ->
             NormalTakeOutVO(
                 img = product.image,
@@ -37,7 +37,7 @@ class Normal_Fragment_Tab1_Menu(val type: Int) : Fragment() {
 
     private fun createBeverageList(): List<NormalTakeOutVO> {
         return CartStorage.menuList.filter { product ->
-            product.cate == "beverage" && product.size == 1
+            product.cate == "beverage" && product.size == 1 && product.temperature == "ICED"
         }.map { product ->
             NormalTakeOutVO(
                 img = product.image,
@@ -61,7 +61,7 @@ class Normal_Fragment_Tab1_Menu(val type: Int) : Fragment() {
 
     private fun createTeaList(): List<NormalTakeOutVO> {
         return CartStorage.menuList.filter { product ->
-            product.cate == "tea"
+            product.cate == "tea" && product.size == 1 && product.temperature == "ICED"
         }.map { product ->
             NormalTakeOutVO(
                 img = product.image,

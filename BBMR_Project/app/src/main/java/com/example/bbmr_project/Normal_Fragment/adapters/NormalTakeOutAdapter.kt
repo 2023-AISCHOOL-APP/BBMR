@@ -51,6 +51,6 @@ class NormalTakeOutAdapter(
 
     }
     override fun getItemCount(): Int {
-        return menuList.size
+        return frag1List.size
     }
 }
