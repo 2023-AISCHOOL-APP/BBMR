@@ -27,9 +27,9 @@ class Normal_MenuDessertDialog : DialogFragment() {
     companion object {
         fun newInstance(item: NormalTakeOutVO): Normal_MenuDessertDialog {
             val args = Bundle().apply {
-                putInt("normal_img", item.img)
+                putString("normal_img", item.img)
                 putString("normal_name", item.name)
-                putString("normal_price", item.price)
+                putInt("normal_price", item.price)
             }
             val fragment = Normal_MenuDessertDialog()
             fragment.arguments = args

@@ -4,37 +4,34 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
+import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import androidx.fragment.app.DialogFragment
+import com.bumptech.glide.Glide
 import com.example.bbmr_project.CartStorage
 import com.example.bbmr_project.Product
 import com.example.bbmr_project.VO.Senior_TakeOutVO
 import com.example.bbmr_project.databinding.DialogSeniorMenuBinding
 
-class Senior_MenuDialog : DialogFragment() {
-
+class SeniorMenuDialog : DialogFragment() {
     var buttonDoubleDefend = false
+    private lateinit var binding: DialogSeniorMenuBinding
 
-    // Adapter에서 값을 받아오는 코드
     companion object {
-        fun Senior_Menu(item: Senior_TakeOutVO): Senior_MenuDialog {
+        fun SeniorMenu(item: Senior_TakeOutVO): SeniorMenuDialog {
             val args = Bundle().apply {
                 putString("sname", item.sname)
                 putInt("sprice", item.sprice)
 //                putInt("simg", item.simg)
             }
-            val fragment = Senior_MenuDialog()
+            val fragment = SeniorMenuDialog()
             fragment.arguments = args
             return fragment
         }
     }
-
-
-    private lateinit var binding: DialogSeniorMenuBinding
-
 
     override fun onStart() {
         super.onStart()
@@ -59,22 +56,30 @@ class Senior_MenuDialog : DialogFragment() {
     }
 
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val seniorTakeoutVO = arguments?.getParcelable<Senior_TakeOutVO>("seniorTakeOutVO")
         // 메뉴 선택시 Dialog에 메뉴의 기본정보 제공하는 코드 (Adapter에서 받아온 값을 화면에 보여주기 위한 코드)
-        val sname = arguments?.getString("sname")
-        val sprice = arguments?.getInt("sprice")
-        val simg = arguments?.getInt("simg")
+        seniorTakeoutVO?.let {item ->
+            var text = item.sname
+            // ------ 각 메뉴의 이름들의 길이에 조건을 걸어 줄 바꿈 해주기 ------
+            val spannableStringBuilder = SpannableStringBuilder(text)
+            if (text.length >= 6) {
+                val indexLine = text.indexOf(' ')
+                if (indexLine != -1) {
+                    val modiText = StringBuilder(text)
+                        .replace(indexLine, indexLine+1, "\n")
+                        .toString()
+                    spannableStringBuilder.replace(0, text.length, modiText)
+                    binding.tvMenuName.text = spannableStringBuilder
+                }
+            } else if (text.length < 6 && !text.contains(' ')) {
+                binding.tvMenuName.text = item.sname
+            }
 
-//        val seniorgetprice = String.format("%,d", sprice)
-
-        binding.tvMenuName.text = sname
-        binding.tvMenuPrice.text =
-            String.format("%,d원", sprice) // String.format("%,d", 값) -> 1000 단위마다 , 표시
-        if (simg != null) {
-            binding.imgMenu.setImageResource(simg)
+            binding.tvMenuPrice.text =
+                String.format("%,d원", item.sprice) // String.format("%,d", 값) -> 1000 단위마다 , 표시
+            Glide.with(requireContext()).load(item.simg).into(binding.imgMenu)
         }
 
         // ------ 추가 옵션 이동 코드 시작 ------
@@ -84,11 +89,11 @@ class Senior_MenuDialog : DialogFragment() {
                 buttonDoubleDefend = true
 
                 val product = Product(
-                binding.tvMenuName.text.toString(),
-                price = binding.tvMenuPrice.text.toString().replace(",", "").replace(" 원", "")
-                    .toIntOrNull() ?: 0,
-                binding.tvMenuCount.text.toString().toInt()
-            )
+                    binding.tvMenuName.text.toString(),
+                    price = binding.tvMenuPrice.text.toString().replace(",", "").replace(" 원", "")
+                        .toIntOrNull() ?: 0,
+                    binding.tvMenuCount.text.toString().toInt()
+                )
                 val dialogFragment = Senior_AdditionalOptionDialog()
                 val bundle = Bundle()
                 bundle.putSerializable("product_option", product)
@@ -97,7 +102,7 @@ class Senior_MenuDialog : DialogFragment() {
                 Handler().postDelayed({
                     buttonDoubleDefend = false
                 }, 1000)
-        }
+            }
 
         }
         // ------ 추가 옵션으로 이동 코드 끝 ------
@@ -118,16 +123,15 @@ class Senior_MenuDialog : DialogFragment() {
             val coolhot: Boolean = radioButton.isChecked
 
 
-
             // CartStorage.productList에 값을 추가
             CartStorage.addProduct(
                 Product(
                     name = binding.tvMenuName.text.toString(),
                     price = binding.tvMenuPrice.text.toString().replace(",", "").replace("원", "")
                         .toIntOrNull() ?: 0,
-                    count = binding.tvMenuCount.text.toString().toInt(),
-                )
+                    count = binding.tvMenuCount.text.toString().toInt()
 
+                )
             )
 
 

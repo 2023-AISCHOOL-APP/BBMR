@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.example.bbmr_project.CartStorage.menuList
 import com.example.bbmr_project.CartStorage.productList
 import com.example.bbmr_project.RetrofitAPI.RetrofitAPI
 import com.example.bbmr_project.databinding.ActivityStartBinding
@@ -23,7 +24,7 @@ class StartActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start)
-
+        // 앱 최초 실행 때만 코드가 실행되고 activity변경에는 안되는
         setRetrofit()   // 설정 초기화
         callTodoList()
 
@@ -68,9 +69,8 @@ class StartActivity : AppCompatActivity() {
                     val size = data.asJsonObject["size"].asInt
                     val image = data.asJsonObject["imageUrl"].asString
                     val cate = data.asJsonObject["category"].asString
-                    productList.add(Product(name=name, price=price,  temperature = temperature, size = size ,id= id, image = image,cate=cate))
+                    menuList.add(Product(name=name, price=price,  temperature = temperature, size = size ,id= id, image = image,cate=cate))
                 }
-                Log.d("메뉴리스트","$productList")
                 // adapter 초기화 해줘야 함
                 // adapter.notifyDataSetChanged()
             }

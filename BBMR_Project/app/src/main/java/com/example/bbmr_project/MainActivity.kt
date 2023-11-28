@@ -14,9 +14,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
-    lateinit var mRetrofit : Retrofit
+    lateinit var mRetrofit: Retrofit
     lateinit var mRetrofitAPI: RetrofitAPI
-    lateinit var mCallTodoList : retrofit2.Call<JsonObject>
+    lateinit var mCallTodoList: retrofit2.Call<JsonObject>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,13 +46,14 @@ class MainActivity : AppCompatActivity() {
 ////        btnOrder.setOnClickListener{
 ////            // SendOrderTask 인스턴스 생성
 ////            val sendOrderTask = FlaskSendRes(this, getString(R.string.baseUrl))
-////
+////            // ------ 결제 완료 후 영수증 여부 Dialog 출력하면서 하단 코드들과
+////            //
 ////            // 주문 정보 전송 (예시)
 ////            val menu_ids = listOf(MenuData(121, 2), MenuData(162, 1))
-////            val total_amount = 18000
-////            val coupon = "qwerasdfzxcv"
-////            val discount = 2500
-////            sendOrderTask.sendOrder(menu_ids, total_amount, coupon, discount)
+////            val total_amount = 18000 // 쿠폰 값 제외 하고 값
+////            val coupon = "qwerasdfzxcv" // 쿠폰번호
+////            val discount = 2500 // 쿠폰했을 때 값
+////            sendOrderTask.sendOrder(menu_ids, total_amount, coupon, discount) // sendOrderTak
 ////        }
 //
 //

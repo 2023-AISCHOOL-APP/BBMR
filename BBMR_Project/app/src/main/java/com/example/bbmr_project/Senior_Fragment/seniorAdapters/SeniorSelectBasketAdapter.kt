@@ -96,6 +96,7 @@ class SeniorSelectBasketAdapter(
             CartStorage.removeProduct(removedItem)
             onChanged.invoke(productList)
             notifyDataSetChanged()
+
         }
     }
 
