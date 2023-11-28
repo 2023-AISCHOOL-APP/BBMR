@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:columnCount="3"
     android:rowCount="2"
-    tools:context=".Senior_Fragment.Senior_Fragment_Tab_Recommend">
+    tools:context=".Senior_Fragment.SeniorTabFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvRecommend"

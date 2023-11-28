@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="20dp"
     tools:context=".Dialog.Normal_MenuDessertDialog"
     tools:ignore="MissingDefaultResource">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="50dp"
+        android:layout_margin="20dp"
         android:background="@drawable/normal_dialog_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -96,27 +97,40 @@
             android:id="@+id/btnCancel"
             android:layout_width="390dp"
             android:layout_height="280dp"
+            android:layout_marginBottom="16dp"
             android:backgroundTint="@color/mainColor"
+            android:padding="32dp"
             android:text="선택취소"
             android:textColor="#FFFFFF"
             android:textSize="80dp"
             android:textStyle="bold"
             app:cornerRadius="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline29"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/btnSelect"
             android:layout_width="390dp"
             android:layout_height="280dp"
+            android:layout_marginBottom="16dp"
             android:backgroundTint="@color/mainColor"
+            android:padding="32dp"
             android:text="선택완료"
             android:textColor="#FFFFFF"
             android:textSize="80dp"
             android:textStyle="bold"
             app:cornerRadius="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline29" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline29"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
