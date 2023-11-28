@@ -131,8 +131,8 @@ class MenuListViewModel() : ViewModel() {
             )
         }
         val mdDessertList = mutableListOf<Senior_TakeOutVO>()
-        mdDessertList.addAll(mdList)
         mdDessertList.addAll(dessertList)
+        mdDessertList.addAll(mdList)
         return mdDessertList
     }
 }

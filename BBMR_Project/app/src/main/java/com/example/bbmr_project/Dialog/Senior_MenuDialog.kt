@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
+import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,7 +48,22 @@ class Senior_MenuDialog : DialogFragment() {
         val seniorTakeoutVO = arguments?.getParcelable<Senior_TakeOutVO>("seniorTakeOutVO")
         // 메뉴 선택시 Dialog에 메뉴의 기본정보 제공하는 코드 (Adapter에서 받아온 값을 화면에 보여주기 위한 코드)
         seniorTakeoutVO?.let {item ->
-            binding.tvMenuName.text = item.sname
+            // ------ 각 메뉴의 이름들의 길이에 조건을 걸어 줄 바꿈 해주기 ------
+
+            val spannableStringBuilder = SpannableStringBuilder(item.sname)
+            if (item.sname.length >= 6) {
+                val indexLine = item.sname.indexOf(' ')
+                if (indexLine != -1) {
+                    val modiText = StringBuilder(item.sname)
+                        .replace(indexLine, indexLine+1, "\n")
+                        .toString()
+                    spannableStringBuilder.replace(0, item.sname.length, modiText)
+                    binding.tvMenuName.text = spannableStringBuilder
+                }
+            } else {
+                binding.tvMenuName.text = item.sname
+            }
+
             binding.tvMenuPrice.text =
                 String.format("%,d원", item.sprice) // String.format("%,d", 값) -> 1000 단위마다 , 표시
             Glide.with(requireContext()).load(item.simg).into(binding.imgMenu)
