@@ -3,31 +3,32 @@ package com.example.bbmr_project.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.bbmr_project.VO.Senior_TakeOutVO
+import com.example.bbmr_project.base.BaseDialogFragment
 import com.example.bbmr_project.databinding.DialogSeniorDessertBinding
 
 
 interface ItemClickListnenr{
     fun onItemClick(item: Senior_TakeOutVO)
 }
-class SeniorDessertDialog : DialogFragment() {
+class SeniorDessertDialog : BaseDialogFragment() {
 
     private lateinit var binding: DialogSeniorDessertBinding
 //    private var dessertDialogListnenr : ItemClickListnenr ?= null
 
 
-
     // Adapter에서 값을 받아오는 코드
     companion object {
-        fun seniorDessert(item: Senior_TakeOutVO): SeniorDessertDialog {
+        fun setArgument(item: Senior_TakeOutVO): SeniorDessertDialog {
             val args = Bundle().apply {
                 putString("sname", item.sname)
                 putInt("sprice", item.sprice)
-//                putInt("simg", "item.simg")
+                putString("simg", item.simg)
             }
             val fragment = SeniorDessertDialog()
             fragment.arguments = args
@@ -66,12 +67,14 @@ class SeniorDessertDialog : DialogFragment() {
         val sprice = arguments?.getInt("sprice")
         val simg = arguments?.getInt("simg")
 
+        Log.d("SeniorDessertDialog", "$sname, $sprice, $simg")
+
 //        val seniorgetprice = String.format("%,d", sprice)
         binding.tvSeniorDessertName.text = sname
         binding.tvSeniorDessertPrice.text =
             String.format("%,d원", sprice) // String.format("%,d", 값) -> 1000 단위마다 , 표시
         if (simg != null) {
-            binding.imgSeniorDessert.setImageResource(simg)
+//            binding.imgSeniorDessert.setImageResource(simg)
         }
 
 

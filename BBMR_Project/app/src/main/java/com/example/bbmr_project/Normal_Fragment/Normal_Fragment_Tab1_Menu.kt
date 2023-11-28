@@ -23,67 +23,60 @@ class Normal_Fragment_Tab1_Menu(val type: Int) : Fragment() {
     private lateinit var adapter: NormalTakeOutAdapter
 
 
+    private fun createCoffeeList(): List<NormalTakeOutVO> {
+        return CartStorage.menuList.filter { product ->
+            product.cate == "coffee" && product.size == 1
+        }.map { product ->
+            NormalTakeOutVO(
+                img = product.image,
+                name = product.name,
+                price = product.price
+            )
+        }
+    }
+
+    private fun createBeverageList(): List<NormalTakeOutVO> {
+        return CartStorage.menuList.filter { product ->
+            product.cate == "beverage" && product.size == 1
+        }.map { product ->
+            NormalTakeOutVO(
+                img = product.image,
+                name = product.name,
+                price = product.price
+            )
+        }
+    }
+
+    private fun createFlatccinoList(): List<NormalTakeOutVO> {
+        return CartStorage.menuList.filter { product ->
+            product.cate == "flatccino" && product.size == 1
+        }.map { product ->
+            NormalTakeOutVO(
+                img = product.image,
+                name = product.name,
+                price = product.price
+            )
+        }
+    }
+
+    private fun createTeaList(): List<NormalTakeOutVO> {
+        return CartStorage.menuList.filter { product ->
+            product.cate == "tea"
+        }.map { product ->
+            NormalTakeOutVO(
+                img = product.image,
+                name = product.name,
+                price = product.price
+            )
+        }
+    }
+
     private fun createNormalTab1List(): List<NormalTakeOutVO> {
-        val menuList: ArrayList<Product> = CartStorage.menuList
-
-
-        // 예제로 로그 출력
-        Log.d("DebugTag", "createNormalTab1List() called. Type: $type")
-
         return when (type) {
-            0 -> {
-                // Coffee 카테고리에 해당하는 NormalTakeOutVO 리스트 생성
-                val coffeeList = menuList.filter { product ->
-                    product.cate == "coffee" && product.size == 1
-                }.map { product ->
-                    NormalTakeOutVO(
-                        img = product.image,
-                        name = product.name,
-                        price = product.price
-                    )
-                }
-                Log.d("DebugTag", "coffee List: $coffeeList")
-                return coffeeList
-            }
-            1 -> {
-                // Beverage 카테고리에 해당하는 NormalTakeOutVO 리스트 생성
-                val beverageList = menuList.filter { product ->
-                    product.cate == "beverage" && product.size == 1
-                }.map { product ->
-                    NormalTakeOutVO(
-                        img = product.image,
-                        name = product.name,
-                        price = product.price
-                    )
-                }
-
-                Log.d("DebugTag", "Beverage List: $beverageList")
-                return beverageList
-            }
-            2 -> {
-                // FlatChino 카테고리에 해당하는 NormalTakeOutVO 리스트 생성
-                menuList.filter { product ->
-                    product.cate == "flatccino" && product.size == 1
-                }.map { product ->
-                    NormalTakeOutVO(
-                        img = product.image,
-                        name = product.name,
-                        price = product.price
-                    )
-                }
-            }
-            else -> {
-                // ShakeAndAde 카테고리에 해당하는 NormalTakeOutVO 리스트 생성
-                menuList.filter { product ->
-                    product.cate == "tea" && product.size == 1
-                }.map { product ->
-                    NormalTakeOutVO(
-                        img = product.image,
-                        name = product.name,
-                        price = product.price
-                    )
-                }
-            }
+            0 -> createCoffeeList()
+            1 -> createBeverageList()
+            2 -> createFlatccinoList()
+            else -> createTeaList()
         }
     }
 
