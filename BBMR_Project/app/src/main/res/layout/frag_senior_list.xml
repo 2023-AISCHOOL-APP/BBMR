@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:gravity="center"
-            android:text="아 메리카노 아\n아"
+            android:text="아 메리카노\n아"
             android:textColor="#000000"
             android:textSize="50sp"
             android:textStyle="bold"
