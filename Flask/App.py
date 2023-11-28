@@ -2,11 +2,12 @@ import datetime
 from datetime import datetime
 from io import BytesIO
 import io
+import secrets
 # from tkinter import Image
 from PIL import Image # 2번 Image 모듈이 tkinter 패키지에 포함되어 3번으로 수정
 from connection import get_connection
 from mysql.connector import Error
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, redirect, render_template, request, jsonify, send_file, session, url_for
 from flask_restful import Resource, Api, reqparse, abort
 from tensorflow import keras
 from keras import models, layers
@@ -21,6 +22,203 @@ import os # 231116 추가 - 이미지를 PIL Image로 변환
 
 app = Flask(__name__)
 api = Api(app)
+# 시크릿 키
+app.secret_key = secrets.token_hex(16)
+
+
+
+
+# 메뉴, 쿠폰 입력, 매출 확인버튼 페이지
+@app.route('/', methods=['GET','POST'])
+def home():
+    return render_template('home.html')
+    
+# 관리자 로그인(임시로 id는 admin, password는 1234로 설정 해둠)
+@app.route('/login', methods=['GET','POST'])
+def login():
+    id = request.form.get('name')
+    password = request.form.get('password')
+    print(id, password)
+    if id == 'admin' and password == '1234':  
+        session['logged_in'] = True
+        return render_template('select.html')
+    else:
+        message = "ID 또는 Password를 잘못 입력하셨습니다."
+        return render_template('home.html',message=message)
+    
+# 로그아웃
+@app.route('/logout')
+def logout():
+    # 세션 제거
+    session.pop('logged_in', None)
+    return redirect(url_for('home'))
+
+# 선택창(추가 or 조회)
+@app.route('/select')
+def select():
+    # 세션을 확인하여 로그인 여부를 확인
+    if 'logged_in' in session:
+        return render_template('select.html')
+    else:
+        # 로그인되지 않은 사용자는 홈페이지로 리다이렉트
+        return redirect(url_for('home'))
+    
+# 메뉴, 쿠폰 추가페이지
+@app.route('/create')
+def create():
+    if 'logged_in' in session:
+        return render_template('create.html')
+    else:
+        return redirect(url_for('home'))
+
+# 메뉴, 쿠폰, 매출 조회페이지
+@app.route('/search')
+def search():
+    if 'logged_in' in session:
+        return render_template('search.html')
+    else:
+        return redirect(url_for('home'))
+
+# 메뉴 조회 
+@app.route('/menuSearch',  methods=['GET', 'POST'])
+def menuSearch():
+    if 'logged_in' in session:
+        menu_search = request.form.get('menu_search')
+        conn = get_connection()
+        cursor = conn.cursor()        
+        if menu_search == 'name':
+            menu_name = request.form.get('menu_name')
+            query = f"select * from menu where name = '{menu_name}'"
+        elif menu_search == 'cate':
+            cate = request.form.get('cate_search')
+            query = f"select * from menu where category = '{cate}'"
+        elif menu_search == 'all':
+            query = "select * from menu"
+        cursor.execute(query)
+        menu = cursor.fetchall()
+        return render_template('menuSearch.html',menu=menu)
+    else:
+        return redirect(url_for('home'))
+
+
+# 쿠폰조회
+@app.route('/couponSearch', methods=['GET', 'POST'])
+def couponSearch():
+    if 'logged_in' in session:
+        search_type = request.form.get('search_type')
+        if search_type == 'single':
+            couponcode = request.form.get('couponcode')
+            conn = get_connection()
+            cursor = conn.cursor()
+            result_query = f"SELECT C.coupon_code, C.expiry_date, M.name, C.C_use, C.amount FROM coupon C LEFT JOIN menu M ON C.menu_id = M.menu_id where coupon_code='{couponcode}'"
+            cursor.execute(result_query)
+            coupon = cursor.fetchall()
+            conn.close()
+            return render_template('couponSearch.html', coupon=coupon)
+        elif search_type == 'all':
+            conn = get_connection()
+            cursor = conn.cursor()
+            result_query = "SELECT C.coupon_code, C.expiry_date, M.name, C.C_use, C.amount FROM coupon C LEFT JOIN menu M ON C.menu_id = M.menu_id"
+            cursor.execute(result_query)
+            coupon = cursor.fetchall()
+            conn.close()
+            return render_template('couponSearch.html', coupon=coupon)
+    else:
+        return redirect(url_for('home'))
+
+
+
+# 메뉴 추가 페이지
+@app.route('/insert', methods=['GET','POST'])
+def insert():
+    try:
+        name = request.form.get('name')
+        category = request.form.get('category')
+        price = request.form.get('price')
+        menu_con = request.form.get('menu_con')
+        size = request.form.get('size')
+        imgUrl = request.form.get('imgUrl')
+        conn = get_connection()
+        cursor = conn.cursor()
+        query = "INSERT INTO menu (name, category, price,menu_con,size,imageUrl) VALUES (%s, %s, %s,%s,%s,%s)"
+        cursor.execute(query, (name, category, price,menu_con,size,imgUrl))
+        conn.commit()
+        cursor.execute("select * from menu")
+        menu = cursor.fetchall()        
+        return render_template('insert.html',menu=menu)
+    except Exception as e:
+        response = {'error': str(e)}
+        return jsonify(response)
+    finally:
+        if conn:
+            conn.close()
+
+# 쿠폰코드 추가 페이지
+@app.route('/coupon', methods=['POST'])
+def coupon():
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        coupon_code = request.form.get('coupon')
+        name = request.form.get('name')
+        date = request.form.get('date')
+        amount = request.form.get('amount')
+        if amount:
+            conn = get_connection()
+            cursor = conn.cursor()
+            query = "INSERT INTO coupon (coupon_code, expiry_date, amount) VALUES (%s, %s, %s)"
+            cursor.execute(query, (coupon_code, date, amount))
+            conn.commit()
+        if name:
+            id_query = f"select menu_id from menu where name='{name}'"
+            cursor.execute(id_query)
+            menu_id = cursor.fetchone()[0]
+            print(menu_id)            
+            conn = get_connection()
+            cursor = conn.cursor()
+            query = "INSERT INTO coupon (coupon_code, expiry_date, menu_id) VALUES (%s, %s, %s)"
+            cursor.execute(query, (coupon_code, date, menu_id))
+            conn.commit()
+        conn = get_connection()
+        cursor = conn.cursor()
+        result_query = "SELECT C.coupon_code, C.expiry_date, M.name, C.C_use, C.amount FROM coupon C LEFT JOIN menu M ON C.menu_id = M.menu_id"
+        cursor.execute(result_query)
+        coupon = cursor.fetchall()
+        conn.close()
+        return render_template('coupon.html', coupon=coupon)
+    except:
+        return render_template('coupon.html')
+
+
+# 매출 확인
+
+@app.route('/sales',methods = ['POST'])
+def sales():
+    date1 = request.form.get('date1')
+    date2 = request.form.get('date2')
+    conn = get_connection()
+    cursor = conn.cursor()
+    if date1 and date2:
+        dayQuery= "select date(date) as day, sum(total_amount) as total from orders WHERE date >= %s AND date < %s group by day"
+        cursor.execute(dayQuery,(date1,date2))
+        day_sales = cursor.fetchall()
+        monthQuery = "select SUBSTRING(date, 1, 7) as month, sum(total_amount) as total from orders where date >= %s AND date < %s group by month"
+        cursor.execute(monthQuery,(date1,date2))
+        month_sales = cursor.fetchall()
+    else:
+        dayQuery= "select date(date) as day, sum(total_amount) as total from orders  group by day"
+        cursor.execute(dayQuery)
+        day_sales = cursor.fetchall()
+        monthQuery = "select SUBSTRING(date, 1, 7) as month, sum(total_amount) as total from orders group by month"
+        cursor.execute(monthQuery)
+        month_sales = cursor.fetchall()
+    conn.close()
+    return render_template('sales.html', day_sales=day_sales ,month_sales=month_sales) 
+
+
+
+
+###############################################################
 
 
 # DB에서 메뉴정보 가져오기
@@ -45,8 +243,6 @@ class TodoList(Resource):
         print(menu)
 
         return jsonify({"menu": menu})
-
-
 
 
 
@@ -176,7 +372,7 @@ class SaveOrder(Resource):
 
 # 학습된 모델 로드
 # 231121
-model = tf.keras.models.load_model('test_face_cnn_model.h5')
+model = tf.keras.models.load_model('face_cnn_model.h5')
 @app.route('/upload', methods=['POST'])
 def upload_file():
     if 'image' not in request.files:
@@ -195,7 +391,7 @@ def upload_file():
         
         print("image -> ",image)
         image.save('image/image1.png')
-        image = image.resize((480, 360))  # 너비 480, 높이 360으로 리사이즈
+        image = image.resize((360,480))  # 리사이즈
         image.save('image/image2.png')
         # 필요한 추가 전처리 과정
         # 예시: 이미지를 numpy 배열로 변환

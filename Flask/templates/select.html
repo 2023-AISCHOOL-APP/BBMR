@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}페이지 제목{% endblock %}
+
+{% block content %}
+    <!-- 각 페이지의 내용 작성 -->
+
+
+<html>
+  <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>
+      select
+    </title>
+  </head>
+  <body>
+    <div>
+        <h3> 메뉴, 쿠폰코드 추가
+            <form method="GET" action="/create" >
+                <button type="submit" class="btn">추 가</button>
+              </form>
+        </h3>            
+
+    </div>
+
+    <div>
+        <h3> 메뉴, 쿠폰코드, 매출 조회
+            <form method="GET" action="/search">
+                <button type="submit" class="btn">조 회</button>
+              </form>
+        </h3>
+
+    </div>
+  </body>
+</html>
+
+{% endblock %}

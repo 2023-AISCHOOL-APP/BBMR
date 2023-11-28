@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}페이지 제목{% endblock %}
+
+{% block content %}
+
+
+<html>
+  <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>
+      
+      Coupon
+    </title>
+  </head>
+  <body>
+    <div>
+    <h3> 쿠폰 
+      <form method="GET" action="/select">
+        <button type="submit" class="btn">이전으로</button>
+      </form>
+    </h3>
+  </div>
+
+    <table>
+      <tr>
+        <th>쿠폰</th>
+        <th>쿠폰 제품</th>
+        <th>만료일</th>
+        <th>금액</th>
+        <th>사용여부</th>
+      </tr>
+      {% for item in coupon %}
+        <tr>
+          <td>{{ item[0] }}</td>
+          <td>{{ item[2] }}</td>
+          <td>{{ item[1] }}</td>
+          <td>{{ item[4] }}</td>
+          <td>{{ item[3] }}</td>
+        </tr>
+      {% endfor %}            
+    </table>
+  </body>
+</html>
+{% endblock %}
