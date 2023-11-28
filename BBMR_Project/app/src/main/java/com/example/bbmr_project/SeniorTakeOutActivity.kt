@@ -1,6 +1,5 @@
 package com.example.bbmr_project
 
-import android.content.ContentValues
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,19 +7,11 @@ import android.os.Handler
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.RelativeSizeSpan
-import android.util.Log
-import android.view.Menu
-import android.view.View
-import android.widget.ScrollView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.bbmr_project.Dialog.SeniorBasketDialog
-import com.example.bbmr_project.Menu.MenuListViewModel
+import com.example.bbmr_project.Senior_Fragment.Category
 import com.example.bbmr_project.databinding.ActivitySeniorTakeoutBinding
-import com.example.bbmr_project.Senior_Fragment.Senior_Fragment_Tab_Recommend
-import com.example.bbmr_project.Senior_Fragment.Senior_Fragment_Tab_Coffee
-import com.example.bbmr_project.Senior_Fragment.Senior_Fragment_Tab_Beverage
-import com.example.bbmr_project.Senior_Fragment.Senior_Fragment_Tab_Dessert
+import com.example.bbmr_project.Senior_Fragment.SeniorTabFragment
 
 
 class SeniorTakeOutActivity() : AppCompatActivity(), OnCartChangeListener {
@@ -78,7 +69,7 @@ class SeniorTakeOutActivity() : AppCompatActivity(), OnCartChangeListener {
         //-------------일반 키오스크로 이동 끝---------------//
 
         //초기 Fragment지정
-        supportFragmentManager.beginTransaction().replace(R.id.fl1, Senior_Fragment_Tab_Recommend())
+        supportFragmentManager.beginTransaction().replace(R.id.fl1, SeniorTabFragment(Category.RECOMMEND))
             .commit()
 
 
@@ -86,33 +77,34 @@ class SeniorTakeOutActivity() : AppCompatActivity(), OnCartChangeListener {
         binding.rgSenior.setOnCheckedChangeListener { _, checkedId ->
             // 체크된 버튼에 따라 해당하는 Fragment로 교체
             when (checkedId) {
-                R.id.rbtnBest -> replaceFragment(Senior_Fragment_Tab_Recommend())
-                R.id.rbtnCoffee -> replaceFragment(Senior_Fragment_Tab_Coffee())
-                R.id.rbtnBeverage -> replaceFragment(Senior_Fragment_Tab_Beverage())
-                R.id.rbtnDessert -> replaceFragment(Senior_Fragment_Tab_Dessert())
+                R.id.rbtnBest -> replaceFragment(SeniorTabFragment(Category.RECOMMEND))
+                R.id.rbtnCoffee -> replaceFragment(SeniorTabFragment(Category.COFFEE))
+                R.id.rbtnBeverage -> replaceFragment(SeniorTabFragment(Category.BEVERAGE))
+                R.id.rbtnDessert -> replaceFragment(SeniorTabFragment(Category.DESSERT))
             }
         }
 
+
         binding.btnNext.setOnClickListener {
             val fragment =
-                supportFragmentManager.findFragmentById(R.id.fl1) as? Senior_Fragment_Tab_Recommend
+                supportFragmentManager.findFragmentById(R.id.fl1) as? SeniorTabFragment
 
             fragment?.let {
+                if (it.menuIndex <= it.getMenuListSize()){
                 it.menuIndex += 6
                 it.scrollToPosition(it.menuIndex)
+                }
             }
         }
         binding.btnPre.setOnClickListener {
             val fragment =
-                supportFragmentManager.findFragmentById(R.id.fl1) as? Senior_Fragment_Tab_Recommend
+                supportFragmentManager.findFragmentById(R.id.fl1) as? SeniorTabFragment
             fragment?.let {
                 if (it.menuIndex != 0 && it.menuIndex >=6){
                     it.menuIndex -= 6
                     it.scrollToPosition(it.menuIndex)
                 }
-
             }
-
         }
 
 
