@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %}페이지 제목{% endblock %}
+
+{% block content %}
+    <!-- 각 페이지의 내용 작성 -->
+
+
+<html>
+  <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>
+      조회
+    </title>
+  </head>
+  <body>
+    <h3> 메뉴 조회 </h3>
+    <form method="POST" action='/menuSearch'>
+      <div class="form-group">
+          <input type="text" class="form-control" id="menu_name" placeholder="메뉴명" name="menu_name"/>
+          <button type="submit" class="btn" name="menu_search" value="name" >메뉴 조회</button>
+      </div>
+    </form>
+    <form method="POST" action='/menuSearch'>
+      <div class="form-group">
+        <select name = "cate_search" id = "cate_search">
+          <option value="coffee">coffee</option>
+          <option value="tea">tea</option>
+          <option value="dessert">dessert</option>
+          <option value="beverage">beverage</option>
+          <option value="flatccino">flatccino</option>
+          <option value="md">md</option>
+      </select>
+          <button type="submit" class="btn" name="menu_search" value="cate" >메뉴 조회</button>
+      </div>
+    </form>
+    <form method="POST" action='/menuSearch'>
+      <div class="form-group">
+          <button type="submit" class="btn" name="menu_search" value="all">전체 메뉴 조회</button>
+      </div>
+    </form>
+
+
+    <h3> 쿠폰 조회 </h3>
+    <form method="POST" action='/couponSearch'>
+      <div class="form-group">
+          <input type="text" class="form-control" id="couponcode" placeholder="쿠폰코드" name="couponcode"/>
+          <button type="submit" class="btn" name="search_type" value="single">쿠폰 조회</button>
+      </div>
+  </form>
+  
+  <form method="POST" action='/couponSearch'>
+      <div class="form-group">
+          <button type="submit" class="btn" name="search_type" value="all">전체 쿠폰 조회</button>
+      </div>
+  </form>
+    <h3> 매출 확인(기간 미입력시 전체 조회) </h3>
+    <form method="POST" action='/sales'>
+        <div class="form-group">
+            <label for="name">시작일</label>
+            <input type="date" class="form-control" id="date1" name="date1" style="margin-right: 10px;"> 
+            <label for="name">종료일</label>
+            <input type="date" class="form-control" id="date2" name="date2"> 
+        <button type="submit" class="btn">매출 조회</button>
+      </div>
+    </form>
+
+  </body>
+</html>
+
+{% endblock %}
+
+
+
