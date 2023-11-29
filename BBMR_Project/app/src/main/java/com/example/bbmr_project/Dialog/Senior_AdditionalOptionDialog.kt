@@ -41,28 +41,30 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // ------ 추가 옵션 코드 시작 ------
-        var size : Int = 1
+//        var size  = CartStorage.menuList.size
+        var size  = CartStorage.menuList.size
         var sugar: Boolean = false
         var cream: Boolean = false
         binding.cbSizeDSAO.setOnCheckedChangeListener { _, isChecked ->
             size = 2
         }
         binding.cbSugarDSAO.setOnCheckedChangeListener { _, isChecked ->
-            sugar = isChecked
+            sugar = true
         }
         binding.cbCreamDSAO.setOnCheckedChangeListener { _, isChecked ->
-            cream = isChecked
+            cream = true
         }
+
         // ------ 추가 옵션 코드 끝 ------
 
         // ------ 추천 메뉴 코드 시작 ------
-
+         // CartStorage.addProduct 사용해야 값이 들어감
         binding.btnRecommend1.setOnClickListener {
             val bread = Product(
                 name = "데블스 초코케이크",
                 price = 4800,
                 count = 1,
-                image = "BBMR/"
+                image = ""
             )
             SuggestionProductAddDialog(view.rootView, bread)
         }
@@ -101,14 +103,15 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
                 // ------ 옵션 선택 시 금액 추가(합산) 코드 시작 ------
                 var addprice : Int = customOption.price
                 val count : Int = customOption.count
-                if (size == 1) {
+                // size == 2 -> 큰 사이즈 (큰 사이즈에서 값을 더해줌) , size == 1 -> 기본값
+                if (size == 2) {
                     addprice += (500 * count)
                 }
                 if (sugar == true) {
                     addprice += (300 * count)
                 }
                 if (cream == true) {
-                    addprice += (300 * count)
+                    addprice += (500 * count)
                 }
                 // ------ 옵션 선택 시 금액 추가(합산) 코드 끝   ------
 

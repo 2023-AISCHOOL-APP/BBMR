@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imgSeniorAdditionMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="220dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/coffee" />
+
+    <TextView
+        android:id="@+id/tvSeniorAdditionName"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:text="상품이름"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="45dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/imgSeniorAdditionMenu"
+        app:layout_constraintStart_toStartOf="@+id/imgSeniorAdditionMenu"
+        app:layout_constraintTop_toBottomOf="@+id/imgSeniorAdditionMenu" />
+
+    <TextView
+        android:id="@+id/tvSeniorAdditionPrice"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:text="상품가격"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/tvSeniorAdditionName"
+        app:layout_constraintStart_toStartOf="@+id/tvSeniorAdditionName"
+        app:layout_constraintTop_toBottomOf="@+id/tvSeniorAdditionName" />
+</androidx.constraintlayout.widget.ConstraintLayout>

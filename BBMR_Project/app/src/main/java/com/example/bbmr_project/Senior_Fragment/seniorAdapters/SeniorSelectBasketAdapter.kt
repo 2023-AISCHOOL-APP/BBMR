@@ -39,6 +39,7 @@ class SeniorSelectBasketAdapter(
     private val inflater: LayoutInflater = LayoutInflater.from(context)
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        // 장바구니 선언
         val basketImgSenior : ImageView = view.findViewById(R.id.basketImgSenior)
         val tvBasketNameSenior: TextView = view.findViewById(R.id.tvBasketNameSenior)
         val tvBasketCountSenior: TextView = view.findViewById(R.id.tvBasketCountSenior)
@@ -46,6 +47,11 @@ class SeniorSelectBasketAdapter(
         val btnBasketMinusSenior: Button = view.findViewById(R.id.btnBasketMinusSenior)
         val btnBasketPlusSenior: Button = view.findViewById(R.id.btnBasketPlusSenior)
         val btnBasketCancellSenior: Button = view.findViewById(R.id.btnBasketCancelSenior)
+
+        // 추가메뉴 선언
+        val imgSeniorAdditionMenu: ImageView = view.findViewById(R.id.imgSeniorAdditionMenu)
+        val tvSeniorAdditionName: TextView = view.findViewById(R.id.tvSeniorAdditionName)
+        val tvSeniorAdditionPrice: TextView = view.findViewById(R.id.tvSeniorAdditionPrice)
     }
 
     override fun onCreateViewHolder(
@@ -58,6 +64,15 @@ class SeniorSelectBasketAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val selectSeniorItem = productList[position]
+
+        holder.tvSeniorAdditionName.text = selectSeniorItem.name
+        holder.tvSeniorAdditionPrice.text = selectSeniorItem.price.toString()
+
+
+
+
+
+
         Glide.with(context).load(selectSeniorItem.image).into(holder.basketImgSenior)
         Log.d("BasketAdapter", "$selectSeniorItem")
 
@@ -67,8 +82,10 @@ class SeniorSelectBasketAdapter(
         holder.tvBasketTemSenior.text = selectSeniorItem.temperature
         if (selectSeniorItem.temperature == "차가운거" ) {
             holder.tvBasketTemSenior.setTextColor(Color.BLUE)
-        } else {
+        } else if(selectSeniorItem.temperature == "뜨거운거"){
             holder.tvBasketTemSenior.setTextColor(Color.RED)
+        } else{
+            holder.tvBasketTemSenior.text = " "
         }
         // 시니어 장바구니에서 plus 버튼 클릭
         holder.btnBasketPlusSenior.setOnClickListener {
