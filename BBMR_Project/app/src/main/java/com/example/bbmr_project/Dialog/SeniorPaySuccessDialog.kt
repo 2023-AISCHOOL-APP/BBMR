@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import com.example.bbmr_project.CartStorage
 import com.example.bbmr_project.Normal_MainActivity
 
 import com.example.bbmr_project.databinding.DialogSeniorPaymentSuccessBinding
@@ -20,6 +21,7 @@ import com.example.bbmr_project.databinding.DialogSeniorPaymentSuccessBinding
 class SeniorPaySuccessDialog: DialogFragment() {
     private lateinit var  binding: DialogSeniorPaymentSuccessBinding
 
+    private var count = 907
     override fun onStart() {
         super.onStart()
         val darkTransparentBlack = Color.argb((255 * 0.6).toInt(), 0, 0, 0)
@@ -53,17 +55,18 @@ class SeniorPaySuccessDialog: DialogFragment() {
         spannableStringBuilder.setSpan(RelativeSizeSpan(2f), 0, 6, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         spannableStringBuilder.setSpan(RelativeSizeSpan(0.9f),7, _text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         tvPaySuccess.text = spannableStringBuilder
-        //
 
-
-
+        CartStorage.clearProduct()
 
         val Handler = Handler(Looper.getMainLooper())
         Handler.postDelayed({
             val intent = Intent(view.context, Normal_MainActivity::class.java)
             startActivity(intent)
         }, 3500)
-
-
+    }
+    override fun onResume() {
+        super.onResume()
+        count++
+        binding.textView11.text = count.toString()
     }
 }

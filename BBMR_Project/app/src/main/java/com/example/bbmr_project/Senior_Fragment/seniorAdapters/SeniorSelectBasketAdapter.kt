@@ -1,6 +1,7 @@
 package com.example.bbmr_project.Senior_Fragment.seniorAdapters
 
 import android.content.Context
+import android.graphics.Color
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.widget.Button
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.bbmr_project.CartStorage
 import com.example.bbmr_project.Product
@@ -61,8 +63,13 @@ class SeniorSelectBasketAdapter(
 
         holder.tvBasketNameSenior.text = selectSeniorItem.name
         holder.tvBasketCountSenior.text = selectSeniorItem.count.toString()
-        holder.tvBasketTemSenior.text = selectSeniorItem.temperature
 
+        holder.tvBasketTemSenior.text = selectSeniorItem.temperature
+        if (selectSeniorItem.temperature == "차가운거" ) {
+            holder.tvBasketTemSenior.setTextColor(Color.BLUE)
+        } else {
+            holder.tvBasketTemSenior.setTextColor(Color.RED)
+        }
         // 시니어 장바구니에서 plus 버튼 클릭
         holder.btnBasketPlusSenior.setOnClickListener {
             var basicCount = selectSeniorItem.count

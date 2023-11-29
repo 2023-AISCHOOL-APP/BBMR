@@ -21,9 +21,9 @@
         <ImageView
             android:id="@+id/imgSeniorDessert"
             android:layout_width="0dp"
-            android:layout_height="300dp"
+            android:layout_height="350dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="120dp"
+            android:layout_marginTop="160dp"
             android:layout_marginEnd="10dp"
             android:src="@drawable/cake"
             app:layout_constraintEnd_toEndOf="parent"

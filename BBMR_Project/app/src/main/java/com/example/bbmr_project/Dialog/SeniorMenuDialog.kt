@@ -65,16 +65,6 @@ class SeniorMenuDialog : DialogFragment() {
             var text = item.sname
             // ------ 각 메뉴의 이름들의 길이에 조건을 걸어 줄 바꿈 해주기 ------
             val spannableStringBuilder = SpannableStringBuilder(text)
-//            if (text.length >= 6) {
-//                val indexLine = text.indexOf(' ')
-//                if (indexLine != -1) {
-//                    val modiText = StringBuilder(text)
-//                        .replace(indexLine, indexLine+1, "\n")
-//                        .toString()
-//                    spannableStringBuilder.replace(0, text.length, modiText)
-//                    binding.tvMenuName.text = spannableStringBuilder
-//                }
-//            } else if (text.length < 6 && !text.contains(' '))
             if (text.contains(" ")) {
             // 첫 번째 공백에서 개행하는 코드
             val indexFirstSpace = text.indexOf(' ')
@@ -85,7 +75,6 @@ class SeniorMenuDialog : DialogFragment() {
                 binding.tvMenuName.text = spannableStringBuilder
             } else {
                 binding.tvMenuName.text = item.sname
-
             }
 
             binding.tvMenuPrice.text =
@@ -134,19 +123,46 @@ class SeniorMenuDialog : DialogFragment() {
             val radiogroup = binding.rbCooHot.checkedRadioButtonId
             val radioButton: RadioButton = binding.rbCooHot.findViewById(radiogroup)
             val coolhot: Boolean = radioButton.isChecked
+            coolhot.toString() == "차가운거"
+            val cool = binding.rbCool.isChecked
+            val hot = binding.rbHot.isChecked
+            if (cool) {
+                CartStorage.addProduct(
+                    Product(
+                        name = binding.tvMenuName.text.toString(),
+                        price = binding.tvMenuPrice.text.toString().replace(",", "").replace("원", "")
+                            .toIntOrNull() ?: 0,
+                        count = binding.tvMenuCount.text.toString().toInt(),
+                        image = imgUrl.toString(),
+                        temperature = "차가운거"
+                    )
+
+                )
+                } else if(hot) {
+                CartStorage.addProduct(
+                    Product(
+                        name = binding.tvMenuName.text.toString(),
+                        price = binding.tvMenuPrice.text.toString().replace(",", "").replace("원", "")
+                            .toIntOrNull() ?: 0,
+                        count = binding.tvMenuCount.text.toString().toInt(),
+                        image = imgUrl.toString(),
+                        temperature = "뜨거운거"
+                    )
+                )
+                }
 
 
             // CartStorage.productList에 값을 추가
-            CartStorage.addProduct(
-                Product(
-                    name = binding.tvMenuName.text.toString(),
-                    price = binding.tvMenuPrice.text.toString().replace(",", "").replace("원", "")
-                        .toIntOrNull() ?: 0,
-                    count = binding.tvMenuCount.text.toString().toInt(),
-                    image = imgUrl.toString()
-                )
-
-            )
+//            CartStorage.addProduct(
+//                Product(
+//                    name = binding.tvMenuName.text.toString(),
+//                    price = binding.tvMenuPrice.text.toString().replace(",", "").replace("원", "")
+//                        .toIntOrNull() ?: 0,
+//                    count = binding.tvMenuCount.text.toString().toInt(),
+//                    image = imgUrl.toString()
+//                )
+//
+//            )
             Log.d("이건뭐야2", binding.imgMenu.toString())
             dismiss()
         }

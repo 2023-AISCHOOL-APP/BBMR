@@ -61,7 +61,6 @@ class SeniorTakeOutAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         Glide.with(context).load(menuList[position].simg).into(holder.imgS)
         Log.d("안녕하세요", menuList.toString())
-
         holder.tvNameS.text = menuList[position].sname
         // ------ 메뉴 목록 이름 접근해서 줄 바꿈 코드 시작 ------
         val text = menuList[position].sname
