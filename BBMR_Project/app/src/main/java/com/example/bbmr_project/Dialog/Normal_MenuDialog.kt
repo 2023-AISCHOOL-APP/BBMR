@@ -313,8 +313,8 @@ class Normal_MenuDialog : DialogFragment() {
     private fun getSelectedTemperature(): String {
         // hot cold 라디오 버튼 선택
         return when (binding.btnNormalTempGroup.checkedRadioButtonId) {
-            R.id.btnLargeSize -> "Large"
-            R.id.btnExtraSize -> "Extra"
+            R.id.btnHot -> "Hot"
+            R.id.btnCold -> "Cold"
             else -> ""
         }
     }
@@ -322,8 +322,8 @@ class Normal_MenuDialog : DialogFragment() {
     private fun getSelectedSize(): String? {
         // size 라디오 버튼 선택
         return when (binding.btnNormalSizeGroup.checkedRadioButtonId) {
-            R.id.btnHot -> "Hot"
-            R.id.btnCold -> "Cold"
+            R.id.btnLargeSize -> "Large"
+            R.id.btnExtraSize -> "Extra"
             else -> ""
         }
     }

@@ -21,6 +21,7 @@ class NormalSelectPayAdapter(
         val selectNormalMoney: TextView = view.findViewById(R.id.tvSelectNormalMoney)
         val selectNormalOption1: TextView = view.findViewById(R.id.selectNormalOption1)
         val selectNormalOptionCost: TextView = view.findViewById(R.id.selectNormalOptionCost1)
+        val temperature: TextView = view.findViewById(R.id.temperature)
     }
 
     override fun onCreateViewHolder(
@@ -47,18 +48,26 @@ class NormalSelectPayAdapter(
         holder.selectNormalMoney.text = formattedCost
         holder.selectNormalOption1.text = selectedMenuList[position].options.toString()
         holder.selectNormalOptionCost.text = selectedMenuList[position].optionTvCount.toString()
+        if (item.temperature == "HOT"){
+            holder.temperature.text = "HOT"
+        } else {
+            holder.temperature.text = "ICED"
+        }
 
         // 옵션 리스트가 비어있는지 확인
         if (item.options.isEmpty()) {
             // 옵션 리스트가 비어있으면 관련 UI 숨기기
             holder.selectNormalOption1.visibility = View.GONE
             holder.selectNormalOptionCost.visibility = View.GONE
+            holder.temperature.visibility = View.GONE
         } else {
             // 옵션 리스트가 있으면 텍스트 설정
             holder.selectNormalOption1.text = item.options.joinToString(", ")
             holder.selectNormalOption1.visibility = View.VISIBLE
             holder.selectNormalOptionCost.text = item.optionTvCount.toString()
             holder.selectNormalOptionCost.visibility = View.VISIBLE
+            holder.temperature.text = item.temperature
+            holder.temperature.visibility = View.VISIBLE
         }
     }
 

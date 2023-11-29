@@ -9,34 +9,43 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="800dp"
         android:layout_margin="100dp"
         android:background="@drawable/normal_dialog_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:id="@+id/imgMD"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="60dp"
+            android:src="@drawable/cake"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/tvMDName"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center|center_vertical"
             android:text="MD상품"
             android:textColor="#000000"
-            android:textSize="40sp"
+            android:textSize="38sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline26" />
+            app:layout_constraintEnd_toEndOf="@+id/imgMD"
+            app:layout_constraintStart_toStartOf="@+id/imgMD"
+            app:layout_constraintTop_toBottomOf="@+id/imgMD" />
 
         <RadioGroup
             android:id="@+id/radioGroup"
             android:layout_width="0dp"
             android:layout_height="70dp"
-            android:layout_marginBottom="160dp"
+            android:layout_marginBottom="50dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline22"
@@ -91,63 +100,65 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.25" />
+            app:layout_constraintGuide_begin="200dp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline22"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.75" />
+            app:layout_constraintGuide_end="200dp" />
 
         <TextView
             android:id="@+id/tvCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
             android:text="1"
             android:textColor="#000000"
             android:textSize="40sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/guideline28"
             app:layout_constraintEnd_toEndOf="@+id/imgMD"
             app:layout_constraintStart_toStartOf="@+id/imgMD"
-            app:layout_constraintTop_toTopOf="@+id/guideline27"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintTop_toBottomOf="@+id/tvMDPrice"
+            tools:ignore="UnknownId" />
 
         <android.widget.Button
             android:id="@+id/btnMinus"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginEnd="30dp"
             android:background="@drawable/minus"
             app:layout_constraintBottom_toBottomOf="@+id/tvCount"
             app:layout_constraintEnd_toStartOf="@+id/tvCount"
-            app:layout_constraintStart_toStartOf="@+id/imgMD"
             app:layout_constraintTop_toTopOf="@+id/tvCount" />
 
         <android.widget.Button
             android:id="@+id/btnPlus"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
             android:background="@drawable/plus"
             app:layout_constraintBottom_toBottomOf="@+id/tvCount"
-            app:layout_constraintEnd_toEndOf="@+id/imgMD"
+            app:layout_constraintEnd_toEndOf="@+id/tvDessertName"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/tvCount"
-            app:layout_constraintTop_toTopOf="@+id/tvCount" />
+            app:layout_constraintTop_toTopOf="@+id/tvCount"
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/tvMDPrice"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="10,000원"
+            android:text="5,000원"
             android:textColor="#FF0000"
-            android:textSize="40sp"
+            android:textSize="38sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/imgMD"
-            app:layout_constraintStart_toStartOf="@+id/imgMD"
-            app:layout_constraintTop_toBottomOf="@+id/tvMDName" />
+            app:layout_constraintEnd_toEndOf="@+id/tvMDName"
+            app:layout_constraintStart_toStartOf="@+id/tvMDName"
+            app:layout_constraintTop_toBottomOf="@+id/tvMDName"
+            tools:ignore="UnknownId" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline26"
@@ -161,24 +172,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.64" />
+            app:layout_constraintGuide_percent="0.5" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline28"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.74" />
-
-        <ImageView
-            android:id="@+id/imgMD"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:src="@drawable/giftcard"
-            app:layout_constraintBottom_toTopOf="@+id/guideline27"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvMDPrice"
-            app:layout_constraintVertical_bias="0.468" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+

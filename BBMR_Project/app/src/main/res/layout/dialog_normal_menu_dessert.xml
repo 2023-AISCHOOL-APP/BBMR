@@ -9,7 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="800dp"
         android:layout_margin="100dp"
         android:background="@drawable/normal_dialog_background"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,32 +21,31 @@
             android:id="@+id/imgDessert"
             android:layout_width="300dp"
             android:layout_height="300dp"
-            android:layout_marginBottom="28dp"
+            android:layout_marginTop="60dp"
             android:src="@drawable/cake"
-            app:layout_constraintBottom_toTopOf="@+id/guideline27"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvDessertPrice" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvDessertName"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:gravity="center"
-            android:text="초코케이크"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center|center_vertical"
+            android:text="초코 티라미수 케이크"
             android:textColor="#000000"
-            android:textSize="40sp"
+            android:textSize="38sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline26" />
+            app:layout_constraintEnd_toEndOf="@+id/imgDessert"
+            app:layout_constraintStart_toStartOf="@+id/imgDessert"
+            app:layout_constraintTop_toBottomOf="@+id/imgDessert" />
 
         <RadioGroup
             android:id="@+id/radioGroup"
             android:layout_width="0dp"
             android:layout_height="70dp"
-            android:layout_marginBottom="160dp"
+            android:layout_marginBottom="50dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline22"
@@ -101,50 +100,51 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.25" />
+            app:layout_constraintGuide_begin="200dp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline22"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.75" />
+            app:layout_constraintGuide_end="200dp" />
 
         <TextView
             android:id="@+id/tvCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
             android:text="1"
             android:textColor="#000000"
             android:textSize="40sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/guideline28"
-            app:layout_constraintEnd_toEndOf="@+id/imgDessert"
-            app:layout_constraintHorizontal_bias="0.501"
-            app:layout_constraintStart_toStartOf="@+id/imgDessert"
-            app:layout_constraintTop_toTopOf="@+id/guideline27" />
+            app:layout_constraintEnd_toEndOf="@+id/tvDessertName"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="@+id/tvDessertName"
+            app:layout_constraintTop_toBottomOf="@+id/tvDessertPrice" />
 
         <android.widget.Button
             android:id="@+id/btnMinus"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginEnd="30dp"
             android:background="@drawable/minus"
             app:layout_constraintBottom_toBottomOf="@+id/tvCount"
             app:layout_constraintEnd_toStartOf="@+id/tvCount"
-            app:layout_constraintStart_toStartOf="@+id/imgDessert"
             app:layout_constraintTop_toTopOf="@+id/tvCount" />
 
         <android.widget.Button
             android:id="@+id/btnPlus"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
             android:background="@drawable/plus"
             app:layout_constraintBottom_toBottomOf="@+id/tvCount"
-            app:layout_constraintEnd_toEndOf="@+id/imgDessert"
+            app:layout_constraintEnd_toEndOf="@+id/tvDessertName"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/tvCount"
-            app:layout_constraintTop_toTopOf="@+id/tvCount" />
+            app:layout_constraintTop_toTopOf="@+id/tvCount"
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/tvDessertPrice"
@@ -153,11 +153,11 @@
             android:gravity="center"
             android:text="5,000원"
             android:textColor="#FF0000"
-            android:textSize="40sp"
+            android:textSize="38sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/imgDessert"
+            app:layout_constraintEnd_toEndOf="@+id/tvDessertName"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/imgDessert"
+            app:layout_constraintStart_toStartOf="@+id/tvDessertName"
             app:layout_constraintTop_toBottomOf="@+id/tvDessertName" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -172,13 +172,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.64" />
+            app:layout_constraintGuide_percent="0.5" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline28"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.74" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

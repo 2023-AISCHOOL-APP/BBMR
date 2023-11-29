@@ -4,63 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/mainColor"
-    tools:context=".Normal_MainActivity">
+    tools:context=".Normal_MainActivity" >
 
-  <TextView
-      android:id="@+id/tv3"
-      android:layout_width="0dp"
-      android:layout_height="1000dp"
-      android:background="@drawable/tv_main_radius"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.0"
-      app:layout_constraintStart_toStartOf="parent" />
-
-  <TextView
-      android:id="@+id/tv1"
-      android:layout_width="0dp"
-      android:layout_height="400dp"
-      android:layout_margin="80dp"
-      android:layout_marginTop="4dp"
-      android:gravity="center|left"
-      android:text="Kinior\n시니어를 위한\n키오스크"
-      android:textColor="#FFFFFF"
-      android:textSize="80sp"
-      android:textStyle="bold"
-      app:layout_constraintBottom_toTopOf="@+id/tv3"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent" />
-
-  <TextView
-      android:id="@+id/tv2"
+  <ImageView
+      android:id="@+id/imageView9"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:gravity="center"
-      android:text="카드 / 쿠폰 결제만 가능합니다.\n현금결제는 카운터에서 부탁드립니다."
-      android:textColor="@color/mainColor"
-      android:textSize="50sp"
-      android:textStyle="bold"
-      app:layout_constraintBottom_toTopOf="@+id/btnOrderInASI"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.503"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="@+id/tv3"
-      app:layout_constraintVertical_bias="0.75" />
-
-  <Button
-      android:id="@+id/btnOrderInASI"
-      android:layout_width="500dp"
-      android:layout_height="225dp"
-      android:layout_marginBottom="104dp"
-      android:backgroundTint="@color/mainColor"
-      android:text="주문하기"
-      android:textSize="80dp"
-      android:textStyle="bold"
-      app:cornerRadius="10dp"
+      android:scaleType="fitXY"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent" />
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:srcCompat="@drawable/startactivity" />
 
+  <android.widget.Button
+      android:id="@+id/btnOrder"
+      android:layout_width="400dp"
+      android:layout_height="150dp"
+      android:background="@drawable/button_normal"
+      android:gravity="center"
+      android:text="주문하기"
+      android:textColor="#FFFFFF"
+      android:textSize="70dp"
+      android:textStyle="bold"
+      app:layout_constraintBottom_toBottomOf="@+id/imageView9"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/imageView9"
+      app:layout_constraintVertical_bias="0.797" />
 </androidx.constraintlayout.widget.ConstraintLayout>

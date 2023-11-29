@@ -139,7 +139,7 @@ class Normal_SelectPayDialog : DialogFragment() {
         var totalSumCost = 0
 
         for (menuInfo in selectedMenuList) {
-            val menuCost = menuInfo.price?.toInt() ?: 0
+            val menuCost = menuInfo.price?.toInt() ?: 0 // DB에서 받아오는 음료 단일 값
             val menuCount = menuInfo.tvCount ?: 0
             val optionCount = menuInfo.optionTvCount ?: 0
 
