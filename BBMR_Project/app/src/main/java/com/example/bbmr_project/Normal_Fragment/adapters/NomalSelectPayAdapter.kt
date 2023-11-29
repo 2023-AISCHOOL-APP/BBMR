@@ -1,4 +1,5 @@
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,13 +16,14 @@ class NormalSelectPayAdapter(
 ) : RecyclerView.Adapter<NormalSelectPayAdapter.ViewHolder>() {
 
     val inflater: LayoutInflater = LayoutInflater.from(context)
+
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val selectNormalName: TextView = view.findViewById(R.id.tvSelectNormalName)
         val selectNormalCount: TextView = view.findViewById(R.id.tvSelectNormalCount)
         val selectNormalMoney: TextView = view.findViewById(R.id.tvSelectNormalMoney)
         val selectNormalOption1: TextView = view.findViewById(R.id.selectNormalOption1)
         val selectNormalOptionCost: TextView = view.findViewById(R.id.selectNormalOptionCost1)
-        val temperature: TextView = view.findViewById(R.id.temperature)
+        val temperature2: TextView = view.findViewById(R.id.temperature2)
     }
 
     override fun onCreateViewHolder(
@@ -48,26 +50,23 @@ class NormalSelectPayAdapter(
         holder.selectNormalMoney.text = formattedCost
         holder.selectNormalOption1.text = selectedMenuList[position].options.toString()
         holder.selectNormalOptionCost.text = selectedMenuList[position].optionTvCount.toString()
-        if (item.temperature == "HOT"){
-            holder.temperature.text = "HOT"
-        } else {
-            holder.temperature.text = "ICED"
-        }
+        holder.temperature2.text = "옵션: " + selectedMenuList[position].temperature.toString()
+
+
+        Log.d("페이어댑터", "${item.temperature}, ${holder.temperature2.text}")
+
 
         // 옵션 리스트가 비어있는지 확인
         if (item.options.isEmpty()) {
             // 옵션 리스트가 비어있으면 관련 UI 숨기기
             holder.selectNormalOption1.visibility = View.GONE
             holder.selectNormalOptionCost.visibility = View.GONE
-            holder.temperature.visibility = View.GONE
         } else {
             // 옵션 리스트가 있으면 텍스트 설정
             holder.selectNormalOption1.text = item.options.joinToString(", ")
             holder.selectNormalOption1.visibility = View.VISIBLE
             holder.selectNormalOptionCost.text = item.optionTvCount.toString()
             holder.selectNormalOptionCost.visibility = View.VISIBLE
-            holder.temperature.text = item.temperature
-            holder.temperature.visibility = View.VISIBLE
         }
     }
 
