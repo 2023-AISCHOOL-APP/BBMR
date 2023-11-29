@@ -109,7 +109,7 @@ class Normal_SelectPayDialog : DialogFragment() {
         binding.rvSelectPayList.invalidateItemDecorations()
         adapter.notifyDataSetChanged()
 
-        // 총 결제 금액을 계산하여 표시
+        // 총 합계 금액을 계산하여 표시
         val totalSumCost = calculateTotalSumCost()
         val formattedTotalSumCost = NumberFormat.getNumberInstance(Locale.KOREA).format(totalSumCost)
         binding.totalSumCostPrice.text = formattedTotalSumCost
@@ -139,7 +139,7 @@ class Normal_SelectPayDialog : DialogFragment() {
         var totalSumCost = 0
 
         for (menuInfo in selectedMenuList) {
-            val menuCost = menuInfo.menuPrice ?: 0
+            val menuCost = menuInfo.price?.toInt() ?: 0
             val menuCount = menuInfo.tvCount ?: 0
             val optionCount = menuInfo.optionTvCount ?: 0
 

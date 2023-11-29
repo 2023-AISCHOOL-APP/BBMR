@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}페이지 제목{% endblock %}
+
+{% block content %}
+<html>
+  <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>
+      매출
+    </title>
+  </head>
+  <body>
+
+    <h3>일별 매출</h3>
+    <table border="1px solid black">
+      <tr bgcolor="skyblue">
+        <th>날 짜</th>
+        <th>매 출</th>
+      </tr>
+      {% for item in day_sales %}
+        <tr>
+          <td>{{ item[0].strftime('%Y-%m-%d') }}</td>
+          <td>{{ item[1] }}</td>
+        </tr>
+      {% endfor %}            
+    </table>
+
+    <h3>월별 매출</h3>
+    <table border="1px solid black">
+      <tr bgcolor="skyblue">
+        <th>날 짜</th>
+        <th>매 출</th>
+      </tr>
+      {% for item in month_sales %}
+        <tr>
+          <td>{{ item[0] }}</td>
+          <td>{{ item[1] }}</td>
+        </tr>
+      {% endfor %}            
+    </table>
+  </body>
+</html>
+{% endblock %}

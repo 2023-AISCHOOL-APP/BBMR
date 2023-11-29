@@ -1,0 +1,105 @@
+/* static/style.css */
+
+/* 공통 스타일 */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    
+}
+table{
+    margin-left: 20px;
+    border : 1px solid black;
+}
+th{
+    padding: 5px;
+    background: skyblue;
+}
+td{
+    padding: 5px;
+}
+tr{
+    padding: 5px;
+}
+
+h3 {
+    color: #333;
+    display: flex;
+    align-items: baseline;
+    margin-left: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.btn {
+    background-color: #637383;
+    color: #fff;
+    padding: 10px 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+.btn:hover {
+    background-color: #316ba8;
+}
+
+
+
+
+
+/* 페이지별 스타일 */
+/* home.html */
+form {
+    max-width: 400px;
+    margin: auto;
+}
+
+/* create.html */
+form {
+    max-width: 600px;
+    margin: auto;
+}
+
+/* select.html, search.html */
+h3 {
+    margin-top: 20px;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+}
+
+
+/* base.html */
+nav {
+    background-color: #333;
+    padding: 10px;
+    text-align: center;
+}
+
+nav button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    font-weight: bold; /* 글씨를 진하게 만들기 */
+}
+
+nav div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav button:hover {
+    color: #316ba8;
+}

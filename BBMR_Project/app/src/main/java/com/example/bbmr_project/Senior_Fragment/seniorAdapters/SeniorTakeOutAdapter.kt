@@ -1,8 +1,8 @@
 package com.example.bbmr_project.Senior_Fragment.seniorAdapters
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +12,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.bbmr_project.Dialog.SeniorDessertDialog
-import com.example.bbmr_project.Dialog.Senior_MenuDialog
+import com.example.bbmr_project.Dialog.SeniorMenuDialog
 import com.example.bbmr_project.R
 import com.example.bbmr_project.Senior_Fragment.Category
 import com.example.bbmr_project.VO.Senior_TakeOutVO
@@ -59,10 +59,29 @@ class SeniorTakeOutAdapter(
     // 메뉴 사진, 이름, 가격 설정
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         Glide.with(context).load(menuList[position].simg.toString()).into(holder.imgS)
+        // ------ 메뉴 목록 이름 접근해서 줄 바꿈 코드 시작 ------
+        val text = menuList[position].sname
+        val spannableStringBuilder = SpannableStringBuilder(text)
+        if (text.length >= 6 && text.contains(" ")) {
+            val indexLine = text.indexOf(' ')
+            val modifiedText = StringBuilder(text)
+                .replace(indexLine, indexLine + 1, "\n")
+                .toString()
+            spannableStringBuilder.replace(0, text.length, modifiedText)
+            holder.tvNameS.text = spannableStringBuilder
+        } else if (text.length >= 7) { // 카라멜마끼야또 저격
+            val modifiedText = StringBuilder(text)
+                .insert(2, "\n").toString()
+            spannableStringBuilder.replace(0, text.length, modifiedText)
+            holder.tvNameS.text = spannableStringBuilder
+        } else { // 띄어쓰기 제외한 것 들
+            holder.tvNameS.text = menuList[position].sname
+        }
+        // ------ 메뉴 목록 이름 접근해서 줄 바꿈 코드 끝 ------
 
-        holder.tvNameS.text = menuList[position].sname
         // 기본값을 1000단위로 나누는 코드
         val basicPrice = String.format("%,d 원", menuList[position].sprice)
+
         holder.tvPriceS.text = basicPrice
 //        holder.imgS.setImageResource(menuList[position].simg)
 
@@ -80,8 +99,12 @@ class SeniorTakeOutAdapter(
 
     private fun showMenuDialog(position: Int){
         // MenuDialog에 값을 보내주는 코드
-        val seniorDialog = Senior_MenuDialog.Senior_Menu(menuList[position])
-        seniorDialog.show(fragmentManager, "seniorDialog")
+        val seniorMenuDialog = SeniorMenuDialog()
+        val bundle = Bundle().apply{
+            putParcelable("seniorTakeOutVO", menuList[position])
+        }
+        seniorMenuDialog.arguments = bundle
+        seniorMenuDialog.show(fragmentManager, "seniorDialog")
     }
 
     private fun showDessertDialaog(position: Int){

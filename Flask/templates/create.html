@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block title %}페이지 제목{% endblock %}
+
+{% block content %}
+    <!-- 각 페이지의 내용 작성 -->
+
+
+<html>
+  <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <title>
+      추가
+    </title>
+  </head>
+  <body>
+    <h3>메뉴 추가</h3>
+    <form method="POST" action='/insert'>
+        <div class="form-group">
+            <label for="name">메뉴명</label>
+            <input type="text" class="form-control" id="name" placeholder="메뉴명" name="name"/>
+        </div>
+        <div class="form-group">
+            <label for="category">카테고리</label>
+                <select name = "category" id = "category">
+                    <option value="coffee">coffee</option>
+                    <option value="tea">tea</option>
+                    <option value="dessert">dessert</option>
+                    <option value="beverage">beverage</option>
+                    <option value="flatccino">flatccino</option>
+                    <option value="md">md</option>
+                    <option value="etc">etc</option>
+                </select>
+        </div>
+        <div class="form-group">
+            <label for="menu_con">메뉴Condition</label>
+                <select name = "menu_con" id = "menu_con">
+                    <option value="HOT">HOT</option>
+                    <option value="ICED">ICED</option>
+                    <option value="N_drink">Non_Drink</option>
+                </select>
+        </div>
+        <div class="form-group">
+            <label for="size">카테고리</label>
+                <select name = "size" id = "size">
+                    <option value="0">사이즈없음(0)</option>
+                    <option value="1">L(1)</option>
+                    <option value="2">Ex(2)</option>
+
+                </select>
+        </div>
+        <div class="form-group">
+            <label for="price">가격</label>
+            <input type="text" class="form-control" id="price" placeholder="가격" name="price"/>
+        </div>
+        <div class="form-group">
+            <label for="imgUrl">이미지주소</label>
+            <input type="text" class="form-control" id="imgUrl" placeholder="이미지 주소" name="imgUrl"/>
+        </div>
+        <button type="submit" class="btn">메뉴 추가</button>
+    </form>
+
+    <h3> 쿠폰 추가 </h3>
+    <form method="POST" action='/coupon'>
+        <div class="form-group">
+            <label for="name">쿠폰(12자리)</label>
+            <input type="text" class="form-control" id="coupon" maxlength="12" placeholder="쿠폰" name="coupon"/>            
+        </div>
+        <div class="form-group">
+            <label for="name">쿠폰 만료일</label>
+            <input type="date" class="form-control" id="date" placeholder="쿠폰 만료일" name="date"/>            
+        </div><div class="form-group">
+            <label for="name">금액권</label>
+            <input type="text" class="form-control" id="amount"  placeholder="금액권" name="amount"/>            
+            <label for="name">교환권</label>
+            <input type="text" class="form-control" id="name"  placeholder="메뉴명" name="name"/>            
+    
+        </div>
+        <button type="submit" class="btn">쿠폰 추가</button>
+    </form>
+  </body>
+</html>
+
+{% endblock %}
