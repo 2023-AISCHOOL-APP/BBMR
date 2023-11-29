@@ -50,7 +50,7 @@ class NormalSelectPayAdapter(
         holder.selectNormalMoney.text = formattedCost
         holder.selectNormalOption1.text = selectedMenuList[position].options.toString()
         holder.selectNormalOptionCost.text = selectedMenuList[position].optionTvCount.toString()
-        holder.temperature2.text = selectedMenuList[position].temperature.toString()
+        holder.temperature2.text = "옵션: " + selectedMenuList[position].temperature.toString()
 
 
         Log.d("페이어댑터", "${item.temperature}, ${holder.temperature2.text}")
