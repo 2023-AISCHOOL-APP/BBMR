@@ -2,7 +2,7 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class NormalSelectedMenuInfo(
-    val menuImg: Int,
+    val menuImg: String?,
     val name: String?,
     val price: String?,
     val temperature: String?,
@@ -18,7 +18,7 @@ data class NormalSelectedMenuInfo(
     val menuPrice: Int
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readInt(),
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -35,7 +35,7 @@ data class NormalSelectedMenuInfo(
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(menuImg)
+        parcel.writeString(menuImg)
         parcel.writeString(name)
         parcel.writeString(price)
         parcel.writeString(temperature)

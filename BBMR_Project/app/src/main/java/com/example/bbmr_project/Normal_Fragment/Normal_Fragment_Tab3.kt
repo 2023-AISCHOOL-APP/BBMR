@@ -23,7 +23,7 @@ class Normal_Fragment_Tab3 : Fragment() {
     private fun createNormalTab3List(): List<NormalTakeOutVO> {
         val menuList: ArrayList<Product> = CartStorage.menuList
         val MDList: List<NormalTakeOutVO> = menuList.filter { product ->
-            product.cate == "md" && product.size == 0
+            product.cate == "md"
         }.map { product ->
             NormalTakeOutVO(
                 img = product.image,

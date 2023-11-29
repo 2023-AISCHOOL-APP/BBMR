@@ -4,15 +4,16 @@ import NormalSelectedMenuInfo
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import com.example.bbmr_project.CartStorage
-import com.example.bbmr_project.Product
+import com.bumptech.glide.Glide
 import com.example.bbmr_project.R
 import com.example.bbmr_project.VO.NormalTakeOutVO
 import com.example.bbmr_project.databinding.DialogNormalMenuBinding
+import java.text.DecimalFormat
 
 // 메뉴 선택 시 출력되는 Dialog
 
@@ -59,6 +60,7 @@ class Normal_MenuDialog : DialogFragment() {
             }
             val fragment = Normal_MenuDialog()
             fragment.arguments = args
+            Log.d("메뉴다이얼로그 아이템", "${item.img}, ${item.price}, ${item.name}")
             return fragment
         }
     }
@@ -87,16 +89,19 @@ class Normal_MenuDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val img = arguments?.getInt("normal_img")
+        val img = arguments?.getString("normal_img")
         val name = arguments?.getString("normal_name")
-        val price = arguments?.getString("normal_price")
+        val price = arguments?.getInt("normal_price")
+        Log.d("메뉴다이얼로그 온뷰크리에이트", "$img, $price, $name")
 
         if (img != null) {
-            binding.menuImg.setImageResource(img)
+            // Glide를 사용하여 이미지를 로드하고 설정
+            Glide.with(requireContext())
+                .load(img) // img는 이미지의 URL
+                .into(binding.menuImg)
         }
         binding.name.text = name
-        binding.price.text = price
-
+        binding.price.text = formatPrice(price) // 한화표기
 
         // 이전으로 클릭 시 NormalTakeOut으로 이동
         binding.btnBackN.setOnClickListener {
@@ -130,7 +135,7 @@ class Normal_MenuDialog : DialogFragment() {
             val optionTvCount = tvCount1 * 500 + tvCount2 * 500 + tvCount3 * 500 + tvCount4 * 500
 
             // 가격 문자열을 정수로 변환
-            val priceString = price?.replace(",", "")?.replace("원", "")
+            val priceString = price.toString()?.replace(",", "")?.replace("원", "")
             val menuOnePrice = priceString?.toIntOrNull() ?: 0 // 메뉴 하나의 가격
             val menuPrice = menuOnePrice * tvCount // 메뉴 * 수량
 
@@ -139,9 +144,9 @@ class Normal_MenuDialog : DialogFragment() {
 
             // 선택한 메뉴의 정보를 NormalSelectedMenuInfo 클래스에 저장
             val selectedMenuInfo = NormalSelectedMenuInfo(
-                menuImg = img ?: 0,
+                menuImg = img,
                 name = name,
-                price = price,
+                price = price.toString(),
                 temperature = getSelectedTemperature(),
                 size = getSelectedSize(),
                 tvCount = binding.tvCount.text.toString().toIntOrNull()
@@ -268,8 +273,17 @@ class Normal_MenuDialog : DialogFragment() {
         }
     }
 
+    private fun formatPrice(price: Int?): String {
+        // 1,000원 단위
+        if (price != null) {
+            val decimalFormat = DecimalFormat("#,###")
+            return "${decimalFormat.format(price)}원"
+        }
+        return ""
+    }
+
     private fun updatePrice(tvCount: Int) {
-        val price: String? = arguments?.getString("normal_price")
+        val price: Int? = arguments?.getInt("normal_price")
         val tvCount1 = binding.tvCount1.text.toString().toIntOrNull() ?: 0
         val tvCount2 = binding.tvCount2.text.toString().toIntOrNull() ?: 0
         val tvCount3 = binding.tvCount3.text.toString().toIntOrNull() ?: 0
@@ -279,7 +293,7 @@ class Normal_MenuDialog : DialogFragment() {
 
 
         if (price != null) {
-            val priceInt: Int? = price.replace("[^0-9]".toRegex(), "").toIntOrNull()
+            val priceInt: Int? = price.toString().replace("[^0-9]".toRegex(), "").toIntOrNull()
 
             if (priceInt != null) {
                 val plusPrice = priceInt * tvCount

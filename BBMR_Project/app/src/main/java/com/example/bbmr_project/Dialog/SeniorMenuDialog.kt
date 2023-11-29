@@ -172,15 +172,23 @@ class SeniorMenuDialog : DialogFragment() {
         // ------ 상품의 수량 조절하는 코드 시작 ------
         var MenuCount = 1
         val priceText = binding.tvMenuPrice.text.toString()
+        val priceText = binding.tvMenuPrice.text.toString()
         // Plus버튼 누르면 증가하는 코드
         binding.btnSeniorPlus.setOnClickListener {
             MenuCount++
             // 상품 수량이 증가하는 코드
             binding.tvMenuCount.text = MenuCount.toString()
 
+
             // 수량에 맞춰 가격이 증가하는 코드
             val MenuPlusCountInt: Int? = binding.tvMenuCount.text.toString().toIntOrNull()
             if (MenuPlusCountInt != null) {
+                val modifyprice = priceText
+                    .replace(",", "")
+                    .replace("원", "")
+                    .toIntOrNull() ?: 0
+//                val getPrice = arguments?.getInt("sprice") ?: 0
+                val plusPrice = modifyprice * MenuPlusCountInt
                 val modifyprice = priceText
                     .replace(",", "")
                     .replace("원", "")
@@ -210,6 +218,11 @@ class SeniorMenuDialog : DialogFragment() {
                 val MenuMinusCountInt: Int? =
                     binding.tvMenuCount.text.toString().toIntOrNull()  //replace
                 if (MenuMinusCountInt != null) {
+                    val modifyprice = priceText
+                        .replace(",", "")
+                        .replace("원", "")
+                        .toIntOrNull() ?: 0
+                    val minusPrice = modifyprice * MenuMinusCountInt
                     val modifyprice = priceText
                         .replace(",", "")
                         .replace("원", "")
