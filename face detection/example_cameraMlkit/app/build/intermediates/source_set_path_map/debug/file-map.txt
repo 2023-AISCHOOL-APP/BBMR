@@ -1,0 +1,55 @@
+com.example.camerax_mlkit.app-lifecycle-runtime-ktx-2.6.2-0 C:\Users\gjaischool\.gradle\caches\transforms-3\0a2f5db633d51a5a690819529535f5ab\transformed\lifecycle-runtime-ktx-2.6.2\res
+com.example.camerax_mlkit.app-camera-mlkit-vision-1.3.0-alpha04-1 C:\Users\gjaischool\.gradle\caches\transforms-3\1474215b639840e610ce90133c6a861f\transformed\camera-mlkit-vision-1.3.0-alpha04\res
+com.example.camerax_mlkit.app-lifecycle-viewmodel-2.6.2-2 C:\Users\gjaischool\.gradle\caches\transforms-3\157505bd24700d3d3554a2b0febeacdd\transformed\lifecycle-viewmodel-2.6.2\res
+com.example.camerax_mlkit.app-runtime-1.0.1-3 C:\Users\gjaischool\.gradle\caches\transforms-3\187e40b77c1ef29dafe1e2e8f2efec42\transformed\runtime-1.0.1\res
+com.example.camerax_mlkit.app-camera-camera2-1.3.0-alpha04-4 C:\Users\gjaischool\.gradle\caches\transforms-3\23d2fcf665108e164267bce0606b92cc\transformed\camera-camera2-1.3.0-alpha04\res
+com.example.camerax_mlkit.app-lifecycle-viewmodel-savedstate-2.6.2-5 C:\Users\gjaischool\.gradle\caches\transforms-3\245fd596fa170b1427b7dc9a12286a33\transformed\lifecycle-viewmodel-savedstate-2.6.2\res
+com.example.camerax_mlkit.app-profileinstaller-1.3.0-6 C:\Users\gjaischool\.gradle\caches\transforms-3\2920d72e0a3be3938c7ca21d59b15d42\transformed\profileinstaller-1.3.0\res
+com.example.camerax_mlkit.app-play-services-basement-18.0.0-7 C:\Users\gjaischool\.gradle\caches\transforms-3\3093f2e5542405c19297483e0fa5aaed\transformed\play-services-basement-18.0.0\res
+com.example.camerax_mlkit.app-lifecycle-livedata-core-2.6.2-8 C:\Users\gjaischool\.gradle\caches\transforms-3\37a7638c7db355f35d5c446bd0cbd0a3\transformed\lifecycle-livedata-core-2.6.2\res
+com.example.camerax_mlkit.app-emoji2-1.2.0-9 C:\Users\gjaischool\.gradle\caches\transforms-3\3ba076982ffca3f3978fee5f758f5627\transformed\emoji2-1.2.0\res
+com.example.camerax_mlkit.app-ui-geometry-1.0.1-10 C:\Users\gjaischool\.gradle\caches\transforms-3\3c0ae07c9a20a6308a22a152584ba378\transformed\ui-geometry-1.0.1\res
+com.example.camerax_mlkit.app-constraintlayout-2.1.4-11 C:\Users\gjaischool\.gradle\caches\transforms-3\3c88e6bbb6503b410ed7660c3092d236\transformed\constraintlayout-2.1.4\res
+com.example.camerax_mlkit.app-viewpager2-1.0.0-12 C:\Users\gjaischool\.gradle\caches\transforms-3\413c21bf329222517fe074e4c00b5e82\transformed\viewpager2-1.0.0\res
+com.example.camerax_mlkit.app-fragment-1.3.6-13 C:\Users\gjaischool\.gradle\caches\transforms-3\4f1c49a01b031fa9a15ffde1ee50eede\transformed\fragment-1.3.6\res
+com.example.camerax_mlkit.app-savedstate-1.2.1-14 C:\Users\gjaischool\.gradle\caches\transforms-3\5065b147fbd3fa0457fca7dc86acbfee\transformed\savedstate-1.2.1\res
+com.example.camerax_mlkit.app-activity-compose-1.6.0-15 C:\Users\gjaischool\.gradle\caches\transforms-3\583c0f87b981ebbb6f5d8ce241aa0638\transformed\activity-compose-1.6.0\res
+com.example.camerax_mlkit.app-appcompat-1.6.1-16 C:\Users\gjaischool\.gradle\caches\transforms-3\69bb5d7573a25a89f9f143451697c713\transformed\appcompat-1.6.1\res
+com.example.camerax_mlkit.app-appcompat-resources-1.6.1-17 C:\Users\gjaischool\.gradle\caches\transforms-3\6a3c12fcfb93b89ddb9884b838da45b9\transformed\appcompat-resources-1.6.1\res
+com.example.camerax_mlkit.app-lifecycle-process-2.6.2-18 C:\Users\gjaischool\.gradle\caches\transforms-3\79276fba7bd65563097679f9efd446d0\transformed\lifecycle-process-2.6.2\res
+com.example.camerax_mlkit.app-camera-view-1.3.0-alpha04-19 C:\Users\gjaischool\.gradle\caches\transforms-3\7b1c0776a013a8f248b06a13e710cbd0\transformed\camera-view-1.3.0-alpha04\res
+com.example.camerax_mlkit.app-recyclerview-1.1.0-20 C:\Users\gjaischool\.gradle\caches\transforms-3\7c0ac07e4813f9b9804c317c423750f7\transformed\recyclerview-1.1.0\res
+com.example.camerax_mlkit.app-coordinatorlayout-1.1.0-21 C:\Users\gjaischool\.gradle\caches\transforms-3\7fff0af7d5a76e16699b6c05e87d313d\transformed\coordinatorlayout-1.1.0\res
+com.example.camerax_mlkit.app-lifecycle-livedata-2.6.2-22 C:\Users\gjaischool\.gradle\caches\transforms-3\84b435ab3a462eae4f59d43a78d3c105\transformed\lifecycle-livedata-2.6.2\res
+com.example.camerax_mlkit.app-transition-1.2.0-23 C:\Users\gjaischool\.gradle\caches\transforms-3\8810eefbb503f31f97f4178135f0a4f6\transformed\transition-1.2.0\res
+com.example.camerax_mlkit.app-ui-1.0.1-24 C:\Users\gjaischool\.gradle\caches\transforms-3\88ea03daf43082d515981951f855a142\transformed\ui-1.0.1\res
+com.example.camerax_mlkit.app-startup-runtime-1.1.1-25 C:\Users\gjaischool\.gradle\caches\transforms-3\8d0aca922228318df1a85bc35b637585\transformed\startup-runtime-1.1.1\res
+com.example.camerax_mlkit.app-play-services-base-18.0.1-26 C:\Users\gjaischool\.gradle\caches\transforms-3\94c566d6a32d08ef6c150afeae4be26c\transformed\play-services-base-18.0.1\res
+com.example.camerax_mlkit.app-drawerlayout-1.1.1-27 C:\Users\gjaischool\.gradle\caches\transforms-3\9ea51597e492d24181912333bb4de0f1\transformed\drawerlayout-1.1.1\res
+com.example.camerax_mlkit.app-cardview-1.0.0-28 C:\Users\gjaischool\.gradle\caches\transforms-3\9f86a1605a8374208ce608853d75ea5a\transformed\cardview-1.0.0\res
+com.example.camerax_mlkit.app-camera-core-1.3.0-alpha04-29 C:\Users\gjaischool\.gradle\caches\transforms-3\ab7eba630326bb0f5ca98c461ba8f520\transformed\camera-core-1.3.0-alpha04\res
+com.example.camerax_mlkit.app-activity-1.6.0-30 C:\Users\gjaischool\.gradle\caches\transforms-3\b09f885516f76c15766c96443ff40ecf\transformed\activity-1.6.0\res
+com.example.camerax_mlkit.app-annotation-experimental-1.3.0-31 C:\Users\gjaischool\.gradle\caches\transforms-3\b6f6b0168db4ee372da66697d322a7ef\transformed\annotation-experimental-1.3.0\res
+com.example.camerax_mlkit.app-runtime-saveable-1.0.1-32 C:\Users\gjaischool\.gradle\caches\transforms-3\ba05db9cb99f74531779192f44afd98d\transformed\runtime-saveable-1.0.1\res
+com.example.camerax_mlkit.app-ui-text-1.0.1-33 C:\Users\gjaischool\.gradle\caches\transforms-3\bec1d18a93b80b387eac8b91b975966f\transformed\ui-text-1.0.1\res
+com.example.camerax_mlkit.app-camera-lifecycle-1.3.0-alpha04-34 C:\Users\gjaischool\.gradle\caches\transforms-3\c80ab9b64c09f05485f7815d7ea68c85\transformed\camera-lifecycle-1.3.0-alpha04\res
+com.example.camerax_mlkit.app-savedstate-ktx-1.2.1-35 C:\Users\gjaischool\.gradle\caches\transforms-3\cc2a07f7852ddaa8d358942005df0b9c\transformed\savedstate-ktx-1.2.1\res
+com.example.camerax_mlkit.app-camera-video-1.3.0-alpha04-36 C:\Users\gjaischool\.gradle\caches\transforms-3\cfb3bd76787510b2d1c22a6ffd9d729e\transformed\camera-video-1.3.0-alpha04\res
+com.example.camerax_mlkit.app-ui-unit-1.0.1-37 C:\Users\gjaischool\.gradle\caches\transforms-3\d353d5aada4640d276171c0ea3607ea0\transformed\ui-unit-1.0.1\res
+com.example.camerax_mlkit.app-core-1.9.0-38 C:\Users\gjaischool\.gradle\caches\transforms-3\d3783e733eeab7851c343ea3b248d521\transformed\core-1.9.0\res
+com.example.camerax_mlkit.app-lifecycle-viewmodel-ktx-2.6.2-39 C:\Users\gjaischool\.gradle\caches\transforms-3\d386bace113b97efcefb46b2844e47f7\transformed\lifecycle-viewmodel-ktx-2.6.2\res
+com.example.camerax_mlkit.app-ui-graphics-1.0.1-40 C:\Users\gjaischool\.gradle\caches\transforms-3\da214988e14f380e4c5347c806e9bae6\transformed\ui-graphics-1.0.1\res
+com.example.camerax_mlkit.app-ui-util-1.0.1-41 C:\Users\gjaischool\.gradle\caches\transforms-3\dea440f683577849de68a5257e6e1803\transformed\ui-util-1.0.1\res
+com.example.camerax_mlkit.app-core-runtime-2.2.0-42 C:\Users\gjaischool\.gradle\caches\transforms-3\e0187da435bcb70e3f3af7eed07a8c77\transformed\core-runtime-2.2.0\res
+com.example.camerax_mlkit.app-core-ktx-1.9.0-43 C:\Users\gjaischool\.gradle\caches\transforms-3\e1f87dac709146500daef8a23bf459c8\transformed\core-ktx-1.9.0\res
+com.example.camerax_mlkit.app-material-1.8.0-44 C:\Users\gjaischool\.gradle\caches\transforms-3\e641c65546bfa47a60de25787703d5bf\transformed\material-1.8.0\res
+com.example.camerax_mlkit.app-activity-ktx-1.6.0-45 C:\Users\gjaischool\.gradle\caches\transforms-3\e6cad14a0d63f25889d3443339c9df16\transformed\activity-ktx-1.6.0\res
+com.example.camerax_mlkit.app-lifecycle-runtime-2.6.2-46 C:\Users\gjaischool\.gradle\caches\transforms-3\e952665abeb30bda8a6f4dd31dd924c9\transformed\lifecycle-runtime-2.6.2\res
+com.example.camerax_mlkit.app-emoji2-views-helper-1.2.0-47 C:\Users\gjaischool\.gradle\caches\transforms-3\f4d8d0da6f4b6915c4b50d1e614d2be5\transformed\emoji2-views-helper-1.2.0\res
+com.example.camerax_mlkit.app-pngs-48 C:\Users\gjaischool\Desktop\BBMR\face detection\example_cameraMlkit\app\build\generated\res\pngs\debug
+com.example.camerax_mlkit.app-resValues-49 C:\Users\gjaischool\Desktop\BBMR\face detection\example_cameraMlkit\app\build\generated\res\resValues\debug
+com.example.camerax_mlkit.app-packageDebugResources-50 C:\Users\gjaischool\Desktop\BBMR\face detection\example_cameraMlkit\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
+com.example.camerax_mlkit.app-packageDebugResources-51 C:\Users\gjaischool\Desktop\BBMR\face detection\example_cameraMlkit\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
+com.example.camerax_mlkit.app-merged_res-52 C:\Users\gjaischool\Desktop\BBMR\face detection\example_cameraMlkit\app\build\intermediates\merged_res\debug
+com.example.camerax_mlkit.app-debug-53 C:\Users\gjaischool\Desktop\BBMR\face detection\example_cameraMlkit\app\src\debug\res
+com.example.camerax_mlkit.app-main-54 C:\Users\gjaischool\Desktop\BBMR\face detection\example_cameraMlkit\app\src\main\res

@@ -3,22 +3,24 @@ from datetime import datetime
 from io import BytesIO
 import io
 import secrets
-# from tkinter import Image
+from tkinter import Image
 from PIL import Image # 2번 Image 모듈이 tkinter 패키지에 포함되어 3번으로 수정
 from connection import get_connection
 from mysql.connector import Error
 from flask import Flask, redirect, render_template, request, jsonify, send_file, session, url_for
 from flask_restful import Resource, Api, reqparse, abort
-# from tensorflow import keras
-# from keras import models, layers
-# from keras.layers import Dense
-# from keras.preprocessing import image
-# from keras.applications.vgg16 import preprocess_input
+from tensorflow import keras
+from keras import models, layers
+from keras.layers import Dense
+from keras.preprocessing import image
+from keras.applications.vgg16 import preprocess_input
 from werkzeug.utils import secure_filename # 231116 filename불러오기 위한 import
 import joblib # 231115 모델 로딩 라이브러리 사용 - 정희석(8-12)
-# import tensorflow as tf
+import tensorflow as tf
 import numpy as np
 import os # 231116 추가 - 이미지를 PIL Image로 변환
+import cv2
+from deepface import DeepFace # 라이브러리 가져오기
 
 app = Flask(__name__)
 api = Api(app)
@@ -257,7 +259,6 @@ class TodoList(Resource):
                 "imageUrl": item[6],
                 "category": item[2]
             }
-        print(menu)
 
         return jsonify({"menu": menu})
 
@@ -292,28 +293,33 @@ class checkCoupon(Resource):
             if current_date <= expiry_date:
                 # 금액권 쿠폰일때(교환권 쿠폰은 amount = 0)
                 if amount > 0 :
-                    return {"result": amount}
+                    return {"result": {0:amount}}
                 elif amount == 0 and menu_id is None:
-                    return {"result" : "잔액이 없습니다."}
+                    return {"result" : {1:"잔액이 없습니다."}}
                 else:
                     # 사용가능 할 때 return 해줄 result 값 DB에서 가져오기 
                     conn = get_connection()
                     cursor = conn.cursor()
                     cursor.execute(f"select menu_id, name, price, menu_con, size from menu where menu_id='{menu_id}'")
-                    result = cursor.fetchall()[0]
+                    result_coupon = cursor.fetchall()[0]
+                    result = {"menu_id":result_coupon[0],
+                              "name":result_coupon[1],
+                              "price":result_coupon[2],
+                              "menu_con":result_coupon[3],
+                              "size":result_coupon[4]}
                     conn.close()
                     # 사용여부 체크 C_use==0 이면 사용가능
                     if C_use==0:
-                        return {"result" : result}
+                        return {"result" : {2:result}}
                     else:
-                        return {"result" : "이미 사용한 쿠폰입니다."}
+                        return {"result" : {1:"이미 사용한 쿠폰입니다."}}
             else:
-                return {"result" : "사용기한이 지났습니다."}    
+                return {"result" : {1:"사용기한이 지났습니다."}}    
             
         # 쿠폰번호를 잘못입력했거나 없을때(입력한 코드에 대한 정보가 DB에 없을때)           
         else:
             result = "잘못 입력 또는 없는 쿠폰입니다."
-            return {"result": result}
+            return {"result": {1:result}}
 
 
 
@@ -387,52 +393,36 @@ class SaveOrder(Resource):
 
 #  ------ 모델 코드 시작 ------
 
-# # 학습된 모델 로드
-# # 231121
-# model = tf.keras.models.load_model('test_face_cnn_model.h5')
-# @app.route('/upload', methods=['POST'])
-# def upload_file():
-#     if 'image' not in request.files:
-#         return jsonify({'error': 'No image part'}), 400
+     
+class Face(Resource):
+    def post(self):
+        if 'image' not in request.files:
+            return jsonify({'error': 'No image part'}), 400
 
-#     file = request.files['image']
-#     print(file)
+        file = request.files['image']
+        if file:
+            image = Image.open(io.BytesIO(file.read()))
+            image = image.rotate(90, expand=True)
+            image = image.convert('RGB')
+            image.save('image/image1.png')
+            print("이미지 -> ", image)
 
-#     if file:
-#         # 이미지 읽기 및 리사이즈
-#         image = Image.open(io.BytesIO(file.read()))
-#         image = image.rotate(90, expand=True)
-
-#         # RGBA에서 RGB로 변환
-#         image = image.convert('RGB')
-        
-#         print("image -> ",image)
-#         image.save('image/image1.png')
-#         image = image.resize((480, 360))  # 너비 480, 높이 360으로 리사이즈
-#         image.save('image/image2.png')
-#         # 필요한 추가 전처리 과정
-#         # 예시: 이미지를 numpy 배열로 변환
-#         image = np.array(image)
-#         image = image / 255.0  # 정규화
-#         image = np.expand_dims(image, axis=0)  # 모델 입력 형태에 맞게 차원 확장
-
-#         # 모델 예측
-#         prediction = model.predict(image)
-#         print("prediction -> " , prediction[0][0])
-
-#         # 예측 결과 처리 및 반환
-#         # 예시: 예측 결과의 최대값 인덱스 반환
-#         if prediction[0][0] < 0.5:
-#             result = 0
-#         else:
-#             result = 1
-#         # result = 0
-#         print("result ->", result)
-#         return {'result': result}
+            img_path = 'image/image1.png'# 이미지 읽기
+            img = cv2.imread(img_path)
+            # DeepFace.analyze에 이미지 객체를 전달
+            deep_result = DeepFace.analyze(img_path=img, actions=['age'], enforce_detection=False)
+            print("result ->", deep_result)
+            age = deep_result[0]["age"]
+            print("age ->", age)
+            if age < 40:
+                result = 1
+            else:
+                result = 0
+            return {'result': result}
 
 #  ------ 모델 코드 끝 -------
 
-
+api.add_resource(Face,"/face/")
 api.add_resource(SaveOrder,"/saveorder/")
 api.add_resource(checkCoupon,"/checkcoupon/")
 api.add_resource(TodoList,'/todos/')

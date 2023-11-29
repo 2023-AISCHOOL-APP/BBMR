@@ -37,12 +37,12 @@ interface RetrofitAPI {
     @GET("/todos/")
     fun getTodoList() : Call<JsonObject>
     @POST("/checkcoupon/")
-    fun sendCoupon(@Body coupon: FormBody): Call<JsonObject>
+    fun sendCoupon(@Body CouponNum: FormBody): Call<JsonObject>
     @POST("/saveorder/")
     fun sendOrder(@Body orderData: OrderData): Call<JsonObject>
 }
 interface ApiService {
     @Multipart
-    @POST("/upload")
+    @POST("/face/")
     fun uploadImage(@Part image: MultipartBody.Part): Call<RfAPI>
 }
