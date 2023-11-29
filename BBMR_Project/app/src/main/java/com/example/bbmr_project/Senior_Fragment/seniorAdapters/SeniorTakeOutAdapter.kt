@@ -3,6 +3,7 @@ package com.example.bbmr_project.Senior_Fragment.seniorAdapters
 import android.content.Context
 import android.os.Bundle
 import android.text.SpannableStringBuilder
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -58,24 +59,35 @@ class SeniorTakeOutAdapter(
     // ViewHolder에 데이터 바인딩
     // 메뉴 사진, 이름, 가격 설정
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Glide.with(context).load(menuList[position].simg.toString()).into(holder.imgS)
+        Glide.with(context).load(menuList[position].simg).into(holder.imgS)
+        Log.d("안녕하세요", menuList.toString())
+
+        holder.tvNameS.text = menuList[position].sname
         // ------ 메뉴 목록 이름 접근해서 줄 바꿈 코드 시작 ------
         val text = menuList[position].sname
         val spannableStringBuilder = SpannableStringBuilder(text)
-        if (text.length >= 6 && text.contains(" ")) {
+//        if (text.length >= 6 && text.contains(" ")) {
+//            val indexLine = text.indexOf(' ')
+//            val modifiedText = StringBuilder(text)
+//                .replace(indexLine, indexLine + 1, "\n")
+//                .toString()
+//            spannableStringBuilder.replace(0, text.length, modifiedText)
+//            holder.tvNameS.text = spannableStringBuilder
+//        } else if (text.length >= 7) { // 카라멜마끼야또 저격
+//            val modifiedText = StringBuilder(text)
+//                .insert(3, "\n").toString()
+//            spannableStringBuilder.replace(0, text.length, modifiedText)
+//            holder.tvNameS.text = spannableStringBuilder
+//        } else { // 띄어쓰기 제외한 것 들
+//            holder.tvNameS.text = menuList[position].sname
+//        }
+        if (text.contains(" ")) {
             val indexLine = text.indexOf(' ')
             val modifiedText = StringBuilder(text)
                 .replace(indexLine, indexLine + 1, "\n")
                 .toString()
             spannableStringBuilder.replace(0, text.length, modifiedText)
             holder.tvNameS.text = spannableStringBuilder
-        } else if (text.length >= 7) { // 카라멜마끼야또 저격
-            val modifiedText = StringBuilder(text)
-                .insert(2, "\n").toString()
-            spannableStringBuilder.replace(0, text.length, modifiedText)
-            holder.tvNameS.text = spannableStringBuilder
-        } else { // 띄어쓰기 제외한 것 들
-            holder.tvNameS.text = menuList[position].sname
         }
         // ------ 메뉴 목록 이름 접근해서 줄 바꿈 코드 끝 ------
 

@@ -9,9 +9,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.widget.Button
+import com.bumptech.glide.Glide
 import com.example.bbmr_project.CartStorage
 import com.example.bbmr_project.Product
 import com.example.bbmr_project.R
+import com.example.bbmr_project.VO.Senior_TakeOutVO
 
 class SeniorSelectBasketAdapter(
     val context: Context,
@@ -35,9 +37,10 @@ class SeniorSelectBasketAdapter(
     private val inflater: LayoutInflater = LayoutInflater.from(context)
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        //        val basketImgSenior : ImageView = view.findViewById(R.id.basketImgSenior)
+        val basketImgSenior : ImageView = view.findViewById(R.id.basketImgSenior)
         val tvBasketNameSenior: TextView = view.findViewById(R.id.tvBasketNameSenior)
         val tvBasketCountSenior: TextView = view.findViewById(R.id.tvBasketCountSenior)
+        val tvBasketTemSenior : TextView = view.findViewById(R.id.tvBasketTemSenior)
         val btnBasketMinusSenior: Button = view.findViewById(R.id.btnBasketMinusSenior)
         val btnBasketPlusSenior: Button = view.findViewById(R.id.btnBasketPlusSenior)
         val btnBasketCancellSenior: Button = view.findViewById(R.id.btnBasketCancelSenior)
@@ -53,10 +56,12 @@ class SeniorSelectBasketAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val selectSeniorItem = productList[position]
+        Glide.with(context).load(selectSeniorItem.image).into(holder.basketImgSenior)
+        Log.d("BasketAdapter", "$selectSeniorItem")
 
-//        holder.basketImgSenior.setImageResource(selectSeniorItem.image)
         holder.tvBasketNameSenior.text = selectSeniorItem.name
         holder.tvBasketCountSenior.text = selectSeniorItem.count.toString()
+        holder.tvBasketTemSenior.text = selectSeniorItem.temperature
 
         // 시니어 장바구니에서 plus 버튼 클릭
         holder.btnBasketPlusSenior.setOnClickListener {

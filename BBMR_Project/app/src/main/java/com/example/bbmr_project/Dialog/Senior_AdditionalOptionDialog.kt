@@ -88,21 +88,12 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
 
         // ------ 이전, 선택 완료 코드 시작 ------
         binding.btnCnclAddiOpDSAO.setOnClickListener {
-                    val bundle = arguments
-                    if (bundle != null) {
-                        val customOption = bundle.getSerializable("product_option") as Product
-                        Log.d("Product라는 data List", "${customOption}")
-                        val bundle2 = Bundle()
-                        val dialogFragment = SeniorMenuDialog()
-                        bundle2.putSerializable("final_product", customOption)
-                        dialogFragment.arguments = bundle2
-                        dialogFragment.show(childFragmentManager, "Senior_MenuDialog")
-            }
             dismiss()
         }
 
         binding.btnOkAddiOpDSAO.setOnClickListener {
             // ------ Product라는 Class 담아오기 코드 시작 ------
+            dismiss()
             val bundle = arguments
             if (bundle != null) {
                 val customOption = bundle.getSerializable("product_option") as Product
@@ -141,7 +132,7 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
 //                startActivity(intent)
             }
             // ------ Product라는 Class 담아오기 코드 끝 ------
-            dismiss()
+//            dismiss()
         }
         // ------ 이전, 선택 완료 코드 끝 ------
 

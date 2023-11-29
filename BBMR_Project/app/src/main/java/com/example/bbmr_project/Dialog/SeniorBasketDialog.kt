@@ -15,6 +15,7 @@ import com.example.bbmr_project.CartStorage
 import com.example.bbmr_project.Product
 import com.example.bbmr_project.R
 import com.example.bbmr_project.Senior_Fragment.seniorAdapters.SeniorSelectBasketAdapter
+import com.example.bbmr_project.VO.Senior_TakeOutVO
 import com.example.bbmr_project.base.BaseDialogFragment
 import com.example.bbmr_project.databinding.DialogSeniorBasketBinding
 

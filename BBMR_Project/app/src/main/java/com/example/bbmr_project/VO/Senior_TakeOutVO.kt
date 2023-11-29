@@ -3,7 +3,7 @@ package com.example.bbmr_project.VO
 import android.os.Parcel
 import android.os.Parcelable
 
-class Senior_TakeOutVO (val simg : String = "", val  sname : String = "", val sprice : Int = 0) :
+class Senior_TakeOutVO (val simg : String = "", val  sname : String = "", val sprice : Int = 0, ) :
     Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",

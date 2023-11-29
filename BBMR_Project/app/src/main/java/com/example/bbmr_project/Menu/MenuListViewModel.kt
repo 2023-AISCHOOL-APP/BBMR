@@ -42,22 +42,18 @@ class MenuListViewModel(
     //첫 번째 메뉴 리스트 생성 메서드
     private fun createMenuList1(): List<Senior_TakeOutVO> {
         return listOf(
-            Senior_TakeOutVO("", "아메리카노", 2000),
-            Senior_TakeOutVO("", "메리카노아", 3000),
-            Senior_TakeOutVO("", "리카노아메", 4000),
-            Senior_TakeOutVO("", "카노아메리", 5000),
-            Senior_TakeOutVO("", "아메리카노", 2000),
-            Senior_TakeOutVO("", "메리카노아", 3000),
-            Senior_TakeOutVO("", "리카노아메", 4000),
-            Senior_TakeOutVO("", "카노아메리", 5000),
-            Senior_TakeOutVO("", "아메리카노", 2000),
-            Senior_TakeOutVO("", "메리카노아", 3000),
-            Senior_TakeOutVO("", "리카노아메", 4000),
-            Senior_TakeOutVO("", "카노아메리", 5000),
-            Senior_TakeOutVO("", "아메리카노", 2000),
-            Senior_TakeOutVO("", "메리카노아", 3000),
-            Senior_TakeOutVO("", "리카노아메", 4000),
-            Senior_TakeOutVO("", "카노아메리", 5000),
+            Senior_TakeOutVO("", "아메리카노", 3200),
+            Senior_TakeOutVO("", "카페 라떼", 4200),
+            Senior_TakeOutVO("", "바닐라 라떼", 4500),
+            Senior_TakeOutVO("", "토피넛 라떼", 4200),
+            Senior_TakeOutVO("", "고구마 라떼", 4200),
+            Senior_TakeOutVO("", "밀크티", 4200),
+            Senior_TakeOutVO("", "자몽차", 4200),
+            Senior_TakeOutVO("", "유자차", 4200),
+            Senior_TakeOutVO("", "퓨어 페퍼민트", 3200),
+            Senior_TakeOutVO("", "피치 얼그레이", 3200),
+            Senior_TakeOutVO("", "플레인 와플", 2700),
+            Senior_TakeOutVO("", "콘치즈 계란빵", 2900),
         )
     }
 

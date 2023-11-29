@@ -10,15 +10,15 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="350dp"
         android:background="@color/white">
 
         <!-- Your existing layout code here -->
 
         <ImageView
             android:id="@+id/imgS"
-            android:layout_width="214dp"
-            android:layout_height="208dp"
+            android:layout_width="0dp"
+            android:layout_height="180dp"
             android:src="@drawable/coffee"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,28 +26,30 @@
 
         <TextView
             android:id="@+id/tvNameS"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginTop="4dp"
             android:gravity="center"
             android:text="아 메리카노\n아"
             android:textColor="#000000"
-            android:textSize="50sp"
+            android:textSize="40sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/tvPriceS"
             app:layout_constraintEnd_toEndOf="@+id/imgS"
+            app:layout_constraintHorizontal_bias="0.473"
             app:layout_constraintStart_toStartOf="@+id/imgS"
             app:layout_constraintTop_toBottomOf="@+id/imgS"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.386" />
 
         <TextView
             android:id="@+id/tvPriceS"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="4dp"
+            android:gravity="center"
             android:text="2,000원"
             android:textColor="#000000"
-            android:textSize="45sp"
+            android:textSize="35sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

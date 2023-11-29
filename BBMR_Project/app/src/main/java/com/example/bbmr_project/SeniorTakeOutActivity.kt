@@ -91,7 +91,7 @@ class SeniorTakeOutActivity() : AppCompatActivity(), OnCartChangeListener {
 
             fragment?.let {
                 if (it.menuIndex <= it.getMenuListSize()){
-                it.menuIndex += 6
+                it.menuIndex += 5
                 it.scrollToPosition(it.menuIndex)
                 }
             }
@@ -100,18 +100,15 @@ class SeniorTakeOutActivity() : AppCompatActivity(), OnCartChangeListener {
             val fragment =
                 supportFragmentManager.findFragmentById(R.id.fl1) as? SeniorTabFragment
             fragment?.let {
-                if (it.menuIndex != 0 && it.menuIndex >=6){
-                    it.menuIndex -= 6
+                if (it.menuIndex != 0 && it.menuIndex >= 6) {
+                    it.menuIndex -= 5
                     it.scrollToPosition(it.menuIndex)
                 }
+//                else if (it.menuIndex == it.getMenuListSize())
             }
         }
 
 
-//        // 다음 버튼 클릭시 기존의 리스트 리셋후 새로운 리스트 추가
-//        binding.btnPre.setOnClickListener { (supportFragmentManager.findFragmentById(R.id.fl1) as? Senior_Fragment_Tab_Recommend)?.switchToMenuList1() }
-//        // 다음 버튼 클릭시 기존의 리스트 리셋후 새로운 리스트 추가
-//        binding.btnNext.setOnClickListener { (supportFragmentManager.findFragmentById(R.id.fl1) as? Senior_Fragment_Tab_Recommend)?.switchToMenuList2() }
 
         // ------------장바구니 버튼 기능 & 연속클릭 방지-----------//
         binding.btnBasket.setOnClickListener {
