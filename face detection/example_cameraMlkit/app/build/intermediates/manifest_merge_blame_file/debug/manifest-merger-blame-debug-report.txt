@@ -1,0 +1,269 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<!--
+3  ~ Copyright 2022 The Android Open Source Project
+4  ~
+5  ~ Licensed under the Apache License, Version 2.0 (the "License");
+6  ~ you may not use this file except in compliance with the License.
+7  ~ You may obtain a copy of the License at
+8  ~
+9  ~ https://www.apache.org/licenses/LICENSE-2.0
+10  ~
+11  ~ Unless required by applicable law or agreed to in writing, software
+12  ~ distributed under the License is distributed on an "AS IS" BASIS,
+13  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+14  ~ See the License for the specific language governing permissions and
+15  ~ limitations under the License.
+16-->
+17<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+18    package="com.example.camerax_mlkit"
+19    android:versionCode="1"
+20    android:versionName="1.0" >
+21
+22    <uses-sdk
+23        android:minSdkVersion="21"
+24        android:targetSdkVersion="33" />
+25
+26    <uses-permission android:name="android.permission.INTERNET" />
+26-->C:\Users\gjaischool\Desktop\BBMR\face detection\example_cameraMlkit\app\src\main\AndroidManifest.xml:21:5-66
+26-->C:\Users\gjaischool\Desktop\BBMR\face detection\example_cameraMlkit\app\src\main\AndroidManifest.xml:21:22-64
+27
+28    <uses-feature android:name="android.hardware.camera.any" />
+28-->C:\Users\gjaischool\Desktop\BBMR\face detection\example_cameraMlkit\app\src\main\AndroidManifest.xml:22:5-64
+28-->C:\Users\gjaischool\Desktop\BBMR\face detection\example_cameraMlkit\app\src\main\AndroidManifest.xml:22:19-61
+29
+30    <uses-permission android:name="android.permission.CAMERA" />
+30-->C:\Users\gjaischool\Desktop\BBMR\face detection\example_cameraMlkit\app\src\main\AndroidManifest.xml:23:5-65
+30-->C:\Users\gjaischool\Desktop\BBMR\face detection\example_cameraMlkit\app\src\main\AndroidManifest.xml:23:22-62
+31
+32    <permission
+32-->[androidx.core:core:1.9.0] C:\Users\gjaischool\.gradle\caches\transforms-3\d3783e733eeab7851c343ea3b248d521\transformed\core-1.9.0\AndroidManifest.xml:22:5-24:47
+33        android:name="com.example.camerax_mlkit.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+33-->[androidx.core:core:1.9.0] C:\Users\gjaischool\.gradle\caches\transforms-3\d3783e733eeab7851c343ea3b248d521\transformed\core-1.9.0\AndroidManifest.xml:23:9-81
+34        android:protectionLevel="signature" />
+34-->[androidx.core:core:1.9.0] C:\Users\gjaischool\.gradle\caches\transforms-3\d3783e733eeab7851c343ea3b248d521\transformed\core-1.9.0\AndroidManifest.xml:24:9-44
+35
+36    <uses-permission android:name="com.example.camerax_mlkit.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" /> <!-- Although the *SdkVersion is captured in gradle build files, this is required for non gradle builds -->
+36-->[androidx.core:core:1.9.0] C:\Users\gjaischool\.gradle\caches\transforms-3\d3783e733eeab7851c343ea3b248d521\transformed\core-1.9.0\AndroidManifest.xml:26:5-97
+36-->[androidx.core:core:1.9.0] C:\Users\gjaischool\.gradle\caches\transforms-3\d3783e733eeab7851c343ea3b248d521\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
+37    <!-- <uses-sdk android:minSdkVersion="14"/> -->
+38    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+38-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\gjaischool\.gradle\caches\transforms-3\2785bedb487dcd1bdb9056ee63210e65\transformed\transport-backend-cct-2.3.3\AndroidManifest.xml:25:5-79
+38-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\gjaischool\.gradle\caches\transforms-3\2785bedb487dcd1bdb9056ee63210e65\transformed\transport-backend-cct-2.3.3\AndroidManifest.xml:25:22-76
+39
+40    <application
+40-->C:\Users\gjaischool\Desktop\BBMR\face detection\example_cameraMlkit\app\src\main\AndroidManifest.xml:25:5-49:19
+41        android:allowBackup="true"
+41-->C:\Users\gjaischool\Desktop\BBMR\face detection\example_cameraMlkit\app\src\main\AndroidManifest.xml:27:9-35
+42        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+42-->[androidx.core:core:1.9.0] C:\Users\gjaischool\.gradle\caches\transforms-3\d3783e733eeab7851c343ea3b248d521\transformed\core-1.9.0\AndroidManifest.xml:28:18-86
+43        android:dataExtractionRules="@xml/data_extraction_rules"
+43-->C:\Users\gjaischool\Desktop\BBMR\face detection\example_cameraMlkit\app\src\main\AndroidManifest.xml:28:9-65
+44        android:debuggable="true"
+45        android:extractNativeLibs="true"
+46        android:fullBackupContent="@xml/backup_rules"
+46-->C:\Users\gjaischool\Desktop\BBMR\face detection\example_cameraMlkit\app\src\main\AndroidManifest.xml:29:9-54
+47        android:icon="@mipmap/ic_launcher"
+47-->C:\Users\gjaischool\Desktop\BBMR\face detection\example_cameraMlkit\app\src\main\AndroidManifest.xml:30:9-43
+48        android:label="@string/app_name"
+48-->C:\Users\gjaischool\Desktop\BBMR\face detection\example_cameraMlkit\app\src\main\AndroidManifest.xml:31:9-41
+49        android:roundIcon="@mipmap/ic_launcher_round"
+49-->C:\Users\gjaischool\Desktop\BBMR\face detection\example_cameraMlkit\app\src\main\AndroidManifest.xml:32:9-54
+50        android:supportsRtl="true"
+50-->C:\Users\gjaischool\Desktop\BBMR\face detection\example_cameraMlkit\app\src\main\AndroidManifest.xml:33:9-35
+51        android:testOnly="true"
+52        android:theme="@style/Theme.CameraxMLKit"
+52-->C:\Users\gjaischool\Desktop\BBMR\face detection\example_cameraMlkit\app\src\main\AndroidManifest.xml:34:9-50
+53        android:usesCleartextTraffic="true" >
+53-->C:\Users\gjaischool\Desktop\BBMR\face detection\example_cameraMlkit\app\src\main\AndroidManifest.xml:26:9-44
+54        <activity
+54-->C:\Users\gjaischool\Desktop\BBMR\face detection\example_cameraMlkit\app\src\main\AndroidManifest.xml:36:9-48:20
+55            android:name="com.example.camerax_mlkit.MainActivity"
+55-->C:\Users\gjaischool\Desktop\BBMR\face detection\example_cameraMlkit\app\src\main\AndroidManifest.xml:37:13-41
+56            android:exported="true" >
+56-->C:\Users\gjaischool\Desktop\BBMR\face detection\example_cameraMlkit\app\src\main\AndroidManifest.xml:38:13-36
+57            <intent-filter>
+57-->C:\Users\gjaischool\Desktop\BBMR\face detection\example_cameraMlkit\app\src\main\AndroidManifest.xml:39:13-43:29
+58                <action android:name="android.intent.action.MAIN" />
+58-->C:\Users\gjaischool\Desktop\BBMR\face detection\example_cameraMlkit\app\src\main\AndroidManifest.xml:40:17-69
+58-->C:\Users\gjaischool\Desktop\BBMR\face detection\example_cameraMlkit\app\src\main\AndroidManifest.xml:40:25-66
+59
+60                <category android:name="android.intent.category.LAUNCHER" />
+60-->C:\Users\gjaischool\Desktop\BBMR\face detection\example_cameraMlkit\app\src\main\AndroidManifest.xml:42:17-77
+60-->C:\Users\gjaischool\Desktop\BBMR\face detection\example_cameraMlkit\app\src\main\AndroidManifest.xml:42:27-74
+61            </intent-filter>
+62
+63            <meta-data
+63-->C:\Users\gjaischool\Desktop\BBMR\face detection\example_cameraMlkit\app\src\main\AndroidManifest.xml:45:13-47:36
+64                android:name="android.app.lib_name"
+64-->C:\Users\gjaischool\Desktop\BBMR\face detection\example_cameraMlkit\app\src\main\AndroidManifest.xml:46:17-52
+65                android:value="" />
+65-->C:\Users\gjaischool\Desktop\BBMR\face detection\example_cameraMlkit\app\src\main\AndroidManifest.xml:47:17-33
+66        </activity>
+67
+68        <service
+68-->[androidx.camera:camera-camera2:1.3.0-alpha04] C:\Users\gjaischool\.gradle\caches\transforms-3\23d2fcf665108e164267bce0606b92cc\transformed\camera-camera2-1.3.0-alpha04\AndroidManifest.xml:24:9-33:19
+69            android:name="androidx.camera.core.impl.MetadataHolderService"
+69-->[androidx.camera:camera-camera2:1.3.0-alpha04] C:\Users\gjaischool\.gradle\caches\transforms-3\23d2fcf665108e164267bce0606b92cc\transformed\camera-camera2-1.3.0-alpha04\AndroidManifest.xml:25:13-75
+70            android:enabled="false"
+70-->[androidx.camera:camera-camera2:1.3.0-alpha04] C:\Users\gjaischool\.gradle\caches\transforms-3\23d2fcf665108e164267bce0606b92cc\transformed\camera-camera2-1.3.0-alpha04\AndroidManifest.xml:26:13-36
+71            android:exported="false" >
+71-->[androidx.camera:camera-camera2:1.3.0-alpha04] C:\Users\gjaischool\.gradle\caches\transforms-3\23d2fcf665108e164267bce0606b92cc\transformed\camera-camera2-1.3.0-alpha04\AndroidManifest.xml:27:13-37
+72            <meta-data
+72-->[androidx.camera:camera-camera2:1.3.0-alpha04] C:\Users\gjaischool\.gradle\caches\transforms-3\23d2fcf665108e164267bce0606b92cc\transformed\camera-camera2-1.3.0-alpha04\AndroidManifest.xml:30:13-32:89
+73                android:name="androidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER"
+73-->[androidx.camera:camera-camera2:1.3.0-alpha04] C:\Users\gjaischool\.gradle\caches\transforms-3\23d2fcf665108e164267bce0606b92cc\transformed\camera-camera2-1.3.0-alpha04\AndroidManifest.xml:31:17-103
+74                android:value="androidx.camera.camera2.Camera2Config$DefaultProvider" />
+74-->[androidx.camera:camera-camera2:1.3.0-alpha04] C:\Users\gjaischool\.gradle\caches\transforms-3\23d2fcf665108e164267bce0606b92cc\transformed\camera-camera2-1.3.0-alpha04\AndroidManifest.xml:32:17-86
+75        </service>
+76        <service
+76-->[com.google.android.gms:play-services-mlkit-face-detection:17.0.1] C:\Users\gjaischool\.gradle\caches\transforms-3\1589438864fdbf1b72ef7d821aecd342\transformed\play-services-mlkit-face-detection-17.0.1\AndroidManifest.xml:9:9-15:19
+77            android:name="com.google.mlkit.common.internal.MlKitComponentDiscoveryService"
+77-->[com.google.android.gms:play-services-mlkit-face-detection:17.0.1] C:\Users\gjaischool\.gradle\caches\transforms-3\1589438864fdbf1b72ef7d821aecd342\transformed\play-services-mlkit-face-detection-17.0.1\AndroidManifest.xml:10:13-91
+78            android:directBootAware="true"
+78-->[com.google.mlkit:common:18.1.0] C:\Users\gjaischool\.gradle\caches\transforms-3\7b1d74f86d60fbab12d955a5fe01b4fc\transformed\common-18.1.0\AndroidManifest.xml:17:13-43
+79            android:exported="false" >
+79-->[com.google.android.gms:play-services-mlkit-face-detection:17.0.1] C:\Users\gjaischool\.gradle\caches\transforms-3\1589438864fdbf1b72ef7d821aecd342\transformed\play-services-mlkit-face-detection-17.0.1\AndroidManifest.xml:11:13-37
+80            <meta-data
+80-->[com.google.android.gms:play-services-mlkit-face-detection:17.0.1] C:\Users\gjaischool\.gradle\caches\transforms-3\1589438864fdbf1b72ef7d821aecd342\transformed\play-services-mlkit-face-detection-17.0.1\AndroidManifest.xml:12:13-14:85
+81                android:name="com.google.firebase.components:com.google.mlkit.vision.face.internal.FaceRegistrar"
+81-->[com.google.android.gms:play-services-mlkit-face-detection:17.0.1] C:\Users\gjaischool\.gradle\caches\transforms-3\1589438864fdbf1b72ef7d821aecd342\transformed\play-services-mlkit-face-detection-17.0.1\AndroidManifest.xml:13:17-114
+82                android:value="com.google.firebase.components.ComponentRegistrar" />
+82-->[com.google.android.gms:play-services-mlkit-face-detection:17.0.1] C:\Users\gjaischool\.gradle\caches\transforms-3\1589438864fdbf1b72ef7d821aecd342\transformed\play-services-mlkit-face-detection-17.0.1\AndroidManifest.xml:14:17-82
+83            <meta-data
+83-->[com.google.mlkit:vision-common:17.1.0] C:\Users\gjaischool\.gradle\caches\transforms-3\017efb7b4ebcc25a9d3c282d481824c5\transformed\vision-common-17.1.0\AndroidManifest.xml:12:13-14:85
+84                android:name="com.google.firebase.components:com.google.mlkit.vision.common.internal.VisionCommonRegistrar"
+84-->[com.google.mlkit:vision-common:17.1.0] C:\Users\gjaischool\.gradle\caches\transforms-3\017efb7b4ebcc25a9d3c282d481824c5\transformed\vision-common-17.1.0\AndroidManifest.xml:13:17-124
+85                android:value="com.google.firebase.components.ComponentRegistrar" />
+85-->[com.google.mlkit:vision-common:17.1.0] C:\Users\gjaischool\.gradle\caches\transforms-3\017efb7b4ebcc25a9d3c282d481824c5\transformed\vision-common-17.1.0\AndroidManifest.xml:14:17-82
+86            <meta-data
+86-->[com.google.mlkit:common:18.1.0] C:\Users\gjaischool\.gradle\caches\transforms-3\7b1d74f86d60fbab12d955a5fe01b4fc\transformed\common-18.1.0\AndroidManifest.xml:20:13-22:85
+87                android:name="com.google.firebase.components:com.google.mlkit.common.internal.CommonComponentRegistrar"
+87-->[com.google.mlkit:common:18.1.0] C:\Users\gjaischool\.gradle\caches\transforms-3\7b1d74f86d60fbab12d955a5fe01b4fc\transformed\common-18.1.0\AndroidManifest.xml:21:17-120
+88                android:value="com.google.firebase.components.ComponentRegistrar" />
+88-->[com.google.mlkit:common:18.1.0] C:\Users\gjaischool\.gradle\caches\transforms-3\7b1d74f86d60fbab12d955a5fe01b4fc\transformed\common-18.1.0\AndroidManifest.xml:22:17-82
+89        </service>
+90
+91        <provider
+91-->[com.google.mlkit:common:18.1.0] C:\Users\gjaischool\.gradle\caches\transforms-3\7b1d74f86d60fbab12d955a5fe01b4fc\transformed\common-18.1.0\AndroidManifest.xml:9:9-13:38
+92            android:name="com.google.mlkit.common.internal.MlKitInitProvider"
+92-->[com.google.mlkit:common:18.1.0] C:\Users\gjaischool\.gradle\caches\transforms-3\7b1d74f86d60fbab12d955a5fe01b4fc\transformed\common-18.1.0\AndroidManifest.xml:10:13-78
+93            android:authorities="com.example.camerax_mlkit.mlkitinitprovider"
+93-->[com.google.mlkit:common:18.1.0] C:\Users\gjaischool\.gradle\caches\transforms-3\7b1d74f86d60fbab12d955a5fe01b4fc\transformed\common-18.1.0\AndroidManifest.xml:11:13-69
+94            android:exported="false"
+94-->[com.google.mlkit:common:18.1.0] C:\Users\gjaischool\.gradle\caches\transforms-3\7b1d74f86d60fbab12d955a5fe01b4fc\transformed\common-18.1.0\AndroidManifest.xml:12:13-37
+95            android:initOrder="99" />
+95-->[com.google.mlkit:common:18.1.0] C:\Users\gjaischool\.gradle\caches\transforms-3\7b1d74f86d60fbab12d955a5fe01b4fc\transformed\common-18.1.0\AndroidManifest.xml:13:13-35
+96
+97        <activity
+97-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\gjaischool\.gradle\caches\transforms-3\94c566d6a32d08ef6c150afeae4be26c\transformed\play-services-base-18.0.1\AndroidManifest.xml:20:9-22:45
+98            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+98-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\gjaischool\.gradle\caches\transforms-3\94c566d6a32d08ef6c150afeae4be26c\transformed\play-services-base-18.0.1\AndroidManifest.xml:20:19-85
+99            android:exported="false"
+99-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\gjaischool\.gradle\caches\transforms-3\94c566d6a32d08ef6c150afeae4be26c\transformed\play-services-base-18.0.1\AndroidManifest.xml:22:19-43
+100            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+100-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\gjaischool\.gradle\caches\transforms-3\94c566d6a32d08ef6c150afeae4be26c\transformed\play-services-base-18.0.1\AndroidManifest.xml:21:19-78
+101
+102        <meta-data
+102-->[com.google.android.gms:play-services-basement:18.0.0] C:\Users\gjaischool\.gradle\caches\transforms-3\3093f2e5542405c19297483e0fa5aaed\transformed\play-services-basement-18.0.0\AndroidManifest.xml:21:9-23:69
+103            android:name="com.google.android.gms.version"
+103-->[com.google.android.gms:play-services-basement:18.0.0] C:\Users\gjaischool\.gradle\caches\transforms-3\3093f2e5542405c19297483e0fa5aaed\transformed\play-services-basement-18.0.0\AndroidManifest.xml:22:13-58
+104            android:value="@integer/google_play_services_version" />
+104-->[com.google.android.gms:play-services-basement:18.0.0] C:\Users\gjaischool\.gradle\caches\transforms-3\3093f2e5542405c19297483e0fa5aaed\transformed\play-services-basement-18.0.0\AndroidManifest.xml:23:13-66
+105
+106        <provider
+106-->[androidx.emoji2:emoji2:1.2.0] C:\Users\gjaischool\.gradle\caches\transforms-3\3ba076982ffca3f3978fee5f758f5627\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+107            android:name="androidx.startup.InitializationProvider"
+107-->[androidx.emoji2:emoji2:1.2.0] C:\Users\gjaischool\.gradle\caches\transforms-3\3ba076982ffca3f3978fee5f758f5627\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
+108            android:authorities="com.example.camerax_mlkit.androidx-startup"
+108-->[androidx.emoji2:emoji2:1.2.0] C:\Users\gjaischool\.gradle\caches\transforms-3\3ba076982ffca3f3978fee5f758f5627\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
+109            android:exported="false" >
+109-->[androidx.emoji2:emoji2:1.2.0] C:\Users\gjaischool\.gradle\caches\transforms-3\3ba076982ffca3f3978fee5f758f5627\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
+110            <meta-data
+110-->[androidx.emoji2:emoji2:1.2.0] C:\Users\gjaischool\.gradle\caches\transforms-3\3ba076982ffca3f3978fee5f758f5627\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+111                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+111-->[androidx.emoji2:emoji2:1.2.0] C:\Users\gjaischool\.gradle\caches\transforms-3\3ba076982ffca3f3978fee5f758f5627\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
+112                android:value="androidx.startup" />
+112-->[androidx.emoji2:emoji2:1.2.0] C:\Users\gjaischool\.gradle\caches\transforms-3\3ba076982ffca3f3978fee5f758f5627\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+113            <meta-data
+113-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\gjaischool\.gradle\caches\transforms-3\79276fba7bd65563097679f9efd446d0\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:29:13-31:52
+114                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+114-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\gjaischool\.gradle\caches\transforms-3\79276fba7bd65563097679f9efd446d0\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:30:17-78
+115                android:value="androidx.startup" />
+115-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\gjaischool\.gradle\caches\transforms-3\79276fba7bd65563097679f9efd446d0\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:31:17-49
+116            <meta-data
+116-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\gjaischool\.gradle\caches\transforms-3\2920d72e0a3be3938c7ca21d59b15d42\transformed\profileinstaller-1.3.0\AndroidManifest.xml:29:13-31:52
+117                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+117-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\gjaischool\.gradle\caches\transforms-3\2920d72e0a3be3938c7ca21d59b15d42\transformed\profileinstaller-1.3.0\AndroidManifest.xml:30:17-85
+118                android:value="androidx.startup" />
+118-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\gjaischool\.gradle\caches\transforms-3\2920d72e0a3be3938c7ca21d59b15d42\transformed\profileinstaller-1.3.0\AndroidManifest.xml:31:17-49
+119        </provider>
+120
+121        <service
+121-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\gjaischool\.gradle\caches\transforms-3\2785bedb487dcd1bdb9056ee63210e65\transformed\transport-backend-cct-2.3.3\AndroidManifest.xml:29:9-35:19
+122            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+122-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\gjaischool\.gradle\caches\transforms-3\2785bedb487dcd1bdb9056ee63210e65\transformed\transport-backend-cct-2.3.3\AndroidManifest.xml:30:13-103
+123            android:exported="false" >
+123-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\gjaischool\.gradle\caches\transforms-3\2785bedb487dcd1bdb9056ee63210e65\transformed\transport-backend-cct-2.3.3\AndroidManifest.xml:31:13-37
+124            <meta-data
+124-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\gjaischool\.gradle\caches\transforms-3\2785bedb487dcd1bdb9056ee63210e65\transformed\transport-backend-cct-2.3.3\AndroidManifest.xml:32:13-34:39
+125                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+125-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\gjaischool\.gradle\caches\transforms-3\2785bedb487dcd1bdb9056ee63210e65\transformed\transport-backend-cct-2.3.3\AndroidManifest.xml:33:17-94
+126                android:value="cct" />
+126-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\gjaischool\.gradle\caches\transforms-3\2785bedb487dcd1bdb9056ee63210e65\transformed\transport-backend-cct-2.3.3\AndroidManifest.xml:34:17-36
+127        </service>
+128        <service
+128-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\gjaischool\.gradle\caches\transforms-3\4ebc46639297feee6c74315066d4f9e4\transformed\transport-runtime-2.2.6\AndroidManifest.xml:26:9-30:19
+129            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+129-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\gjaischool\.gradle\caches\transforms-3\4ebc46639297feee6c74315066d4f9e4\transformed\transport-runtime-2.2.6\AndroidManifest.xml:27:13-117
+130            android:exported="false"
+130-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\gjaischool\.gradle\caches\transforms-3\4ebc46639297feee6c74315066d4f9e4\transformed\transport-runtime-2.2.6\AndroidManifest.xml:28:13-37
+131            android:permission="android.permission.BIND_JOB_SERVICE" >
+131-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\gjaischool\.gradle\caches\transforms-3\4ebc46639297feee6c74315066d4f9e4\transformed\transport-runtime-2.2.6\AndroidManifest.xml:29:13-69
+132        </service>
+133
+134        <receiver
+134-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\gjaischool\.gradle\caches\transforms-3\4ebc46639297feee6c74315066d4f9e4\transformed\transport-runtime-2.2.6\AndroidManifest.xml:32:9-34:40
+135            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+135-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\gjaischool\.gradle\caches\transforms-3\4ebc46639297feee6c74315066d4f9e4\transformed\transport-runtime-2.2.6\AndroidManifest.xml:33:13-132
+136            android:exported="false" />
+136-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\gjaischool\.gradle\caches\transforms-3\4ebc46639297feee6c74315066d4f9e4\transformed\transport-runtime-2.2.6\AndroidManifest.xml:34:13-37
+137        <receiver
+137-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\gjaischool\.gradle\caches\transforms-3\2920d72e0a3be3938c7ca21d59b15d42\transformed\profileinstaller-1.3.0\AndroidManifest.xml:34:9-52:20
+138            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+138-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\gjaischool\.gradle\caches\transforms-3\2920d72e0a3be3938c7ca21d59b15d42\transformed\profileinstaller-1.3.0\AndroidManifest.xml:35:13-76
+139            android:directBootAware="false"
+139-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\gjaischool\.gradle\caches\transforms-3\2920d72e0a3be3938c7ca21d59b15d42\transformed\profileinstaller-1.3.0\AndroidManifest.xml:36:13-44
+140            android:enabled="true"
+140-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\gjaischool\.gradle\caches\transforms-3\2920d72e0a3be3938c7ca21d59b15d42\transformed\profileinstaller-1.3.0\AndroidManifest.xml:37:13-35
+141            android:exported="true"
+141-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\gjaischool\.gradle\caches\transforms-3\2920d72e0a3be3938c7ca21d59b15d42\transformed\profileinstaller-1.3.0\AndroidManifest.xml:38:13-36
+142            android:permission="android.permission.DUMP" >
+142-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\gjaischool\.gradle\caches\transforms-3\2920d72e0a3be3938c7ca21d59b15d42\transformed\profileinstaller-1.3.0\AndroidManifest.xml:39:13-57
+143            <intent-filter>
+143-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\gjaischool\.gradle\caches\transforms-3\2920d72e0a3be3938c7ca21d59b15d42\transformed\profileinstaller-1.3.0\AndroidManifest.xml:40:13-42:29
+144                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+144-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\gjaischool\.gradle\caches\transforms-3\2920d72e0a3be3938c7ca21d59b15d42\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:17-91
+144-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\gjaischool\.gradle\caches\transforms-3\2920d72e0a3be3938c7ca21d59b15d42\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:25-88
+145            </intent-filter>
+146            <intent-filter>
+146-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\gjaischool\.gradle\caches\transforms-3\2920d72e0a3be3938c7ca21d59b15d42\transformed\profileinstaller-1.3.0\AndroidManifest.xml:43:13-45:29
+147                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+147-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\gjaischool\.gradle\caches\transforms-3\2920d72e0a3be3938c7ca21d59b15d42\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:17-85
+147-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\gjaischool\.gradle\caches\transforms-3\2920d72e0a3be3938c7ca21d59b15d42\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:25-82
+148            </intent-filter>
+149            <intent-filter>
+149-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\gjaischool\.gradle\caches\transforms-3\2920d72e0a3be3938c7ca21d59b15d42\transformed\profileinstaller-1.3.0\AndroidManifest.xml:46:13-48:29
+150                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+150-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\gjaischool\.gradle\caches\transforms-3\2920d72e0a3be3938c7ca21d59b15d42\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:17-88
+150-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\gjaischool\.gradle\caches\transforms-3\2920d72e0a3be3938c7ca21d59b15d42\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:25-85
+151            </intent-filter>
+152            <intent-filter>
+152-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\gjaischool\.gradle\caches\transforms-3\2920d72e0a3be3938c7ca21d59b15d42\transformed\profileinstaller-1.3.0\AndroidManifest.xml:49:13-51:29
+153                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+153-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\gjaischool\.gradle\caches\transforms-3\2920d72e0a3be3938c7ca21d59b15d42\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:17-95
+153-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\gjaischool\.gradle\caches\transforms-3\2920d72e0a3be3938c7ca21d59b15d42\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:25-92
+154            </intent-filter>
+155        </receiver>
+156    </application>
+157
+158</manifest>
