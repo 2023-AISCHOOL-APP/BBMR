@@ -71,7 +71,7 @@ class SeniorTakeOutAdapter(
             holder.tvNameS.text = spannableStringBuilder
         } else if (text.length >= 7) { // 카라멜마끼야또 저격
             val modifiedText = StringBuilder(text)
-                .insert(2, "\n").toString()
+                .insert(3, "\n").toString()
             spannableStringBuilder.replace(0, text.length, modifiedText)
             holder.tvNameS.text = spannableStringBuilder
         } else { // 띄어쓰기 제외한 것 들
