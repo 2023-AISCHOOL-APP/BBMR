@@ -34,6 +34,6 @@ class Normal_Fragment_Tab1 : Fragment() {
     }
 
     private fun replaceFragment(fragment: Fragment) {
-        childFragmentManager.beginTransaction().replace(R.id.flMenu, fragment).addToBackStack(null).commit()
+        childFragmentManager.beginTransaction().replace(R.id.flMenu, fragment).commit()
     }
 }

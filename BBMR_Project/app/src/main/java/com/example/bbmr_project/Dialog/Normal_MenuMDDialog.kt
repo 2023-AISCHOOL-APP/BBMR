@@ -8,13 +8,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import com.example.bbmr_project.Product
+import com.bumptech.glide.Glide
 import com.example.bbmr_project.VO.NormalTakeOutVO
 import com.example.bbmr_project.databinding.DialogNormalMenuMdBinding
+import java.text.DecimalFormat
 
 interface Normal_MenuMDDialogListener {
     fun onMDMenuAdded(normalSelectedMenuInfo: NormalSelectedMenuInfo)
 }
+
 class Normal_MenuMDDialog : DialogFragment() {
     private lateinit var binding: DialogNormalMenuMdBinding
     private var MDDialogListener: Normal_MenuMDDialogListener? = null
@@ -56,15 +58,18 @@ class Normal_MenuMDDialog : DialogFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val img = arguments?.getInt("normal_img")
+        val img = arguments?.getString("normal_img")
         val name = arguments?.getString("normal_name")
-        val price = arguments?.getString("normal_price")
+        val price = arguments?.getInt("normal_price")
 
         if (img != null) {
-            binding.imgMD.setImageResource(img)
+            // Glide를 사용하여 이미지를 로드하고 설정
+            Glide.with(requireContext())
+                .load(img) // img는 이미지의 URL
+                .into(binding.imgMD)
         }
         binding.tvMDName.text = name
-        binding.tvMDPrice.text = price
+        binding.tvMDPrice.text = formatPrice(price) // 한화표기
 
 
         // 이전으로 클릭 시 NormalTakeOut으로 이동
@@ -74,12 +79,12 @@ class Normal_MenuMDDialog : DialogFragment() {
 
         binding.btnBasketN.setOnClickListener {
             val tvCount = binding.tvCount.text.toString().toIntOrNull() ?: 0
-            val priceString = price?.replace(",", "")?.replace("원", "")
+            val priceString = price.toString()?.replace(",", "")?.replace("원", "")
             val menuOnePrice = priceString?.toIntOrNull() ?: 0 // 메뉴 하나의 가격
             val menuPrice = menuOnePrice * tvCount // 메뉴 * 수량
 
             val normalSelectedMenuInfo = NormalSelectedMenuInfo(
-                menuImg = arguments?.getInt("normal_img") ?: 0,
+                menuImg = arguments?.getString("normal_img") ?: "",
                 name = arguments?.getString("normal_name") ?: "",
                 price = priceString ?: "",
                 tvCount = tvCount,
@@ -110,13 +115,13 @@ class Normal_MenuMDDialog : DialogFragment() {
                 // 수량에 맞춰 가격이 감소하는 코드
                 val MenuPlusCountInt: Int? = binding.tvCount.text.toString().toIntOrNull()
                 if (MenuPlusCountInt != null) {
-                    val price: String? = arguments?.getString("normal_price")
+                    val price: Int? = arguments?.getInt("normal_price")
 
                     if (price != null) {
                         val MenuPlusCountInt: Int? = binding.tvCount.text.toString().toIntOrNull()
 
                         if (MenuPlusCountInt != null) {
-                            val priceInt: Int? = price.replace("[^0-9]".toRegex(), "").toIntOrNull()
+                            val priceInt: Int? = price.toString().replace("[^0-9]".toRegex(), "").toIntOrNull()
 
                             if (priceInt != null) {
                                 val plusPrice = priceInt * MenuPlusCountInt
@@ -139,13 +144,13 @@ class Normal_MenuMDDialog : DialogFragment() {
             // 수량에 맞춰 가격이 증가하는 코드
             val MenuPlusCountInt: Int? = binding.tvCount.text.toString().toIntOrNull()
             if (MenuPlusCountInt != null) {
-                val price: String? = arguments?.getString("normal_price")
+                val price: Int? = arguments?.getInt("normal_price")
 
                 if (price != null) {
                     val MenuPlusCountInt: Int? = binding.tvCount.text.toString().toIntOrNull()
 
                     if (MenuPlusCountInt != null) {
-                        val priceInt: Int? = price.replace("[^0-9]".toRegex(), "").toIntOrNull()
+                        val priceInt: Int? = price.toString().replace("[^0-9]".toRegex(), "").toIntOrNull()
 
                         if (priceInt != null) {
                             val plusPrice = priceInt * MenuPlusCountInt
@@ -156,6 +161,16 @@ class Normal_MenuMDDialog : DialogFragment() {
             }
         }
     }
+
+    private fun formatPrice(price: Int?): String {
+        // 1,000원 표기
+        if (price != null) {
+            val decimalFormat = DecimalFormat("#,###")
+            return "${decimalFormat.format(price)}원"
+        }
+        return ""
+    }
+
     fun setMDListener(listener: Normal_MenuMDDialogListener) {
         this.MDDialogListener = listener
     }
