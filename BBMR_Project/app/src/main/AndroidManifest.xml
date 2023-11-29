@@ -21,6 +21,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BBMR_Project"
         android:usesCleartextTraffic="true"
+
         tools:targetApi="31">
         <activity
             android:name=".Dialog.Normal_MenuMDDialog"

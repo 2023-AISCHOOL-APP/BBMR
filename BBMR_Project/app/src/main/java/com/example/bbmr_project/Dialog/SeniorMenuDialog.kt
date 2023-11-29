@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.text.SpannableStringBuilder
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,7 @@ import com.example.bbmr_project.databinding.DialogSeniorMenuBinding
 
 class SeniorMenuDialog : DialogFragment() {
     var buttonDoubleDefend = false
+    var imgUrl: String? = null  // onCreatView 에서 이미지에 담기는 URL을 let 밖에서 사용할 수 있게 변수로 정의
     private lateinit var binding: DialogSeniorMenuBinding
 
     companion object {
@@ -55,7 +57,6 @@ class SeniorMenuDialog : DialogFragment() {
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val seniorTakeoutVO = arguments?.getParcelable<Senior_TakeOutVO>("seniorTakeOutVO")
@@ -64,22 +65,23 @@ class SeniorMenuDialog : DialogFragment() {
             var text = item.sname
             // ------ 각 메뉴의 이름들의 길이에 조건을 걸어 줄 바꿈 해주기 ------
             val spannableStringBuilder = SpannableStringBuilder(text)
-            if (text.length >= 6) {
-                val indexLine = text.indexOf(' ')
-                if (indexLine != -1) {
-                    val modiText = StringBuilder(text)
-                        .replace(indexLine, indexLine+1, "\n")
-                        .toString()
-                    spannableStringBuilder.replace(0, text.length, modiText)
-                    binding.tvMenuName.text = spannableStringBuilder
-                }
-            } else if (text.length < 6 && !text.contains(' ')) {
+            if (text.contains(" ")) {
+            // 첫 번째 공백에서 개행하는 코드
+            val indexFirstSpace = text.indexOf(' ')
+                val modiText = StringBuilder(text)
+                    .replace(indexFirstSpace, indexFirstSpace + 1, "\n")
+                    .toString()
+                spannableStringBuilder.replace(0, text.length, modiText)
+                binding.tvMenuName.text = spannableStringBuilder
+            } else {
                 binding.tvMenuName.text = item.sname
             }
 
             binding.tvMenuPrice.text =
                 String.format("%,d원", item.sprice) // String.format("%,d", 값) -> 1000 단위마다 , 표시
             Glide.with(requireContext()).load(item.simg).into(binding.imgMenu)
+            imgUrl = item.simg  // 받아온 값의 URL을 let밖에서 사용할 수 있게 담아둠
+            Log.d("이건뭐야1", binding.imgMenu.toString())  // 지워주세요
         }
 
         // ------ 추가 옵션 이동 코드 시작 ------
@@ -92,7 +94,7 @@ class SeniorMenuDialog : DialogFragment() {
                     binding.tvMenuName.text.toString(),
                     price = binding.tvMenuPrice.text.toString().replace(",", "").replace(" 원", "")
                         .toIntOrNull() ?: 0,
-                    binding.tvMenuCount.text.toString().toInt()
+                    binding.tvMenuCount.text.toString().toInt(),
                 )
                 val dialogFragment = Senior_AdditionalOptionDialog()
                 val bundle = Bundle()
@@ -121,21 +123,47 @@ class SeniorMenuDialog : DialogFragment() {
             val radiogroup = binding.rbCooHot.checkedRadioButtonId
             val radioButton: RadioButton = binding.rbCooHot.findViewById(radiogroup)
             val coolhot: Boolean = radioButton.isChecked
+            coolhot.toString() == "차가운거"
+            val cool = binding.rbCool.isChecked
+            val hot = binding.rbHot.isChecked
+            if (cool) {
+                CartStorage.addProduct(
+                    Product(
+                        name = binding.tvMenuName.text.toString(),
+                        price = binding.tvMenuPrice.text.toString().replace(",", "").replace("원", "")
+                            .toIntOrNull() ?: 0,
+                        count = binding.tvMenuCount.text.toString().toInt(),
+                        image = imgUrl.toString(),
+                        temperature = "차가운거"
+                    )
+
+                )
+                } else if(hot) {
+                CartStorage.addProduct(
+                    Product(
+                        name = binding.tvMenuName.text.toString(),
+                        price = binding.tvMenuPrice.text.toString().replace(",", "").replace("원", "")
+                            .toIntOrNull() ?: 0,
+                        count = binding.tvMenuCount.text.toString().toInt(),
+                        image = imgUrl.toString(),
+                        temperature = "뜨거운거"
+                    )
+                )
+                }
 
 
             // CartStorage.productList에 값을 추가
-            CartStorage.addProduct(
-                Product(
-                    name = binding.tvMenuName.text.toString(),
-                    price = binding.tvMenuPrice.text.toString().replace(",", "").replace("원", "")
-                        .toIntOrNull() ?: 0,
-                    count = binding.tvMenuCount.text.toString().toInt(),
-                    image = binding.imgMenu.toString()
-                )
-            )
-
-
-
+//            CartStorage.addProduct(
+//                Product(
+//                    name = binding.tvMenuName.text.toString(),
+//                    price = binding.tvMenuPrice.text.toString().replace(",", "").replace("원", "")
+//                        .toIntOrNull() ?: 0,
+//                    count = binding.tvMenuCount.text.toString().toInt(),
+//                    image = imgUrl.toString()
+//                )
+//
+//            )
+            Log.d("이건뭐야2", binding.imgMenu.toString())
             dismiss()
         }
 
@@ -144,15 +172,23 @@ class SeniorMenuDialog : DialogFragment() {
         // ------ 상품의 수량 조절하는 코드 시작 ------
         var MenuCount = 1
         val priceText = binding.tvMenuPrice.text.toString()
+        val priceText = binding.tvMenuPrice.text.toString()
         // Plus버튼 누르면 증가하는 코드
         binding.btnSeniorPlus.setOnClickListener {
             MenuCount++
             // 상품 수량이 증가하는 코드
             binding.tvMenuCount.text = MenuCount.toString()
 
+
             // 수량에 맞춰 가격이 증가하는 코드
             val MenuPlusCountInt: Int? = binding.tvMenuCount.text.toString().toIntOrNull()
             if (MenuPlusCountInt != null) {
+                val modifyprice = priceText
+                    .replace(",", "")
+                    .replace("원", "")
+                    .toIntOrNull() ?: 0
+//                val getPrice = arguments?.getInt("sprice") ?: 0
+                val plusPrice = modifyprice * MenuPlusCountInt
                 val modifyprice = priceText
                     .replace(",", "")
                     .replace("원", "")
@@ -182,6 +218,11 @@ class SeniorMenuDialog : DialogFragment() {
                 val MenuMinusCountInt: Int? =
                     binding.tvMenuCount.text.toString().toIntOrNull()  //replace
                 if (MenuMinusCountInt != null) {
+                    val modifyprice = priceText
+                        .replace(",", "")
+                        .replace("원", "")
+                        .toIntOrNull() ?: 0
+                    val minusPrice = modifyprice * MenuMinusCountInt
                     val modifyprice = priceText
                         .replace(",", "")
                         .replace("원", "")

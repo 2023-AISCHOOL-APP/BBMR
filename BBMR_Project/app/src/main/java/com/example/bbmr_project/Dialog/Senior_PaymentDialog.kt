@@ -107,7 +107,7 @@ class Senior_PaymentDialog: DialogFragment() {
                     progressCount++
                     handler.postDelayed(this, 1000)
                 } else {
-                    val dialogFragment = Senior_PaySuccessDialog()
+                    val dialogFragment = SeniorPaySuccessDialog()
                     dialogFragment.show(requireActivity().supportFragmentManager, "PaymentSuccessDialog")
                     dialog.dismiss()
                     dismiss()
@@ -119,13 +119,13 @@ class Senior_PaymentDialog: DialogFragment() {
 
         // 영수증 출력
         myLayout.findViewById<Button>(R.id.btnYesBillDSPB).setOnClickListener {
-            val dialogFragment = Senior_PaySuccessDialog()
+            val dialogFragment = SeniorPaySuccessDialog()
             dialogFragment.show(requireActivity().supportFragmentManager, "PaymentSuccessDialog")
             dialog.dismiss()
         }
         // 주문번호 발행
         myLayout.findViewById<Button>(R.id.btnNoBillDSPB).setOnClickListener {
-            val dialogFragment = Senior_PaySuccessDialog()
+            val dialogFragment = SeniorPaySuccessDialog()
             dialogFragment.show(requireActivity().supportFragmentManager, "PaymentSuccessDialog")
             dialog.dismiss()
         }

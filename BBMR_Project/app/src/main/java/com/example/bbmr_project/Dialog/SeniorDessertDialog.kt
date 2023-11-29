@@ -44,7 +44,6 @@ class SeniorDessertDialog : BaseDialogFragment() {
         isCancelable = false
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
