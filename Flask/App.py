@@ -9,18 +9,18 @@ from connection import get_connection
 from mysql.connector import Error
 from flask import Flask, redirect, render_template, request, jsonify, send_file, session, url_for
 from flask_restful import Resource, Api, reqparse, abort
-from tensorflow import keras
-from keras import models, layers
-from keras.layers import Dense
-from keras.preprocessing import image
-from keras.applications.vgg16 import preprocess_input
+# from tensorflow import keras
+# from keras import models, layers
+# from keras.layers import Dense
+# from keras.preprocessing import image
+# from keras.applications.vgg16 import preprocess_input
 from werkzeug.utils import secure_filename # 231116 filename불러오기 위한 import
 import joblib # 231115 모델 로딩 라이브러리 사용 - 정희석(8-12)
-import tensorflow as tf
+# import tensorflow as tf
 import numpy as np
 import os # 231116 추가 - 이미지를 PIL Image로 변환
-import cv2
-from deepface import DeepFace # 라이브러리 가져오기
+# import cv2
+# from deepface import DeepFace # 라이브러리 가져오기
 
 app = Flask(__name__)
 api = Api(app)
@@ -394,7 +394,7 @@ class SaveOrder(Resource):
 #  ------ 모델 코드 시작 ------
 
      
-class Face(Resource):
+# class Face(Resource):
     def post(self):
         if 'image' not in request.files:
             return jsonify({'error': 'No image part'}), 400
@@ -422,7 +422,7 @@ class Face(Resource):
 
 #  ------ 모델 코드 끝 -------
 
-api.add_resource(Face,"/face/")
+# api.add_resource(Face,"/face/")
 api.add_resource(SaveOrder,"/saveorder/")
 api.add_resource(checkCoupon,"/checkcoupon/")
 api.add_resource(TodoList,'/todos/')

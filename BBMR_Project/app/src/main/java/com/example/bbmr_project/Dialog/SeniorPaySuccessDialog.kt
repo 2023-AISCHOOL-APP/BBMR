@@ -12,8 +12,10 @@ import android.text.style.RelativeSizeSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.fragment.app.DialogFragment
 import com.example.bbmr_project.CartStorage
+import com.example.bbmr_project.LegalityActivity
 import com.example.bbmr_project.Normal_MainActivity
 
 import com.example.bbmr_project.databinding.DialogSeniorPaymentSuccessBinding
@@ -60,8 +62,9 @@ class SeniorPaySuccessDialog: DialogFragment() {
 
         val Handler = Handler(Looper.getMainLooper())
         Handler.postDelayed({
-            val intent = Intent(view.context, Normal_MainActivity::class.java)
+            val intent = Intent(view.context, LegalityActivity::class.java)
             startActivity(intent)
+            dismiss()
         }, 3500)
     }
     override fun onResume() {

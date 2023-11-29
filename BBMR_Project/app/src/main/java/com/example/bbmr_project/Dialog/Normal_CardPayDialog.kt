@@ -99,10 +99,9 @@ class Normal_CardPayDialog : DialogFragment() {
                     progressCount++
                     handler.postDelayed(this, 1000)
                 } else {
-                    val intent = Intent(view.context, Normal_PaySuccessActivity::class.java)
-                    startActivity(intent)
                     dialog.dismiss()
-                    dismiss()
+                    val intent = Intent(requireActivity(), Normal_PaySuccessActivity::class.java)
+                    requireActivity().startActivity(intent)
                 }
             }
         }

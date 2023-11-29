@@ -15,7 +15,9 @@ class LegalityActivity : AppCompatActivity() {
         cl.setOnClickListener {
             val intent = Intent(this, StartActivity::class.java)
             startActivity(intent)
-            finish()
+            // ------ 모든 stack의 창들을 종료하는 코드 -----
+            // 시니어는 DialogFragment이기 때문에 stack 초기화가 불가능해서 여기서 전환 될 때 창들을 종료 시키는 구조
+            finishAffinity()
         }
 
 

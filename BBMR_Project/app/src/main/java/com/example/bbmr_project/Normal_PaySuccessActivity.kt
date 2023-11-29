@@ -18,7 +18,8 @@ class Normal_PaySuccessActivity : AppCompatActivity() {
         binding = ActivityNormalPaySuccessBinding.inflate(layoutInflater)
         val Handler = Handler(Looper.getMainLooper())
         Handler.postDelayed({
-            val intent = Intent(this, Normal_MainActivity::class.java)
+            finishAffinity()
+            val intent = Intent(this, LegalityActivity::class.java)
             startActivity(intent)
         }, 3500)
 

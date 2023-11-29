@@ -97,11 +97,11 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
             val bundle = arguments
             if (bundle != null) {
                 val customOption = bundle.getSerializable("product_option") as Product
-
+                Log.d("추가옵션 진입", "${customOption}")
                 // ------ 옵션 선택 시 금액 추가(합산) 코드 시작 ------
                 var addprice : Int = customOption.price
                 val count : Int = customOption.count
-                if (size == 1) {
+                if (size == 2) {
                     addprice += (500 * count)
                 }
                 if (sugar == true) {

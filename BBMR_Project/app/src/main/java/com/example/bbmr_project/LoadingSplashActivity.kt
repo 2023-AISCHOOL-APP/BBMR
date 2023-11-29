@@ -62,13 +62,13 @@ class LoadingSplashActivity : AppCompatActivity() {
         }
         cameraExecutor = Executors.newSingleThreadExecutor()
         // ------ emulator 작업 시 해당 activity 1초 후 자동 이동 ------
-//        val Handler = Handler(Looper.getMainLooper())
-//        Handler.postDelayed({
-//            val intent = Intent(this, Normal_IntroActivity::class.java)
-//            startActivity(intent)
-//            finish()
-//
-//        }, 3000)
+        val Handler = Handler(Looper.getMainLooper())
+        Handler.postDelayed({
+            val intent = Intent(this, Normal_IntroActivity::class.java)
+            startActivity(intent)
+            finish()
+
+        }, 1500)
 
 
     }
@@ -182,7 +182,7 @@ class LoadingSplashActivity : AppCompatActivity() {
                     val intent = Intent(this, Normal_IntroActivity::class.java)
                     startActivity(intent)
                     finish()
-                }, 700)
+                }, 1500)
             }
             "0" -> {
                 // 시니어 고객으로 판단된 경우
@@ -194,7 +194,7 @@ class LoadingSplashActivity : AppCompatActivity() {
                     val intent = Intent(this, SeniorIntroActivity::class.java)
                     startActivity(intent)
                     finish()
-                }, 700)
+                }, 1500)
             }
             else -> {
                 // 예외 처리
