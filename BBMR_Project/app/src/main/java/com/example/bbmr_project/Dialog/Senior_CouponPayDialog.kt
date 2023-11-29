@@ -71,10 +71,9 @@ class Senior_CouponPayDialog : DialogFragment() {
             val CouponNum = binding.tvCpnNumN.text.toString()
             Log.d("CouponNum", "CouponNum value:$CouponNum")
             Log.d("CouponType", "CouponType:${CouponNum::class?.simpleName}")
-            sendCouponToServer(CouponNum)
-            if (CouponNum == "111") {
+            if (CouponNum == "331210188802") {
                 ChangedSuccessDialog(binding.root)
-            } else if (CouponNum == "332") {
+            } else if (CouponNum == "502341578874") {
                 CardSuccessDialog(binding.root)
             } else {
                 CouponFailDialog(binding.root)

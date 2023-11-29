@@ -119,8 +119,12 @@ class SeniorTakeOutAdapter(
     }
 
     private fun showDessertDialaog(position: Int){
-        val item = menuList[position]
-        SeniorDessertDialog.setArgument(item).show(fragmentManager, "")
+        val seniorDessertDialog = SeniorDessertDialog()
+        val bundle = Bundle().apply {
+            putParcelable("seniorTakeOutVO", menuList[position])
+        }
+        seniorDessertDialog.arguments = bundle
+        seniorDessertDialog.show(fragmentManager, "seniorDialog")
     }
 
     // 데이터 아이템 개수 반환

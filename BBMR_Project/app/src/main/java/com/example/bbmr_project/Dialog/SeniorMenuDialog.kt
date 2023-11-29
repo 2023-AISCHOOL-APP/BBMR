@@ -60,14 +60,16 @@ class SeniorMenuDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val seniorTakeoutVO = arguments?.getParcelable<Senior_TakeOutVO>("seniorTakeOutVO")
+        Log.d("시니어1", seniorTakeoutVO.toString())
+
         // 메뉴 선택시 Dialog에 메뉴의 기본정보 제공하는 코드 (Adapter에서 받아온 값을 화면에 보여주기 위한 코드)
         seniorTakeoutVO?.let {item ->
             var text = item.sname
             // ------ 각 메뉴의 이름들의 길이에 조건을 걸어 줄 바꿈 해주기 ------
             val spannableStringBuilder = SpannableStringBuilder(text)
             if (text.contains(" ")) {
-            // 첫 번째 공백에서 개행하는 코드
-            val indexFirstSpace = text.indexOf(' ')
+                // 첫 번째 공백에서 개행하는 코드
+                val indexFirstSpace = text.indexOf(' ')
                 val modiText = StringBuilder(text)
                     .replace(indexFirstSpace, indexFirstSpace + 1, "\n")
                     .toString()
@@ -76,6 +78,7 @@ class SeniorMenuDialog : DialogFragment() {
             } else {
                 binding.tvMenuName.text = item.sname
             }
+            Log.d("이름1", "${item.sname}")
 
             binding.tvMenuPrice.text =
                 String.format("%,d원", item.sprice) // String.format("%,d", 값) -> 1000 단위마다 , 표시
@@ -148,7 +151,7 @@ class SeniorMenuDialog : DialogFragment() {
                     )
 
                 )
-                } else if(hot) {
+            } else if(hot) {
                 CartStorage.addProduct(
                     Product(
                         name = binding.tvMenuName.text.toString(),
@@ -159,7 +162,7 @@ class SeniorMenuDialog : DialogFragment() {
                         temperature = "뜨거운거"
                     )
                 )
-                }
+            }
 
 
             // CartStorage.productList에 값을 추가

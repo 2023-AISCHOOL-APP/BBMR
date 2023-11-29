@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".Senior_TakeOutActivity">
+    tools:context=".SeniorTakeOutActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline9"
@@ -49,26 +49,12 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.75" />
 
-    <android.widget.Button
-        android:id="@+id/btnStart"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/button_normal"
-        android:text="처음으로"
-        android:textColor="@drawable/button_text"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/guideline15"
-        app:layout_constraintEnd_toStartOf="@+id/guideline12"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.07" />
+        app:layout_constraintGuide_percent="0.08" />
 
     <RadioGroup
         android:id="@+id/rgSenior"
@@ -240,13 +226,29 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.875" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/btnToOrigin"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/button_normal"
+        android:text="일반화면 보기"
+        android:textColor="@drawable/button_text"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guideline15"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline14" />
+
+    <android.widget.Button
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="일반으로 가기"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginStart="16dp"
+        android:background="@drawable/gohome"
+        app:layout_constraintBottom_toTopOf="@+id/guideline15"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
