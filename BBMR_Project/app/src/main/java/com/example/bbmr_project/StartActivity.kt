@@ -31,7 +31,7 @@ class StartActivity : AppCompatActivity() {
         binding = ActivityStartBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnOrderInASI.setOnClickListener {
+        binding.btnOrder.setOnClickListener {
             val intent = Intent(this, LoadingSplashActivity::class.java)
             startActivity(intent)
             finish()
@@ -88,5 +88,7 @@ class StartActivity : AppCompatActivity() {
 
         mRetrofitAPI = mRetrofit.create(RetrofitAPI::class.java)
     }
+
+
 
 }

@@ -1,5 +1,6 @@
 package com.example.bbmr_project.Dialog
 
+import android.content.ContentValues
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -13,10 +14,19 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.example.bbmr_project.R
+import com.example.bbmr_project.RetrofitAPI.RetrofitAPI
 import com.example.bbmr_project.databinding.DialogSeniorCouponpayBinding
+import com.google.gson.JsonObject
+import okhttp3.FormBody
+import retrofit2.Call
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class Senior_CouponPayDialog : DialogFragment() {
     private lateinit var binding: DialogSeniorCouponpayBinding
+    lateinit var mRetrofitAPI: RetrofitAPI
+    lateinit var mRetrofit: Retrofit
     override fun onStart() {
         super.onStart()
         val darkTransparentBlack = Color.argb((255 * 0).toInt(), 0, 0, 0)
@@ -35,6 +45,7 @@ class Senior_CouponPayDialog : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DialogSeniorCouponpayBinding.inflate(layoutInflater)
+        setRetrofit()
         return binding.root
     }
 
@@ -48,7 +59,7 @@ class Senior_CouponPayDialog : DialogFragment() {
         binding.btn6.setOnClickListener { binding.tvCpnNumN.append("6") }
         binding.btn7.setOnClickListener { binding.tvCpnNumN.append("7") }
         binding.btn8.setOnClickListener { binding.tvCpnNumN.append("8") }
-        binding.btn8.setOnClickListener { binding.tvCpnNumN.append("9") }
+        binding.btn9.setOnClickListener { binding.tvCpnNumN.append("9") }
         binding.btnBckSpce.setOnClickListener {
             if (binding.tvCpnNumN.text.isNotEmpty()) {
                 val newText = binding.tvCpnNumN.text.substring(0, binding.tvCpnNumN.text.length - 1)
@@ -76,6 +87,39 @@ class Senior_CouponPayDialog : DialogFragment() {
 
 
     }
+
+    // 쿠폰번호 서버로 보내고 응답값 받기
+        private fun sendCouponToServer(CouponNum: String) {
+        val requestBody = FormBody.Builder()
+            .add("coupon", CouponNum)
+            .build()
+        val callSendCoupon = mRetrofitAPI.sendCoupon(requestBody)
+        callSendCoupon.enqueue(object : retrofit2.Callback<JsonObject> {
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                t.printStackTrace()
+                Log.d(ContentValues.TAG, "쿠폰 전송 에러입니다. => ${t.message.toString()}")
+            }
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    val result = response.body()?.getAsJsonObject("result") // 서버 응답 결과
+                    Log.d(ContentValues.TAG, "쿠폰 전송 결과 => $result")
+
+                } else {
+                    Log.d(ContentValues.TAG, "쿠폰 전송 실패. HTTP 응답코드: ${response.code()}")
+                }
+            }
+        })
+    }
+    private fun setRetrofit() {
+        mRetrofit = Retrofit
+            .Builder()
+            .baseUrl(getString(R.string.baseUrl))   // baseUrl은 strings.xml에서 플라스크서버 IP 확인 후 수정
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        mRetrofitAPI = mRetrofit.create(RetrofitAPI::class.java)
+    }
+
 
     // 쿠폰창에서 취소 다이얼로그
     fun CancelDialog(view: View) {
