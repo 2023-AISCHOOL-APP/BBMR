@@ -86,6 +86,14 @@ class SeniorMenuDialog : DialogFragment() {
             imgUrl = item.simg  // 받아온 값의 URL을 let밖에서 사용할 수 있게 담아둠
             Log.d("이건뭐야1", binding.imgMenu.toString())  // 지워주세요
         }
+        // ------ 추가 옵션을 선택해서 받아올 코드 시작 ------
+//        val addiProduct = arguments?.getSerializable("커스텀_옵션_완료") as? Product
+//        addiProduct?.let {product ->
+//            binding.tvMenuPrice.text = product.price.toString()
+//        }
+
+
+        // ------ 추가 옵션을 선택해서 받아올 코드 끝 ------
 
         // ------ 추가 옵션 이동 코드 시작 ------
         binding.btnAddtionOption.setOnClickListener {
@@ -94,10 +102,12 @@ class SeniorMenuDialog : DialogFragment() {
                 buttonDoubleDefend = true
 
                 val product = Product(
-                    binding.tvMenuName.text.toString(),
-                    price = binding.tvMenuPrice.text.toString().replace(",", "").replace(" 원", "")
-                        .toIntOrNull() ?: 0,
-                    binding.tvMenuCount.text.toString().toInt(),
+                    name = binding.tvMenuName.text.toString(),
+                    price = binding.tvMenuPrice.text.toString()
+                        .replace(",", "")
+                        .replace("원", "")
+                        .toIntOrNull() ?:0,
+                    count = binding.tvMenuCount.text.toString().toInt(),
                 )
                 val dialogFragment = Senior_AdditionalOptionDialog()
                 val bundle = Bundle()
