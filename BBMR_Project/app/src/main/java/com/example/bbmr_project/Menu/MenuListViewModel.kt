@@ -121,5 +121,20 @@ class MenuListViewModel(
         mdDessertList.addAll(mdList)
         return mdDessertList
     }
+
+
+    private fun createMenuList5(): List<Senior_TakeOutVO> {
+        val menuList: ArrayList<Product> = CartStorage.menuList
+        val recommendList: List<Senior_TakeOutVO> = menuList.filter { product ->
+            product.id == "35" || product.id == "121" || product.id == "122"
+        }.map {product ->
+            Senior_TakeOutVO(
+                sname = product.name,
+                sprice = product.price,
+                simg = product.image
+            )
+        }
+        return recommendList
+    }
 }
 

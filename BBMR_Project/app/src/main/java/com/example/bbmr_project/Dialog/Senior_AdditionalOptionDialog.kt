@@ -10,7 +10,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.createViewModelLazy
 import com.example.bbmr_project.CartStorage
+import com.example.bbmr_project.Menu.MenuListViewModel
 import com.example.bbmr_project.Product
 import com.example.bbmr_project.R
 import com.example.bbmr_project.databinding.DialogSeniorAdditionalOptionBinding
@@ -42,7 +44,7 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // ------ 추가 옵션 코드 시작 ------
 //        var size  = CartStorage.menuList.size
-        var size  = CartStorage.menuList.size
+        var size  = 1
         var sugar: Boolean = false
         var cream: Boolean = false
         binding.cbSizeDSAO.setOnCheckedChangeListener { _, isChecked ->
@@ -62,9 +64,9 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
         binding.btnRecommend1.setOnClickListener {
             val bread = Product(
                 name = "데블스 초코케이크",
-                price = 4800,
+                price = 4500,
                 count = 1,
-                image = ""
+                image = "https://shop-phinf.pstatic.net/20221223_97/16717893245683z1ju_PNG/I000022253.jpg?type=m510"
             )
             SuggestionProductAddDialog(view.rootView, bread)
         }
@@ -73,7 +75,7 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
                 name = "콘치즈 계란빵",
                 price = 2900,
                 count = 1,
-                image = "BBMR/"
+                image = "https://shop-phinf.pstatic.net/20231102_156/1698909003769FXQYp_JPEG/25827574172676864_100459445.jpg?type=m510"
             )
             SuggestionProductAddDialog(view.rootView,bread)
         }
@@ -82,7 +84,7 @@ class Senior_AdditionalOptionDialog : DialogFragment() {
                 name = "허니 카라멜 브레드",
                 price = 4800,
                 count = 1,
-                image = "BBMR/"
+                image = "https://shop-phinf.pstatic.net/20221226_171/1672022807862vCIQQ_PNG/I000022726.jpg?type=m510"
             )
             SuggestionProductAddDialog(view.rootView, bread)
         }

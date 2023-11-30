@@ -49,9 +49,6 @@ class SeniorSelectBasketAdapter(
         val btnBasketCancellSenior: Button = view.findViewById(R.id.btnBasketCancelSenior)
 
         // 추가메뉴 선언
-        val imgSeniorAdditionMenu: ImageView = view.findViewById(R.id.imgSeniorAdditionMenu)
-        val tvSeniorAdditionName: TextView = view.findViewById(R.id.tvSeniorAdditionName)
-        val tvSeniorAdditionPrice: TextView = view.findViewById(R.id.tvSeniorAdditionPrice)
     }
 
     override fun onCreateViewHolder(
@@ -64,13 +61,6 @@ class SeniorSelectBasketAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val selectSeniorItem = productList[position]
-
-        holder.tvSeniorAdditionName.text = selectSeniorItem.name
-        holder.tvSeniorAdditionPrice.text = selectSeniorItem.price.toString()
-
-
-
-
 
 
         Glide.with(context).load(selectSeniorItem.image).into(holder.basketImgSenior)
