@@ -98,29 +98,29 @@ class Normal_CardPayDialog : DialogFragment() {
                     progressBar.incrementProgressBy(progressIncreaseAmount)
                     progressCount++
                     handler.postDelayed(this, 1000)
-                } else {
-                    dialog.dismiss()
-                    val intent = Intent(requireActivity(), Normal_PaySuccessActivity::class.java)
-                    requireActivity().startActivity(intent)
+                } else if (progressCount == 5) {
+                    if (dialog.isShowing) {
+                        val intent = Intent(requireActivity(), Normal_PaySuccessActivity::class.java)
+                        requireActivity().startActivity(intent)
+                        dialog.dismiss()
+                    }
                 }
             }
         }
-        handler.post(runnable)
-
-
         // 영수증 출력
         myLayout.findViewById<Button>(R.id.btnYesBillDNPB).setOnClickListener {
-            val intent = Intent(view.context, Normal_PaySuccessActivity::class.java)
-            startActivity(intent)
+            val intent = Intent(requireActivity(), Normal_PaySuccessActivity::class.java)
+            requireActivity().startActivity(intent)
             dialog.dismiss()
             dismiss()
         }
         // 영수증 미출력 주문번호 발행
         myLayout.findViewById<Button>(R.id.btnNoBillDNPB).setOnClickListener {
-            val intent = Intent(view.context, Normal_PaySuccessActivity::class.java)
-            startActivity(intent)
+            val intent = Intent(requireActivity(), Normal_PaySuccessActivity::class.java)
+            requireActivity().startActivity(intent)
             dialog.dismiss()
             dismiss()
         }
+        handler.post(runnable)
     }
 }

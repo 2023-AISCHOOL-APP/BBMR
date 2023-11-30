@@ -106,11 +106,12 @@ class Senior_PaymentDialog: DialogFragment() {
                     progressBar.incrementProgressBy(progressIncreaseAmount)
                     progressCount++
                     handler.postDelayed(this, 1000)
-                } else {
-                    val dialogFragment = SeniorPaySuccessDialog()
-                    dialogFragment.show(requireActivity().supportFragmentManager, "PaymentSuccessDialog")
-                    dialog.dismiss()
-                    dismiss()
+                } else if (progressCount == 5) {
+                    if (dialog.isShowing) {
+                        val dialogFragment = SeniorPaySuccessDialog()
+                        dialogFragment.show(requireActivity().supportFragmentManager, "PaymentSuccessDialog")
+                        dialog.dismiss()
+                    }
                 }
             }
         }
@@ -122,12 +123,14 @@ class Senior_PaymentDialog: DialogFragment() {
             val dialogFragment = SeniorPaySuccessDialog()
             dialogFragment.show(requireActivity().supportFragmentManager, "PaymentSuccessDialog")
             dialog.dismiss()
+            dismiss()
         }
         // 주문번호 발행
         myLayout.findViewById<Button>(R.id.btnNoBillDSPB).setOnClickListener {
             val dialogFragment = SeniorPaySuccessDialog()
             dialogFragment.show(requireActivity().supportFragmentManager, "PaymentSuccessDialog")
             dialog.dismiss()
+            dismiss()
         }
     }
 }

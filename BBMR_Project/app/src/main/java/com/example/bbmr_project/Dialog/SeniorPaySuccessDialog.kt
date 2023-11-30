@@ -23,7 +23,7 @@ import com.example.bbmr_project.databinding.DialogSeniorPaymentSuccessBinding
 class SeniorPaySuccessDialog: DialogFragment() {
     private lateinit var  binding: DialogSeniorPaymentSuccessBinding
 
-    private var count = 907
+    private var count = 820
     override fun onStart() {
         super.onStart()
         val darkTransparentBlack = Color.argb((255 * 0.6).toInt(), 0, 0, 0)
@@ -64,7 +64,7 @@ class SeniorPaySuccessDialog: DialogFragment() {
         Handler.postDelayed({
             val intent = Intent(view.context, LegalityActivity::class.java)
             startActivity(intent)
-            dismiss()
+
         }, 3500)
     }
     override fun onResume() {
