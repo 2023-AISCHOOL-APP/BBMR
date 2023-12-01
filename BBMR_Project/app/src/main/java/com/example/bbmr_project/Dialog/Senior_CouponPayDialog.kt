@@ -13,6 +13,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import com.example.bbmr_project.CartStorage
+import com.example.bbmr_project.Product
 import com.example.bbmr_project.R
 import com.example.bbmr_project.RetrofitAPI.RetrofitAPI
 import com.example.bbmr_project.databinding.DialogSeniorCouponpayBinding
@@ -190,10 +192,17 @@ class Senior_CouponPayDialog : DialogFragment() {
                     .toIntOrNull() ?: 0
             // 번들에 담아서 다이얼로그프래그먼트로 보내기
 
+            val bread = Product(
+                name = "콘치즈 계란빵",
+                price = 0,
+                count = 1,
+                image = "https://shop-phinf.pstatic.net/20231102_156/1698909003769FXQYp_JPEG/25827574172676864_100459445.jpg?type=m510"
+            )
+            CartStorage.productList.add(bread)
+            // 변한 값을 UI에 바꿔주는 코드
+            CartStorage.notifyProductListChanged()
+
             val dialogFragment = SeniorBasketDialog()
-            val bundle = Bundle()
-            bundle.putString("discount_price", "2,900")
-            dialogFragment.arguments = bundle
             dialogFragment.show(childFragmentManager, "Senior_BasketDialog")
 
             // 다이얼로그창 끄기

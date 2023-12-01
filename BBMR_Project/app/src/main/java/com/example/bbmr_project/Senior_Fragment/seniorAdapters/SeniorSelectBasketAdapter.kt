@@ -83,7 +83,7 @@ class SeniorSelectBasketAdapter(
             var basicPrice = selectSeniorItem.price
             Log.d("기본값 ", "${basicCount}")
             Log.d("기본값 ", "${basicPrice}")
-
+            // 4500 1     9000 2  4500 + 4500/
             selectSeniorItem.count++
             selectSeniorItem.price = basicPrice + (basicPrice / basicCount)
 

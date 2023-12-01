@@ -68,7 +68,7 @@ class LoadingSplashActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
 
-        }, 1500)
+        }, 1000)
 
 
     }
@@ -173,28 +173,28 @@ class LoadingSplashActivity : AppCompatActivity() {
         // 예를 들어, 결과에 따라 다른 Activity를 시작할 수 있습니다.
         when (result) {
             "1" -> {
-                // 일반 고객으로 판단된 경우
-                val Handler = Handler(Looper.getMainLooper())
                 viewBinding.progressBar.visibility = View.INVISIBLE
                 viewBinding.tvguide1.text = "고객님"
                 viewBinding.tvguide2.text = "안녕하세요"
+                // 일반 고객으로 판단된 경우
+                val Handler = Handler(Looper.getMainLooper())
                 Handler.postDelayed({
                     val intent = Intent(this, Normal_IntroActivity::class.java)
                     startActivity(intent)
                     finish()
-                }, 1500)
+                }, 1200)
             }
             "0" -> {
                 // 시니어 고객으로 판단된 경우
-                val Handler = Handler(Looper.getMainLooper())
                 viewBinding.progressBar.visibility = View.INVISIBLE
                 viewBinding.tvguide1.text = "시니어님"
                 viewBinding.tvguide2.text = "환영합니다"
+                val Handler = Handler(Looper.getMainLooper())
                 Handler.postDelayed({
                     val intent = Intent(this, SeniorIntroActivity::class.java)
                     startActivity(intent)
                     finish()
-                }, 1500)
+                }, 1200)
             }
             else -> {
                 // 예외 처리
