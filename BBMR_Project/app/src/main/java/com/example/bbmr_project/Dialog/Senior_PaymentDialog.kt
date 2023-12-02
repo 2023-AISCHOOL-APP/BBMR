@@ -20,10 +20,12 @@ import com.example.bbmr_project.Product
 import com.example.bbmr_project.R
 import com.example.bbmr_project.RetrofitAPI.FlaskSendRes
 import com.example.bbmr_project.RetrofitAPI.MenuData
+import com.example.bbmr_project.RetrofitAPI.OrderResponseCallBack
 import com.example.bbmr_project.databinding.DialogSeniorPaymentBinding
 
-class Senior_PaymentDialog(private val orderNumber: Int?): DialogFragment() {
+class Senior_PaymentDialog: DialogFragment(), OrderResponseCallBack {
     private lateinit var binding : DialogSeniorPaymentBinding
+    private var orderNumber: Int = 0
 
     override fun onStart() {
         super.onStart()
@@ -109,9 +111,10 @@ class Senior_PaymentDialog(private val orderNumber: Int?): DialogFragment() {
         // 화면 밖 터치 잠금
         dialog.setCanceledOnTouchOutside(false)
         dialog.show()
+        val amount = arguments?.getString("amount").toString().toIntOrNull() ?: 0
 
         // ------ 결제 정보 전송 코드 시작 ------
-        val sendOrderTask = FlaskSendRes(view.context, getString(R.string.baseUrl))
+        val sendOrderTask = FlaskSendRes(view.context, getString(R.string.baseUrl), this)
             // ------ 결제 완료 후 영수증 여부 Dialog 출력하면서 하단 코드들과
 
             // 주문 정보 전송 (예시) // MenuData(121, 2), MenuData(162, 1)
@@ -121,20 +124,12 @@ class Senior_PaymentDialog(private val orderNumber: Int?): DialogFragment() {
                 }
             )
             Log.d("결제 메뉴 리스트 ","'$menu_ids")
-
-
-            val total_amount = 18000 // 쿠폰 값 제외 하고 값
+            val total_amount = amount // 쿠폰 값 제외 하고 값
             val coupon = null // 쿠폰번호
             val discount = null // 쿠폰했을 때 값
             sendOrderTask.sendOrder(menu_ids, total_amount, coupon, discount) // sendOrderTak
-
-
-
-
-
-
-
         // ------ 결제 정보 전송 코드 끝 ------
+
         // ------ 프로그레스 바 코드 시작 -------
         val handler = Handler()
         val progressBar: ProgressBar = myLayout.findViewById(R.id.progressBar3)
@@ -152,9 +147,7 @@ class Senior_PaymentDialog(private val orderNumber: Int?): DialogFragment() {
                     if (dialog.isShowing) {
                         val dialogFragment = SeniorPaySuccessDialog()
                         val bundle = Bundle()
-                        if (orderNumber != null) {
-                            bundle.putInt("주문번호", orderNumber)
-                        }
+                        bundle.putInt("주문번호", orderNumber)
                         dialogFragment.arguments = bundle
                         dialogFragment.show(requireActivity().supportFragmentManager, "PaymentSuccessDialog")
                         dialog.dismiss()
@@ -168,6 +161,9 @@ class Senior_PaymentDialog(private val orderNumber: Int?): DialogFragment() {
         // 영수증 출력
         myLayout.findViewById<Button>(R.id.btnYesBillDSPB).setOnClickListener {
             val dialogFragment = SeniorPaySuccessDialog()
+            val bundle = Bundle()
+            bundle.putInt("주문번호", orderNumber)
+            dialogFragment.arguments = bundle
             dialogFragment.show(requireActivity().supportFragmentManager, "PaymentSuccessDialog")
             dialog.dismiss()
             dismiss()
@@ -175,9 +171,16 @@ class Senior_PaymentDialog(private val orderNumber: Int?): DialogFragment() {
         // 주문번호 발행
         myLayout.findViewById<Button>(R.id.btnNoBillDSPB).setOnClickListener {
             val dialogFragment = SeniorPaySuccessDialog()
+            val bundle = Bundle()
+            bundle.putInt("주문번호", orderNumber)
+            dialogFragment.arguments = bundle
             dialogFragment.show(requireActivity().supportFragmentManager, "PaymentSuccessDialog")
             dialog.dismiss()
             dismiss()
         }
+    }
+
+    override fun onOrderResponse(orderNumber: Int) {
+        this.orderNumber = orderNumber
     }
 }

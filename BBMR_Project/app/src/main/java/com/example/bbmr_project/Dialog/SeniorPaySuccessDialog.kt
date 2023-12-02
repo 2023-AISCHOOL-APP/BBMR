@@ -51,11 +51,7 @@ class SeniorPaySuccessDialog: DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         val bundle = arguments
         val orderNumber = bundle?.getInt("주문번호")
-
-
-
-        val tvOrderNumber = binding.tvOrderNumberDSPS
-        tvOrderNumber.text = orderNumber.toString()
+        binding.tvOrderNumberDSPS.text = orderNumber.toString()
 
 
         // 텍스트 뷰 텍스트 크기 조정

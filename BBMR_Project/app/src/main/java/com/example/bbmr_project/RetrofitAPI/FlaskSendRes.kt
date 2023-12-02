@@ -3,6 +3,7 @@ package com.example.bbmr_project.RetrofitAPI
 import android.content.ContentValues
 import android.content.Context
 import android.util.Log
+import com.example.bbmr_project.Dialog.SeniorBasketDialog
 import com.example.bbmr_project.Dialog.SeniorPaySuccessDialog
 import com.example.bbmr_project.Dialog.Senior_PaymentDialog
 import com.google.gson.JsonObject
@@ -11,7 +12,10 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class FlaskSendRes (private val context: Context, private val baseUrl: String) {
+interface OrderResponseCallBack {
+    fun onOrderResponse(orderNumber: Int)
+}
+class FlaskSendRes (private val context: Context, private val baseUrl: String, private val callback:OrderResponseCallBack) {
     fun sendOrder(menu_ids: List<Unit>, total_amount: Int, coupon: String?, discount : Int?) {
         val retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
@@ -32,8 +36,8 @@ class FlaskSendRes (private val context: Context, private val baseUrl: String) {
                 if (response.isSuccessful) {
                     val orderResponse = response.body()
                     if (orderResponse != null) {
-                        val orderNumber = orderResponse.get("response")?.asInt
-                        val dialogFragmnet = Senior_PaymentDialog(orderNumber ?:0)
+                        val orderNumber = orderResponse.get("response")?.asInt ?: 0
+                        callback.onOrderResponse(orderNumber)
                         Log.d(ContentValues.TAG, "주문이 성공적으로 전송됨. 주문번호: $orderNumber")
                     } else {
                         Log.d(ContentValues.TAG, "주문 응답이 null입니다.")
@@ -50,7 +54,4 @@ class FlaskSendRes (private val context: Context, private val baseUrl: String) {
             }
         })
     }
-
-
-
 }

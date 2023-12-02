@@ -21,7 +21,7 @@ import com.example.bbmr_project.databinding.DialogSeniorBasketBinding
 
 //const val KeyProductBundleKey = "Product"
 
-class SeniorBasketDialog() : BaseDialogFragment() {
+class SeniorBasketDialog : BaseDialogFragment() {
 
 
     var buttonDoubleDefend = false
@@ -129,7 +129,8 @@ class SeniorBasketDialog() : BaseDialogFragment() {
 
         // 결제창 클릭했을 때, 결제로 넘어가기
         binding.btnCardDSB.setOnClickListener {
-            val dialogFragment = Senior_PaymentDialog(null)
+
+            val dialogFragment = Senior_PaymentDialog()
             val bundle = Bundle()
             // 결제 창으로 넘기기 amount라는 걸 받아오면 됨 받아오는 방법은  discountPrice변수 초기화에 적혀있음
             bundle.putString("amount", "${totalAmount}")
