@@ -7,6 +7,7 @@ import android.os.Handler
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.RelativeSizeSpan
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,10 +15,14 @@ import android.widget.Button
 import android.widget.ProgressBar
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import com.example.bbmr_project.CartStorage.productList
+import com.example.bbmr_project.Product
 import com.example.bbmr_project.R
+import com.example.bbmr_project.RetrofitAPI.FlaskSendRes
+import com.example.bbmr_project.RetrofitAPI.MenuData
 import com.example.bbmr_project.databinding.DialogSeniorPaymentBinding
 
-class Senior_PaymentDialog: DialogFragment() {
+class Senior_PaymentDialog(private val orderNumber: Int?): DialogFragment() {
     private lateinit var binding : DialogSeniorPaymentBinding
 
     override fun onStart() {
@@ -57,6 +62,18 @@ class Senior_PaymentDialog: DialogFragment() {
             paymentSuccess(view.rootView)
         }
     }
+
+
+    // SendOrderTask 인스턴스 생성
+////            val sendOrderTask = FlaskSendRes(this, getString(R.string.baseUrl))
+////            // ------ 결제 완료 후 영수증 여부 Dialog 출력하면서 하단 코드들과
+////            //
+////            // 주문 정보 전송 (예시)
+////            val menu_ids = listOf(MenuData(121, 2), MenuData(162, 1))
+////            val total_amount = 18000 // 쿠폰 값 제외 하고 값
+////            val coupon = "qwerasdfzxcv" // 쿠폰번호
+////            val discount = 2500 // 쿠폰했을 때 값
+////            sendOrderTask.sendOrder(menu_ids, total_amount, coupon, discount) // sendOrderTak
     fun paymentFail(view: View) {
         val myLayout = layoutInflater.inflate(R.layout.dialog_senior_payment_fail, null)
         val build = AlertDialog.Builder(view.context).apply {
@@ -93,6 +110,31 @@ class Senior_PaymentDialog: DialogFragment() {
         dialog.setCanceledOnTouchOutside(false)
         dialog.show()
 
+        // ------ 결제 정보 전송 코드 시작 ------
+        val sendOrderTask = FlaskSendRes(view.context, getString(R.string.baseUrl))
+            // ------ 결제 완료 후 영수증 여부 Dialog 출력하면서 하단 코드들과
+
+            // 주문 정보 전송 (예시) // MenuData(121, 2), MenuData(162, 1)
+            val menu_ids = listOf(
+                productList.forEach { p: Product ->
+                    MenuData(p.id, p.count)
+                }
+            )
+            Log.d("결제 메뉴 리스트 ","'$menu_ids")
+
+
+            val total_amount = 18000 // 쿠폰 값 제외 하고 값
+            val coupon = null // 쿠폰번호
+            val discount = null // 쿠폰했을 때 값
+            sendOrderTask.sendOrder(menu_ids, total_amount, coupon, discount) // sendOrderTak
+
+
+
+
+
+
+
+        // ------ 결제 정보 전송 코드 끝 ------
         // ------ 프로그레스 바 코드 시작 -------
         val handler = Handler()
         val progressBar: ProgressBar = myLayout.findViewById(R.id.progressBar3)
@@ -109,6 +151,11 @@ class Senior_PaymentDialog: DialogFragment() {
                 } else if (progressCount == 5) {
                     if (dialog.isShowing) {
                         val dialogFragment = SeniorPaySuccessDialog()
+                        val bundle = Bundle()
+                        if (orderNumber != null) {
+                            bundle.putInt("주문번호", orderNumber)
+                        }
+                        dialogFragment.arguments = bundle
                         dialogFragment.show(requireActivity().supportFragmentManager, "PaymentSuccessDialog")
                         dialog.dismiss()
                     }

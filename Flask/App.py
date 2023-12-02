@@ -14,13 +14,13 @@ from flask_restful import Resource, Api, reqparse, abort
 # from keras.layers import Dense
 # from keras.preprocessing import image
 # from keras.applications.vgg16 import preprocess_input
-from werkzeug.utils import secure_filename # 231116 filename불러오기 위한 import
-import joblib # 231115 모델 로딩 라이브러리 사용 - 정희석(8-12)
 # import tensorflow as tf
-import numpy as np
-import os # 231116 추가 - 이미지를 PIL Image로 변환
 # import cv2
 # from deepface import DeepFace # 라이브러리 가져오기
+from werkzeug.utils import secure_filename # 231116 filename불러오기 위한 import
+import joblib # 231115 모델 로딩 라이브러리 사용 - 정희석(8-12)
+import numpy as np
+import os # 231116 추가 - 이미지를 PIL Image로 변환
 
 app = Flask(__name__)
 api = Api(app)
@@ -293,33 +293,34 @@ class checkCoupon(Resource):
             if current_date <= expiry_date:
                 # 금액권 쿠폰일때(교환권 쿠폰은 amount = 0)
                 if amount > 0 :
-                    return {"result": {0:amount}}
+                    return {"result": {0:{"amount":amount}}}
                 elif amount == 0 and menu_id is None:
-                    return {"result" : {1:"잔액이 없습니다."}}
+                    return {"result" : {1:{"sub":"잔액이 없습니다."}}}
                 else:
                     # 사용가능 할 때 return 해줄 result 값 DB에서 가져오기 
                     conn = get_connection()
                     cursor = conn.cursor()
-                    cursor.execute(f"select menu_id, name, price, menu_con, size from menu where menu_id='{menu_id}'")
+                    cursor.execute(f"select menu_id, name, price, menu_con, size, imageUrl from menu where menu_id='{menu_id}'")
                     result_coupon = cursor.fetchall()[0]
                     result = {"menu_id":result_coupon[0],
                               "name":result_coupon[1],
                               "price":result_coupon[2],
                               "menu_con":result_coupon[3],
-                              "size":result_coupon[4]}
+                              "size":result_coupon[4],
+                              "imageUrl":result_coupon[5]}
                     conn.close()
                     # 사용여부 체크 C_use==0 이면 사용가능
                     if C_use==0:
                         return {"result" : {2:result}}
                     else:
-                        return {"result" : {1:"이미 사용한 쿠폰입니다."}}
+                        return {"result" : {1:{"sub":"이미 사용한 쿠폰입니다."}}}
             else:
-                return {"result" : {1:"사용기한이 지났습니다."}}    
+                return {"result" : {1:{"sub":"사용기한이 지났습니다."}}}    
             
         # 쿠폰번호를 잘못입력했거나 없을때(입력한 코드에 대한 정보가 DB에 없을때)           
         else:
             result = "잘못 입력 또는 없는 쿠폰입니다."
-            return {"result": {1:result}}
+            return {"result": {1:{"sub":result}}}
 
 
 
@@ -334,6 +335,8 @@ class SaveOrder(Resource):
             # 메뉴리스트[(메뉴id,수량),(메뉴id,수량)...], 결제금액
             menu_ids = data['menu_ids']
             total_amount = data['total_amount']
+            print(menu_ids)
+            print(total_amount)
 
             conn = get_connection()
             cursor = conn.cursor()
@@ -354,7 +357,7 @@ class SaveOrder(Resource):
             if 'coupon' in data:
                 # 쿠폰코드와 할인금액을 가져온다(할인금액은 금액권이나 교환권이나 상관없이 금액으로)
                 coupon_code = data['coupon']
-                discount = data['discount']
+                # discount = data['discount']
 
                 # 쿠폰코드에 해당되는 쿠폰정보를 가져옴
                 conn = get_connection()
@@ -369,13 +372,13 @@ class SaveOrder(Resource):
                     cursor.execute(f"update coupon set C_use = 1 where coupon_code = '{coupon_code}'")
                     conn.commit()
                 # 금액권
-                else:
-                    amount_result = amount-discount
-                    print(amount_result)
-                    conn = get_connection()
-                    cursor = conn.cursor()
-                    cursor.execute("UPDATE coupon SET amount = %s WHERE coupon_code = %s", (amount_result, coupon_code))
-                    conn.commit()
+                # else:
+                #     amount_result = amount # -discount
+                #     print(amount_result)
+                #     conn = get_connection()
+                #     cursor = conn.cursor()
+                #     cursor.execute("UPDATE coupon SET amount = %s WHERE coupon_code = %s", (amount_result, coupon_code))
+                #     conn.commit()
                 conn.close()
 
             
@@ -391,34 +394,33 @@ class SaveOrder(Resource):
 
    
 
-#  ------ 모델 코드 시작 ------
+#  ------ 모델 코드 시작 ------     
 
-     
 # class Face(Resource):
-    def post(self):
-        if 'image' not in request.files:
-            return jsonify({'error': 'No image part'}), 400
+#     def post(self):
+#         if 'image' not in request.files:
+#             return jsonify({'error': 'No image part'}), 400
 
-        file = request.files['image']
-        if file:
-            image = Image.open(io.BytesIO(file.read()))
-            image = image.rotate(90, expand=True)
-            image = image.convert('RGB')
-            image.save('image/image1.png')
-            print("이미지 -> ", image)
+#         file = request.files['image']
+#         if file:
+#             image = Image.open(io.BytesIO(file.read()))
+#             image = image.rotate(90, expand=True)
+#             image = image.convert('RGB')
+#             image.save('image/image1.png')
+#             print("이미지 -> ", image)
 
-            img_path = 'image/image1.png'# 이미지 읽기
-            img = cv2.imread(img_path)
-            # DeepFace.analyze에 이미지 객체를 전달
-            deep_result = DeepFace.analyze(img_path=img, actions=['age'], enforce_detection=False)
-            print("result ->", deep_result)
-            age = deep_result[0]["age"]
-            print("age ->", age)
-            if age < 40:
-                result = 1
-            else:
-                result = 0
-            return {'result': result}
+#             img_path = 'image/image1.png'# 이미지 읽기
+#             img = cv2.imread(img_path)
+#             # DeepFace.analyze에 이미지 객체를 전달
+#             deep_result = DeepFace.analyze(img_path=img, actions=['age'], enforce_detection=False)
+#             print("result ->", deep_result)
+#             age = deep_result[0]["age"]
+#             print("age ->", age)
+#             if age < 40:
+#                 result = 1
+#             else:
+#                 result = 0
+#             return {'result': result}
 
 #  ------ 모델 코드 끝 -------
 
@@ -429,6 +431,3 @@ api.add_resource(TodoList,'/todos/')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000) 
-
-
-

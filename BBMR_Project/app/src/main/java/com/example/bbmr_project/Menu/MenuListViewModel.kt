@@ -44,7 +44,7 @@ class MenuListViewModel(
     private fun createMenuList1(): List<Senior_TakeOutVO> {
         val menuList: ArrayList<Product> = CartStorage.menuList
         val recommendList: List<Senior_TakeOutVO> = menuList.filter { product ->
-            product.id == "2" || product.id == "5" || product.id == "31" || product.id == "10" || product.id == "85" || product.id == "82" || product.id == "98" || product.id == "71" || product.id == "47" || product.id == "43" || product.id == "113" || product.id == "35"
+            product.id == "2" || product.id == "5" || product.id == "31" || product.id == "10" || product.id == "85" || product.id == "82" || product.id == "98" || product.id == "71" || product.id == "47" || product.id == "43"
         }.map {product ->
             Senior_TakeOutVO(
                 sname = product.name,

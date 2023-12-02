@@ -21,13 +21,13 @@ data class OrderResponse(
 
 data class OrderData(
     val total_amount: Int,
-    val menu_ids: List<MenuData>,
+    val menu_ids: List<Unit>,
     val coupon: String?,
     val discount: Int?
 )
 
 data class MenuData(
-    val menu_id: Int,
+    val menu_id: String,
     val quantity: Int
 )
 
