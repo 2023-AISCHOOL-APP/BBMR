@@ -9,14 +9,14 @@ from connection import get_connection
 from mysql.connector import Error
 from flask import Flask, redirect, render_template, request, jsonify, send_file, session, url_for
 from flask_restful import Resource, Api, reqparse, abort
-# from tensorflow import keras
-# from keras import models, layers
-# from keras.layers import Dense
-# from keras.preprocessing import image
-# from keras.applications.vgg16 import preprocess_input
-# import tensorflow as tf
-# import cv2
-# from deepface import DeepFace # 라이브러리 가져오기
+from tensorflow import keras
+from keras import models, layers
+from keras.layers import Dense
+from keras.preprocessing import image
+from keras.applications.vgg16 import preprocess_input
+import tensorflow as tf
+import cv2
+from deepface import DeepFace # 라이브러리 가져오기
 from werkzeug.utils import secure_filename # 231116 filename불러오기 위한 import
 import joblib # 231115 모델 로딩 라이브러리 사용 - 정희석(8-12)
 import numpy as np
@@ -319,7 +319,7 @@ class checkCoupon(Resource):
             
         # 쿠폰번호를 잘못입력했거나 없을때(입력한 코드에 대한 정보가 DB에 없을때)           
         else:
-            result = "잘못 입력 또는 없는 쿠폰입니다."
+            result = "잘못 입력 또는\n없는 쿠폰입니다."
             return {"result": {1:{"sub":result}}}
 
 
@@ -396,35 +396,35 @@ class SaveOrder(Resource):
 
 #  ------ 모델 코드 시작 ------     
 
-# class Face(Resource):
-#     def post(self):
-#         if 'image' not in request.files:
-#             return jsonify({'error': 'No image part'}), 400
+class Face(Resource):
+    def post(self):
+        if 'image' not in request.files:
+            return jsonify({'error': 'No image part'}), 400
 
-#         file = request.files['image']
-#         if file:
-#             image = Image.open(io.BytesIO(file.read()))
-#             image = image.rotate(90, expand=True)
-#             image = image.convert('RGB')
-#             image.save('image/image1.png')
-#             print("이미지 -> ", image)
+        file = request.files['image']
+        if file:
+            image = Image.open(io.BytesIO(file.read()))
+            image = image.rotate(90, expand=True)
+            image = image.convert('RGB')
+            image.save('image/image1.png')
+            print("이미지 -> ", image)
 
-#             img_path = 'image/image1.png'# 이미지 읽기
-#             img = cv2.imread(img_path)
-#             # DeepFace.analyze에 이미지 객체를 전달
-#             deep_result = DeepFace.analyze(img_path=img, actions=['age'], enforce_detection=False)
-#             print("result ->", deep_result)
-#             age = deep_result[0]["age"]
-#             print("age ->", age)
-#             if age < 40:
-#                 result = 1
-#             else:
-#                 result = 0
-#             return {'result': result}
+            img_path = 'image/image1.png'# 이미지 읽기
+            img = cv2.imread(img_path)
+            # DeepFace.analyze에 이미지 객체를 전달
+            deep_result = DeepFace.analyze(img_path=img, actions=['age'], enforce_detection=False)
+            print("result ->", deep_result)
+            age = deep_result[0]["age"]
+            print("age ->", age)
+            if age < 39:
+                result = 1
+            else:
+                result = 0
+            return {'result': result}
 
-#  ------ 모델 코드 끝 -------
+# ------ 모델 코드 끝 -------
 
-# api.add_resource(Face,"/face/")
+api.add_resource(Face,"/face/")
 api.add_resource(SaveOrder,"/saveorder/")
 api.add_resource(checkCoupon,"/checkcoupon/")
 api.add_resource(TodoList,'/todos/')
