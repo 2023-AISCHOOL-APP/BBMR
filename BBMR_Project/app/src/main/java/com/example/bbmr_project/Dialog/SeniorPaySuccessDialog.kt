@@ -50,8 +50,8 @@ class SeniorPaySuccessDialog: DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val bundle = arguments
-        val orderNumber = bundle?.getInt("주문번호")
-        binding.tvOrderNumberDSPS.text = orderNumber.toString()
+//        val orderNumber = bundle?.getInt("주문번호")
+//        binding.tvOrderNumberDSPS.text = orderNumber.toString()
 
 
         // 텍스트 뷰 텍스트 크기 조정

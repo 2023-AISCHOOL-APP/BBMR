@@ -406,21 +406,70 @@ class Face(Resource):
             image = Image.open(io.BytesIO(file.read()))
             image = image.rotate(90, expand=True)
             image = image.convert('RGB')
-            image.save('image/image1.png')
+            image.save('C:/Users/aischool185/Desktop/BBMR/Flask/image/image1.png')
             print("이미지 -> ", image)
 
-            img_path = 'image/image1.png'# 이미지 읽기
+            img_path = 'C:/Users/aischool185/Desktop/BBMR/Flask/image/image1.png'# 이미지 읽기
             img = cv2.imread(img_path)
             # DeepFace.analyze에 이미지 객체를 전달
             deep_result = DeepFace.analyze(img_path=img, actions=['age'], enforce_detection=False)
             print("result ->", deep_result)
             age = deep_result[0]["age"]
             print("age ->", age)
-            if age < 39:
+            if age < 40:
                 result = 1
             else:
                 result = 0
             return {'result': result}
+
+
+
+# #  ------ 모델 코드 시작 ------
+
+# # 학습된 모델 로드
+# # 231121
+# model = tf.keras.models.load_model('face_cnn_model.h5')
+# @app.route('/upload', methods=['POST'])
+# def upload_file():
+#     if 'image' not in request.files:
+#         return jsonify({'error': 'No image part'}), 400
+
+#     file = request.files['image']
+#     print(file)
+
+#     if file:
+#         # 이미지 읽기 및 리사이즈
+#         image = Image.open(io.BytesIO(file.read()))
+#         image = image.rotate(90, expand=True)
+
+#         # RGBA에서 RGB로 변환
+#         image = image.convert('RGB')
+        
+#         print("image -> ",image)
+#         image.save('image/image1.png')
+#         image = image.resize((360, 480))  # 리사이즈
+#         image.save('image/image2.png')
+#         # 필요한 추가 전처리 과정
+#         # 예시: 이미지를 numpy 배열로 변환
+#         image = np.array(image)
+#         image = image / 255.0  # 정규화
+#         image = np.expand_dims(image, axis=0)  # 모델 입력 형태에 맞게 차원 확장
+
+#         # 모델 예측
+#         prediction = model.predict(image)
+#         print("prediction -> " , prediction[0][0])
+
+#         # 예측 결과 처리 및 반환
+#         # 예시: 예측 결과의 최대값 인덱스 반환
+#         if prediction[0][0] < 0.5:
+#             result = 0
+#         else:
+#             result = 1
+#         # result = 0
+#         print("result ->", result)
+#         return {'result': result}
+
+# #  ------ 모델 코드 끝 -------
 
 # ------ 모델 코드 끝 -------
 
